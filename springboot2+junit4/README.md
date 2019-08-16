@@ -62,7 +62,7 @@
   {
   	public static void main(String[] args) 
       {
-  		SpringApplication.run(SpringbootJunitApplication.class, args);
+  		SpringApplication.run(App.class, args);
   	}
   }
   ```
