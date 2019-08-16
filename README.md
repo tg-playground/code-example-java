@@ -142,6 +142,7 @@ Good reusable code library for Java development.
   - Spring Boot and OAuth2
   - OAuth
   - OpenSSO
+- Internationalization
 - Utility
   - Apache Commons
 
