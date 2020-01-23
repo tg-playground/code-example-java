@@ -65,29 +65,51 @@ Good reusable code library for Java development.
 
 - Web Framework
   - Spring
-    - spring-hello-world
-    - spring-ioc
-    - spring-aop
-    - spring-junit4
-    - spring-junit5
+    - Basic
+      - spring-hello-world
+      - spring-ioc
+      - spring-aop
+      - spring-logging
+    - Test
+      - spring-junit4
+      - spring-junit5
+    - Logging
+    - Data Persistence
+    - Data Cache
+    - Web API
+    - Web Template
+    - Web Bean Validation
   - Spring Boot
-    - basic
+    - Basic
       - springboot2-hello-world
       - springboot2-configuration
       - springboot2-logging
       - springboot2-devtools
-    - Persistence
-      - springboot2+jpa
-      - springboot2+mybatis
-      - springboot2+hibernate
-    - cache
-      - springboot2+redis
-    - API
-      - springboot2+restful-api
-      - springboot2+swaggerui2
+      - springboot2-aop
+    - Test
+      - [springboot2+junit4](springboot2+junit4) (test web and service)
+      - springboot2+junit5
+      - springboot2+testng
     - Logging
       - springboot2+log4j
       - springboot2+logback
+    - Data Persistence
+      - springboot2+jdbc
+      - springboot2+jpa
+      - springboot2+mybatis
+      - springboot2+mybatis-plus
+      - springboot2+hibernate
+    - Data Cache
+      - springboot2+redis
+    - Web API
+      - springboot2+restful-api
+      - springboot2+swaggerui2
+    - Web Template
+      - springboot2+thymeleaf
+      - springboot2+jsp
+      - springboot2+freemarker
+    - Web Bean Validation
+      - springboot2+hibernate-validator
     - Messaging
     - Job Scheduling
       - springboot2+spring-scheduling-task
@@ -96,16 +118,11 @@ Good reusable code library for Java development.
       - springboot2+activiti
     - Search Engine
     - Single Sign-on
-    - Test
-      - [springboot2+junit4](springboot2+junit4) (test web and service)
-      - springboot2+junit5
-      - springboot2+testng
-    - template
-      - springboot2+thymeleaf
-      - springboot2+jsp
-      - springboot2+template
   - Persistence Framework 
     - MyBatis
+      - mybatis-common
+      - mybatis-plus
+      - mybatis-generator
     - Hibernate
   - Security Framwork
     - Spring Security
