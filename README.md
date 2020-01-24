@@ -99,6 +99,7 @@ Good reusable code library for Java development.
       - springboot2+mybatis
       - springboot2+mybatis-plus
       - springboot2+hibernate
+      - springboot2+auto-db-generate
     - Data Cache
       - springboot2+redis
     - Web API
