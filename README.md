@@ -35,12 +35,7 @@ Good reusable code library for Java development.
 
 ### 2. Web Development
 
-#### 2. 1Web Servers
 
-- Nginx
-  - nginx-http
-  - nginx-https
-  - nginx-load-balancing
 
 #### 2.2 Web Frontend
 
