@@ -93,9 +93,15 @@ Generate SSL Certificates
 
 
 
-Edit `conf/server.xml`
+Edit `conf/server.xml` set HTTP/2
 
 ```xml
+
+```
+
+Set HTTPS on localhost
+
+```
 
 ```
 
@@ -103,9 +109,9 @@ Edit `conf/server.xml`
 
 Step 5: Run Tomcat
 
-Visit Index Page by `http://localhost:{your_port}/{your_context}` 
+Visit Index Page by `https://localhost:{your_port}/{your_context}` 
 
-Visit HelloWorld Servlet by `http://localhost:{your_port}/{your_context}/serverPush`
+Visit HelloWorld Servlet by `https://localhost:{your_port}/{your_context}/serverPush`
 
 
 
@@ -122,3 +128,5 @@ Visit HelloWorld Servlet by `http://localhost:{your_port}/{your_context}/serverP
 [4] [Configure Tomcat support HTTP/2](https://huongdanjava.com/configure-tomcat-support-http-2.html)
 
 [4] [How to Implement HTTP2 in Tomcat?](https://geekflare.com/tomcat-http2/)
+
+[6] [How to get HTTPS working on your local development environment in 5 minutes](https://www.freecodecamp.org/news/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec/)

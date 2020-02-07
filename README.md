@@ -125,24 +125,28 @@ JavaScript
 
 Servlet
 
-- servlet-helloworld
-- servlet-by-annotation
-- servlet-upload-file
-- servlet-curd
-- servlet4-http2-server-push
-- servlet4-http2-server-push-with-jsf
-- servlet4-http-servlet-mapping
-- servlet4-filter
-- servlet4-trailer-fields
-- servlet4-servlet-context-new-methods
+- servlet-basic-helloworld
+- servlet-basic-by-annotation
+- servlet-basic-upload-file
+- servlet-basic-curd
+- servlet4-basic-http2-server-push
+- servlet4-basic-http2-server-push-with-jsf
+- servlet4-basic-http-servlet-mapping
+- servlet4-basic-filter
+- servlet4-basic-trailer-fields
+- servlet4-basic-servlet-context-new-methods
 
 Web Pages  & Template Engine
 
-- servlet+jsp
-- servlet+freemaker
-- springboot2+thymeleaf
-- springboot2+jsp
-- springboot2+freemarker
+> Thymeleaf, Apache FreeMarker, JSP
+>
+> Groovy Template, JSF, Jade4j, Velocity
+
+- servlet-page-jsp
+- servlet-page-freemaker
+- springboot2-page-thymeleaf
+- springboot2-page-jsp
+- springboot2-page-freemarker
 
 ### 4.2 Web Framework
 
@@ -150,20 +154,20 @@ Web Pages  & Template Engine
 
 Spring
 
-- spring-hello-world
-- spring-configuration
-- spring-mvc
-- spring-ioc
-- spring-aop
-- spring-validation
+- spring-basic-hello-world
+- spring-basic-configuration
+- spring-basic-mvc
+- spring-basic-ioc
+- spring-basic-aop
+- spring-basic-validation
 
 Spring Boot
 
-- springboot2-hello-world
-- springboot2-configuration
-- springboot2+hibernate-validator
-- springboot2-devtools
-- springboot2-aop
+- springboot2-basic-hello-world
+- springboot2-basic-configuration
+- springboot2-basic-hibernate-validator
+- springboot2-basic-devtools
+- springboot2-basic-aop
 
 ### 4.3 Common Techniques
 
@@ -171,15 +175,15 @@ API
 
 > Swagger UI, RESTful
 
-- springboot2+restful-api
-- springboot2+swaggerui2
+- springboot2-api-restful-api
+- springboot2-api-swaggerui2
 
 Logging
 
 > Log4j, SLF4j
 
-- springboot2+log4j
-- springboot2+logback
+- springboot2-logging-log4j
+- springboot2-logging-logback
 
 Messaging
 
@@ -187,18 +191,22 @@ Job Scheduling
 
 > Quartz, Spring Scheduling Tasks
 
-- springboot2+spring-scheduling-task
-- springboot2+quartz
+- springboot2-job-spring-scheduling-task
+- springboot2-job-quartz
 
 Workflow Engine
 
-> Activiti
+> Activiti, Bonita, jBPM, Workflow Server, Camunda, Copper
 
-- springboot2+activiti
+- springboot2-workflow-activiti
 
 Search Engine
 
 > Apache Lucene, Apache Solr, Elasticsearch
+
+- springboot2-search-lucene
+- springboot2-search-solr
+- springboot2-search-elasticsearch
 
 Web Crawler
 
@@ -246,27 +254,29 @@ Push
 
 ### 5.1 Data Access
 
-> JDBC, Database Connection Pool, Transaction, Persistence Framework(JPA, MyBatis, Hibernate)
+> JDBC, Database Connection Pool, Transaction
+>
+> Persistence Framework(JPA, MyBatis, Hibernate)
 
-- mybatis-helloworld
-- mybatis-plus
-- mybatis-generator
-- hibernate-helloworld
-- springboot2+jdbc
-- springboot2+database-connection-pool
-- springboot2+multiple-database-source
-- springboot2+transaction
-- springboot2+jpa
-- springboot2+mybatis
-- springboot2+mybatis-plus
-- springboot2+hibernate
-- springboot2+auto-db-generate
+- mybatis-basic-helloworld
+- mybatis-basic-mybatis-plus
+- mybatis-basic-mybatis-generator
+- hibernate-basic-helloworld
+- springboot2-data-jdbc
+- springboot2-data-connection-pool
+- springboot2-data-multiple-datasource
+- springboot2-data-transaction
+- springboot2-data-jpa
+- springboot2-data-mybatis
+- springboot2-data-mybatis-plus
+- springboot2-data-hibernate
+- springboot2-data-auto-db-generate
 
 ### 5.2 Data Cache
 
 > Ehcache, Redis, Memcached
 
-- springboot2+redis
+- springboot2-data-redis
 
 
 
@@ -276,17 +286,20 @@ Security Framwork
 
 > Spring Securityj, Apache Shiro
 
+- springboot2-security-shiro
+- springboot2-security-spring-security
+
 ## 7. Test
 
 Unit Test
 
 > JUnit, TestNG
 
-- spring-junit4
-- spring-junit5
-- [springboot2+junit4](springboot2+junit4) (test web and service)
-- springboot2+junit5
-- springboot2+testng
+- spring-test-junit4
+- spring-test-junit5
+- [springboot2-test-junit4](springboot2+junit4) (test web and service)
+- springboot2-test-junit5
+- springboot2-test-testng
 
 Mock Test
 
