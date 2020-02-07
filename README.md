@@ -125,10 +125,21 @@ JavaScript
 
 Servlet
 
-- servlet-hello-world
+- servlet-helloworld
+- servlet-by-annotation
+- servlet-upload-file
+- servlet-curd
+- servlet4-http2-server-push
+- servlet4-http2-server-push-with-jsf
+- servlet4-http-servlet-mapping
+- servlet4-filter
+- servlet4-trailer-fields
+- servlet4-servlet-context-new-methods
 
 Web Pages  & Template Engine
 
+- servlet+jsp
+- servlet+freemaker
 - springboot2+thymeleaf
 - springboot2+jsp
 - springboot2+freemarker
