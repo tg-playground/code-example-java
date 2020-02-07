@@ -1,13 +1,13 @@
 package com.taogen.example;
 
 import java.io.*;
-import java.util.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 // Extend HttpServlet class
 public class HelloWorldServlet extends HttpServlet {
  
+   private static final long serialVersionUID = 1L;
    private String message;
 
    public void init() throws ServletException {

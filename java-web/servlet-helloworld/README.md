@@ -2,7 +2,16 @@
 
 Content
 
+- Requirements
 - Steps
+- References
+
+## Requirements
+
+Required
+
+- JDK 1.8
+- Maven
 
 ## Steps
 
@@ -121,7 +130,7 @@ Step 5: Configure `HelloWorldServlet` in `src/main/webapp/WEB-INF/web.xml`
 
 
 
-Step 5: Run Servlet Maven Project
+Step 6: Run Servlet Maven Project
 
 ```shell
 $ mvn tomcat7:run
@@ -133,7 +142,7 @@ Visit HelloWorld Servlet by `http://localhost:{your_port}/{your_context}/HelloWo
 
 
 
-## Reference
+## References
 
 [1] [Run Maven Java Web Application in Tomcat Maven Plugin](https://o7planning.org/en/10133/run-maven-java-web-application-in-tomcat-maven-plugin)
 
