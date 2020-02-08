@@ -125,10 +125,26 @@ JavaScript
 
 Servlet
 
+1
+
 - servlet-basic-helloworld
-- servlet-basic-by-annotation
-- servlet-basic-upload-file
+- servlet-basic-hello-by-annotation
+- servlet-basic-the-request
+- servlet-basic-servlet-context
+- servlet-basic-the-response
+- servlet-basic-filter
+- servlet-basic-session
+- servlet-basic-annotations
+- servlet-basic-pluggability
+- servlet-basic-dispatching-request
+- servlet-basic-web-applications-error-handling
+- servlet-basic-application-lifecycle-events
+- servlet-basic-mapping-requests-to-servlets
+- servlet-basic-security
 - servlet-basic-curd
+
+2
+
 - servlet4-basic-http2-server-push
 - servlet4-basic-http2-server-push-with-jsf
 - servlet4-basic-http-servlet-mapping
