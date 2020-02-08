@@ -15,13 +15,26 @@ Required
 
 ## Steps
 
-Step 1: Using Maven Template to Generate Project Structure and Artifacts
+### Step 1: Creating Project
+
+Using Maven Template to Generate Project Structure and Artifacts
 
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId=servlet-by-annotation -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
-Step2: Add Maven Dependencies
+### Step 2: Configuring Maven Project `pom.xml`
+
+Set Maven Project Properties
+
+```xml
+<properties>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+</properties>
+```
+
+Add Maven Dependencies
 
 ```xml
 <dependency>
@@ -33,7 +46,7 @@ Step2: Add Maven Dependencies
 </dependency>
 ```
 
-Step 3: Add Tomcat Maven Plugin and Tomcat Configuration
+Add Tomcat Maven Plugin and Tomcat Configuration
 
 ``` xml
 <project>
@@ -71,7 +84,7 @@ Step 3: Add Tomcat Maven Plugin and Tomcat Configuration
 </project>
 ```
 
-Step 4: Write HelloWorld Servlet with Annotation
+### Step 3: Write HelloWorld Servlet with Annotation
 
 Add source root `src/main/java`
 
@@ -102,15 +115,27 @@ public class HelloWorldServlet extends HttpServlet {
 
 ```
 
-Step 5: Run Servlet Maven Project
+### Step 4: Running and Visiting Project
+
+Running Maven Project by Maven Tomcat 7 Plugin
 
 ```shell
 $ mvn tomcat7:run
 ```
 
-Visit Index Page by `http://localhost:{your_port}/{your_context}` 
+Visiting Index Page
 
-Visit HelloWorld Servlet by `http://localhost:{your_port}/{your_context}/hello`
+```shell
+$ curl http://localhost:{your_port}/{your_context}
+```
+
+Visiting `HelloWorldServlet`
+
+```shell
+$ curl http://localhost:{your_port}/{your_context}/hello
+```
+
+
 
 ## References
 

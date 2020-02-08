@@ -16,13 +16,15 @@ Required
 
 ## Steps
 
-### Step 1: Using Maven Template to Generate Project Structure and Artifacts
+### Step 1: Creating Project
+
+Using Maven Template to Generate Project Structure and Artifacts
 
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId=servlet4-http2-server-push -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
-### Step2: Configuring `pom.xml`
+### Step2: Configuring Maven Project `pom.xml`
 
 Set Maven Project Properties
 
@@ -104,13 +106,21 @@ Edit `conf/server.xml` set HTTP/2
 
 Optional: Enable HTTPS on localhost
 
-### Step 5: Run Tomcat
+### Step 5: Running and Visiting Project
 
 Running Tomcat 9
 
-Visit Index Page by `https://localhost:8443/{your_context}` 
+Visiting Index Page
 
-Visit HelloWorld Servlet by `https://localhost:8443/{your_context}/serverPush`
+```shell
+$ curl http://localhost:{your_port}/{your_context}
+```
+
+Visiting `ServerPushServlet`
+
+```shell
+$ curl http://localhost:{your_port}/{your_context}/serverPush
+```
 
 
 
