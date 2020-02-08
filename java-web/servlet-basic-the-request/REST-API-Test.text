@@ -1,0 +1,33 @@
+# REST API Test by REST Client Plugin on VS Code
+
+
+### /httpRequestParams
+
+### GET
+
+GET http://localhost:9000/servlet-basic-the-request/httpRequestParams?name=Get HTTP/1.1
+
+### POST 1
+### if the POST data is encoded as key-value pairs of content type: "application/x-www-form-urlencoded" like when you use a standard HTML form.
+
+POST http://localhost:9000/servlet-basic-the-request/httpRequestParams HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+name=Post by form
+
+### POST 2 
+### If you use a different encoding schema for your post data, as in your case when you post a json data stream, you need to use a custom decoder that can process the raw datastream from:
+### BufferedReader reader = request.getReader();
+
+POST http://localhost:9000/servlet-basic-the-request/httpRequestParams HTTP/1.1
+Content-Type: application/json
+
+{"name":"Post by json"}
+
+###
+
+PUT http://localhost:9000/servlet-basic-the-request/httpRequestParams?name=Put HTTP/1.1
+
+###
+
+PUT http://localhost:9000/servlet-basic-the-request/httpRequestParams?name=Delete HTTP/1.1
