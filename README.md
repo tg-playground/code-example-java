@@ -65,9 +65,10 @@ Good reusable code library for Java development.
   - Performance Test
     - Jmeter
 - 8.Tools
-- 9.Distributed System, Middleware, Microservices
+- 9.DevOps
+- 10.Distributed System, Middleware, Microservices
   - Spring Cloud
-- 10.Code Optimization
+- 11.Code Optimization
 
 
 
@@ -81,9 +82,14 @@ Good reusable code library for Java development.
 
 Java Mail
 
-Data Parser
+Data Parser (XML, JSON)
 
-- XML, JSON
+- java-basic-datetime
+- java-basic-file-parser
+- java-basic-mail
+- java-basic-jdbc
+- java-basic-socket
+- java-basic-ssl
 
 ## 2. Java Network
 
@@ -121,36 +127,49 @@ JavaScript
 
 ## 4. Java Web
 
-### 4.1 Servlet, Web Pages  & Template Engine
+### 4.1 Servlet
 
-Servlet
+Servlet Basic
 
 1
 
-- servlet-basic-helloworld
-- servlet-basic-hello-by-annotation
-- servlet-basic-the-request
-- servlet-basic-servlet-context
-- servlet-basic-the-response
-- servlet-basic-filter
-- servlet-basic-session
-- servlet-basic-annotations
-- servlet-basic-pluggability
-- servlet-basic-dispatching-request
-- servlet-basic-web-applications-error-handling
-- servlet-basic-application-lifecycle-events
-- servlet-basic-mapping-requests-to-servlets
-- servlet-basic-security
-- servlet-basic-curd
+- [x] servlet-basic-01-helloworld
+- [x] servlet-basic-01-hello-by-annotation
+- [ ] servlet-basic-02-the-request
+- servlet-basic-03-servlet-context
+- servlet-basic-04-the-response
+- servlet-basic-05-filter
+- servlet-basic-06-session
+- servlet-basic-07-annotations
+- servlet-basic-08-pluggability
+- servlet-basic-09-dispatching-request
+- [x] servlet-basic-10-error-handling
+- servlet-basic-11-application-lifecycle-events
+- servlet-basic-12-mapping-requests-to-servlets
+- servlet-basic-13-security
+- servlet-basic-14-curd
 
 2
 
-- servlet4-basic-http2-server-push
-- servlet4-basic-http2-server-push-with-jsf
-- servlet4-basic-http-servlet-mapping
-- servlet4-basic-filter
-- servlet4-basic-trailer-fields
-- servlet4-basic-servlet-context-new-methods
+- [x] servlet4-basic-01-server-push
+- servlet4-basic-01-server-push-with-jsf
+- servlet4-basic-02-servlet-mapping
+- servlet4-basic-03-filter
+- servlet4-basic-04-trailer-fields
+- servlet4-basic-05-servlet-context-new-methods
+
+Web Pages
+
+- servlet-page-jsp
+- servlet-page-freemaker
+
+Logging
+
+- servlet-logging-log4j2
+
+Test
+
+- servlet-test-junit
 
 Web Pages  & Template Engine
 
@@ -158,8 +177,6 @@ Web Pages  & Template Engine
 >
 > Groovy Template, JSF, Jade4j, Velocity
 
-- servlet-page-jsp
-- servlet-page-freemaker
 - springboot2-page-thymeleaf
 - springboot2-page-jsp
 - springboot2-page-freemarker
