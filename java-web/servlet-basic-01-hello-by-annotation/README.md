@@ -12,6 +12,7 @@ Required
 
 - JDK 1.8
 - Maven
+- Tomcat7 Maven Plugin
 
 ## Steps
 
@@ -52,13 +53,8 @@ Add Tomcat Maven Plugin and Tomcat Configuration
 <project>
   ...
   <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-        </resource>
-    </resources>
     <plugins>
+        <!-- maven compile -->
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.5.1</version>
@@ -67,6 +63,21 @@ Add Tomcat Maven Plugin and Tomcat Configuration
                 <target>1.8</target>
             </configuration>
         </plugin>
+        
+        <!-- maven package war -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.2.3</version>
+            <configuration>
+              <webResources>
+                <resource>
+                  <!-- this is relative to the pom.xml directory -->
+                  <directory>src/main/resources</directory>
+                </resource>
+              </webResources>
+            </configuration>
+      </plugin>
  
         <!-- Tomcat plugin-->
         <plugin>

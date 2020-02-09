@@ -47,6 +47,43 @@ Add Maven Dependencies
 </dependency>
 ```
 
+Add Maven Plugins
+
+```xml
+<project>
+  ...
+  <build>
+    <plugins>
+        <!-- maven compile -->
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+        
+        <!-- maven package war -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.2.3</version>
+            <configuration>
+              <webResources>
+                <resource>
+                  <!-- this is relative to the pom.xml directory -->
+                  <directory>src/main/resources</directory>
+                </resource>
+              </webResources>
+            </configuration>
+      	</plugin>
+    </plugins>
+  </build>
+  ...
+</project>
+```
+
 ### Step 3: Write ServerPushServlet
 
 Add source root `src/main/java`

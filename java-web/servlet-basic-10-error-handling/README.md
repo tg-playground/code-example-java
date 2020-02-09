@@ -77,7 +77,7 @@ Add Tomcat Maven Plugin and Tomcat Configuration
                 </resource>
               </webResources>
             </configuration>
-      </plugin>
+      	</plugin>
         
         <!-- Tomcat plugin -->
         <plugin>
