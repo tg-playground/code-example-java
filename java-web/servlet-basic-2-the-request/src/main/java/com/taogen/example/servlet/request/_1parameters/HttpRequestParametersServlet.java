@@ -1,4 +1,4 @@
-package com.taogen.example.parameters;
+package com.taogen.example.servlet.request._1parameters;
 
 import java.io.*;
 import javax.servlet.*;

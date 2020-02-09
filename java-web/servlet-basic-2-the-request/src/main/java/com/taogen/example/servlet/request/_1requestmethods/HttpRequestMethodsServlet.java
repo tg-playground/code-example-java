@@ -1,4 +1,4 @@
-package com.taogen.example.requestmethods;
+package com.taogen.example.servlet.request._1requestmethods;
 
 import java.io.*;
 import javax.servlet.*;
