@@ -53,8 +53,8 @@ public class FileUploadServlet extends HttpServlet {
         DiskFileItemFactory diskFileItemFactory = getDiskFileItemFactory();
         ServletFileUpload servletFileUpload = getServletFileUpload(diskFileItemFactory);
         List<FileItem> formItems = getFileItems(servletFileUpload, request, out);
-        ensureUploadDirectoryExist();
         if (formItems != null) {
+            ensureUploadDirectoryExist();
             writeFilesFromFileItem(formItems, out);
         }
     }
