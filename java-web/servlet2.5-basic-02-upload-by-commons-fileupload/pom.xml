@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taogen.example</groupId>
-    <artifactId>servlet3-basic-01-annotations-multipartconfig-for-file-upload</artifactId>
+    <artifactId>servlet2.5-basic-02-upload-by-commons-fileupload</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>servlet3-basic-01-annotations-multipartconfig-for-file-upload Maven Webapp</name>
+    <name>servlet2.5-basic-02-upload-by-commons-fileupload Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -24,10 +23,22 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
             <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache Commons FileUpload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
     </dependencies>
     <build>
@@ -63,8 +74,10 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
+                    <!-- Configure port number -->
                     <port>9000</port>
-                    <path>/servlet3-basic-01-annotations-multipartconfig-for-file-upload</path>
+                    <!-- Configure application root URL -->
+                    <path>/servlet2.5-basic-02-upload-by-commons-fileupload</path>
                 </configuration>
             </plugin>
         </plugins>

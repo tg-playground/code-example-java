@@ -1,14 +1,5 @@
 package com.taogen.example.servlet.annotations;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @WebServlet("/fileUpload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10MB

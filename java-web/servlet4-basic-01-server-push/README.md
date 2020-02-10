@@ -2,21 +2,29 @@
 
 Content
 
-- Requirements
-- Steps
+- Environments
+- Building Project
+- Implementation
+- Test
 - References
 
 ## Requirements
 
-Required
+## Environment
+
+Software
 
 - JDK 1.8+
 - Maven
 - **Tomcat 9+**
 
-## Steps
+Dependencies
 
-### Step 1: Creating Project
+- javax.servlet-api 4.0.1
+
+## Building Project
+
+### Step 1: Generating Maven Project
 
 Using Maven Template to Generate Project Structure and Artifacts
 
@@ -84,7 +92,17 @@ Add Maven Plugins
 </project>
 ```
 
-### Step 3: Write ServerPushServlet
+### Step 3: Add project file structures  
+
+Add source root `src/main/java`
+
+Add package path `com/taogen/example`
+
+
+
+## Implementation
+
+### Step 1: Write Servlets
 
 Add source root `src/main/java`
 
@@ -122,7 +140,7 @@ public class ServerPushServlet extends HttpServlet {
 
 ```
 
-**Step 4: Configuring Tomcat 8 for support HTTP/2**
+**Step 2: Configuring Tomcat 8 for support HTTP/2**
 
 Using **OpenSSL** to generate root SSL certificate file and domain `localhost` SSL certificate file. 
 
@@ -143,9 +161,13 @@ Edit `conf/server.xml` set HTTP/2
 
 Optional: Enable HTTPS on localhost
 
-### Step 5: Running and Visiting Project
 
-Running Tomcat 9
+
+## Test
+
+### Running and Visiting Project
+
+Running your Tomcat 9
 
 Visiting Index Page
 

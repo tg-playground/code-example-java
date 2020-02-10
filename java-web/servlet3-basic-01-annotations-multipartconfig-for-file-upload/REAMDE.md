@@ -2,13 +2,15 @@
 
 Content
 
-- Requirements
-- Steps
+- Environments
+- Building Project
+- Implementation
+- Test
 - References
 
-## Requirements
+## Environment
 
-Environments
+Software
 
 - JDK 1.8
 - Maven
@@ -18,9 +20,9 @@ Dependencies
 
 - javax.servlet-api 3.0.1
 
-## Steps
+## Building Project
 
-### Step 1: Creating Project
+### Step 1: Generating Maven Project
 
 Using Maven Template to Generate Project Structure and Artifacts
 
@@ -99,11 +101,17 @@ Add Maven Plugins
 </project>
 ```
 
-### Step 3: Write Servlets
+### Step 3: Add project file structures  
 
 Add source root `src/main/java`
 
-Add package path `com/taogen/example/servlet/annotations`
+Add package path `com/taogen/example`
+
+
+
+## Implementation
+
+### Step 1: Write Servlets
 
 Add `FileUploadByMultipartConfigServlet.java`
 
@@ -208,7 +216,11 @@ public class FileUploadByMultipartConfigServlet extends HttpServlet {
 }
 ```
 
-### Step 4: Running and Visiting Project
+
+
+## Test
+
+### Running and Visiting Project
 
 Running Maven Project by Maven Tomcat 7 Plugin
 

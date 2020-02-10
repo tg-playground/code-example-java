@@ -1,4 +1,4 @@
-# servlet-xxx Project {{update me}}
+# servlet-basic-the-request Project 
 
 Content
 
@@ -18,21 +18,20 @@ Software
 
 Dependencies
 
-- javax.servlet-api 4.0.1
-
-
+- servlet-api v3.5
+- org.json v20190722
 
 ## Building Project
 
 ### Step 1: Generating Maven Project
 
-Using Maven Template to Generate Project Structure and Artifacts **<<<<<<!!{update me}!!>>>>>>**
+Using Maven Template to Generate Project Structure and Artifacts
 
 ```shell
-$ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project_name} -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId=servlet-basic-the-request -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
-### Step 2: Configuring Maven Project `pom.xml`
+### Step2: Configuring Maven Project `pom.xml`
 
 Set Maven Project Properties
 
@@ -46,6 +45,7 @@ Set Maven Project Properties
 Add Maven Dependencies
 
 ```xml
+<!-- servlet api -->
 <dependency>
     <groupId>javax.servlet</groupId>
     <artifactId>servlet-api</artifactId>
@@ -53,14 +53,21 @@ Add Maven Dependencies
     <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
     <scope>provided</scope>
 </dependency>
+
+<!-- JSON parser -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20190722</version>
+</dependency>
 ```
 
-Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
+Add Tomcat Maven Plugin and Tomcat Configuration
 
-``` xml
+```xml
 <project>
     ...
-	<build>
+  	<build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
@@ -84,22 +91,20 @@ Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
                 <version>2.2</version>
                 <configuration>
                     <port>9000</port>
-                    <path>/servlet-helloworld</path>
+                    <path>/servlet-basic-the-request</path>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-	...
+    ...
 </project>
 ```
 
-### Step 3: Add project file structures  
-
-### **<<<<<<!!{update me}!!>>>>>>**
+### Step 3: Add project file structures
 
 Add source root `src/main/java`
 
-Add package path `com/taogen/example`
+Add package path `com/taogen/example/servlet/request`
 
 
 
@@ -107,50 +112,7 @@ Add package path `com/taogen/example`
 
 ### Step 1: Write Servlets
 
-Add `HelloWorldServlet.java`   **<<<<<<!!{update me}!!>>>>>>**
 
-```java
-package com.taogen.example.servlet;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-public class HelloWorldServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
-    private String message;
-
-    public void init() throws ServletException {
-        // Do required initialization
-        message = "Hello World! ";
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        // Set response content type
-        response.setContentType("text/html");
-
-        // Actual logic goes here.
-        PrintWriter out = response.getWriter();
-        String result = new StringBuilder(message).append(System.currentTimeMillis()).toString();
-        out.println("<h3>" + result + "</h3>");
-    }
-
-    public void destroy() {
-        // do nothing.
-    }
-}
-
-```
-
-### Step2: Configuring Servlet 
-
-**<<<<<<!!{update me}!!>>>>>>**
 
 
 
@@ -162,8 +124,6 @@ Running Maven Project by Maven Tomcat 7 Plugin
 
 ```shell
 $ mvn tomcat7:run
-# or
-$ mvn tomcat7:run-war
 ```
 
 Visiting Index Page
@@ -172,7 +132,7 @@ Visiting Index Page
 $ curl http://localhost:{your_port}/{your_context}
 ```
 
-Visiting `HelloWorldServlet`  **<<<<<<!!{update me}!!>>>>>>**
+Visiting `HelloWorldServlet`
 
 ```shell
 $ curl http://localhost:{your_port}/{your_context}/hello
@@ -181,5 +141,3 @@ $ curl http://localhost:{your_port}/{your_context}/hello
 
 
 ## References
-
-**<<<<<<!!{update me}!!>>>>>>**

@@ -1,0 +1,20 @@
+package com.taogen.example;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/hello")
+public class HelloWorldServlet extends HttpServlet {
+    private static final long serialVersionUID = -3462096228274971485L;
+
+    @Override
+    protected void doGet(HttpServletRequest reqest, HttpServletResponse response)
+            throws ServletException, IOException {
+		response.setContentType("text/html");
+        response.getWriter().println("<h3>Hello World!</h3>");
+    }
+}

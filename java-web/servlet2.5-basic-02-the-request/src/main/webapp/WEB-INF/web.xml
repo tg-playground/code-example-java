@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HttpRequestParametersServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._1parameters.HttpRequestParametersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HttpRequestParametersServlet</servlet-name>
+        <url-pattern>/httpRequestParams</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HttpRequestMethodsServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._1requestmethods.HttpRequestMethodsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HttpRequestMethodsServlet</servlet-name>
+        <url-pattern>/httpRequestMethods</url-pattern>
+    </servlet-mapping>
+</web-app>
