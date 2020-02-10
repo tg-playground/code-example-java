@@ -2,21 +2,29 @@
 
 Content
 
-- Requirements
-- Steps
+- Environments
+- Building Project
+- Implementation
+- Test
 - References
 
-## Requirements
+## Environment
 
-Required
+Software
 
 - JDK 1.8
 - Maven
 - Tomcat7 Maven Plugin
 
-## Steps
+Dependencies
 
-### Step 1: Creating Project
+- javax.servlet-api 4.0.1
+
+## 
+
+## Building Project
+
+### Step 1: Generating Maven Project
 
 Using Maven Template to Generate Project Structure and Artifacts **<<<<<<!!{update me}!!>>>>>>**
 
@@ -40,8 +48,8 @@ Add Maven Dependencies
 ```xml
 <dependency>
     <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
     <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
     <scope>provided</scope>
 </dependency>
@@ -51,51 +59,45 @@ Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
 
 ``` xml
 <project>
-  ...
-  <build>
-    <plugins>
-        <!-- maven compile -->
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.5.1</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-        
-        <!-- maven package war -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.3</version>
-            <configuration>
-              <webResources>
-                <resource>
-                  <!-- this is relative to the pom.xml directory -->
-                  <directory>src/main/resources</directory>
-                </resource>
-              </webResources>
-            </configuration>
-      </plugin>
- 
-        <!-- Tomcat plugin-->
-        <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
-            <configuration>
-                <port>9000</port>   //Configure port number
-                <path>/{your_project_name}</path>   //Configure application root URL
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
-  ...
+    ...
+	<build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Tomcat plugin-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>9000</port>
+                    <path>/servlet-helloworld</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+	...
 </project>
 ```
 
-### Step 3: Write Servlets
+
+
+## Implementation
+
+### Step 1: Write Servlets
 
 Add source root `src/main/java`
 
@@ -104,29 +106,51 @@ Add package path `com/taogen/example`
 Add `HelloWorldServlet.java`   **<<<<<<!!{update me}!!>>>>>>**
 
 ```java
-package com.taogen.example;
+package com.taogen.example.servlet;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-@WebServlet("/hello")
 public class HelloWorldServlet extends HttpServlet {
-    private static final long serialVersionUID = -3462096228274971485L;
-    
-	@Override
-	protected void doGet(HttpServletRequest reqest, HttpServletResponse response) 
-			throws ServletException, IOException {
-		response.getWriter().println("Hello World!");
+
+    private static final long serialVersionUID = 1L;
+    private String message;
+
+    public void init() throws ServletException {
+        // Do required initialization
+        message = "Hello World! ";
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Set response content type
+        response.setContentType("text/html");
+
+        // Actual logic goes here.
+        PrintWriter out = response.getWriter();
+        String result = new StringBuilder(message).append(System.currentTimeMillis()).toString();
+        out.println("<h3>" + result + "</h3>");
+    }
+
+    public void destroy() {
+        // do nothing.
     }
 }
 
 ```
 
-### Step 4: Running and Visiting Project
+Configuring Servlet **<<<<<<!!{update me}!!>>>>>>**
+
+
+
+## Test
+
+### Running and Visiting Project
 
 Running Maven Project by Maven Tomcat 7 Plugin
 
