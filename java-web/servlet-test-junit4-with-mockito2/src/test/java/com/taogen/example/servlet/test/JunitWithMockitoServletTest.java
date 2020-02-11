@@ -1,6 +1,7 @@
 package com.taogen.example.servlet.test;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -25,13 +26,20 @@ public class JunitWithMockitoServletTest {
     @Mock
     private HttpServletResponse response;
 
+    JunitWithMockitoServlet junitWithMockitoServlet = new JunitWithMockitoServlet();
+
+    @BeforeClass
+    public static void init() {
+        // init your Servlet member variables
+    }
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void doGet() throws IOException, ServletException {
+    public void doGetTest() throws IOException, ServletException {
         Map<String, String> params = new HashMap<>();
         params.put("name", "Taogen");
         params.put("hobby", "Computer");
@@ -50,8 +58,7 @@ public class JunitWithMockitoServletTest {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         when(response.getWriter()).thenReturn(pw);
-        JunitWithMockitoServlet myServlet = new JunitWithMockitoServlet();
-        myServlet.doGet(request, response);
+        junitWithMockitoServlet.doGet(request, response);
         return sw.getBuffer().toString().trim();
     }
 }
