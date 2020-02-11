@@ -1,4 +1,4 @@
-# Servlet by Annotation Project
+# servlet3-basic-01-annotations-servlet-and-params Project
 
 Content
 
@@ -23,7 +23,7 @@ Software
 Using Maven Template to Generate Project Structure and Artifacts
 
 ```shell
-$ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId=servlet-by-annotation -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId=servlet3-basic-01-annotations-servlet-and-params -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
 ### Step 2: Configuring Maven Project `pom.xml`
@@ -87,8 +87,8 @@ Add Tomcat Maven Plugin and Tomcat Configuration
             <artifactId>tomcat7-maven-plugin</artifactId>
             <version>2.2</version>
             <configuration>
-                <port>9000</port>   //Configure port number
-                <path>/servlet-by-annotation</path>   //Configure application root URL
+                <port>9000</port>
+                <path>/servlet3-basic-01-annotations-servlet-and-params</path>
             </configuration>
         </plugin>
     </plugins>
