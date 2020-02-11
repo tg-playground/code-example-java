@@ -58,39 +58,47 @@ Add Maven Dependencies
 Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
 
 ``` xml
-<project>
-    ...
-	<build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+<build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <plugins>
+        <!-- maven compile -->
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
 
-            <!-- Tomcat plugin-->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>9000</port>
-                    <path>/servlet-helloworld</path>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-	...
-</project>
+        <!-- maven package war -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.2.3</version>
+            <configuration>
+                <webResources>
+                    <resource>
+                        <!-- this is relative to the pom.xml directory -->
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </webResources>
+            </configuration>
+        </plugin>
+
+        <!-- Tomcat plugin -->
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+                <port>9000</port>
+                <path>/servlet-hello</path>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ### Step 3: Add project file structures  
