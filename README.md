@@ -1,2 +1,2 @@
 # code-example-java
-Good reusable code library for Java development.
+Good reusable code example for Java development.
