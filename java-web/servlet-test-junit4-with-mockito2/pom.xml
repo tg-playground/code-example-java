@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taogen.example</groupId>
-    <artifactId>servlet-test-junit-with-mockito</artifactId>
+    <artifactId>servlet-test-junit4-with-mockito2</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>servlet-test-junit-with-mockito Maven Webapp</name>
+    <name>servlet-test-junit4-with-mockito2 Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>

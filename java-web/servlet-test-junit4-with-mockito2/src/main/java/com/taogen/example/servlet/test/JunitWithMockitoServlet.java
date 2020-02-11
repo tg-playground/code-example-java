@@ -16,7 +16,7 @@ public class JunitWithMockitoServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String name = req.getParameter("name");
         String hobby = req.getParameter("hobby");
-        StringBuilder result = new StringBuilder(name).append("-").append(hobby);
+        StringBuilder result = new StringBuilder().append(name).append("-").append(hobby);
         out.println(result.toString());
     }
 }
