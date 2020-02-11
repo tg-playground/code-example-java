@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "RequestAndInitParamsAnnotationsServlet", value = "/hello", initParams = {
+@WebServlet(name = "ServletAnnotationsServlet", value = "/hello", initParams = {
         @WebInitParam(name = "foo", value = "Hello "),
         @WebInitParam(name = "bar", value = "World!")
 })
-public class RequestAndInitParamsAnnotationsServlet extends HttpServlet {
+public class ServletAnnotationsServlet extends HttpServlet {
     private static final long serialVersionUID = -3462096228274971485L;
 
     @Override
