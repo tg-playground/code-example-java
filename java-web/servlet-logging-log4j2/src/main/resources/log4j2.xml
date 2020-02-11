@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="info">
+
+    <Properties>
+        <Property name="logdir">D:\App\code-example-java\log</Property>
+        <Property name="messagePatternLayout1">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+        <Property name="messagePatternLayout2">%d [%t] %-5p %c- %m%n</Property>
+    </Properties>
+
+    <!-- define where logging messages are saved. including consoles, files, database tables, or sockets -->
+    <Appenders>
+        <RollingFile name="File"
+                     fileName="${logdir}/localhost.log"
+                     filePattern="${logdir}/localhost.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${messagePatternLayout2}"/>
+            <!-- The TimeBasedTriggeringPolicy starts a rollover according to the most specific date and time pattern; in our case, every hour.
+                The SizeBasedTriggeringPolicy starts a rollover if the size of the log file reaches 1 MB.-->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${messagePatternLayout1}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- In the Loggers tag we define loggers. They are named log message destinations.
+            Each logger can have different level of logging configured. We define a logger with info logging level.
+            We append the rolling file appender that we have previously defined to this logger.-->
+        <!-- Application logging -->
+        <Logger name="com.taogen.example.servlet.logging"
+                level="info" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
