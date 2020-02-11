@@ -10,6 +10,8 @@ Content
 
 ## Environment
 
+**<<<<<<!!{update me}!!>>>>>>**
+
 Software
 
 - JDK 1.8
@@ -18,7 +20,8 @@ Software
 
 Dependencies
 
-- javax.servlet-api 4.0.1
+- javax.servlet-api 3.0.1
+- junit 4.12
 
 
 
@@ -26,7 +29,9 @@ Dependencies
 
 ### Step 1: Generating Maven Project
 
-Using Maven Template to Generate Project Structure and Artifacts **<<<<<<!!{update me}!!>>>>>>**
+**<<<<<<!!{update me}!!>>>>>>**
+
+Using Maven Template to Generate Project Structure and Artifacts
 
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project_name} -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
@@ -38,6 +43,7 @@ Set Maven Project Properties
 
 ```xml
 <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
 </properties>
@@ -45,17 +51,27 @@ Set Maven Project Properties
 
 Add Maven Dependencies
 
+**<<<<<<!!{update me}!!>>>>>>**
+
 ```xml
 <dependency>
     <groupId>javax.servlet</groupId>
-    <artifactId>servlet-api</artifactId>
-    <version>2.5</version>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.0.1</version>
     <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
     <scope>provided</scope>
 </dependency>
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
 ```
 
-Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
+Add Maven Plugins  
+
+**<<<<<<!!{update me}!!>>>>>>**
 
 ``` xml
 <build>
@@ -105,9 +121,11 @@ Add Maven Plugins  **<<<<<<!!{update me}!!>>>>>>**
 
 ### **<<<<<<!!{update me}!!>>>>>>**
 
-Add source root `src/main/java`
+Add "Sources Root" `src/main/java`
 
-Add package path `com/taogen/example`
+Add "Test Sources Root" `src/test/java`
+
+Add package `com.taogen.example`
 
 
 
@@ -115,7 +133,9 @@ Add package path `com/taogen/example`
 
 ### Step 1: Write Servlets
 
-Add `HelloWorldServlet.java`   **<<<<<<!!{update me}!!>>>>>>**
+**<<<<<<!!{update me}!!>>>>>>**
+
+Add `HelloWorldServlet.java`
 
 ```java
 package com.taogen.example.servlet;
@@ -180,7 +200,9 @@ Visiting Index Page
 $ curl http://localhost:{your_port}/{your_context}
 ```
 
-Visiting `HelloWorldServlet`  **<<<<<<!!{update me}!!>>>>>>**
+Visiting `HelloWorldServlet`  
+
+**<<<<<<!!{update me}!!>>>>>>**
 
 ```shell
 $ curl http://localhost:{your_port}/{your_context}/hello
