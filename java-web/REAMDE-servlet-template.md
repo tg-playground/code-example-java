@@ -42,11 +42,19 @@ $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project
 
 Set Maven Project Properties
 
+**<<<<<<!!{update me}!!>>>>>>**
+
 ```xml
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <!-- custom properties -->
+    <project.java.version>1.8</project.java.version>
+    <tomcat.plugin.version>2.2</tomcat.plugin.version>
+    <tomcat.plugin.config.port>9000</tomcat.plugin.config.port>
+    <tomcat.plugin.config.path>/servlet-hello</tomcat.plugin.config.path>
 </properties>
 ```
 
@@ -82,8 +90,6 @@ Add Maven Dependencies
 
 Add Maven Plugins  
 
-**<<<<<<!!{update me}!!>>>>>>**
-
 ``` xml
 <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -94,8 +100,8 @@ Add Maven Plugins
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.5.1</version>
             <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
+                <source>${project.java.version}</source>
+                <target>${project.java.version}</target>
             </configuration>
         </plugin>
 
@@ -118,10 +124,10 @@ Add Maven Plugins
         <plugin>
             <groupId>org.apache.tomcat.maven</groupId>
             <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
+            <version>${tomcat.plugin.version}</version>
             <configuration>
-                <port>9000</port>
-                <path>/servlet-hello</path>
+                <port>${tomcat.plugin.config.port}</port>
+                <path>${tomcat.plugin.config.path}</path>
             </configuration>
         </plugin>
     </plugins>
