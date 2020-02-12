@@ -1,4 +1,4 @@
-package com.taogen.example.servlet.request._1requestmethods;
+package com.taogen.example.servlet.request._0methods;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,4 +1,4 @@
-package com.taogen.example.servlet.request._3attributes;
+package com.taogen.example.servlet.request._2attributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

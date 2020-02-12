@@ -28,7 +28,7 @@
     <!-- RequestMethodServlet -->
     <servlet>
         <servlet-name>HttpRequestMethodsServlet</servlet-name>
-        <servlet-class>com.taogen.example.servlet.request._1requestmethods.HttpRequestMethodsServlet</servlet-class>
+        <servlet-class>com.taogen.example.servlet.request._0methods.HttpRequestMethodsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HttpRequestMethodsServlet</servlet-name>
@@ -38,7 +38,7 @@
     <!-- RequestAttributeServlet -->
     <servlet>
         <servlet-name>RequestAttributeServlet</servlet-name>
-        <servlet-class>com.taogen.example.servlet.request._3attributes.RequestAttributeServlet</servlet-class>
+        <servlet-class>com.taogen.example.servlet.request._2attributes.RequestAttributeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RequestAttributeServlet</servlet-name>
@@ -48,7 +48,7 @@
     <!-- RequestAttributeServlet 2 -->
     <servlet>
         <servlet-name>RequestAttributeResultServlet</servlet-name>
-        <servlet-class>com.taogen.example.servlet.request._3attributes.RequestAttributeResultServlet</servlet-class>
+        <servlet-class>com.taogen.example.servlet.request._2attributes.RequestAttributeResultServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RequestAttributeResultServlet</servlet-name>
