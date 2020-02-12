@@ -22,6 +22,7 @@ Dependencies
 
 - javax.servlet-api 3.0.1
 - junit 4.12
+- log4j-web 2.12.1
 
 
 
@@ -54,6 +55,7 @@ Add Maven Dependencies
 **<<<<<<!!{update me}!!>>>>>>**
 
 ```xml
+<!-- servlet api -->
 <dependency>
     <groupId>javax.servlet</groupId>
     <artifactId>javax.servlet-api</artifactId>
@@ -61,11 +63,20 @@ Add Maven Dependencies
     <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
     <scope>provided</scope>
 </dependency>
+
+<!-- unit test -->
 <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
     <version>4.12</version>
     <scope>test</scope>
+</dependency>
+
+<!-- logging -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-web</artifactId>
+    <version>2.12.1</version>
 </dependency>
 ```
 
