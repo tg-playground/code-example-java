@@ -1,5 +1,7 @@
 package com.taogen.example.servlet.request._1parameters;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import java.io.PrintWriter;
 public class HttpRequestParametersServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LogManager.getLogger();
 
     public void init() throws ServletException {
         // Do required initialization
@@ -24,6 +27,7 @@ public class HttpRequestParametersServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         StringBuilder result = new StringBuilder("This is HTTP Get result page. \nYour parameter name is ");
         String name = request.getParameter("name");
+        logger.debug("name is {}", name);
         result.append(name);
         out.println("<h1>" + result.toString() + "</h1>");
     }
@@ -54,7 +58,7 @@ public class HttpRequestParametersServlet extends HttpServlet {
     public String getParameterValue(String key, HttpServletRequest request) {
         String value = null;
         String requestContentType = request.getContentType();
-        System.out.println("Your request contentType is : " + requestContentType);
+        logger.debug("Your request contentType is : " + requestContentType);
 
         StringBuilder sb = new StringBuilder();
         String line = null;
@@ -65,7 +69,7 @@ public class HttpRequestParametersServlet extends HttpServlet {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
-                System.out.println("Your json parameter is : " + sb.toString());
+                logger.debug("Your json parameter is : " + sb.toString());
                 JSONObject jsonObject = new JSONObject(sb.toString());
                 value = jsonObject.getString(key);
             } catch (Exception e) {
