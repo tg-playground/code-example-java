@@ -38,16 +38,28 @@ Set Maven Project Properties
     <maven.compiler.source>1.8</maven.compiler.source>
     <!-- custom properties -->
     <project.java.version>1.8</project.java.version>
+    <junit.version>4.12</junit.version>
+    <log4j.version>2.8.2</log4j.version>
 </properties>
 ```
 
 Add Maven Dependencies
 
 ```xml
-<!-- unit test-->
+<!-- unit test -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>${junit.version}</version>
+    <scope>test</scope>
+</dependency>
 
 <!-- logging -->
-
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-web</artifactId>
+    <version>${log4j.version}</version>
+</dependency>
 ```
 
 Add Maven Plugins
@@ -80,17 +92,6 @@ Add Maven Plugins
                         <directory>src/main/resources</directory>
                     </resource>
                 </webResources>
-            </configuration>
-        </plugin>
-
-        <!-- Tomcat plugin -->
-        <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
-            <configuration>
-                <port>9000</port>
-                <path>/servlet-logging-log4j2</path>
             </configuration>
         </plugin>
     </plugins>
