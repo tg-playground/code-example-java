@@ -22,7 +22,7 @@ Dependencies
 
 - javax.servlet-api 3.0.1
 - junit 4.12
-- log4j-web 2.12.1
+- log4j-web 2.8.2
 
 
 
@@ -53,8 +53,13 @@ Set Maven Project Properties
     <!-- custom properties -->
     <project.java.version>1.8</project.java.version>
     <tomcat.plugin.version>2.2</tomcat.plugin.version>
-    <tomcat.plugin.config.port>9000</tomcat.plugin.config.port>
+    <junit.version>4.12</junit.version>
+    <log4j.version>2.8.2</log4j.version>
+    <!-- changeit -->
+    <tomcat.plugin.config.port>80</tomcat.plugin.config.port>
     <tomcat.plugin.config.path>/servlet-hello</tomcat.plugin.config.path>
+    <servlet.version>2.5</servlet.version>
+    <servlet.artifactId>servlet-api</servlet.artifactId>
 </properties>
 ```
 
@@ -63,20 +68,11 @@ Add Maven Dependencies
 **<<<<<<!!{update me}!!>>>>>>**
 
 ```xml
-<!-- servlet api -->
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>3.0.1</version>
-    <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
-    <scope>provided</scope>
-</dependency>
-
 <!-- unit test -->
 <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
-    <version>4.12</version>
+    <version>${junit.version}</version>
     <scope>test</scope>
 </dependency>
 
@@ -84,7 +80,16 @@ Add Maven Dependencies
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-web</artifactId>
-    <version>2.12.1</version>
+    <version>${log4j.version}</version>
+</dependency>
+
+<!-- servlet api -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>${servlet.artifactId}</artifactId>
+    <version>${servlet.version}</version>
+    <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
+    <scope>provided</scope>
 </dependency>
 ```
 
