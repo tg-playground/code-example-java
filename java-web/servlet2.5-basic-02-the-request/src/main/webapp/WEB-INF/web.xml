@@ -5,6 +5,7 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
 
+    <!-- HelloServlet -->
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.taogen.example.servlet.request.HelloServlet</servlet-class>
@@ -13,21 +14,44 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
+    <!-- RequestParamterServlet -->
     <servlet>
         <servlet-name>HttpRequestParametersServlet</servlet-name>
         <servlet-class>com.taogen.example.servlet.request._1parameters.HttpRequestParametersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HttpRequestParametersServlet</servlet-name>
-        <url-pattern>/httpRequestParams</url-pattern>
+        <url-pattern>/requestParams</url-pattern>
     </servlet-mapping>
 
+    <!-- RequestMethodServlet -->
     <servlet>
         <servlet-name>HttpRequestMethodsServlet</servlet-name>
         <servlet-class>com.taogen.example.servlet.request._1requestmethods.HttpRequestMethodsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HttpRequestMethodsServlet</servlet-name>
-        <url-pattern>/httpRequestMethods</url-pattern>
+        <url-pattern>/requestMethods</url-pattern>
+    </servlet-mapping>
+
+    <!-- RequestAttributeServlet -->
+    <servlet>
+        <servlet-name>RequestAttributeServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._3attributes.RequestAttributeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestAttributeServlet</servlet-name>
+        <url-pattern>/requestAttribute</url-pattern>
+    </servlet-mapping>
+
+    <!-- RequestAttributeServlet 2 -->
+    <servlet>
+        <servlet-name>RequestAttributeResultServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._3attributes.RequestAttributeResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestAttributeResultServlet</servlet-name>
+        <url-pattern>/requestAttributeResult</url-pattern>
     </servlet-mapping>
 </web-app>
