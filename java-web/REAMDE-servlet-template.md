@@ -251,62 +251,100 @@ public class HelloServlet extends HttpServlet {
 Add `HelloServletTest.java`
 
 ```java
-package com.taogen.example;
+package com.taogen.example.servlet.servletcontext;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertTrue;
 
-public class HelloServletTest {
-    @Mock
-    private HttpServletRequest request;
-
-    @Mock
-    private HttpServletResponse response;
+public class HelloServletTest extends MyServletTest {
 
     private static final HelloServlet helloServlet = new HelloServlet();
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
+        this.stringWriter = new StringWriter();
+        this.printWriter = new PrintWriter(stringWriter);
+        buildResponse(response, this.printWriter);
+    }
+
+    @After
+    public void closeResources() throws IOException {
+        this.stringWriter.flush();
+        this.printWriter.flush();
+    }
+
+    @BeforeClass
+    public static void init() {
+        helloServlet.setMessage("Hello World!");
     }
 
     @Test
     public void doGet() throws IOException, ServletException {
         Map<String, String> params = new HashMap<>();
-        buildRequestParams(params);
-        String result = getResponse();
+        buildRequestParams(request, params);
+        helloServlet.doGet(request, response);
+        String result = stringWriter.getBuffer().toString().trim();
         assertTrue(result.contains("Hello World"));
     }
+}
 
-    private void buildRequestParams(Map<String, String> params) {
+```
+
+Add `MyServletTest.java`
+
+```java
+package com.taogen.example.servlet.servletcontext;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.mockito.Mock;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Map;
+
+import static org.mockito.Mockito.when;
+
+public class MyServletTest {
+
+    protected static final Logger logger = LogManager.getLogger();
+
+    @Mock
+    protected HttpServletRequest request;
+
+    @Mock
+    protected HttpServletResponse response;
+
+    protected StringWriter stringWriter;
+
+    protected PrintWriter printWriter;
+
+    public static void buildRequestParams(HttpServletRequest request, Map<String, String> params) {
         for (String key : params.keySet()) {
             when(request.getParameter(key)).thenReturn(params.get(key));
         }
     }
 
-    private String getResponse() throws IOException, ServletException {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        when(response.getWriter()).thenReturn(pw);
-        helloServlet.doGet(request, response);
-        return sw.getBuffer().toString().trim();
+    public static void buildResponse(HttpServletResponse response, PrintWriter printWriter) throws IOException {
+        when(response.getWriter()).thenReturn(printWriter);
     }
+
 }
 ```
 
@@ -315,6 +353,17 @@ public class HelloServletTest {
 ### Step2: Configuring Servlet 
 
 **<<<<<<!!{update me}!!>>>>>>**
+
+```xml
+<servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>com.taogen.example.servlet.servletcontext.HelloServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+</servlet-mapping>
+```
 
 
 
