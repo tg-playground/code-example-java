@@ -20,9 +20,14 @@ Software
 
 Dependencies
 
-- junit 4.12
-- mockito-core 2.23.4
-- log4j-web 2.8.2
+- test
+  - junit 4.12
+  - mockito-core 2.23.4
+- logging
+  - log4j-web 2.8.2
+- tools
+  - lombok 1.18.10
+  - org.json 20190722
 - ...
 
 
@@ -68,7 +73,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
-	<!-- mockito -->
     <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
@@ -81,6 +85,19 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-web</artifactId>
         <version>${log4j.version}</version>
+    </dependency>
+    
+    <!-- Tools -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.10</version>
+        <scope>provided</scope>
+    </dependency>
+	<dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20190722</version>
     </dependency>
     
 </dependencies>

@@ -20,10 +20,15 @@ Software
 
 Dependencies
 
+- test
+  - junit 4.12
+  - mockito-core 2.23.4
+- logging
+  - log4j-web 2.8.2
+- tools
+  - lombok 1.18.10
+  - org.json 20190722
 - javax.servlet-api 3.0.1
-- junit 4.12
-- mockito-core 2.23.4
-- log4j-web 2.8.2
 
 
 
@@ -88,7 +93,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
-	<!-- mockito -->
     <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
@@ -103,6 +107,19 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${log4j.version}</version>
     </dependency>
 
+    <!-- Tools -->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.10</version>
+        <scope>provided</scope>
+    </dependency>
+	<dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20190722</version>
+    </dependency>
+    
     <!-- servlet api -->
     <dependency>
         <groupId>javax.servlet</groupId>
@@ -190,6 +207,7 @@ Add `HelloWorldServlet.java`
 ```java
 package com.taogen.example;
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -200,16 +218,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Data
 public class HelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LogManager.getLogger();
+    private String message;
+	
+    @Override
+    public void init() throws ServletException {
+        // Do required initialization
+        message = "Hello World!";
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("HelloServlet doGet() called");
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        out.println("<h3>Hello World!");
+        out.println("<html><head><title>HelloServlet</title></head><body><h3>");
+        out.println(message);
+        out.println("</h3></body></html>");
+    }
+    
+	@Override
+    public void destroy() {
+        // do nothing.
     }
 }
 ```
