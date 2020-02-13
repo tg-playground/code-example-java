@@ -167,6 +167,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
             <configuration>
                 <port>${tomcat.plugin.config.port}</port>
                 <path>${tomcat.plugin.config.path}</path>
+                <contextReloadable>true</contextReloadable>
             </configuration>
         </plugin>
     </plugins>
