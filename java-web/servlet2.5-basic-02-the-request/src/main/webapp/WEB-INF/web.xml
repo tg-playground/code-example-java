@@ -84,4 +84,15 @@
         <servlet-name>PathTranslationServlet</servlet-name>
         <url-pattern>/requestPathTranslation</url-pattern>
     </servlet-mapping>
+
+    <!-- CookiesServlet -->
+    <servlet>
+        <servlet-name>CookiesServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._5cookies.CookiesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CookiesServlet</servlet-name>
+        <url-pattern>/cookies</url-pattern>
+    </servlet-mapping>
+
 </web-app>
