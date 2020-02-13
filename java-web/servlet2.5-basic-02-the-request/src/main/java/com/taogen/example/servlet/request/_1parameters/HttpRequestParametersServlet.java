@@ -1,5 +1,6 @@
 package com.taogen.example.servlet.request._1parameters;
 
+import com.taogen.example.servlet.request.util.ServletHelp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class HttpRequestParametersServlet extends HttpServlet {
 
@@ -24,12 +24,11 @@ public class HttpRequestParametersServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        StringBuilder result = new StringBuilder("This is HTTP Get result page. \nYour parameter name is ");
+        StringBuilder result = new StringBuilder("This is HTTP Get result page. \nYour parameters: name=");
         String name = request.getParameter("name");
         logger.debug("name is {}", name);
         result.append(name);
-        out.println("<h1>" + result.toString() + "</h1>");
+        ServletHelp.writeHtml(getClass().getSimpleName(), response, result.toString());
     }
 
     /**
@@ -47,12 +46,10 @@ public class HttpRequestParametersServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        StringBuilder result = new StringBuilder("This is HTTP Post result page. \nYour parameter name is ");
+        StringBuilder result = new StringBuilder("This is HTTP Post result page. \nYour parameters: name=");
         String name = getParameterValue("name", request);
-
         result.append(name);
-        out.println("<h1>" + result.toString() + "</h1>");
+        ServletHelp.writeHtml(getClass().getSimpleName(), response, result.toString());
     }
 
     public String getParameterValue(String key, HttpServletRequest request) {
@@ -82,21 +79,19 @@ public class HttpRequestParametersServlet extends HttpServlet {
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        StringBuilder result = new StringBuilder("This is HTTP Put result page. \nYour parameter name is ");
+        StringBuilder result = new StringBuilder("This is HTTP Put result page. \nYour parameters: name=");
         String name = request.getParameter("name");
         result.append(name);
-        out.println("<h1>" + result.toString() + "</h1>");
+        ServletHelp.writeHtml(getClass().getSimpleName(), response, result.toString());
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        StringBuilder result = new StringBuilder("This is HTTP Delete result page. \nYour parameter name is ");
+        StringBuilder result = new StringBuilder("This is HTTP Delete result page. \nYour parameters: name:");
         String name = request.getParameter("name");
         result.append(name);
-        out.println("<h1>" + result.toString() + "</h1>");
+        ServletHelp.writeHtml(getClass().getSimpleName(), response, result.toString());
     }
 
     public void destroy() {
