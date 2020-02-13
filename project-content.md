@@ -131,10 +131,10 @@ JavaScript
 Servlet 2.5
 
 - [x] servlet2.5-basic-01-helloworld
-- [ ] servlet2.5-basic-02-the-request 
+- [x] servlet2.5-basic-02-the-request 
   - Parameters, Attributes, Headers, RequestPathElements, Path Translation Methods, Cookies, SSL Attributes, Internationalization, Request Data Encoding, Lifetime of the Request Object
 - [x] servlet2.5-basic-02-upload-by-commons-fileupload
-- servlet2.5-basic-03-servlet-context
+- [x] servlet2.5-basic-03-servlet-context
   - Initialization Parameters, Context Attributes, Resources
 - servlet2.5-basic-04-the-response
   - Buffering, Headers, Convenience Methods, Internationalization, Closure of Response Object, Lifetime of Response Object
