@@ -1,0 +1,68 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- servlet context initial params -->
+    <context-param>
+        <param-name>project-name</param-name>
+        <param-value>code-example-java</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>project-desc</param-name>
+        <param-value>make programming easy</param-value>
+    </context-param>
+
+    <!-- HelloServlet -->
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.servletcontext.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <!-- InitialParamsServlet -->
+    <servlet>
+        <servlet-name>InitialParamsServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.servletcontext._1initparams.InitialParamsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InitialParamsServlet</servlet-name>
+        <url-pattern>/initialParams</url-pattern>
+    </servlet-mapping>
+
+    <!-- ContextAttributesServlet -->
+    <servlet>
+        <servlet-name>ContextAttributesServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.servletcontext._2context_attributes.ContextAttributesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContextAttributesServlet</servlet-name>
+        <url-pattern>/contextAttributes</url-pattern>
+    </servlet-mapping>
+
+    <!-- ResourcesServlet -->
+    <servlet>
+        <servlet-name>ResourcesServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.servletcontext._3resources.ResourcesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResourcesServlet</servlet-name>
+        <url-pattern>/resources</url-pattern>
+    </servlet-mapping>
+
+    <!-- TemporaryDirectoryServlet -->
+    <servlet>
+        <servlet-name>TemporaryDirectoryServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.servletcontext._4temporary_directory.TemporaryDirectoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TemporaryDirectoryServlet</servlet-name>
+        <url-pattern>/temporaryDir</url-pattern>
+    </servlet-mapping>
+</web-app>
