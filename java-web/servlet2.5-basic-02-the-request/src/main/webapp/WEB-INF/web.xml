@@ -95,4 +95,14 @@
         <url-pattern>/cookies</url-pattern>
     </servlet-mapping>
 
+    <!-- InternationalizationServlet -->
+    <servlet>
+        <servlet-name>InternationalizationServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._6internationalization.InternationalizationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InternationalizationServlet</servlet-name>
+        <url-pattern>/i18n</url-pattern>
+    </servlet-mapping>
+
 </web-app>
