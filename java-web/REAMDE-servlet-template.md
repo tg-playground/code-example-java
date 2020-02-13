@@ -22,6 +22,7 @@ Dependencies
 
 - javax.servlet-api 3.0.1
 - junit 4.12
+- mockito-core 2.23.4
 - log4j-web 2.8.2
 
 
@@ -30,17 +31,34 @@ Dependencies
 
 ### Step 1: Generating Maven Project
 
-**<<<<<<!!{update me}!!>>>>>>**
-
 Using Maven Template to Generate Project Structure and Artifacts
+
+**<<<<<<!!{update me}!!>>>>>>**
 
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project_name} -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
-### Step 2: Configuring Maven Project `pom.xml`
+### Step 2: Add project directories structures  
 
-Set Maven Project Properties
+Add "Sources Root" `src/main/java`
+
+Add "Test Sources Root" `src/test/java`
+
+Add package `com.taogen.example`
+
+**<<<<<<!!{update me}!!>>>>>>**
+
+```shell
+cd {your_project_root_dir}
+mkdir -p src/main/java/com/taogen/example src/test/java/com/taogen/example
+# or
+mkdir -p src\main\java\com\taogen\example src\test\java\com\taogen\example
+```
+
+### Step 3: Configuring Maven Project `pom.xml`
+
+Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 **<<<<<<!!{update me}!!>>>>>>**
 
@@ -61,41 +79,40 @@ Set Maven Project Properties
     <servlet.version>2.5</servlet.version>
     <servlet.artifactId>servlet-api</servlet.artifactId>
 </properties>
-```
 
-Add Maven Dependencies
+<dependencies>
+    <!-- unit test -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+	<!-- mockito -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>2.23.4</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- logging -->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-web</artifactId>
+        <version>${log4j.version}</version>
+    </dependency>
 
-**<<<<<<!!{update me}!!>>>>>>**
+    <!-- servlet api -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>${servlet.artifactId}</artifactId>
+        <version>${servlet.version}</version>
+        <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
 
-```xml
-<!-- unit test -->
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>${junit.version}</version>
-    <scope>test</scope>
-</dependency>
-
-<!-- logging -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-web</artifactId>
-    <version>${log4j.version}</version>
-</dependency>
-
-<!-- servlet api -->
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>${servlet.artifactId}</artifactId>
-    <version>${servlet.version}</version>
-    <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
-    <scope>provided</scope>
-</dependency>
-```
-
-Add Maven Plugins  
-
-``` xml
 <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -139,15 +156,26 @@ Add Maven Plugins
 </build>
 ```
 
-### Step 3: Add project file structures  
+### Step 4: Add Log4j2.xml
 
-### **<<<<<<!!{update me}!!>>>>>>**
-
-Add "Sources Root" `src/main/java`
-
-Add "Test Sources Root" `src/test/java`
-
-Add package `com.taogen.example`
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.taogen.example" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
+```
 
 
 
@@ -160,7 +188,10 @@ Add package `com.taogen.example`
 Add `HelloWorldServlet.java`
 
 ```java
-package com.taogen.example.servlet;
+package com.taogen.example;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -169,34 +200,83 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class HelloWorldServlet extends HttpServlet {
-
+public class HelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private String message;
+    private static final Logger logger = LogManager.getLogger();
 
-    public void init() throws ServletException {
-        // Do required initialization
-        message = "Hello World! ";
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        // Set response content type
-        response.setContentType("text/html");
-
-        // Actual logic goes here.
-        PrintWriter out = response.getWriter();
-        String result = new StringBuilder(message).append(System.currentTimeMillis()).toString();
-        out.println("<h3>" + result + "</h3>");
-    }
-
-    public void destroy() {
-        // do nothing.
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("HelloServlet doGet() called");
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.println("<h3>Hello World!");
     }
 }
-
 ```
+
+Add `HelloServletTest.java`
+
+```java
+package com.taogen.example;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
+public class HelloServletTest {
+    @Mock
+    private HttpServletRequest request;
+
+    @Mock
+    private HttpServletResponse response;
+
+    private static final HelloServlet helloServlet = new HelloServlet();
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void doGet() throws IOException, ServletException {
+        Map<String, String> params = new HashMap<>();
+        buildRequestParams(params);
+        String result = getResponse();
+        assertTrue(result.contains("Hello World"));
+    }
+
+    private void buildRequestParams(Map<String, String> params) {
+        for (String key : params.keySet()) {
+            when(request.getParameter(key)).thenReturn(params.get(key));
+        }
+    }
+
+    private String getResponse() throws IOException, ServletException {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        when(response.getWriter()).thenReturn(pw);
+        helloServlet.doGet(request, response);
+        return sw.getBuffer().toString().trim();
+    }
+}
+```
+
+
 
 ### Step2: Configuring Servlet 
 

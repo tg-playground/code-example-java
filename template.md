@@ -20,15 +20,33 @@ Software
 
 Dependencies
 
+- junit 4.12
+- mockito-core 2.23.4
+- log4j-web 2.8.2
+- ...
+
 
 
 ## Building Project
 
 ### Step 1: Generating Maven Project
 
-### Step 2: Configuring Maven Project `pom.xml`
+```shell
+$ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project_name} -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+```
 
-Set Maven Project Properties
+### Step 2: Add project directories structures  
+
+```shell
+cd {your_project_root_dir}
+mkdir -p src/main/java/com/taogen/example src/test/java/com/taogen/example
+# or
+mkdir -p src\main\java\com\taogen\example src\test\java\com\taogen\example
+```
+
+### Step 3: Configuring Maven Project `pom.xml`
+
+Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ```xml
 <properties>
@@ -41,30 +59,32 @@ Set Maven Project Properties
     <junit.version>4.12</junit.version>
     <log4j.version>2.8.2</log4j.version>
 </properties>
-```
 
-Add Maven Dependencies
+<dependencies>
+    <!-- unit test -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+	<!-- mockito -->
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>2.23.4</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- logging -->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-web</artifactId>
+        <version>${log4j.version}</version>
+    </dependency>
+    
+</dependencies>
 
-```xml
-<!-- unit test -->
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>${junit.version}</version>
-    <scope>test</scope>
-</dependency>
-
-<!-- logging -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-web</artifactId>
-    <version>${log4j.version}</version>
-</dependency>
-```
-
-Add Maven Plugins
-
-```xml
 <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -98,17 +118,26 @@ Add Maven Plugins
 </build>
 ```
 
+### Step 4: Add Log4j2.xml
 
-
-### Step 3: Add project file structures  
-
-### **<<<<<<!!{update me}!!>>>>>>**
-
-Add "Sources Root" `src/main/java`
-
-Add "Test Sources Root" `src/test/java`
-
-Add package `com.taogen.example`
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.taogen.example" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
+```
 
 
 
