@@ -1,6 +1,5 @@
 package com.taogen.example.servlet.request;
 
-import com.taogen.example.servlet.request.util.ServletTestHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
-public class HelloServletTest extends MyServletTest{
+public class HelloServletTest extends MyServletTest {
 
     private static final HelloServlet helloServlet = new HelloServlet();
 
@@ -25,7 +24,7 @@ public class HelloServletTest extends MyServletTest{
         MockitoAnnotations.initMocks(this);
         this.stringWriter = new StringWriter();
         this.printWriter = new PrintWriter(stringWriter);
-        ServletTestHelper.buildResponse(response, this.printWriter);
+        buildResponse(response, this.printWriter);
     }
 
     @After
@@ -35,14 +34,14 @@ public class HelloServletTest extends MyServletTest{
     }
 
     @BeforeClass
-    public static void init(){
+    public static void init() {
         helloServlet.setMessage("Hello World!");
     }
 
     @Test
     public void doGet() throws IOException, ServletException {
         Map<String, String> params = new HashMap<>();
-        ServletTestHelper.buildRequestParams(request, params);
+        buildRequestParams(request, params);
         helloServlet.doGet(request, response);
         String result = stringWriter.getBuffer().toString().trim();
         assertTrue(result.contains("Hello World"));

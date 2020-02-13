@@ -1,7 +1,6 @@
 package com.taogen.example.servlet.request._3headers;
 
 import com.taogen.example.servlet.request.MyServletTest;
-import com.taogen.example.servlet.request.util.ServletTestHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,7 +25,7 @@ public class RequestHeadersServletTest extends MyServletTest {
         MockitoAnnotations.initMocks(this);
         this.stringWriter = new StringWriter();
         this.printWriter = new PrintWriter(stringWriter);
-        ServletTestHelper.buildResponse(response, this.printWriter);
+        buildResponse(response, this.printWriter);
     }
 
     @After
@@ -42,7 +41,7 @@ public class RequestHeadersServletTest extends MyServletTest {
     @Test
     public void doGet() throws ServletException, IOException {
         Map<String, String> params = new HashMap<>();
-        ServletTestHelper.buildRequestParams(request, params);
+        buildRequestParams(request, params);
 
         myServlet.doGet(request, response);
         String result = stringWriter.getBuffer().toString().trim();
