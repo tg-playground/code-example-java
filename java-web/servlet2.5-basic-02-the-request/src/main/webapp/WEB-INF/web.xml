@@ -54,4 +54,34 @@
         <servlet-name>RequestAttributeResultServlet</servlet-name>
         <url-pattern>/requestAttributeResult</url-pattern>
     </servlet-mapping>
+
+    <!-- RequestHeaderServlet -->
+    <servlet>
+        <servlet-name>RequestHeaderServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._3headers.RequestHeadersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestHeaderServlet</servlet-name>
+        <url-pattern>/requestHeaders</url-pattern>
+    </servlet-mapping>
+
+    <!-- RequestPathServlet -->
+    <servlet>
+        <servlet-name>RequestPathServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._4request_path.RequestPathServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestPathServlet</servlet-name>
+        <url-pattern>/requestPath/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- PathTranslationServlet -->
+    <servlet>
+        <servlet-name>PathTranslationServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.request._4request_path.PathTranslationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PathTranslationServlet</servlet-name>
+        <url-pattern>/requestPathTranslation</url-pattern>
+    </servlet-mapping>
 </web-app>

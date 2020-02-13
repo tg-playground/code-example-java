@@ -108,6 +108,7 @@
                 <configuration>
                     <port>${tomcat.plugin.config.port}</port>
                     <path>${tomcat.plugin.config.path}</path>
+                    <contextReloadable>true</contextReloadable>
                 </configuration>
             </plugin>
 

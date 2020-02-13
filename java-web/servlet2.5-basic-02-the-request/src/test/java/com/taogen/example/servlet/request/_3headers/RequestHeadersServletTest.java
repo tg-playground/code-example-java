@@ -1,5 +1,6 @@
-package com.taogen.example.servlet.request;
+package com.taogen.example.servlet.request._3headers;
 
+import com.taogen.example.servlet.request.MyServletTest;
 import com.taogen.example.servlet.request.util.ServletTestHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
-public class HelloServletTest extends MyServletTest{
+public class RequestHeadersServletTest extends MyServletTest {
 
-    private static final HelloServlet helloServlet = new HelloServlet();
+    private static final RequestHeadersServlet myServlet = new RequestHeadersServlet();
 
     @Before
     public void setUp() throws IOException {
@@ -35,17 +36,17 @@ public class HelloServletTest extends MyServletTest{
     }
 
     @BeforeClass
-    public static void init(){
-        helloServlet.setMessage("Hello World!");
+    public static void init() {
     }
 
     @Test
-    public void doGet() throws IOException, ServletException {
+    public void doGet() throws ServletException, IOException {
         Map<String, String> params = new HashMap<>();
         ServletTestHelper.buildRequestParams(request, params);
-        helloServlet.doGet(request, response);
-        String result = stringWriter.getBuffer().toString().trim();
-        assertTrue(result.contains("Hello World"));
-    }
 
+        myServlet.doGet(request, response);
+        String result = stringWriter.getBuffer().toString().trim();
+        logger.info("headers are {}", result);
+        assertTrue(result.contains("headers"));
+    }
 }
