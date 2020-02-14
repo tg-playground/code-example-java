@@ -6,19 +6,10 @@
   - Java Mail
   - Data Parser
     - XML, JSON
-- 2.Java Network
-  - Socket, SSL
-  - Network IO (BIO, NIO, AIO)
-  - Web Socket
-  - NIO Frameworks
-    - Mina, Jetty
-  - RPC
-    - Web Service
-    - Apache Thrift
-- 3.Web Frontend
+- 2.Web Frontend
   - CSS
   - JavaScript
-- 4.Java Web
+- 3.Java Web
   - Servlet, Web Pages  & Template Engine
   - Web Framework (MVC, IOC, AOP, Configurations & Properties, Bean Validation, DevTools)
     - Spring
@@ -29,6 +20,9 @@
       - REST
       - Swagger
     - Logging
+    - Java Security
+      - Spring Security
+      - Apache Shiro
     - Messaging
     - Job Scheduling
     - Workflow Engine
@@ -36,7 +30,7 @@
     - Single Sign-on
     - Internationalization
   - Third Platforms
-- 5.Java Database, Cache and Persistence
+- 4.Java Database, Cache and Persistence
   - Relational Database
     - MySQL
     - SQL Server
@@ -51,23 +45,39 @@
   - Persistence Frameworks
     - MyBatis
     - Hibernate
-- 6.Java Security
-  - Spring Security
-  - Apache Shiro
-- 7.Test
-  - Unit Test
-    - JUnit
-    - TestNG
-  - Mock Test
-    - Mockito
-    - PowerMock
-  - Performance Test
-    - Jmeter
-- 8.Tools
-- 9.DevOps
-- 10.Distributed System, Middleware, Microservices
-  - Spring Cloud
-- 11.Code Optimization
+- 5.Software Engineering
+  - Test
+    - Unit Test
+      - JUnit
+      - TestNG
+    - Mock Test
+      - Mockito
+      - PowerMock
+    - Performance Test
+      - Jmeter
+  - 8.Tools
+  - 9.DevOps
+- 6.Network Programming
+  - Socket, SSL
+  - Network IO (BIO, NIO, AIO)
+  - Web Socket
+  - NIO Frameworks
+    - Mina, Jetty
+  - Reactive Applications 
+      - Eclipse Vert.x
+  - RPC Frameworks
+    - Web Service
+    - Apache Thrift
+- 7.Distributed System, Middleware, Microservices
+  - Message Queue
+    - RabbitMQ
+    - Kafka
+  - Distributed  Collaboration
+    - Zookeeper
+    - Apache Dubbo
+  - Microservices
+    - Spring Cloud
+- 8.Code Optimization
 
 
 
@@ -90,27 +100,7 @@ Data Parser (XML, JSON)
 - java-basic-socket
 - java-basic-ssl
 
-## 2. Java Network
-
-TCP/IP
-
-Network IO (BIO, NIO, AIO) 
-
-Socket & SSL
-
-Web Socket
-
-NIO Framework
-
-- Netty
-- Apache Mina
-
-RPC
-
-- Web Service
-- Apache Thrift
-
-## 3. Web Frontend
+## 2. Web Frontend
 
 CSS
 
@@ -124,9 +114,9 @@ JavaScript
 - ajax-cross-origin
 - echart
 
-## 4. Java Web
+## 3. Java Web
 
-### 4.1 Servlet
+### 3.1 Servlet
 
 Servlet 2.5
 
@@ -201,7 +191,7 @@ Web Pages  & Template Engine
 - springboot2-page-jsp
 - springboot2-page-freemarker
 
-### 4.2 Web Framework
+### 3.2 Web Framework
 
 > MVC, IOC, AOP, Configurations & Properties, Bean Validation, DevTools
 
@@ -222,7 +212,7 @@ Spring Boot
 - springboot2-basic-devtools
 - springboot2-basic-aop
 
-### 4.3 Common Techniques
+### 3.3 Common Techniques
 
 API
 
@@ -237,6 +227,13 @@ Logging
 
 - springboot2-logging-log4j
 - springboot2-logging-logback
+
+Security Framwork
+
+> Spring Securityj, Apache Shiro
+
+- springboot2-security-shiro
+- springboot2-security-spring-security
 
 Messaging
 
@@ -275,7 +272,7 @@ Utility
 
 > Apache Commons
 
-### 4.4 Third Platforms
+### 3.4 Third Platforms
 
 WeChat official account
 
@@ -303,9 +300,9 @@ Push
 - 极光
 - 腾讯推送
 
-## 5. Java Database, Cache and Persistence
+## 4. Java Database, Cache and Persistence
 
-### 5.1 Data Access
+### 4.1 Data Access
 
 > JDBC, Database Connection Pool, Transaction
 >
@@ -325,7 +322,7 @@ Push
 - springboot2-data-hibernate
 - springboot2-data-auto-db-generate
 
-### 5.2 Data Cache
+### 4.2 Data Cache
 
 > Ehcache, Redis, Memcached
 
@@ -333,16 +330,9 @@ Push
 
 
 
-## 6. Java Security
+## 5. Software Engineering
 
-Security Framwork
-
-> Spring Securityj, Apache Shiro
-
-- springboot2-security-shiro
-- springboot2-security-spring-security
-
-## 7. Test
+### Test
 
 Unit Test
 
@@ -362,7 +352,7 @@ Performance Test
 
 > Jmeter
 
-## 8. Tools
+### Tools
 
 Maven
 
@@ -370,7 +360,29 @@ Jenkins
 
 Docker
 
-## 9. Distributed System, Middleware, Microservices
+## 6. Java Network
+
+TCP/IP
+
+Network IO (BIO, NIO, AIO) 
+
+Socket & SSL
+
+Web Socket
+
+NIO Framework
+
+- Netty
+- Apache Mina
+
+RPC
+
+- Web Service
+- Apache Thrift
+
+## 
+
+## 7. Distributed System, Middleware, Microservices
 
 - Distributed Data Stores
   - Cassandra
@@ -407,7 +419,7 @@ Docker
 - Others
   - Elasticsearch
 
-## 10. Code Optimization
+## 8. Code Optimization
 
 - Exception Handle
 - Char encode.
