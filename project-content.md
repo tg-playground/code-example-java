@@ -126,7 +126,7 @@ Servlet 2.5
 - [x] servlet2.5-basic-02-upload-by-commons-fileupload
 - [x] servlet2.5-basic-03-servlet-context
   - Initialization Parameters, Context Attributes, Resources
-- servlet2.5-basic-04-the-response
+- [x] servlet2.5-basic-04-the-response
   - Buffering, Headers, Convenience Methods, Internationalization, Closure of Response Object, Lifetime of Response Object
 - servlet2.5-basic-05-filter
   - Filter Lifecycle, Wrapping Request and Responses, Filter Environment, Configuration of Filter, Filters and RequestDispatcher
