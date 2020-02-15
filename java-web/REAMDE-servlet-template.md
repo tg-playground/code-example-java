@@ -56,9 +56,10 @@ Add package `com.taogen.example`
 
 ```shell
 cd {your_project_root_dir}
+# Linux
 mkdir -p src/main/java/com/taogen/example src/test/java/com/taogen/example
-# or
-mkdir -p src\main\java\com\taogen\example src\test\java\com\taogen\example
+# Windows
+mkdir src\main\java\com\taogen\example src\test\java\com\taogen\example
 ```
 
 ### Step 3: Configuring Maven Project `pom.xml`
