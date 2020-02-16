@@ -23,6 +23,7 @@ public class RequestLoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        logger.debug("******************************************************");
         logger.debug("Logging Filter Begin...");
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -30,34 +31,42 @@ public class RequestLoggingFilter implements Filter {
         String remoteAddress = servletRequest.getRemoteAddr();
         String uri = request.getRequestURI();
         String protocol = servletRequest.getProtocol();
-        logger.info("Client IP: {}, Resource File: {}, Protocol: {}", remoteAddress, uri, protocol);
+        logger.debug("Client IP: {}, Resource File: {}, Protocol: {}", remoteAddress, uri, protocol);
 
-        // Params
+        loggingRequestParams(request);
+        loggingRequestHeaders(request);
+        loggingCookies(request);
+
+        filterChain.doFilter(servletRequest, servletResponse);
+        logger.debug("Logging Filter End.");
+        logger.debug("******************************************************");
+    }
+
+    private void loggingRequestParams(HttpServletRequest request) {
         Enumeration<String> params = request.getParameterNames();
         while (params.hasMoreElements()) {
             String name = params.nextElement();
             String value = request.getParameter(name);
             logger.debug("{}::Request Params::{{}, {}}", request.getRemoteAddr(), name, value);
         }
+    }
 
-        // Cookies
+    private void loggingRequestHeaders(HttpServletRequest request) {
+        Enumeration headerNames = request.getHeaderNames();
+        while(headerNames.hasMoreElements()){
+            String headerName = (String) headerNames.nextElement();
+            String headerValue = request.getHeader(headerName);
+            logger.debug("{}::Header::{{}, {}}", request.getRemoteAddr(), headerName, headerValue);
+        }
+    }
+
+    private void loggingCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 logger.debug("{}::Cookie::{{}, {}}", request.getRemoteAddr(), cookie.getName(), cookie.getValue());
             }
         }
-
-        // headers
-//        Enumeration headerNames = request.getHeaderNames();
-//        while(headerNames.hasMoreElements()){
-//            String headerName = (String) headerNames.nextElement();
-//            String headerValue = request.getHeader(headerName);
-//            logger.debug("{}::Header::{{}, {}}", request.getRemoteAddr(), headerName, headerValue);
-//        }
-
-        filterChain.doFilter(servletRequest, servletResponse);
-        logger.debug("Logging Filter End.");
     }
 
     @Override

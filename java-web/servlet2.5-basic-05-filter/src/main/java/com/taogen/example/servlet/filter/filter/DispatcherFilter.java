@@ -9,10 +9,12 @@ import java.io.IOException;
 public class DispatcherFilter implements Filter {
 
     private static final Logger logger = LogManager.getLogger();
+    private ServletContext servletContext;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        this.servletContext = filterConfig.getServletContext();
+        logger.debug("DispatcherFilter initialized");
     }
 
     @Override

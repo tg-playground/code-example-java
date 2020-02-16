@@ -128,7 +128,7 @@ Servlet 2.5
   - Initialization Parameters, Context Attributes, Resources
 - [x] servlet2.5-basic-04-the-response
   - Buffering, Headers, Convenience Methods, Internationalization, Closure of Response Object, Lifetime of Response Object
-- servlet2.5-basic-05-filter
+- [x] servlet2.5-basic-05-filter
   - Filter Lifecycle, Wrapping Request and Responses, Filter Environment, Configuration of Filter, Filters and RequestDispatcher
 - servlet2.5-basic-06-session
   - Session Tracking Mechanisms, Creating Session, Session Scope, Binding Attributes into a Session, Session Timeout, Last Accessed Times, Important Session Semantics
