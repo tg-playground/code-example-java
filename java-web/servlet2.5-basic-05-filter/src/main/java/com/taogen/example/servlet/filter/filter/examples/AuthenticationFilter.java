@@ -33,7 +33,9 @@ public class AuthenticationFilter implements Filter {
         String uri = request.getRequestURI();
         logger.debug("Requested Resource::{}", uri);
         String sessionUserID = getSessionUserID(request);
+        logger.debug("sessionUserID is {}", sessionUserID);
         String cookieUserID = getCookieUserID(request);
+        logger.debug("cookieUserID is {}", cookieUserID);
         if ((sessionUserID == null || cookieUserID == null || !sessionUserID.equals(cookieUserID) || UserCache.userCache.get(sessionUserID) == null)
                 && !(uri.endsWith("login.jsp") || uri.endsWith("/login"))) {
             logger.debug("Unauthorized access request");
@@ -56,11 +58,13 @@ public class AuthenticationFilter implements Filter {
 
     private String getCookieUserID(HttpServletRequest request) {
         String cookieUserID = null;
-        List<Cookie> cookieList = Arrays.asList(request.getCookies());
-        if (cookieList != null) {
-            for (Cookie cookie : cookieList) {
-                if ("userID".equals(cookie.getName())) {
-                    cookieUserID = cookie.getValue();
+        if (request.getCookies() != null) {
+            List<Cookie> cookieList = Arrays.asList(request.getCookies());
+            if (cookieList != null) {
+                for (Cookie cookie : cookieList) {
+                    if ("userID".equals(cookie.getName())) {
+                        cookieUserID = cookie.getValue();
+                    }
                 }
             }
         }
