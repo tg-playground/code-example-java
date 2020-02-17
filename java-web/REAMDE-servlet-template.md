@@ -21,14 +21,17 @@ Software
 Dependencies
 
 - test
-  - junit 4.12
-  - mockito-core 2.23.4
+  - junit v4.12
+  - mockito-core v2.23.4
 - logging
-  - log4j-web 2.8.2
+  - log4j-web v2.8.2
 - tools
-  - lombok 1.18.10
-  - org.json 20190722
-- javax.servlet-api 3.0.1
+  - lombok v1.18.10
+  - gson v2.8.5
+  - jackson v2.9.8
+  - commons-lang3 v3.9
+  - commons-io v2.6
+- javax.servlet-api v3.0.1
 
 
 
