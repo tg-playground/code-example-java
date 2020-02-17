@@ -108,18 +108,34 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${log4j.version}</version>
     </dependency>
 
-    <!-- Tools -->
+    <!-- Common Tools -->
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.18.10</version>
         <scope>provided</scope>
     </dependency>
-	<dependency>
+    <dependency>
         <groupId>org.json</groupId>
         <artifactId>json</artifactId>
         <version>20190722</version>
     </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.9</version>
+    </dependency>
+    <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.4</version>
+    </dependency>
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.6</version>
+    </dependency>
+
     
     <!-- servlet api -->
     <dependency>
