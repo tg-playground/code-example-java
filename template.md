@@ -66,7 +66,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 </properties>
 
 <dependencies>
-    <!-- unit test -->
+    <!-- ** Unit Test ** -->
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
@@ -79,25 +79,42 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>2.23.4</version>
         <scope>test</scope>
     </dependency>
-    
-    <!-- logging -->
+
+    <!-- ** Logging ** -->
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-web</artifactId>
         <version>${log4j.version}</version>
     </dependency>
-    
-    <!-- Common Tools -->
+
+    <!-- ** Common Tools ** -->
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.18.10</version>
         <scope>provided</scope>
     </dependency>
+    <!-- small json file (KB) -->
     <dependency>
-        <groupId>org.json</groupId>
-        <artifactId>json</artifactId>
-        <version>20190722</version>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.5</version>
+    </dependency>
+    <!-- large json file (MB) -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.9.8</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>2.9.8</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.8</version>
     </dependency>
     <dependency>
         <groupId>org.apache.commons</groupId>
@@ -114,8 +131,9 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <artifactId>commons-io</artifactId>
         <version>2.6</version>
     </dependency>
-    
+
 </dependencies>
+
 
 <build>
     <sourceDirectory>src/main/java</sourceDirectory>
