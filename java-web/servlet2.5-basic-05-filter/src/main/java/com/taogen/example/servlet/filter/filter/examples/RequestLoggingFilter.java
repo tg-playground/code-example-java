@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestLoggingFilter implements Filter {
 
@@ -23,8 +25,7 @@ public class RequestLoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.debug("******************************************************");
-        logger.debug("Logging Filter Begin...");
+        logger.debug("RequestLoggingFilter Begin...");
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -38,34 +39,39 @@ public class RequestLoggingFilter implements Filter {
         loggingCookies(request);
 
         filterChain.doFilter(servletRequest, servletResponse);
-        logger.debug("Logging Filter End.");
-        logger.debug("******************************************************");
+        logger.debug("RequestLoggingFilter End.");
     }
 
     private void loggingRequestParams(HttpServletRequest request) {
+        Map<String, String> paramMap = new HashMap<>();
         Enumeration<String> params = request.getParameterNames();
         while (params.hasMoreElements()) {
             String name = params.nextElement();
             String value = request.getParameter(name);
-            logger.debug("{}::Request Params::{{}, {}}", request.getRemoteAddr(), name, value);
+            paramMap.put(name, value);
         }
+        logger.debug("{}::Parameters::{}", request.getRemoteAddr(), paramMap.toString());
     }
 
     private void loggingRequestHeaders(HttpServletRequest request) {
+        Map<String, String> headerMap = new HashMap<>();
         Enumeration headerNames = request.getHeaderNames();
         while(headerNames.hasMoreElements()){
             String headerName = (String) headerNames.nextElement();
             String headerValue = request.getHeader(headerName);
-            logger.debug("{}::Header::{{}, {}}", request.getRemoteAddr(), headerName, headerValue);
+            headerMap.put(headerName, headerValue);
         }
+        logger.debug("{}::Headers::{}", request.getRemoteAddr(), headerMap.toString());
     }
 
     private void loggingCookies(HttpServletRequest request) {
+        Map<String, String> cookieMap = new HashMap<>();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                logger.debug("{}::Cookie::{{}, {}}", request.getRemoteAddr(), cookie.getName(), cookie.getValue());
+                cookieMap.put(cookie.getName(), cookie.getValue());
             }
+            logger.debug("{}::Cookies::{}", request.getRemoteAddr(), cookieMap.toString());
         }
     }
 

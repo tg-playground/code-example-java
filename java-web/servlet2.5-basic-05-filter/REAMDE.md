@@ -390,6 +390,12 @@ $ curl http://localhost:{your_port}/{your_context}/hello
 
 ## References
 
-[1] [Java Servlet Filter Example Tutorial](https://www.journaldev.com/1933/java-servlet-filter-example-tutorial)
+[1] [Java Servlet Filter Example Tutorial - Logging and Auth Filters](https://www.journaldev.com/1933/java-servlet-filter-example-tutorial)
 
 [2] [Logging Filter Servlet Example](https://www.roseindia.net/servlets/logging-servlet.shtml)
+
+[3] [The Essentials of Filters - Oracle](https://www.oracle.com/technetwork/java/filters-137243.html)
+
+[4] [package org.springframework.web.filter.CharacterEncodingFilter - GitHub](https://github.com/spring-projects/spring-framework/blob/master/spring-web/src/main/java/org/springframework/web/filter/CharacterEncodingFilter.java)
+
+[5] [GZip Servlet Filter](http://tutorials.jenkov.com/java-servlets/gzip-servlet-filter.html)

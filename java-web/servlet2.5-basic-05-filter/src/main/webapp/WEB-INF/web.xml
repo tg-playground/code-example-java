@@ -6,12 +6,30 @@
          version="2.5">
     <display-name>Archetype Created Web Application</display-name>
 
+    <context-param>
+        <param-name>hitCounter</param-name>
+        <param-value>0</param-value>
+    </context-param>
+
     <filter>
-        <filter-name>LoggingFilter</filter-name>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>com.taogen.example.servlet.filter.filter.examples.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>RequestLoggingFilter</filter-name>
         <filter-class>com.taogen.example.servlet.filter.filter.examples.RequestLoggingFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>LoggingFilter</filter-name>
+        <filter-name>RequestLoggingFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
@@ -22,6 +40,26 @@
     </filter>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- HitCounterFilter conflicts with GZipCompressionFilter -->
+    <!--<filter>-->
+        <!--<filter-name>HitCounterFilter</filter-name>-->
+        <!--<filter-class>com.taogen.example.servlet.filter.filter.examples.HitCounterFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>HitCounterFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!-- GzipCompressionFilter conflicts with HitCounterFilter -->
+    <filter>
+        <filter-name>GZipCompressionFilter</filter-name>
+        <filter-class>com.taogen.example.servlet.filter.filter.examples.GZipCompressionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GZipCompressionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
