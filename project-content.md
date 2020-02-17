@@ -130,20 +130,20 @@ Servlet 2.5
   - Buffering, Headers, Convenience Methods, Internationalization, Closure of Response Object, Lifetime of Response Object
 - [x] servlet2.5-basic-05-filter
   - Filter Lifecycle, Wrapping Request and Responses, Filter Environment, Configuration of Filter, Filters and RequestDispatcher
-- servlet2.5-basic-06-session
+- [ ] servlet2.5-basic-06-session
   - Session Tracking Mechanisms, Creating Session, Session Scope, Binding Attributes into a Session, Session Timeout, Last Accessed Times, Important Session Semantics
-- servlet2.5-basic-09-dispatching-request
+- servlet2.5-basic-07-dispatching-request
   - Obtaining a ReqeustDispatcher, Using a Request Dispather, The Include Method, The Forward Method, Error Handling
-- [x] servlet2.5-basic-10-error-handling
-- Servlet2.5-basic-10-web-applications
+- [x] servlet2.5-basic-08-error-handling
+- Servlet2.5-basic-08-web-applications
   - Error Handling, Welcome Files
-- servlet2.5-basic-11-application-lifecycle-events
+- servlet2.5-basic-09-application-lifecycle-events
   - Event Listeners, Listener Class Configuration
-- servlet2.5-basic-12-mapping-requests-to-servlets
+- servlet2.5-basic-10-mapping-requests-to-servlets
   - Use of URL Paths, Specification of Mappings
-- servlet2.5-basic-13-security
+- servlet2.5-basic-11-security
   - Declarative Security, Programming Security, Roles, Authentication
-- servlet2.5-basic-14-deployment-descriptor
+- servlet2.5-basic-12-deployment-descriptor
 - servlet2.5-basic-02-webxml-convenienves
 
 Servlet 3
