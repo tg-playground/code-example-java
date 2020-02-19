@@ -4,6 +4,18 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
+
+    <filter>
+        <filter-name>RequestLoggingFilter</filter-name>
+        <filter-class>com.taogen.example.servlet.session.filter.RequestLoggingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestLoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    
+
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.taogen.example.servlet.session.HelloServlet</servlet-class>
@@ -14,11 +26,37 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.taogen.example.servlet.session.session_tracking_by_url_rewriting.LoginServlet</servlet-class>
+        <servlet-name>AddSessionAttrServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.session.servlet.AddSessionAttributeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>AddSessionAttrServlet</servlet-name>
+        <url-pattern>/addSessionAttr</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RemoveSessionAttrServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.session.servlet.RemoveSessionAttributeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveSessionAttrServlet</servlet-name>
+        <url-pattern>/removeSessionAttr</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ViewSessionAttrsServlete</servlet-name>
+        <servlet-class>com.taogen.example.servlet.session.servlet.ViewSessionAttributesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewSessionAttrsServlete</servlet-name>
+        <url-pattern>/viewSessionAttrs</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateNewSessionServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.session.servlet.CreateNewSessionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateNewSessionServlet</servlet-name>
+        <url-pattern>/newSession</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -227,178 +227,15 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Implementation
 
-### Step 1: Write Servlets
+Functions
 
-**<<<<<<!!{update me}!!>>>>>>**
+- Add session attribute
+- Remove session attribute
+- View session attributes
+- Set session properties (MaxInactiveInterval)
+- Create new session
 
-Add `HelloWorldServlet.java`
-
-```java
-package com.taogen.example;
-
-import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-@Data
-public class HelloServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final Logger logger = LogManager.getLogger();
-    private String message;
-	
-    @Override
-    public void init() throws ServletException {
-        // Do required initialization
-        message = "Hello World!";
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("HelloServlet doGet() called");
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<html><head><title>HelloServlet</title></head><body><h3>");
-        out.println(message);
-        out.println("</h3></body></html>");
-    }
-    
-	@Override
-    public void destroy() {
-        // do nothing.
-    }
-}
-```
-
-Add `HelloServletTest.java`
-
-```java
-package com.taogen.example.servlet.servletcontext;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.mockito.MockitoAnnotations;
-
-import javax.servlet.ServletException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertTrue;
-
-public class HelloServletTest extends MyServletTest {
-
-    private static final HelloServlet helloServlet = new HelloServlet();
-
-    @Before
-    public void setUp() throws IOException {
-        MockitoAnnotations.initMocks(this);
-        this.stringWriter = new StringWriter();
-        this.printWriter = new PrintWriter(stringWriter);
-        buildResponse(response, this.printWriter);
-    }
-
-    @After
-    public void closeResources() throws IOException {
-        this.stringWriter.flush();
-        this.printWriter.flush();
-    }
-
-    @BeforeClass
-    public static void init() {
-        helloServlet.setMessage("Hello World!");
-    }
-
-    @Test
-    public void doGet() throws IOException, ServletException {
-        Map<String, String> params = new HashMap<>();
-        buildRequestParams(request, params);
-        helloServlet.doGet(request, response);
-        String result = stringWriter.getBuffer().toString().trim();
-        assertTrue(result.contains("Hello World"));
-    }
-}
-
-```
-
-Add `MyServletTest.java`
-
-```java
-package com.taogen.example.servlet.servletcontext;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.mockito.Mock;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Map;
-
-import static org.mockito.Mockito.when;
-
-public class MyServletTest {
-
-    protected static final Logger logger = LogManager.getLogger();
-
-    @Mock
-    protected HttpServletRequest request;
-
-    @Mock
-    protected HttpServletResponse response;
-
-    protected StringWriter stringWriter;
-
-    protected PrintWriter printWriter;
-
-    public static void buildRequestParams(HttpServletRequest request, Map<String, String> params) {
-        for (String key : params.keySet()) {
-            when(request.getParameter(key)).thenReturn(params.get(key));
-        }
-    }
-
-    public static void buildResponse(HttpServletResponse response, PrintWriter printWriter) throws IOException {
-        when(response.getWriter()).thenReturn(printWriter);
-    }
-
-}
-```
-
-
-
-### Step2: Configuring Servlet 
-
-**<<<<<<!!{update me}!!>>>>>>**
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-	      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	      version="2.5">
-    <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.taogen.example.servlet.servletcontext.HelloServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
-</web-app>
-```
+Implement by call servlet api
 
 
 
@@ -431,6 +268,3 @@ $ curl http://localhost:{your_port}/{your_context}/hello
 
 
 ## References
-
-[1] [Session Management in Java – HttpServlet, Cookies, URL Rewriting](https://www.journaldev.com/1907/java-session-management-servlet-httpsession-url-rewriting)
-
