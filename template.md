@@ -107,17 +107,17 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>org.apache.commons</groupId>

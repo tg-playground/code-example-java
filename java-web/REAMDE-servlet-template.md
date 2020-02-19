@@ -28,7 +28,7 @@ Dependencies
 - tools
   - lombok v1.18.10
   - gson v2.8.5
-  - jackson v2.9.8
+  - jackson v2.9.10.2
   - commons-lang3 v3.9
   - commons-io v2.6
 - javax.servlet-api v3.0.1
@@ -128,17 +128,17 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.9.8</version>
+        <version>2.9.10.2</version>
     </dependency>
     <dependency>
         <groupId>org.apache.commons</groupId>
