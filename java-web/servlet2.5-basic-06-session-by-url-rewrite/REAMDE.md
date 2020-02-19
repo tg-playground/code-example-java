@@ -269,8 +269,13 @@ request.getRequestDispatcher("/{your_uri}").forward(request, response);
 4. Logout remove create new session
 
 ```java
-request.getSession(false).invalidate();
-HttpSession session = resp.getSession(true);
+HttpSession session = req.getSession(false);
+if (session != null){
+    session.invalidate();
+    logger.debug("Old sessionId is {}", session.getId());
+}
+session = req.getSession(true);
+logger.debug("New sessionId is {}", session.getId());
 String redirectUri = resp.encodeRedirectURL(req.getContextPath() + "/login.jsp");
 resp.sendRedirect(redirectUri);
 ```
