@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class RequestLoggingFilter implements Filter {
         loggingRequestParams(request);
         loggingRequestHeaders(request);
         loggingCookies(request);
+        loggingSession(request);
 
         filterChain.doFilter(servletRequest, servletResponse);
         logger.debug("RequestLoggingFilter End.");
@@ -72,6 +74,17 @@ public class RequestLoggingFilter implements Filter {
                 cookieMap.put(cookie.getName(), cookie.getValue());
             }
             logger.debug("{}::Cookies::{}", request.getRemoteAddr(), cookieMap.toString());
+        }else{
+            logger.debug("Cookies is null");
+        }
+    }
+
+    private void loggingSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            logger.debug("SessionId is {}", session.getId());
+        }else{
+            logger.debug("Session is null");
         }
     }
 
