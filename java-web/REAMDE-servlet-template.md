@@ -265,7 +265,9 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
+Functions
 
+Business Processes
 
 ## Implementation
 
@@ -310,3 +312,5 @@ $ curl http://localhost:{your_port}/{your_context}/hello
 ## References
 
 **<<<<<<!!{update me}!!>>>>>>**
+
+Books, Docs, URLs

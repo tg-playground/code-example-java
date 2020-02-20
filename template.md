@@ -200,7 +200,9 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
+Functions, User Roles
 
+Business Processes
 
 ## Implementation
 
@@ -213,3 +215,5 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 
 ## References
+
+Books, Docs, URLs
