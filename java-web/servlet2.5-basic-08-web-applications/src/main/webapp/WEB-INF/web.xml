@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <context-param>
+        <param-name>message</param-name>
+        <param-value>Hello!</param-value>
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <session-config>
+        <session-timeout>1800</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.webapplications.HelloServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <!--<filter>-->
+    <!--<filter-name></filter-name>-->
+    <!--<filter-class></filter-class>-->
+    <!--</filter>-->
+
+    <!--<listener>-->
+    <!--<listener-class</listener-class>-->
+    <!--</listener>-->
+
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- This tag defines a mapping between a file extension and a MIME type.
+    A file’s MIME type specifies how a server or browser should interpret the file.
+    For example, whether the file contains plain text, formatted HTML, an image, or a sound recording.
+    In a Web server, MIME mappings specify how a static file should be interpreted by mapping file extensions to MIME types.
+    MIME mappings affect only static files. Servlets and JSPs must be coded to specify a MIME type for their response.-->
+    <mime-mapping>
+        <extension>war</extension>
+        <mime-type>application/zip.war</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jar</extension>
+        <mime-type>application/zip.jar</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ico</extension>
+        <mime-type>image/x-icon</mime-type>
+    </mime-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+</web-app>

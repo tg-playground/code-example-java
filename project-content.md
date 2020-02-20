@@ -136,7 +136,7 @@ Servlet 2.5
 - [x] servlet2.5-basic-07-dispatching-request
   - Obtaining a ReqeustDispatcher, Using a Request Dispather, The Include Method, The Forward Method, Error Handling
 - [x] servlet2.5-basic-08-error-handling
-- Servlet2.5-basic-08-web-applications
+- [x] servlet2.5-basic-08-web-applications
   - Error Handling, Welcome Files
 - servlet2.5-basic-09-application-lifecycle-events
   - Event Listeners, Listener Class Configuration
