@@ -34,6 +34,7 @@ Dependencies
   - jackson v2.9.10.2
   - commons-io v2.6
 - javax.servlet-api v3.0.1
+- JSTL
 
 
 
@@ -167,6 +168,18 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${servlet.version}</version>
         <!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
         <scope>provided</scope>
+    </dependency>
+    
+    <!-- JSTL -->
+    <dependency>
+        <groupId>javax.servlet.jsp.jstl</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+    <dependency>
+        <groupId>taglibs</groupId>
+        <artifactId>standard</artifactId>
+        <version>1.1.2</version>
     </dependency>
 </dependencies>
 
