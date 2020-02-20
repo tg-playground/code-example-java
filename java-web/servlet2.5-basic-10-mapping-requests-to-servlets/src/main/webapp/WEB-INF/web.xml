@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>Archetype Created Web Application</display-name>
+    
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.mapping_request.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StartWithMappingServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.mapping_request.StartWithMappingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartWithMappingServlet</servlet-name>
+        <url-pattern>/startWith/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EndWithMappingServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.mapping_request.EndWithMappingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EndWithMappingServlet</servlet-name>
+        <url-pattern>*.suffix</url-pattern>
+    </servlet-mapping>
+
+</web-app>
