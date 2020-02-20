@@ -4,6 +4,7 @@ Content
 
 - Environments
 - Building Project
+- Requirements
 - Implementation
 - Test
 - References
@@ -20,16 +21,17 @@ Software
 
 Dependencies
 
-- test
+- Test
   - junit v4.12
   - mockito-core v2.23.4
-- logging
+- Logging
   - log4j-web v2.8.2
-- tools
+- Tools
   - lombok v1.18.10
   - gson v2.8.5
-  - jackson v2.9.8
   - commons-lang3 v3.9
+- Optional Tools
+  - jackson v2.9.8
   - commons-io v2.6
 - ...
 
@@ -103,6 +105,13 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <artifactId>gson</artifactId>
         <version>2.8.5</version>
     </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.9</version>
+    </dependency>
+    
+    <!-- ** Optional Common Tools ** -->
     <!-- large json file (MB) -->
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -118,11 +127,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
         <version>2.9.10.2</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.9</version>
     </dependency>
     <dependency>
         <groupId>commons-fileupload</groupId>
@@ -191,6 +195,10 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     </Loggers>
 </Configuration>
 ```
+
+
+
+## Requirements
 
 
 
