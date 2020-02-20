@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taogen.example</groupId>
-    <artifactId>servlet-basic-10-error-handling</artifactId>
+    <artifactId>servlet-basic-08-error-handling</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>servlet-basic-10-error-handling Maven Webapp</name>
+    <name>servlet-basic-08-error-handling Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>
