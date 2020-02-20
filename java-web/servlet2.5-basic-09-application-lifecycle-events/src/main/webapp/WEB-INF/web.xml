@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>Archetype Created Web Application</display-name>
+
+    <listener>
+        <listener-class>com.taogen.example.servlet.events.listener.AppContextListener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>com.taogen.example.servlet.events.listener.MySessionListener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>com.taogen.example.servlet.events.listener.MyServletRquestListener</listener-class>
+    </listener>
+    
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.events.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+</web-app>
