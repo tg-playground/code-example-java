@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RequestDispatcherServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._1get_dispatcher.RequestDispatherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestDispatcherServlet</servlet-name>
+        <url-pattern>/requestDispatcher</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>NamedDispatcherServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._1get_dispatcher.NamedDispatcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NamedDispatcherServlet</servlet-name>
+        <url-pattern>/namedDispatcher</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DispatcherIncludeServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._2include.DispatcherIncludeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherIncludeServlet</servlet-name>
+        <url-pattern>/dispatcherInclude</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>IncludedServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._2include.IncludedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IncludedServlet</servlet-name>
+        <url-pattern>/included</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DispatcherForwardServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._3forward.DispatcherForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherForwardServlet</servlet-name>
+        <url-pattern>/dispatcherForward</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AcceptForwardServlet</servlet-name>
+        <servlet-class>com.taogen.example.servlet.dispatching._3forward.AcceptForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AcceptForwardServlet</servlet-name>
+        <url-pattern>/acceptForward</url-pattern>
+    </servlet-mapping>
+</web-app>

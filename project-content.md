@@ -133,7 +133,7 @@ Servlet 2.5
 - [x] servlet2.5-basic-06-session
   - Session Tracking Mechanisms, Creating Session, Session Scope, Binding Attributes into a Session, Session Timeout, Last Accessed Times, Important Session Semantics
 - [x] servlet2.5-basic-06-session-by-url-rewriting
-- servlet2.5-basic-07-dispatching-request
+- [x] servlet2.5-basic-07-dispatching-request
   - Obtaining a ReqeustDispatcher, Using a Request Dispather, The Include Method, The Forward Method, Error Handling
 - [x] servlet2.5-basic-08-error-handling
 - Servlet2.5-basic-08-web-applications
