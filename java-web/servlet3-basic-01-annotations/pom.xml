@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taogen.example</groupId>
-    <artifactId>servlet3-basic-01-annotations-servlet-and-params</artifactId>
+    <artifactId>servlet3-basic-01-annotations</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>servlet3-basic-01-annotations-servlet-and-params Maven Webapp</name>
+    <name>servlet3-basic-01-annotations Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>
