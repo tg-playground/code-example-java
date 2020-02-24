@@ -189,7 +189,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
-Using `@WebServlet`, `@WebInitParam` annotations.
+Using `@WebServlet`, `@WebInitParam`, `@WebFilter`, `@WebListener` annotations.
 
 
 
