@@ -1,4 +1,6 @@
-# servlet-xxx Project {{update me}}
+# servlet-xxx Project 
+
+**<<<<<<!!{update me}!!>>>>>>**
 
 Content
 
@@ -203,6 +205,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
             <artifactId>maven-war-plugin</artifactId>
             <version>3.2.3</version>
             <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
                 <webResources>
                     <resource>
                         <!-- this is relative to the pom.xml directory -->
