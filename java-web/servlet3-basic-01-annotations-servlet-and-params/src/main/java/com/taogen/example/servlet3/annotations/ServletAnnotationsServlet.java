@@ -1,4 +1,7 @@
-package com.taogen.example.servlet.annotations;
+package com.taogen.example.servlet3.annotations;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -15,10 +18,12 @@ import java.io.PrintWriter;
 })
 public class ServletAnnotationsServlet extends HttpServlet {
     private static final long serialVersionUID = -3462096228274971485L;
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest reqest, HttpServletResponse response)
             throws ServletException, IOException {
+        logger.debug("doGet() called.");
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<h3>");
