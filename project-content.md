@@ -151,18 +151,15 @@ Servlet 2.5
 
 Servlet 3
 
-- [x] servlet3-basic-01-annotations-hello
-- servlet3-basic-01-annotations-servlet-and-init-param
-- servlet3-basic-01-annotations-multipartconfig-for-file-upload
-- servlet3-basic-01-annotations-filter
-- servlet3-basic-01-annotations-servlet-context-listener
+- [x] servlet3-basic-01-annotations
+- [x] servlet3-basic-01-annotations-multipartconfig-for-file-upload
 - servlet3-basic-02-pluggability-web-fragments
 - servlet3-basic-02-pluggability-programmatic-for-web-components
-- servlet3-basic-03-asynchronous
+- [x] servlet3-basic-03-asynchronous
 
 Servlet 3.1
 
-- servlet3.1-basic-01-nio-and-asynchronous-request-processing
+- [x] servlet3.1-basic-01-nio-and-asynchronous-request-processing
 
 Servlet 4
 
