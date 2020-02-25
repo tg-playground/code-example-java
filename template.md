@@ -1,5 +1,7 @@
 # xxx Project
 
+**<<<<!!{{update me}}!!>>>>**
+
 Content
 
 - Environments
@@ -12,6 +14,8 @@ Content
 
 
 ## Environments
+
+**<<<<!!{{update me}}!!>>>>**
 
 Software
 
@@ -41,11 +45,18 @@ Dependencies
 
 ### Step 1: Generating Maven Project
 
+**<<<<!!{{update me}}!!>>>>**
+
+- maven-archetype-webapp 
+- maven-archetype-quickstart
+
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example -DartifactId={your_project_name} -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
 ```
 
 ### Step 2: Add project directories structures  
+
+**<<<<!!{{update me}}!!>>>>**
 
 ```shell
 cd {your_project_root_dir}
@@ -57,6 +68,8 @@ mkdir -p src\main\java\com\taogen\example src\test\java\com\taogen\example
 ### Step 3: Configuring Maven Project `pom.xml`
 
 Set Maven project properties, add Maven dependencies, and add Maven plugins
+
+**<<<<!!{{update me}}!!>>>>**
 
 ```xml
 <properties>
@@ -217,3 +230,5 @@ Business Processes
 ## References
 
 Books, Docs, URLs
+
+**<<<<!!{{update me}}!!>>>>**
