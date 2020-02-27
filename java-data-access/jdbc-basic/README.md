@@ -225,6 +225,15 @@ Business Processes
 
 ## References
 
-[1] [JDBCTM API Documentation](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/index.html)
+JDBC General
 
-[2] [JDBC Basic Tutorial - doc](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html)
+- [JDBCTM API Documentation](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/index.html)
+
+- [JDBC Basic Tutorial - doc](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html)
+
+Data Source
+
+- [Connecting with DataSource Objects - doc](https://docs.oracle.com/javase/tutorial/jdbc/basics/sqldatasources.html)
+- [Java DataSource, JDBC DataSource Example - JournalDev](https://www.journaldev.com/2509/java-datasource-jdbc-datasource-example)
+- [Tomcat DataSource JNDI Example in Java](https://www.journaldev.com/2513/tomcat-datasource-jndi-example-java)
+
