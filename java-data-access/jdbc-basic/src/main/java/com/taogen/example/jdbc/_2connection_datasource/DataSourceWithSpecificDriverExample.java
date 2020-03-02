@@ -1,7 +1,8 @@
-package com.taogen.example.jdbc._2connection;
+package com.taogen.example.jdbc._2connection_datasource;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.taogen.example.jdbc.constant.JdbcConfig;
+import com.taogen.example.jdbc.utils.LoggerUtil;
 import com.taogen.example.jdbc.utils.PropertyUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DataSourceExample {
+public class DataSourceWithSpecificDriverExample {
 
     private static final Logger logger = LogManager.getLogger();
     private static MysqlDataSource dataSource = new MysqlDataSource();
@@ -21,7 +22,7 @@ public class DataSourceExample {
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
         dataSource.setUrl(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_URL)));
         dataSource.setUser(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_USER)));
@@ -33,7 +34,7 @@ public class DataSourceExample {
         try {
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
         logger.debug("connection is {}", connection);
         return connection;

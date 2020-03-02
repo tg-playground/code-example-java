@@ -141,7 +141,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <artifactId>commons-io</artifactId>
         <version>2.6</version>
     </dependency>
-	<!-- MySQL Conncector -->
+	MYSQL
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
@@ -227,13 +227,17 @@ Business Processes
 
 JDBC General
 
-- [JDBCTM API Documentation](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/index.html)
-
+- [JDBC API Documentation](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/index.html)
 - [JDBC Basic Tutorial - doc](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html)
+- [JDBC Tutorial - tutorialspoint](https://www.tutorialspoint.com/jdbc/index.htm)
 
 Data Source
 
 - [Connecting with DataSource Objects - doc](https://docs.oracle.com/javase/tutorial/jdbc/basics/sqldatasources.html)
 - [Java DataSource, JDBC DataSource Example - JournalDev](https://www.journaldev.com/2509/java-datasource-jdbc-datasource-example)
-- [Tomcat DataSource JNDI Example in Java](https://www.journaldev.com/2513/tomcat-datasource-jndi-example-java)
 
+Others
+
+- [How do I get the size of a java.sql.ResultSet?](https://stackoverflow.com/questions/192078/how-do-i-get-the-size-of-a-java-sql-resultset)
+- [Check if a MySQL table exists](https://electrictoolbox.com/check-if-mysql-table-exists/)
+- [IF NOT EXISTS Statements](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)

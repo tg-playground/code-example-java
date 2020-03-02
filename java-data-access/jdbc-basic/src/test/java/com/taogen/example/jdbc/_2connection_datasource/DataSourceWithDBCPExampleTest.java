@@ -1,4 +1,4 @@
-package com.taogen.example.jdbc._2connection;
+package com.taogen.example.jdbc._2connection_datasource;
 
 import com.taogen.example.jdbc.constant.DatabaseType;
 import org.junit.Test;
@@ -9,7 +9,7 @@ public class DataSourceWithDBCPExampleTest {
 
     @Test
     public void getDataSource() {
-        assertNotNull(DataSourceWithDBCPExample.getDataSource(DatabaseType.MySQL));
+        assertNotNull(DataSourceWithDBCPExample.getDataSource(DatabaseType.MYSQL));
     }
 
     @Test

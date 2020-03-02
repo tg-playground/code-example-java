@@ -1,7 +1,8 @@
-package com.taogen.example.jdbc._2connection;
+package com.taogen.example.jdbc._2connection_datasource;
 
 import com.taogen.example.jdbc.constant.DatabaseType;
 import com.taogen.example.jdbc.constant.JdbcConfig;
+import com.taogen.example.jdbc.utils.LoggerUtil;
 import com.taogen.example.jdbc.utils.PropertyUtils;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
@@ -24,14 +25,14 @@ public class DataSourceWithDBCPExample {
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
-        if (DatabaseType.MySQL.equals(databaseType)) {
+        if (DatabaseType.MYSQL.equals(databaseType)) {
             dataSource.setDriverClassName(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_DRIVER_CLASS)));
             dataSource.setUrl(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_URL)));
             dataSource.setUsername(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_USER)));
             dataSource.setPassword(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_PASSWD)));
-        }else if (DatabaseType.Oracle.equals(databaseType)){
+        }else if (DatabaseType.ORACLE.equals(databaseType)){
             dataSource.setDriverClassName(properties.getProperty(String.valueOf(JdbcConfig.ORACLE_DRIVER_CLASS)));
             dataSource.setUrl(properties.getProperty(String.valueOf(JdbcConfig.ORACLE_URL)));
             dataSource.setUsername(properties.getProperty(String.valueOf(JdbcConfig.ORACLE_USER)));
@@ -43,9 +44,9 @@ public class DataSourceWithDBCPExample {
     public static Connection getConnection(){
         Connection connection = null;
         try {
-            connection = getDataSource(DatabaseType.MySQL).getConnection();
+            connection = getDataSource(DatabaseType.MYSQL).getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
         logger.debug("connection is {}", connection);
         return connection;
