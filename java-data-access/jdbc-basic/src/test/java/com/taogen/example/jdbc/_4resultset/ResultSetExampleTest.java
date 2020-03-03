@@ -18,7 +18,7 @@ public class ResultSetExampleTest {
     }
 
     @Test
-    public void updateRowInResultSet() throws SQLException {
+    public void updateAllRowsInResultSet() throws SQLException {
         // prepare: delete and insert data
         Statement statement = StatementUtil.getStatement();
         statement.executeUpdate(StatementSQL.DELETE_SQL);
@@ -28,19 +28,19 @@ public class ResultSetExampleTest {
         String newname = "update-in-result-set";
         long beforeUpdateCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + newname + "'"));
         assertEquals(0L, beforeUpdateCount);
-        ResultSetExample.updateRowInResultSet(newname);
+        ResultSetExample.updateAllRowsInResultSet(newname);
         long afterUpdateCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + newname + "'"));
         assertTrue(afterUpdateCount > 0);
 
     }
 
     @Test
-    public void insertRowInResultSet() throws SQLException {
+    public void insertNewRowInResultSet() throws SQLException {
         Statement statement = StatementUtil.getStatement();
         statement.executeUpdate(StatementSQL.DELETE_SQL);
 
         String name = "insert-in-result-set";
-        ResultSetExample.insertRowInResultSet(name);
+        ResultSetExample.insertNewRowInResultSet(name);
         long afterInsertCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + name + "'"));
         assertTrue(afterInsertCount > 0);
     }
