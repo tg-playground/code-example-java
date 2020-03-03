@@ -13,6 +13,10 @@ public class StatementUtil {
 
     private static final Logger logger = LogManager.getLogger();
 
+    private StatementUtil(){
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void executeDdlSQL(String sql) {
         try {
             getStatement().execute(sql);
@@ -41,12 +45,13 @@ public class StatementUtil {
         return resultSet;
     }
 
-    public static Statement getStatement() {
+    public static Statement getStatement() throws SQLException {
         Statement statement = null;
         try {
             statement = DataSourceWithSpecificDriverExample.getConnectionFromDataSoruce().createStatement();
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
+            throw e;
         }
         return statement;
     }

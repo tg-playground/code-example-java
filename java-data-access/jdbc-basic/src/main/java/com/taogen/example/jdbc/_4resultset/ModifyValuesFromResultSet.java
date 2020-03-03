@@ -1,5 +1,4 @@
 package com.taogen.example.jdbc._4resultset;
 
-public class ResultSetExample {
-
+public class ModifyValuesFromResultSet {
 }

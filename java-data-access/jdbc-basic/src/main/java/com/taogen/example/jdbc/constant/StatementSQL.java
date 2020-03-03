@@ -8,4 +8,8 @@ public class StatementSQL {
     public static final String DELETE_SQL = "delete from test where name='hello' or name='helloworld'";
     public static final String DROP_TABLE_SQL = "drop table if exists test";
     public static final String CHECK_TABLE_EXIST_SQL = "select count(*) as count from information_schema.tables where table_schema = 'test' and table_name = 'test'";
+
+    private StatementSQL(){
+        throw new IllegalStateException("Constant class");
+    }
 }

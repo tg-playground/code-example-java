@@ -1,22 +1,22 @@
 package com.taogen.example.jdbc._3statement;
 
-import com.taogen.example.jdbc._4resultset.ResultSetExample;
+import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class PreparedStatementExampleTest {
 
     @Before
     public void init() throws SQLException {
-        if (PreparedStatementExample.checkTableExist() <= 0){
+        if (PreparedStatementExample.checkTableExist() <= 0) {
             PreparedStatementExample.createTable();
         }
-        if (ResultSetExample.getResultSetCount(PreparedStatementExample.select()) <= 0){
+        if (ResultSetUtil.getResultSetCount(PreparedStatementExample.select()) <= 0) {
             PreparedStatementExample.insert();
         }
     }

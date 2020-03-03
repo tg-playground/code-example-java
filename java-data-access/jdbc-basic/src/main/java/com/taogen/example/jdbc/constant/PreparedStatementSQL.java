@@ -8,4 +8,8 @@ public class PreparedStatementSQL {
     public static final String DELETE_SQL = "delete from test where name=? or name=?";
     public static final String DROP_TABLE_SQL = "drop table if exists test";
     public static final String CHECK_TABLE_EXIST_SQL = "select count(*) as count from information_schema.tables where table_schema = 'test' and table_name = 'test'";
+
+    private PreparedStatementSQL(){
+        throw new IllegalStateException("Constant class");
+    }
 }

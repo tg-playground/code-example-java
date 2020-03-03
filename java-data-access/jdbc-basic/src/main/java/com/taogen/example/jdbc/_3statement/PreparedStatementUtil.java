@@ -13,6 +13,10 @@ public class PreparedStatementUtil {
 
     private static final Logger logger = LogManager.getLogger();
 
+    private PreparedStatementUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void executeDdlSQL(String sql) {
         try {
             getPreparedStatement(sql).execute();
@@ -23,9 +27,9 @@ public class PreparedStatementUtil {
 
     public static int executeDmlSql(String sql, Object... objects) {
         int count = -1;
-        PreparedStatement preparedStatement = getPreparedStatement(sql);
-        setPreparedStatementParams(preparedStatement, objects);
         try {
+            PreparedStatement preparedStatement = getPreparedStatement(sql);
+            setPreparedStatementParams(preparedStatement, objects);
             count = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
@@ -35,9 +39,9 @@ public class PreparedStatementUtil {
 
     public static ResultSet executeDqlSql(String sql, Object... objects) {
         ResultSet resultSet = null;
-        PreparedStatement preparedStatement = getPreparedStatement(sql);
-        setPreparedStatementParams(preparedStatement, objects);
         try {
+            PreparedStatement preparedStatement = getPreparedStatement(sql);
+            setPreparedStatementParams(preparedStatement, objects);
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
@@ -45,12 +49,13 @@ public class PreparedStatementUtil {
         return resultSet;
     }
 
-    public static PreparedStatement getPreparedStatement(String sql) {
+    public static PreparedStatement getPreparedStatement(String sql) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = DataSourceWithSpecificDriverExample.getConnectionFromDataSoruce().prepareStatement(sql);
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
+            throw e;
         }
         return preparedStatement;
     }

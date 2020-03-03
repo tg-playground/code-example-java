@@ -11,6 +11,10 @@ public class PropertyUtils {
 
     private static final Logger logger = LogManager.getLogger();
 
+    private PropertyUtils(){
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @param filepath: relative to classes path
      * @return

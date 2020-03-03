@@ -1,6 +1,6 @@
 package com.taogen.example.jdbc._3statement;
 
-import com.taogen.example.jdbc._4resultset.ResultSetExample;
+import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,14 +8,15 @@ import org.apache.logging.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.taogen.example.jdbc.constant.StatementSQL.*;
 import static com.taogen.example.jdbc._3statement.StatementUtil.*;
+import static com.taogen.example.jdbc.constant.StatementSQL.*;
 
 public class StatementExample {
 
     private static final Logger logger = LogManager.getLogger();
 
     public static void executeSqlFile() {
+        // TODO
     }
 
     public static int checkTableExist() {
@@ -59,7 +60,7 @@ public class StatementExample {
 
     public static ResultSet select() {
         ResultSet resultSet = executeDqlSql(SELECT_SQL);
-        logger.debug("select {} rows", ResultSetExample.getResultSetCount(resultSet));
+        logger.debug("select {} rows", ResultSetUtil.getResultSetCount(resultSet));
         return resultSet;
     }
 }

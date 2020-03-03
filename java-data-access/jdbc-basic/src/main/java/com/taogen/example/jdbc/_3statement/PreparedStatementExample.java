@@ -1,6 +1,6 @@
 package com.taogen.example.jdbc._3statement;
 
-import com.taogen.example.jdbc._4resultset.ResultSetExample;
+import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +18,7 @@ public class PreparedStatementExample {
     public static final String UPDATE_NAME = "hello-preparedStatement";
 
     public static void executeSqlFile() {
+        // TODO
     }
 
     public static int checkTableExist() {
@@ -61,7 +62,7 @@ public class PreparedStatementExample {
 
     public static ResultSet select() {
         ResultSet resultSet = executeDqlSql(SELECT_SQL);
-        logger.debug("select {} rows", ResultSetExample.getResultSetCount(resultSet));
+        logger.debug("select {} rows", ResultSetUtil.getResultSetCount(resultSet));
         return resultSet;
     }
 
