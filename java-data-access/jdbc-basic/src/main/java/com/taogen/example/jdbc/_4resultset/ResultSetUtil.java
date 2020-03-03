@@ -11,13 +11,13 @@ public class ResultSetUtil {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private ResultSetUtil(){
+    private ResultSetUtil() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static int getResultSetCount(ResultSet resultSet){
+    public static int getResultSetSize(ResultSet resultSet) {
         int count = 0;
-        if (resultSet != null){
+        if (resultSet != null) {
             try {
                 resultSet.last();
                 count = resultSet.getRow();
@@ -25,6 +25,14 @@ public class ResultSetUtil {
             } catch (SQLException e) {
                 LoggerUtil.loggerError(logger, e);
             }
+        }
+        return count;
+    }
+
+    public static long getCountFromResultSet(ResultSet resultSet) throws SQLException {
+        long count = -1;
+        while (resultSet.next()) {
+            count = resultSet.getInt("count");
         }
         return count;
     }

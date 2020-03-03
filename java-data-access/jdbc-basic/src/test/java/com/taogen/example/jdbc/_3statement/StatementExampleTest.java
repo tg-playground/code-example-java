@@ -13,10 +13,10 @@ public class StatementExampleTest {
 
     @Before
     public void init() throws SQLException {
-        if (StatementExample.checkTableExist() <= 0){
+        if (! StatementExample.checkTableExist()){
             StatementExample.createTable();
         }
-        if (ResultSetUtil.getResultSetCount(StatementExample.select()) <= 0){
+        if (StatementExample.count() <= 0){
             StatementExample.insert();
         }
     }
@@ -54,6 +54,16 @@ public class StatementExampleTest {
     @Test
     public void checkTableExist() {
         StatementExample.createTable();
-        assertTrue(StatementExample.checkTableExist() > 0);
+        assertTrue(StatementExample.checkTableExist());
+    }
+
+    @Test
+    public void count() throws SQLException {
+        assertTrue(StatementExample.count() > 0);
+    }
+
+    @Test
+    public void batchInsert() throws SQLException {
+        assertTrue(StatementExample.batchInsert() == 10);
     }
 }

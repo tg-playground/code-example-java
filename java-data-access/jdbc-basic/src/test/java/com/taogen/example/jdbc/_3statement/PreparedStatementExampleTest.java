@@ -16,7 +16,7 @@ public class PreparedStatementExampleTest {
         if (PreparedStatementExample.checkTableExist() <= 0) {
             PreparedStatementExample.createTable();
         }
-        if (ResultSetUtil.getResultSetCount(PreparedStatementExample.select()) <= 0) {
+        if (PreparedStatementExample.count() <= 0) {
             PreparedStatementExample.insert();
         }
     }
@@ -41,6 +41,11 @@ public class PreparedStatementExampleTest {
     }
 
     @Test
+    public void count() throws SQLException {
+        assertTrue(PreparedStatementExample.count() >= 0);
+    }
+
+    @Test
     public void insert() {
         assertTrue(PreparedStatementExample.insert() > 0);
     }
@@ -58,5 +63,10 @@ public class PreparedStatementExampleTest {
     @Test
     public void select() throws SQLException {
         assertNotNull(PreparedStatementExample.select());
+    }
+
+    @Test
+    public void batchInsert() throws SQLException {
+        assertTrue(PreparedStatementExample.batchInsert() == 10);
     }
 }
