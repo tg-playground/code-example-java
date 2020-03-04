@@ -2,12 +2,12 @@ package com.taogen.example.jdbc._1hello;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.sql.SQLException;
 
 public class JDBCHelloTest {
 
     @Test
-    public void hello() {
+    public void hello() throws SQLException {
         JDBCHello.hello();
     }
 
