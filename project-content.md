@@ -105,6 +105,10 @@ Utility
 
 ### JDBC & Connection Pools & Transaction
 
+- jdbc-basic
+- jdbc-datasource
+- jdbc-datasource-jndi-tomcat
+
 ### Persistence Frameworks
 
 - mybatis-basic-helloworld
