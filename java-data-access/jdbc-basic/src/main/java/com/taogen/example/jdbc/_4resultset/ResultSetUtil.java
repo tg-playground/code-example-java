@@ -33,13 +33,8 @@ public class ResultSetUtil {
     }
 
     public static ResultSet getUpdatableResultSet() throws SQLException {
-        ResultSet resultSet;
-        try (
-                Connection connection = ConnectionUtil.getConnection();
-                Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)
-        ) {
-            resultSet = statement.executeQuery(StatementSQL.SELECT_SQL);
-        }
-        return resultSet;
+        Connection connection = ConnectionUtil.getConnection();
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        return statement.executeQuery(StatementSQL.SELECT_SQL);
     }
 }

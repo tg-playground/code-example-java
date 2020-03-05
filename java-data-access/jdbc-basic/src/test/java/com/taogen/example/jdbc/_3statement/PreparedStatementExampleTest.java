@@ -9,11 +9,11 @@ import static org.junit.Assert.*;
 
 public class PreparedStatementExampleTest {
 
-    private PreparedStatementExample preparedStatementExample;
+    private PreparedStatementExample preparedStatementExample = new PreparedStatementExample();
 
     @Before
     public void init() throws SQLException {
-        if (preparedStatementExample.isTableExist()) {
+        if (!preparedStatementExample.isTableExist()) {
             preparedStatementExample.createTable();
         }
         if (preparedStatementExample.count() <= 0) {
@@ -24,7 +24,6 @@ public class PreparedStatementExampleTest {
     @Test
     public void executeSqlFile() {
         // TODO
-        assertTrue(true);
     }
 
     @Test

@@ -33,7 +33,6 @@ public class ResultSetExampleTest {
         resultSetExample.updateAllRowsInResultSet(newname);
         long afterUpdateCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + newname + "'"));
         assertTrue(afterUpdateCount > 0);
-
     }
 
     @Test
