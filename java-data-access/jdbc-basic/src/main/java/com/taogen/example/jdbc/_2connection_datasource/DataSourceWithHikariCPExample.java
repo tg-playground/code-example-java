@@ -22,20 +22,20 @@ public class DataSourceWithHikariCPExample {
         Properties properties = null;
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            hikariConfig.setJdbcUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
+            hikariConfig.setDriverClassName(properties.getProperty(JdbcConfig.MYSQL_DRIVER_CLASS.toString()));
+            hikariConfig.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
+            hikariConfig.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));
+            hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
+            hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
+            hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
         } catch (IOException e) {
             LoggerUtil.loggerError(logger, e);
         }
-        hikariConfig.setJdbcUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
-        hikariConfig.setDriverClassName(properties.getProperty(JdbcConfig.MYSQL_DRIVER_CLASS.toString()));
-        hikariConfig.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
-        hikariConfig.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));
-        hikariConfig.addDataSourceProperty( "cachePrepStmts" , "true" );
-        hikariConfig.addDataSourceProperty( "prepStmtCacheSize" , "250" );
-        hikariConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         dataSource = new HikariDataSource(hikariConfig);
     }
 
-    public static Connection getConnection(){
+    public Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();

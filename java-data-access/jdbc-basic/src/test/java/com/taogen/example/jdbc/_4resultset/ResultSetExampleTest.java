@@ -12,9 +12,11 @@ import static org.junit.Assert.assertTrue;
 
 public class ResultSetExampleTest {
 
+    private ResultSetExample resultSetExample = new ResultSetExample();
+
     @Test
-    public void printResultSet() throws SQLException {
-        ResultSetExample.printResultSet();
+    public void printResultSet() {
+        assertTrue(resultSetExample.printResultSet());
     }
 
     @Test
@@ -28,7 +30,7 @@ public class ResultSetExampleTest {
         String newname = "update-in-result-set";
         long beforeUpdateCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + newname + "'"));
         assertEquals(0L, beforeUpdateCount);
-        ResultSetExample.updateAllRowsInResultSet(newname);
+        resultSetExample.updateAllRowsInResultSet(newname);
         long afterUpdateCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + newname + "'"));
         assertTrue(afterUpdateCount > 0);
 
@@ -40,7 +42,7 @@ public class ResultSetExampleTest {
         statement.executeUpdate(StatementSQL.DELETE_SQL);
 
         String name = "insert-in-result-set";
-        ResultSetExample.insertNewRowInResultSet(name);
+        resultSetExample.insertNewRowInResultSet(name);
         long afterInsertCount = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test where name='" + name + "'"));
         assertTrue(afterInsertCount > 0);
     }

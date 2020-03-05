@@ -22,20 +22,16 @@ public class DataSourceWithC3P0Example {
         Properties properties = null;
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
-        } catch (IOException e) {
-            LoggerUtil.loggerError(logger, e);
-        }
-        try {
             dataSource.setDriverClass(properties.getProperty(JdbcConfig.MYSQL_DRIVER_CLASS.toString()));
             dataSource.setJdbcUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
             dataSource.setUser(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
             dataSource.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));
-        } catch (PropertyVetoException e) {
+        } catch (IOException | PropertyVetoException e) {
             LoggerUtil.loggerError(logger, e);
         }
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();

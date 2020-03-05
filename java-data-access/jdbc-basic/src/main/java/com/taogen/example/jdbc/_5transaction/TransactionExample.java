@@ -1,6 +1,6 @@
 package com.taogen.example.jdbc._5transaction;
 
-import com.taogen.example.jdbc._2connection_datasource.DataSourceWithSpecificDriverExample;
+import com.taogen.example.jdbc._2connection_datasource.ConnectionUtil;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ public class TransactionExample {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static void transactionCommit() {
+    public boolean transactionCommit() {
         Connection connection = getTransactionConnection();
         try {
             Statement statement = connection.createStatement();
@@ -22,25 +22,25 @@ public class TransactionExample {
             connection.setAutoCommit(false);
             executeMultipleStatements(statement);
             connection.commit();
-        } catch (Exception e) {
+            return true;
+        } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
-            if (connection != null) {
-                try {
-                    connection.rollback();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                LoggerUtil.loggerError(logger, e);
             }
         } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerUtil.loggerError(logger, e);
             }
         }
+        return false;
     }
 
-    public static void transactionRollback() {
+    public boolean transactionRollback() {
         Connection connection = getTransactionConnection();
         try {
             Statement statement = connection.createStatement();
@@ -51,47 +51,47 @@ public class TransactionExample {
             connection.commit();
         } catch (Exception e) {
             LoggerUtil.loggerError(logger, e);
-            if (connection != null) {
-                try {
-                    connection.rollback();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
+            try {
+                connection.rollback();
+                return true;
+            } catch (SQLException e1) {
+                LoggerUtil.loggerError(logger, e);
             }
         } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
-                e.printStackTrace();
+                LoggerUtil.loggerError(logger, e);
             }
         }
+        return false;
     }
 
-    private static Connection getTransactionConnection() {
-        Connection connection = DataSourceWithSpecificDriverExample.getConnectionFromDataSoruce();
+    private Connection getTransactionConnection() {
+        Connection connection = ConnectionUtil.getConnection();
         try {
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
         return connection;
     }
 
-    private static void initialData(Statement statement) {
+    private void initialData(Statement statement) {
         try {
             statement.executeUpdate("insert into test (id, name) values (1, 'hello') on duplicate key update name='hello'");
             statement.executeUpdate("insert into test (id, name) values (2, 'hello') on duplicate key update name='hello'");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerUtil.loggerError(logger, e);
         }
     }
 
-    private static void executeMultipleStatements(Statement statement) throws SQLException {
+    private void executeMultipleStatements(Statement statement) throws SQLException {
         statement.executeUpdate("update test set name='hello1' where id=1");
         statement.executeUpdate("update test set name='hello2' where id=2");
     }
 
-    private static void executeMultipleStatementsWithError(Statement statement) throws SQLException {
+    private void executeMultipleStatementsWithError(Statement statement) throws SQLException {
         statement.executeUpdate("update test set name='hello1' where id=1");
         int i = 1 / 0;
         statement.executeUpdate("update test set name='hello2' where id=2");

@@ -1,72 +1,74 @@
 package com.taogen.example.jdbc._3statement;
 
-import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PreparedStatementExampleTest {
 
+    private PreparedStatementExample preparedStatementExample;
+
     @Before
     public void init() throws SQLException {
-        if (PreparedStatementExample.checkTableExist() <= 0) {
-            PreparedStatementExample.createTable();
+        if (preparedStatementExample.isTableExist()) {
+            preparedStatementExample.createTable();
         }
-        if (PreparedStatementExample.count() <= 0) {
-            PreparedStatementExample.insert();
+        if (preparedStatementExample.count() <= 0) {
+            preparedStatementExample.insert();
         }
     }
 
     @Test
     public void executeSqlFile() {
+        // TODO
+        assertTrue(true);
     }
 
     @Test
-    public void checkTableExist() {
-        PreparedStatementExample.checkTableExist();
+    public void checkTableExist() throws SQLException {
+        assertTrue(preparedStatementExample.isTableExist());
     }
 
     @Test
     public void createTable() {
-        PreparedStatementExample.createTable();
+        assertTrue(preparedStatementExample.createTable());
     }
 
     @Test
     public void dropTable() {
-        PreparedStatementExample.dropTable();
+        assertTrue(preparedStatementExample.dropTable());
     }
 
     @Test
     public void count() throws SQLException {
-        assertTrue(PreparedStatementExample.count() >= 0);
+        assertTrue(preparedStatementExample.count() >= 0);
     }
 
     @Test
-    public void insert() {
-        assertTrue(PreparedStatementExample.insert() > 0);
+    public void insert() throws SQLException {
+        assertTrue(preparedStatementExample.insert() > 0);
     }
 
     @Test
-    public void delete() {
-        assertTrue(PreparedStatementExample.delete() >= 0);
+    public void delete() throws SQLException {
+        assertTrue(preparedStatementExample.delete() >= 0);
     }
 
     @Test
-    public void update() {
-        assertTrue(PreparedStatementExample.update() > 0);
+    public void update() throws SQLException {
+        assertTrue(preparedStatementExample.update() > 0);
     }
 
     @Test
     public void select() throws SQLException {
-        assertNotNull(PreparedStatementExample.select());
+        assertNotNull(preparedStatementExample.select());
     }
 
     @Test
     public void batchInsert() throws SQLException {
-        assertTrue(PreparedStatementExample.batchInsert() == 10);
+        assertEquals(10, preparedStatementExample.batchInsert());
     }
 }

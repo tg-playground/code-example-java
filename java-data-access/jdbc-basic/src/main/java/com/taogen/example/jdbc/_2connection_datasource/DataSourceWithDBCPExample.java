@@ -19,9 +19,9 @@ public class DataSourceWithDBCPExample {
     private static final Logger logger = LogManager.getLogger();
     private static BasicDataSource dataSource = new BasicDataSource();
 
-    public static DataSource getDataSource(DatabaseType databaseType) throws IOException {
+    private static DataSource getDataSource(DatabaseType databaseType) throws IOException {
 
-        Properties properties = null;
+        Properties properties;
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
         } catch (IOException e) {
@@ -42,14 +42,13 @@ public class DataSourceWithDBCPExample {
         return dataSource;
     }
 
-    public static Connection getConnection() {
-        Connection connection = null;
+    public Connection getConnection() throws IOException, SQLException {
+        Connection connection;
         try {
             connection = getDataSource(DatabaseType.MYSQL).getConnection();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             LoggerUtil.loggerError(logger, e);
-        } catch (IOException e) {
-            LoggerUtil.loggerError(logger, e);
+            throw e;
         }
         logger.debug("connection is {}", connection);
         return connection;

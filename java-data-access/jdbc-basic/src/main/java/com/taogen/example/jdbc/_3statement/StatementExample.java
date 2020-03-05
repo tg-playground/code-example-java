@@ -22,7 +22,7 @@ public class StatementExample {
         // TODO
     }
 
-    public static boolean checkTableExist() {
+    public boolean checkTableExist() throws SQLException {
         ResultSet resultSet = executeDqlSql(CHECK_TABLE_EXIST_SQL);
         int count = -1;
         try {
@@ -35,47 +35,58 @@ public class StatementExample {
         return count == 1;
     }
 
-    public static void createTable() {
-        executeDdlSQL(CREATE_TABLE_SQL);
+    public boolean createTable() {
+        try {
+            executeDdlSQL(CREATE_TABLE_SQL);
+            return true;
+        } catch (SQLException e) {
+            LoggerUtil.loggerError(logger, e);
+        }
+        return false;
     }
 
-    public static void dropTable() {
-        executeDdlSQL(DROP_TABLE_SQL);
+    public boolean dropTable() {
+        try {
+            executeDdlSQL(DROP_TABLE_SQL);
+            return true;
+        } catch (SQLException e) {
+            LoggerUtil.loggerError(logger, e);
+        }
+        return false;
     }
 
-    public static long count() throws SQLException {
-        long count = -1;
+    public long count() throws SQLException {
         ResultSet resultSet = StatementUtil.executeDqlSql(StatementSQL.COUNT_TABLE_SQL);
-        count = ResultSetUtil.getCountFromResultSet(resultSet);
+        long count = ResultSetUtil.getCountFromResultSet(resultSet);
         logger.debug("count is {}", count);
         return count;
     }
 
-    public static int insert() {
+    public int insert() throws SQLException {
         int count = executeDmlSql(INSERT_SQL);
         logger.debug("insert {} rows", count);
         return count;
     }
 
-    public static int delete() {
+    public int delete() throws SQLException {
         int count = executeDmlSql(DELETE_SQL);
         logger.debug("delete {} rows", count);
         return count;
     }
 
-    public static int update() {
+    public int update() throws SQLException {
         int count = executeDmlSql(UPDATE_SQL);
         logger.debug("update {} rows", count);
         return count;
     }
 
-    public static ResultSet select() {
+    public ResultSet select() throws SQLException {
         ResultSet resultSet = executeDqlSql(SELECT_SQL);
         logger.debug("select {} rows", ResultSetUtil.getResultSetSize(resultSet));
         return resultSet;
     }
 
-    public static int batchInsert() throws SQLException {
+    public int batchInsert() throws SQLException {
 
         Statement statement = StatementUtil.getStatement();
         statement.executeUpdate("delete from test");

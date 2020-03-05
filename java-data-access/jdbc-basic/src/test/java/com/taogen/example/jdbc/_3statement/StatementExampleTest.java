@@ -1,69 +1,69 @@
 package com.taogen.example.jdbc._3statement;
 
-import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StatementExampleTest {
 
+    private StatementExample statementExample = new StatementExample();
+
     @Before
     public void init() throws SQLException {
-        if (! StatementExample.checkTableExist()){
-            StatementExample.createTable();
+        if (!statementExample.checkTableExist()) {
+            statementExample.createTable();
         }
-        if (StatementExample.count() <= 0){
-            StatementExample.insert();
+        if (statementExample.count() <= 0) {
+            statementExample.insert();
         }
     }
 
     @Test
     public void createTable() {
-        StatementExample.createTable();
+        assertTrue(statementExample.createTable());
     }
 
     @Test
-    public void insert() {
-        assertTrue(StatementExample.insert() > 0);
+    public void insert() throws SQLException {
+        assertTrue(statementExample.insert() > 0);
     }
 
     @Test
-    public void update() {
-        assertTrue(StatementExample.update() > 0);
+    public void update() throws SQLException {
+        assertTrue(statementExample.update() > 0);
     }
 
     @Test
-    public void select() {
-        assertNotNull(StatementExample.select());
+    public void select() throws SQLException {
+        assertNotNull(statementExample.select());
     }
 
     @Test
-    public void delete() {
-        assertTrue(StatementExample.delete() >= 0);
+    public void delete() throws SQLException {
+        assertTrue(statementExample.delete() >= 0);
     }
 
     @Test
     public void dropTable() {
-        StatementExample.dropTable();
+        assertTrue(statementExample.dropTable());
     }
 
     @Test
-    public void checkTableExist() {
-        StatementExample.createTable();
-        assertTrue(StatementExample.checkTableExist());
+    public void checkTableExist() throws SQLException {
+        statementExample.createTable();
+        assertTrue(statementExample.checkTableExist());
     }
 
     @Test
     public void count() throws SQLException {
-        assertTrue(StatementExample.count() > 0);
+        assertTrue(statementExample.count() > 0);
     }
 
     @Test
     public void batchInsert() throws SQLException {
-        assertTrue(StatementExample.batchInsert() == 10);
+        assertEquals(10, statementExample.batchInsert());
     }
 }

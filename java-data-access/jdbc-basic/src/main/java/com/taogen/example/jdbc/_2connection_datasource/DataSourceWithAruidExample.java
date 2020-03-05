@@ -2,6 +2,7 @@ package com.taogen.example.jdbc._2connection_datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.taogen.example.jdbc.constant.JdbcConfig;
+import com.taogen.example.jdbc.utils.LoggerUtil;
 import com.taogen.example.jdbc.utils.PropertyUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,20 +21,20 @@ public class DataSourceWithAruidExample {
         Properties properties = null;
         try {
             properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            dataSource.setUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
+            dataSource.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
+            dataSource.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));
         } catch (IOException e) {
-            logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);
+            LoggerUtil.loggerError(logger, e);
         }
-        dataSource.setUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
-        dataSource.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
-        dataSource.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);
+            LoggerUtil.loggerError(logger, e);
         }
         return connection;
     }

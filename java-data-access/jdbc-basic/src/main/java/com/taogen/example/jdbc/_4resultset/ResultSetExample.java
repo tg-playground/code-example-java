@@ -2,6 +2,7 @@ package com.taogen.example.jdbc._4resultset;
 
 import com.taogen.example.jdbc._3statement.StatementUtil;
 import com.taogen.example.jdbc.constant.StatementSQL;
+import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,17 +15,23 @@ public class ResultSetExample {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static void printResultSet() throws SQLException {
-        ResultSet resultSet = StatementUtil.executeDqlSql(StatementSQL.SELECT_SQL);
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            logger.info("{} \t {}", id, name);
+    public boolean printResultSet() {
+        try {
+            ResultSet resultSet = StatementUtil.executeDqlSql(StatementSQL.SELECT_SQL);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                logger.info("{} \t {}", id, name);
+            }
+            return true;
+        } catch (SQLException e) {
+            LoggerUtil.loggerError(logger, e);
         }
+        return false;
     }
 
 
-    public static void updateAllRowsInResultSet(String newname) throws SQLException {
+    public void updateAllRowsInResultSet(String newname) throws SQLException {
         ResultSet resultSet = getUpdatableResultSet();
         while (resultSet.next()) {
             resultSet.updateString("name", newname);
@@ -32,7 +39,7 @@ public class ResultSetExample {
         }
     }
 
-    public static void insertNewRowInResultSet(String name) throws SQLException {
+    public void insertNewRowInResultSet(String name) throws SQLException {
         ResultSet resultSet = getUpdatableResultSet();
         resultSet.moveToInsertRow();
         resultSet.updateString("name", name);

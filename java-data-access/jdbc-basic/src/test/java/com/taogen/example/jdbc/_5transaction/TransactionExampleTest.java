@@ -2,18 +2,19 @@ package com.taogen.example.jdbc._5transaction;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class TransactionExampleTest {
 
+    private TransactionExample transactionExample = new TransactionExample();
+
     @Test
     public void transactionCommit() {
-        TransactionExample.transactionCommit();
+        assertTrue(transactionExample.transactionCommit());
     }
 
     @Test
     public void transactionRollback() {
-        TransactionExample.transactionRollback();
-
+        assertTrue(transactionExample.transactionRollback());
     }
 }

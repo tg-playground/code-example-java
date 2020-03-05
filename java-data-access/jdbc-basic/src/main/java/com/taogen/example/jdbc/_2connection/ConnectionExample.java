@@ -14,27 +14,26 @@ import java.util.Properties;
 public class ConnectionExample {
 
     private static final Logger logger = LogManager.getLogger();
-    private static Connection connection;
+    private Connection connection;
 
-    public static Connection getConnection() throws IOException, SQLException {
+    public Connection getConnection() throws IOException, SQLException {
         if (connection == null) {
             synchronized (ConnectionExample.class) {
                 if (connection == null) {
-                    connection = getConnectionByProperties(PropertyUtils.getProperitesByFilePath("db.properties"));
+                    connection = getConnectionByDriverManager(PropertyUtils.getProperitesByFilePath("db.properties"));
                 }
             }
         }
         return connection;
     }
 
-    private static Connection getConnectionByProperties(Properties properties) throws SQLException {
-        Connection connection = null;
+    private Connection getConnectionByDriverManager(Properties properties) throws SQLException {
         String url = properties.getProperty(String.valueOf(JdbcConfig.MYSQL_URL));
         String user = properties.getProperty(String.valueOf(JdbcConfig.MYSQL_USER));
-        String password = properties.getProperty(String.valueOf(JdbcConfig.MYSQL_PASSWD));
-        logger.debug("url is {}, user is {}, password is {}", url, user, password.substring(0, 2));
+        String passwd = properties.getProperty(String.valueOf(JdbcConfig.MYSQL_PASSWD));
+        logger.debug("url is {}, user is {}", url, user);
         try {
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, user, passwd);
             logger.debug("connection is {}", connection);
         } catch (SQLException e) {
             logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);

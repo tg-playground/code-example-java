@@ -16,68 +16,73 @@ import static com.taogen.example.jdbc.constant.PreparedStatementSQL.*;
 
 public class PreparedStatementExample {
 
-    private static final Logger logger = LogManager.getLogger();
     public static final String NAME = "preparedStatement";
     public static final String UPDATE_NAME = "hello-preparedStatement";
+    private static final Logger logger = LogManager.getLogger();
 
     public static void executeSqlFile() {
         // TODO
     }
 
-    public static int checkTableExist() {
+    public boolean isTableExist() throws SQLException {
         ResultSet resultSet = executeDqlSql(CHECK_TABLE_EXIST_SQL);
-        int count = -1;
+        resultSet.next();
+        int count = resultSet.getInt("count");
+        return count > 0;
+    }
+
+    public boolean createTable() {
         try {
-            resultSet.next();
-            count = resultSet.getInt("count");
-            logger.debug("count is {}", count);
+            executeDdlSQL(CREATE_TABLE_SQL);
+            return true;
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
         }
-        return count;
+        return false;
     }
 
-    public static void createTable() {
-        executeDdlSQL(CREATE_TABLE_SQL);
+    public boolean dropTable() {
+        try {
+            executeDdlSQL(DROP_TABLE_SQL);
+            return true;
+        } catch (SQLException e) {
+            LoggerUtil.loggerError(logger, e);
+        }
+        return false;
     }
 
-    public static void dropTable() {
-        executeDdlSQL(DROP_TABLE_SQL);
-    }
-
-    public static long count() throws SQLException {
+    public long count() throws SQLException {
         ResultSet resultSet = executeDqlSql("select count(*) as count from test");
-        long count = -1;
-        count = ResultSetUtil.getCountFromResultSet(resultSet);
+        long count = ResultSetUtil.getCountFromResultSet(resultSet);
         logger.debug("count is {}", count);
         return count;
     }
 
-    public static int insert() {
+    public int insert() throws SQLException {
         int count = executeDmlSql(INSERT_SQL, NAME);
         logger.debug("insert {} rows", count);
         return count;
     }
 
-    public static int delete() {
+    public int delete() throws SQLException {
         int count = executeDmlSql(DELETE_SQL, NAME, UPDATE_NAME);
         logger.debug("delete {} rows", count);
         return count;
     }
 
-    public static int update() {
+    public int update() throws SQLException {
         int count = executeDmlSql(UPDATE_SQL, UPDATE_NAME, NAME);
         logger.debug("delete {} rows", count);
         return count;
     }
 
-    public static ResultSet select() {
+    public ResultSet select() throws SQLException {
         ResultSet resultSet = executeDqlSql(SELECT_SQL);
         logger.debug("select {} rows", ResultSetUtil.getResultSetSize(resultSet));
         return resultSet;
     }
 
-    public static int batchInsert() throws SQLException {
+    public int batchInsert() throws SQLException {
         // remove all before insert
         PreparedStatementUtil.getPreparedStatement("delete from test").executeUpdate();
 
@@ -85,7 +90,7 @@ public class PreparedStatementExample {
         PreparedStatement preparedStatement = PreparedStatementUtil.getPreparedStatement(PreparedStatementSQL.INSERT_SQL);
         Connection connection = preparedStatement.getConnection();
         connection.setAutoCommit(false);
-        for (int i = 1; i <= 10; i++){
+        for (int i = 1; i <= 10; i++) {
             preparedStatement.setString(1, NAME);
             preparedStatement.addBatch();
         }
@@ -93,7 +98,7 @@ public class PreparedStatementExample {
         connection.commit();
         connection.setAutoCommit(true);
         int count = 0;
-        for (int c : insertCounts){
+        for (int c : insertCounts) {
             count += c;
         }
         logger.debug("batch insert count is {}", count);

@@ -1,21 +1,16 @@
 package com.taogen.example.jdbc._2connection_datasource;
 
-import com.taogen.example.jdbc.constant.DatabaseType;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class DataSourceWithDBCPExampleTest {
 
     @Test
-    public void getDataSource() throws IOException {
-        assertNotNull(DataSourceWithDBCPExample.getDataSource(DatabaseType.MYSQL));
-    }
-
-    @Test
-    public void getConnection() {
-        assertNotNull(DataSourceWithDBCPExample.getConnection());
+    public void getConnection() throws IOException, SQLException {
+        assertNotNull(new DataSourceWithDBCPExample().getConnection());
     }
 }

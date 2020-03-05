@@ -9,9 +9,10 @@ import static org.junit.Assert.assertNotNull;
 
 public class ConnectionExampleTest {
 
+    private ConnectionExample connectionExample = new ConnectionExample();
 
     @Test
     public void getConnection() throws IOException, SQLException {
-        assertNotNull(ConnectionExample.getConnection());
+        assertNotNull(connectionExample.getConnection());
     }
 }
