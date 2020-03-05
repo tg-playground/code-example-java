@@ -13,11 +13,11 @@ import java.util.Properties;
 
 public class ConnectionExample {
 
-    private static Connection connection;
     private static final Logger logger = LogManager.getLogger();
+    private static Connection connection;
 
     public static Connection getConnection() throws IOException, SQLException {
-        if (connection == null){
+        if (connection == null) {
             synchronized (ConnectionExample.class) {
                 if (connection == null) {
                     connection = getConnectionByProperties(PropertyUtils.getProperitesByFilePath("db.properties"));
