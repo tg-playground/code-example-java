@@ -1,17 +1,19 @@
 package com.taogen.example.jdbc._1hello;
 
+import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
-public class JDBCHello {
+public class JdbcHello {
     private static final Logger logger = LogManager.getLogger();
 
-    public static void hello() throws SQLException {
+    public boolean hello() {
         String url = "jdbc:mysql://localhost:3306/test?serverTimezone=UTC";
         String user = "root";
         String password = "root";
+        ResultSet resultSet = null;
         try (
                 Connection connection = DriverManager.getConnection(url, user, password);
                 Statement statement = connection.createStatement()
@@ -21,10 +23,22 @@ public class JDBCHello {
             statement.execute("create table if not exists user(id int not null primary key auto_increment, name varchar(64) not null, age int null)");
             int insertCount = statement.executeUpdate("insert into user (name, age) values ('Tom', 18), ('John', 21)");
             logger.debug("insert {} row(s)", insertCount);
-            ResultSet resultSet = statement.executeQuery("select * from user");
+            resultSet = statement.executeQuery("select * from user");
             while (resultSet.next()) {
                 logger.debug("name is {}, age is {}", resultSet.getString(2), resultSet.getString(3));
             }
+            return true;
+        } catch (Exception e) {
+            LoggerUtil.loggerError(logger, e);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    LoggerUtil.loggerError(logger, e);
+                }
+            }
         }
+        return false;
     }
 }
