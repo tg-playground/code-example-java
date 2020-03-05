@@ -33,7 +33,7 @@ Dependencies
   - gson v2.8.5
   - commons-lang3 v3.9
 - Optional Tools
-  - jackson v2.9.10.2
+  - jackson-databind v2.9.10.3
   - commons-io v2.6
 - javax.servlet-api v3.0.1
 - JSTL
@@ -150,7 +150,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.9.10.2</version>
+        <version>2.9.10.3</version>
     </dependency>
     <dependency>
         <groupId>commons-fileupload</groupId>
