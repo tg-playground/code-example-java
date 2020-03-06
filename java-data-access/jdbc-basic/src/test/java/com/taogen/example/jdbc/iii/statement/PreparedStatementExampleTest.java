@@ -32,12 +32,12 @@ public class PreparedStatementExampleTest {
     }
 
     @Test
-    public void createTable() {
+    public void createTable() throws SQLException {
         assertTrue(preparedStatementExample.createTable());
     }
 
     @Test
-    public void dropTable() {
+    public void dropTable() throws SQLException {
         assertTrue(preparedStatementExample.dropTable());
     }
 

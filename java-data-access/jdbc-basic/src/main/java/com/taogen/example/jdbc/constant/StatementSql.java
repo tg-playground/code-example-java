@@ -1,5 +1,8 @@
 package com.taogen.example.jdbc.constant;
 
+/**
+ * @author Taogen
+ */
 public class StatementSql {
     public static final String TEST_TABLE = "test";
     public static final String CREATE_TABLE_SQL = new StringBuilder()

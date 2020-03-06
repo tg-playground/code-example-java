@@ -1,13 +1,11 @@
 package com.taogen.example.jdbc.iv.resultset;
 
-import com.taogen.example.jdbc.constant.StatementSql;
-import com.taogen.example.jdbc.ii.datasource.ConnectionUtil;
-
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
+/**
+ * @author Taogen
+ */
 public class ResultSetUtil {
 
     private ResultSetUtil() {
@@ -30,11 +28,5 @@ public class ResultSetUtil {
             count = resultSet.getInt("count");
         }
         return count;
-    }
-
-    public static ResultSet getUpdatableResultSet() throws SQLException {
-        Connection connection = ConnectionUtil.getConnection();
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        return statement.executeQuery(StatementSql.SELECT_SQL);
     }
 }

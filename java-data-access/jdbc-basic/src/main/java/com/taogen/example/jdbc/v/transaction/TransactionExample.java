@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Taogen
+ */
 public class TransactionExample {
 
     private static final Logger logger = LogManager.getLogger();

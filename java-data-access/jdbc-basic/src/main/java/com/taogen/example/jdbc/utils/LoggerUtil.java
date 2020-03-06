@@ -2,6 +2,9 @@ package com.taogen.example.jdbc.utils;
 
 import org.apache.logging.log4j.Logger;
 
+/**
+ * @author Taogen
+ */
 public class LoggerUtil {
 
     private LoggerUtil(){

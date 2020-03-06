@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Hello world!
+ * @author Taogen
  */
 public class App {
     public static final Logger LOGGER = LogManager.getLogger();

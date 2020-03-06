@@ -1,5 +1,8 @@
 package com.taogen.example.jdbc.constant;
 
+/**
+ * @author Taogen
+ */
 public class PreparedStatementSql {
     public static final String CREATE_TABLE_SQL = "create table if not exists test (id int not null primary key auto_increment, name varchar(64) not null)";
     public static final String INSERT_SQL = "insert into test (name) value (?)";

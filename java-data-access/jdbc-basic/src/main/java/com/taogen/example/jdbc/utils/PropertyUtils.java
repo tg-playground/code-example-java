@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @author Taogen
+ */
 public class PropertyUtils {
 
     private static final Logger logger = LogManager.getLogger();

@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
+/**
+ * @author Taogen
+ */
 public class JdbcHello {
     private static final Logger logger = LogManager.getLogger();
 
