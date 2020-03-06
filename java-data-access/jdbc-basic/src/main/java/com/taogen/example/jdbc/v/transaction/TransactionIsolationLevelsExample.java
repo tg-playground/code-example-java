@@ -1,4 +1,4 @@
-package com.taogen.example.jdbc._5transaction;
+package com.taogen.example.jdbc.v.transaction;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,22 +10,19 @@ public class TransactionIsolationLevelsExample {
 
     public static final Logger logger = LogManager.getLogger();
 
-    private TransactionIsolationLevelsExample() {
-    }
-
-    public static void readUncommitted() {
+    public void readUncommitted() {
         // see to test
     }
 
-    public static void readCommitted() {
+    public void readCommitted() {
         // see to test
     }
 
-    public static void repeatableRead() {
+    public void repeatableRead() {
         // see to test
     }
 
-    public static void serializable() {
+    public void serializable() {
         // see to test
     }
 }

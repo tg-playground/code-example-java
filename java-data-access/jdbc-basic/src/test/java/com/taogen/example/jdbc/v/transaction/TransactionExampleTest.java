@@ -1,4 +1,4 @@
-package com.taogen.example.jdbc._5transaction;
+package com.taogen.example.jdbc.v.transaction;
 
 import org.junit.Test;
 

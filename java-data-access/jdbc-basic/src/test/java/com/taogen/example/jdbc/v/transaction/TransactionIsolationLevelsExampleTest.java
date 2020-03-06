@@ -1,9 +1,9 @@
-package com.taogen.example.jdbc._5transaction;
+package com.taogen.example.jdbc.v.transaction;
 
 import com.mysql.cj.jdbc.exceptions.MySQLTimeoutException;
-import com.taogen.example.jdbc._2connection_datasource.ConnectionUtil;
-import com.taogen.example.jdbc._4resultset.ResultSetUtil;
 import com.taogen.example.jdbc.constant.StatementSQL;
+import com.taogen.example.jdbc.ii.datasource.ConnectionUtil;
+import com.taogen.example.jdbc.iv.resultset.ResultSetUtil;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -188,7 +188,7 @@ public class TransactionIsolationLevelsExampleTest {
             ResultSet resultSet2 = statement.executeQuery("select * from test where id=1");
             assertTrue(resultSet2.next());
             assertEquals("Tom", resultSet2.getString("name"));
-            long count = ResultSetUtil.getCountFromResultSet(statement.executeQuery("select count(*) as count from test"));
+            long count = ResultSetUtil.getCountFiledFromResultSet(statement.executeQuery("select count(*) as count from test"));
             assertEquals(1, count);
 
             connection.commit();
