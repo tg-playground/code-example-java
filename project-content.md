@@ -106,7 +106,7 @@ Utility
 ### JDBC & Connection Pools & Transaction
 
 - jdbc-basic
-- jdbc-datasource
+  - HelloWorld, Connection, Connection with DataSource, Statement and PreparedStatement, ResultSet, Transaction, RowSet, Advanced Data Type, Store Process
 - jdbc-datasource-jndi-tomcat
 
 ### Persistence Frameworks
