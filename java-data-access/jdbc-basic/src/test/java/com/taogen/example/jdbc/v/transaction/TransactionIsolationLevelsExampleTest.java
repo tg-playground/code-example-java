@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.v.transaction;
 
 import com.mysql.cj.jdbc.exceptions.MySQLTimeoutException;
-import com.taogen.example.jdbc.constant.StatementSQL;
+import com.taogen.example.jdbc.constant.StatementSql;
 import com.taogen.example.jdbc.ii.datasource.ConnectionUtil;
 import com.taogen.example.jdbc.iv.resultset.ResultSetUtil;
 import com.taogen.example.jdbc.utils.LoggerUtil;
@@ -33,7 +33,7 @@ public class TransactionIsolationLevelsExampleTest {
         ) {
             connection.setAutoCommit(true);
             statement.execute("drop table if exists test");
-            statement.execute(StatementSQL.CREATE_TABLE_SQL);
+            statement.execute(StatementSql.CREATE_TABLE_SQL);
         }
     }
 

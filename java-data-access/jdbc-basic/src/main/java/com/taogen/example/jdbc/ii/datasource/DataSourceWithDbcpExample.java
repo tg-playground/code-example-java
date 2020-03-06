@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DataSourceWithDBCPExample {
+public class DataSourceWithDbcpExample {
 
     private static final Logger logger = LogManager.getLogger();
     private static BasicDataSource dataSource = new BasicDataSource();

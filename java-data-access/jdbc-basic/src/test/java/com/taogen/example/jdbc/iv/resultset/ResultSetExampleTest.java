@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.iv.resultset;
 
+import com.taogen.example.jdbc.constant.StatementSql;
 import com.taogen.example.jdbc.iii.statement.StatementUtil;
-import com.taogen.example.jdbc.constant.StatementSQL;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -23,8 +23,8 @@ public class ResultSetExampleTest {
     public void updateAllRowsInResultSet() throws SQLException {
         // prepare: delete and insert data
         Statement statement = StatementUtil.getStatement();
-        statement.executeUpdate(StatementSQL.DELETE_SQL);
-        statement.executeUpdate(StatementSQL.INSERT_SQL);
+        statement.executeUpdate(StatementSql.DELETE_SQL);
+        statement.executeUpdate(StatementSql.INSERT_SQL);
 
         // update row in result set
         String newname = "update-in-result-set";
@@ -38,7 +38,7 @@ public class ResultSetExampleTest {
     @Test
     public void insertNewRowInResultSet() throws SQLException {
         Statement statement = StatementUtil.getStatement();
-        statement.executeUpdate(StatementSQL.DELETE_SQL);
+        statement.executeUpdate(StatementSql.DELETE_SQL);
 
         String name = "insert-in-result-set";
         resultSetExample.insertNewRowInResultSet(name);

@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.iv.resultset;
 
+import com.taogen.example.jdbc.constant.StatementSql;
 import com.taogen.example.jdbc.iii.statement.StatementUtil;
-import com.taogen.example.jdbc.constant.StatementSQL;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +15,7 @@ public class ResultSetExample {
 
     public boolean printResultSet() {
         try {
-            ResultSet resultSet = StatementUtil.executeDqlSql(StatementSQL.SELECT_SQL);
+            ResultSet resultSet = StatementUtil.executeDqlSql(StatementSql.SELECT_SQL);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");

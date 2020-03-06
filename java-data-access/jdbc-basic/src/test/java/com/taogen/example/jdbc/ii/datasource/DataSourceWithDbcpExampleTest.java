@@ -7,10 +7,10 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertNotNull;
 
-public class DataSourceWithDBCPExampleTest {
+public class DataSourceWithDbcpExampleTest {
 
     @Test
     public void getConnection() throws IOException, SQLException {
-        assertNotNull(new DataSourceWithDBCPExample().getConnection());
+        assertNotNull(new DataSourceWithDbcpExample().getConnection());
     }
 }

@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DataSourceWithHikariCPExample {
+public class DataSourceWithHikaricpExample {
     private static final Logger logger = LogManager.getLogger();
     private static HikariConfig hikariConfig = new HikariConfig();
     private static HikariDataSource dataSource;

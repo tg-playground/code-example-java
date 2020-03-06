@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.iii.statement;
 
+import com.taogen.example.jdbc.constant.PreparedStatementSql;
 import com.taogen.example.jdbc.iv.resultset.ResultSetUtil;
-import com.taogen.example.jdbc.constant.PreparedStatementSQL;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.taogen.example.jdbc.constant.PreparedStatementSQL.*;
+import static com.taogen.example.jdbc.constant.PreparedStatementSql.*;
 
 public class PreparedStatementExample {
 
@@ -32,7 +32,7 @@ public class PreparedStatementExample {
 
     public boolean createTable() {
         try {
-            PreparedStatementUtil.executeDdlSQL(CREATE_TABLE_SQL);
+            PreparedStatementUtil.executeDdlSql(CREATE_TABLE_SQL);
             return true;
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
@@ -42,7 +42,7 @@ public class PreparedStatementExample {
 
     public boolean dropTable() {
         try {
-            PreparedStatementUtil.executeDdlSQL(DROP_TABLE_SQL);
+            PreparedStatementUtil.executeDdlSql(DROP_TABLE_SQL);
             return true;
         } catch (SQLException e) {
             LoggerUtil.loggerError(logger, e);
@@ -86,10 +86,11 @@ public class PreparedStatementExample {
         PreparedStatementUtil.getPreparedStatement("delete from test").executeUpdate();
 
         // insert
-        PreparedStatement preparedStatement = PreparedStatementUtil.getPreparedStatement(PreparedStatementSQL.INSERT_SQL);
+        PreparedStatement preparedStatement = PreparedStatementUtil.getPreparedStatement(PreparedStatementSql.INSERT_SQL);
         Connection connection = preparedStatement.getConnection();
         connection.setAutoCommit(false);
-        for (int i = 1; i <= 10; i++) {
+        int insertCount = 10;
+        for (int i = 1; i <= insertCount; i++) {
             preparedStatement.setString(1, NAME);
             preparedStatement.addBatch();
         }

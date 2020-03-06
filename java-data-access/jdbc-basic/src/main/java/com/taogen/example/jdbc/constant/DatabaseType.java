@@ -1,5 +1,13 @@
 package com.taogen.example.jdbc.constant;
 
 public enum DatabaseType {
-    MYSQL, ORACLE
+    /**
+     * MySQL database
+     */
+    MYSQL,
+
+    /**
+     * Oracle database
+     */
+    ORACLE
 }

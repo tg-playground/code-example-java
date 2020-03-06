@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class DataSourceWithHikariCPExampleTest {
+public class DataSourceWithHikaricpExampleTest {
 
     @Test
     public void getConnection() {
-        assertNotNull(new DataSourceWithHikariCPExample().getConnection());
+        assertNotNull(new DataSourceWithHikaricpExample().getConnection());
     }
 }

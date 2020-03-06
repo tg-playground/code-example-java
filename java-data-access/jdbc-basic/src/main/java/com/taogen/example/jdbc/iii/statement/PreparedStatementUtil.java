@@ -16,7 +16,7 @@ public class PreparedStatementUtil {
         throw new IllegalStateException("Utility class");
     }
 
-    public static void executeDdlSQL(String sql) throws SQLException {
+    public static void executeDdlSql(String sql) throws SQLException {
         getPreparedStatement(sql).execute();
     }
 

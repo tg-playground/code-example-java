@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.iv.resultset;
 
+import com.taogen.example.jdbc.constant.StatementSql;
 import com.taogen.example.jdbc.ii.datasource.ConnectionUtil;
-import com.taogen.example.jdbc.constant.StatementSQL;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,6 +35,6 @@ public class ResultSetUtil {
     public static ResultSet getUpdatableResultSet() throws SQLException {
         Connection connection = ConnectionUtil.getConnection();
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        return statement.executeQuery(StatementSQL.SELECT_SQL);
+        return statement.executeQuery(StatementSql.SELECT_SQL);
     }
 }

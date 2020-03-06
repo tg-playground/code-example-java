@@ -1,7 +1,7 @@
 package com.taogen.example.jdbc.iii.statement;
 
+import com.taogen.example.jdbc.constant.StatementSql;
 import com.taogen.example.jdbc.iv.resultset.ResultSetUtil;
-import com.taogen.example.jdbc.constant.StatementSQL;
 import com.taogen.example.jdbc.utils.LoggerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.taogen.example.jdbc.constant.StatementSql.*;
 import static com.taogen.example.jdbc.iii.statement.StatementUtil.*;
-import static com.taogen.example.jdbc.constant.StatementSQL.*;
 
 public class StatementExample {
 
@@ -56,7 +56,7 @@ public class StatementExample {
     }
 
     public long count() throws SQLException {
-        ResultSet resultSet = StatementUtil.executeDqlSql(StatementSQL.COUNT_TABLE_SQL);
+        ResultSet resultSet = StatementUtil.executeDqlSql(StatementSql.COUNT_TABLE_SQL);
         long count = ResultSetUtil.getCountFiledFromResultSet(resultSet);
         logger.debug("count is {}", count);
         return count;
@@ -94,7 +94,7 @@ public class StatementExample {
         Connection connection = statement.getConnection();
         connection.setAutoCommit(false);
         for (int i = 1; i <= 10; i++) {
-            statement.addBatch(StatementSQL.INSERT_SQL);
+            statement.addBatch(StatementSql.INSERT_SQL);
         }
         int[] insertCounts = statement.executeBatch();
         connection.commit();

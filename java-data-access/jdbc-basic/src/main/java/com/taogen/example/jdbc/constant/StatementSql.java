@@ -1,6 +1,6 @@
 package com.taogen.example.jdbc.constant;
 
-public class StatementSQL {
+public class StatementSql {
     public static final String TEST_TABLE = "test";
     public static final String CREATE_TABLE_SQL = new StringBuilder()
             .append("create table if not exists ")
@@ -18,7 +18,7 @@ public class StatementSQL {
     public static final String DROP_TABLE_SQL = "drop table if exists test";
     public static final String CHECK_TABLE_EXIST_SQL = "select count(*) as count from information_schema.tables where table_schema = 'test' and table_name = 'test'";
 
-    private StatementSQL(){
+    private StatementSql() {
         throw new IllegalStateException("Constant class");
     }
 }
