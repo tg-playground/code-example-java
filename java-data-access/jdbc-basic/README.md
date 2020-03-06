@@ -241,3 +241,4 @@ Others
 - [How do I get the size of a java.sql.ResultSet?](https://stackoverflow.com/questions/192078/how-do-i-get-the-size-of-a-java-sql-resultset)
 - [Check if a MySQL table exists](https://electrictoolbox.com/check-if-mysql-table-exists/)
 - [IF NOT EXISTS Statements](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)
+- [Should I close a Connection obtained from a DataSource manually?](https://stackoverflow.com/questions/23957390/should-i-close-a-connection-obtained-from-a-datasource-manually)
