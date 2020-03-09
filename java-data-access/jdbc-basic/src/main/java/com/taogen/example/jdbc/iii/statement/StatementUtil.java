@@ -1,7 +1,5 @@
 package com.taogen.example.jdbc.iii.statement;
 
-import com.taogen.example.jdbc.ii.datasource.ConnectionUtil;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
