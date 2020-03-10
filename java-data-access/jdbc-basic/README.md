@@ -209,17 +209,27 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
-Functions, User Roles
+Functions
 
-Business Processes
+1. JDBC Hello World
+2. Connection and DataSource
+3. Statement and PreparedStatement
+4. ResultSet
+5. Transation
+6. Advanced Data Type
+7. Stored Procedure
 
 ## Implementation
 
-### Step1: xxx
-
-...
+Implement by JDBC API.
 
 ## Test
+
+Using maven command to run the project unit tests
+
+```shell
+$ mvn test
+```
 
 
 
