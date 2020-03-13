@@ -17,23 +17,19 @@ Software
 
 - JDK 1.8
 - Maven
-- mysql 5
+- MySQL 8
 
 Dependencies
 
 - Test
   - junit v4.12
-  - mockito-core v2.23.4
 - Logging
   - log4j-web v2.8.2
-- Tools
-  - lombok v1.18.10
-  - gson v2.8.5
-  - commons-lang3 v3.9
-- Optional Tools
-  - jackson v2.9.8
-  - commons-io v2.6
-- mysql-connector-java v5.1.48
+- mysql-connector-java v8.0.19
+- commons-dbcp v1.4
+- druid v1.1.10
+- c3p0 v0.9.5.2
+- HikariCP v3.2.0
 
 
 
@@ -81,12 +77,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>2.23.4</version>
-        <scope>test</scope>
-    </dependency>
 
     <!-- ** Logging ** -->
     <dependency>
@@ -95,61 +85,36 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${log4j.version}</version>
     </dependency>
 
-    <!-- ** Common Tools ** -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.18.10</version>
-        <scope>provided</scope>
-    </dependency>
-    <!-- small json file (KB) -->
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.5</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.9</version>
-    </dependency>
-    
-    <!-- ** Optional Common Tools ** -->
-    <!-- large json file (MB) -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>2.9.10.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>2.9.10.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.9.10.2</version>
-    </dependency>
-    <dependency>
-        <groupId>commons-fileupload</groupId>
-        <artifactId>commons-fileupload</artifactId>
-        <version>1.4</version>
-    </dependency>
-    <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.6</version>
-    </dependency>
-	MYSQL
+    <!-- MYSQL Connector -->
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql-connector.version}</version>
     </dependency>
 
-</dependencies>
+    <!-- Data Source -->
+    <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>1.4</version>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.1.10</version>
+    </dependency>
+    <dependency>
+        <groupId>com.mchange</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>0.9.5.2</version>
+    </dependency>
+    <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>3.2.0</version>
+    </dependency>
 
+</dependencies>
 
 <build>
     <sourceDirectory>src/main/java</sourceDirectory>
