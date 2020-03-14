@@ -1,0 +1,136 @@
+@startuml
+
+interface java.lang.AutoCloseable
+
+interface Closeable
+'interface DataInput
+'interface Externalizable
+'interface FileFilter
+'interface FilenameFilter
+interface Flushable
+'interface ObjectInput
+'interface ObjectInputValidation
+'interface ObjectOutput
+'interface ObjectStreamConstants
+'interface Serializable
+
+'InputStream classes
+
+abstract InputStream {
+    read()
+}
+Closeable <|-- InputStream
+java.lang.AutoCloseable <|-- InputStream
+
+class BufferedInputStream {
+    available()
+    close()
+    mark(int readlimit)
+    markSupported()
+    read()
+    read(byte[] b, int off, lnt len)
+    reset()
+    skip(long n)
+}
+class ByteArrayInputStream {
+}
+class DataInputStream {
+}
+class FileInputStream {
+}
+class FilterInputStream {
+}
+class InputStreamReader {
+}
+class LineNumberInputStream {
+}
+class ObjectInputStream {
+}
+class PipedInputStream {
+}
+class PushbackInputStream {
+}
+class SequenceInputStream {
+}
+class StringBufferInputStream {
+}
+
+' InputStream Relationship
+
+InputStream <|-- BufferedInputStream
+InputStream <|--- ByteArrayInputStream
+InputStream <|-- DataInputStream
+InputStream <|--- FileInputStream
+InputStream <|-- FilterInputStream
+InputStream <|--- InputStreamReader
+InputStream <|-- LineNumberInputStream
+InputStream <|--- ObjectInputStream
+InputStream <|-- PipedInputStream
+InputStream <|--- PushbackInputStream
+InputStream <|-- SequenceInputStream
+InputStream <|--- StringBufferInputStream
+
+'OutputStream classes
+
+abstract OutputStream {
+    + void close()
+    + void flush()
+    + void write(byte[] b)
+    + void write(byte[] b, int off, int len)
+    + {abstract} void write(int b)
+}
+
+Closeable <|-- OutputStream
+Flushable <|-- OutputStream
+java.lang.AutoCloseable <|-- OutputStream
+
+class BufferedOutputStream {
+    # byte[] buf
+    # int count
+    + BufferedOutputStream(OutputStream out)
+    + BufferedOutputStream(OutputStream out, int size)
+    + void flush()
+    + void write(byte[] b, int off, int len)
+    + void write(int b)
+}
+class ByteArrayOutputStream {
+    # byte[] buf
+    # int count
+    + ByteArrayOutputStream()
+    + ByteArrayOutputStream(int size)
+    + void close()
+    + void reset()
+    + int size()
+    + byte[] toByteArray()
+    + String toString()
+    + String toString(int hibyte)
+    + String toString(String charsetName)
+    + void write(byte[] b, int off, int len)
+    + void write(int b)
+    + void writeTo(OutputStream out)
+}
+class DataOutputStream {
+}
+class FileOutputStream {
+}
+class FilterOutputStream {
+}
+class ObjectOutputStream {
+}
+class OutputStreamWriter {
+}
+class PipedOutputStream {
+}
+
+' OutputStream Relationship
+
+OutputStream <|--- BufferedOutputStream
+OutputStream <|-- ByteArrayOutputStream
+OutputStream <|--- DataOutputStream
+OutputStream <|-- FileOutputStream
+OutputStream <|--- FilterOutputStream
+OutputStream <|-- ObjectOutputStream
+OutputStream <|--- OutputStreamWriter
+OutputStream <|-- PipedOutputStream
+
+@enduml
