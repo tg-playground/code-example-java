@@ -88,14 +88,12 @@
 
 ## Java Basic
 
-Java Mail
-
-Data Parser (XML, JSON)
+- java-basic
+  - IO, container, generic, lambda and stream, concurrency, network and nio, annotation
 
 - java-basic-datetime
-- java-basic-file-parser
+- java-basic-file-parser (XML, JSON)
 - java-basic-mail
-- java-basic-jdbc
 - java-basic-socket
 - java-basic-ssl
 
@@ -105,9 +103,9 @@ Utility
 
 ### JDBC & Connection Pools & Transaction
 
-- jdbc-basic
+- [x] jdbc-basic
   - HelloWorld, Connection, Connection with DataSource, Statement and PreparedStatement, ResultSet, Transaction, RowSet, Advanced Data Type, Store Process
-- jdbc-datasource-jndi-tomcat
+- [x] jdbc-datasource-jndi-tomcat
 
 ### Persistence Frameworks
 
