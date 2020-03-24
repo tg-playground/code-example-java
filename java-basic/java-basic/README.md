@@ -213,6 +213,4 @@ Business Processes
 
 ## References
 
-Books, Docs, URLs
-
-**<<<<!!{{update me}}!!>>>>**
+[java 8 api](https://docs.oracle.com/javase/8/docs/api/)
