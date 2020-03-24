@@ -26,7 +26,7 @@ public class InputStreamExampleTest {
     @Test
     public void byteArrayInputStream() {
         try (
-                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(new byte[]{1, 2, 3});
+                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(new byte[]{1, 2, 3})
         ) {
             int inputStreamSize = byteArrayInputStream.available();
             logger.debug("the input stream size: {}", inputStreamSize);
@@ -55,7 +55,7 @@ public class InputStreamExampleTest {
     @Test
     public void fileInputStream() {
         try (
-                FileInputStream fileInputStream = new FileInputStream("src/main/resources/tmp.txt");
+                FileInputStream fileInputStream = new FileInputStream("src/main/resources/tmp.txt")
         ) {
             String path = getClass().getClassLoader().getResource("tmp.txt").toURI().getPath();
             logger.debug("path: {}", path);
@@ -74,7 +74,7 @@ public class InputStreamExampleTest {
     @Test
     public void dataInputStream() {
         try (
-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(new byte[]{0x00, 0x00, 0x1, 0x1}));
+        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(new byte[]{0x00, 0x00, 0x1, 0x1}))
         ) {
             logger.debug("read int (4 bytes) result: {}", dataInputStream.readInt());
         }catch (IOException e){
