@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class NumericDataTypesExample {
     /**
-     * bit - A bit-value type. M indicates the number of bits per value, from 1 to 64. The default is 1 if M is omitted.
+     * bit - A bit-value type. M indicates the number of bits per value, from 1 to 64. The default is 1 if M is omitted. Insert by int value convert from M bits binary value, binary value b'', or one bit by true or false. Get by boolean value(when it's M=1 or bit(1)) or int value(when M > 1). For example, when column is BIT(2), You can insert int value 3(represent 11), or insert b'11'.
      * bool, boolean - These types are synonyms for TINYINT(1). A value of zero is considered false. Nonzero values are considered true.
      * tinyint - 1 byte, A very small integer. The signed range is -128 to 127. The unsigned range is 0 to 255.
      * smallint - 2 bytes, A small integer. The signed range is -32768 to 32767. The unsigned range is 0 to 65535.
