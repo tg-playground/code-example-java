@@ -3,10 +3,28 @@
 ### Content-New
 
 - Java
-  - Java Mail
-  - Data Parser
-    - XML, JSON
-  - Utility Libraries
+  - Java I - Fundamental
+    - Java Basics and Classes
+    - Java IO
+    - Java Collections
+    - Java Lambda and Streams
+    - Java Generic Programming
+    - Java Reflection and Proxy
+    - Java Annotations
+    - Java Internationalization
+    - Java Timer and Scheduler
+  - Java II - Advanced
+    - Java Concurrency
+    - Java Network and NIO (Netty, RPC)
+    - Java Security
+    - JVM
+    - JMX, JNDI, JAXP, RMI
+  - Java III - Others
+    - Java Date and Time
+    - Java Regex
+    - Send Mail
+    - Data Parser (XML, JSON, EXCEL, PDF)
+    - Utility Libraries
 - Java Data Access
   - JDBC & Connection Pools
   - Persistence Frameworks
@@ -86,18 +104,14 @@
 
 ## Main
 
-## Java Basic
+## Java
 
-- java-basic
-  - IO, container, generic, lambda and stream, concurrency, network and nio, annotation
-
-- java-basic-datetime
-- java-basic-file-parser (XML, JSON)
-- java-basic-mail
-- java-basic-socket
-- java-basic-ssl
-
-Utility
+- java-1-fundamental
+  - java basics and classes, IO, container, lambda and stream, generic, reflection and proxy, annotation, internationalization, time and scheduler
+- java-2-advanced
+  - concurrency, network and nio, java security, JVM, JMX JNDI JAXP RMI
+- java-3-others
+  - date time, regex, send mail, file-parser (XML, JSON, EXCEL, PDF), utility libraries
 
 ## Java Data Access
 
