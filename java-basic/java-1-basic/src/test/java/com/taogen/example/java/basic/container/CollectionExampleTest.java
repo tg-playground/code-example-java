@@ -3,7 +3,6 @@ package com.taogen.example.java.basic.container;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -33,14 +32,14 @@ public class CollectionExampleTest {
                 enumMap.put(Colors.RED, "yellow new");
             }
         }
-        LinkedList linkedList = new LinkedList();
-        linkedList.pop();
-        ArrayDeque deque = new ArrayDeque();
-        deque.poll();
-        deque.pop();
-        ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
-        queue.poll();
-        System.out.println(enumMap);
+//        LinkedList linkedList = new LinkedList();
+//        linkedList.pop();
+//        ArrayDeque deque = new ArrayDeque();
+//        deque.poll();
+//        deque.pop();
+//        ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
+//        queue.poll();
+//        System.out.println(enumMap);
 
     }
 
@@ -77,7 +76,11 @@ public class CollectionExampleTest {
         Spliterator<Integer> spliterator2 = spliterator.trySplit();
         spliterator.forEachRemaining(System.out::println);
         System.out.println("======");
-        spliterator2.forEachRemaining(System.out::println);
+        try {
+            // can't foreach more than once
+            spliterator2.forEachRemaining(System.out::println);
+        } catch (NullPointerException e) {
+        }
 
     }
 
