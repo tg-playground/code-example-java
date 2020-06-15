@@ -28,6 +28,7 @@ Dependencies
   - lombok v1.18.10
   - gson v2.8.5
   - commons-lang3 v3.9
+  - cglib v3.3.0
 - Optional Tools
   - jackson v2.9.8
   - commons-io v2.6
