@@ -1,6 +1,6 @@
 @startuml
 
-ServletContainer -> DispatcherServlet: 1.1 instantiate and init \nservlets in web.xml
+ServletContainer -> DispatcherServlet: 1.1 instantiate and init \nservlets from web.xml
 ServletContainer -> HttpServletBean: 2 call its parent class init()
 HttpServletBean -> HttpServletBean: 2.1 set bean properties from \ninit parameters
 HttpServletBean -> FrameworkServlet: 3 initServletBean()
@@ -15,12 +15,14 @@ DefaultListableBeanFactory -> DefaultListableBeanFactory: 5.1 to create all bean
 DefaultListableBeanFactory -> AbstractBeanFactory: 6. getBean(name)
 AbstractBeanFactory -> AbstractBeanFactory: 6.1 doGetBean()
 AbstractBeanFactory -> DefaultSingletonBeanRegistry: 7. getSingleton(beanName, singletonFactory)
-DefaultSingletonBeanRegistry -> AbstractAutowireCapableBeanFactory: 8. createBean(beanName, beanDefinition, args)
-AbstractAutowireCapableBeanFactory -> DefaultListableBeanFactory: return bean instance
+DefaultSingletonBeanRegistry -> AbstractAutowireCapableBeanFactory: 8. createBean(beanName, beanDefinition, args):\n create beanWrapper, initialize bean, add to beanFactory
+AbstractAutowireCapableBeanFactory -> SimpleInstantiationStrategy: 9. instantiate(): get Constructor\n before create instance
+SimpleInstantiationStrategy -> BeanUtils: 10. instantiateClass(): using reflection\n to create the instance
+BeanUtils -> DefaultListableBeanFactory: return bean instance
 DefaultListableBeanFactory -> AbstractApplicationContext: end instantiate all beans
 AbstractApplicationContext -> AbstractApplicationContext: 4.3 finishRefresh()
 AbstractApplicationContext -> FrameworkServlet: end refresh
 FrameworkServlet -> FrameworkServlet: 3.2 initFrameworkServlet()
-FrameworkServlet -> HttpServletBean: end init servlet bean
-HttpServletBean -> ServletContainer: end init
+FrameworkServlet -> HttpServletBean: end initServletBean()
+HttpServletBean -> ServletContainer: end servlet init()
 @enduml

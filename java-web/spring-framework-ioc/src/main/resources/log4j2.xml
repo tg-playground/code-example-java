@@ -9,7 +9,7 @@
         <Logger name="com.taogen.example" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="org.springframework" level="trace" additivity="false">
+        <Logger name="org.springframework" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="error">
