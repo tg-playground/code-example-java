@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop = "http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="logging" class="com.taogen.springaopbyxml.aspect.Logging" />
+    <bean id="myBean" class="com.taogen.springaopbyxml.bean.MyBean" />
+    <aop:config>
+        <aop:aspect id="log" ref="logging">
+            <aop:pointcut id="logMyBean" expression="execution(* com.taogen.springaopbyxml.bean.*.*(..))" />
+            <aop:before method="beforeAdvice" pointcut-ref="logMyBean" />
+            <aop:after method="afterAdvice" pointcut-ref="logMyBean" />
+            <aop:after-returning method="afterReturnAdvice" pointcut-ref="logMyBean" />
+            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="logMyBean" />
+        </aop:aspect>
+    </aop:config>
+</beans>
