@@ -1,0 +1,8 @@
+wechat:
+  token: "my_token"
+  appId: "wx154dff7157e77bbe"
+  appSecret: "dd53602b4a70543e657353ac54322c1a"
+  testAppId: "wx154dff7157e77bbe"
+  testAppSecret: "dd53602b4a70543e657353ac54322c1a"
+server:
+  port: 80
