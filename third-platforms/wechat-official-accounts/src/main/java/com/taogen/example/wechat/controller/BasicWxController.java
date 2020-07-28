@@ -26,22 +26,18 @@ public class BasicWxController {
     @Autowired
     protected AccessTokenService accessTokenService;
 
-    protected String doGetWithAccessToken(String uri) {
-        String accessToken = accessTokenService.getCurrentAccessToken();
-        String requestUri = String.format(uri, accessToken);
-        return MyHttpClient.doGet(wxDomains.getWechatDomain() + requestUri);
-    }
-
-    protected String doGetWithAccessTokenAndOthers(String uri, Object... params) {
+    protected String doGetWithAccessTokenAndOtherParams(String uri, Object... params) {
         String accessToken = accessTokenService.getCurrentAccessToken();
         Object[] args = null;
         if (params != null && params.length > 0) {
             args = new Object[params.length + 1];
-            args[0] = accessToken;
-            for (int i = 0; i < params.length; i++){
-                args[i+1] = params[i];
+            for (int i = 0; i < params.length; i++) {
+                args[i + 1] = params[i];
             }
+        } else {
+            args = new Object[1];
         }
+        args[0] = accessToken;
         String requestUri = String.format(uri, args);
         return MyHttpClient.doGet(wxDomains.getWechatDomain() + requestUri);
     }

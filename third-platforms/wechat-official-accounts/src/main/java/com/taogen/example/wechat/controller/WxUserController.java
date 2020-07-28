@@ -1,6 +1,5 @@
 package com.taogen.example.wechat.controller;
 
-import com.taogen.example.wechat.utils.MyHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +16,11 @@ public class WxUserController extends BasicWxController {
 
     @GetMapping("/user/list")
     public String getUserList() {
-        return doGetWithAccessTokenAndOthers(wxUris.USER_LIST_GET_URI, "");
+        return doGetWithAccessTokenAndOtherParams(wxUris.USER_LIST_GET_URI, "");
     }
 
     @GetMapping("user/get")
     public String getUserInfo(@RequestParam("openid") String openid) {
-        return doGetWithAccessTokenAndOthers(wxUris.USER_INFO_GET_URI, openid);
+        return doGetWithAccessTokenAndOtherParams(wxUris.USER_INFO_GET_URI, openid);
     }
 }
