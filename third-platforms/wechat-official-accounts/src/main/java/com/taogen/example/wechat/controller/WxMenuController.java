@@ -26,7 +26,7 @@ public class WxMenuController extends BasicWxController {
     }
 
 
-    @GetMapping("menu/get")
+    @GetMapping("/menu/get")
     public String menuGet() {
         return doGetWithAccessTokenAndOtherParams(wxUris.MENU_QUERY_URI);
     }

@@ -19,7 +19,7 @@ public class WxUserController extends BasicWxController {
         return doGetWithAccessTokenAndOtherParams(wxUris.USER_LIST_GET_URI, "");
     }
 
-    @GetMapping("user/get")
+    @GetMapping("/user/get")
     public String getUserInfo(@RequestParam("openid") String openid) {
         return doGetWithAccessTokenAndOtherParams(wxUris.USER_INFO_GET_URI, openid);
     }
