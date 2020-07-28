@@ -1,4 +1,4 @@
-package com.taogen.example;
+package com.taogen.example.wechat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -39,11 +38,6 @@ public class App {
 
     @Value("${wechat.testAppSecret}")
     private String testAppSecret;
-
-    private String accessToken;
-    private Timestamp accessTokenAcquiredTimestamp;
-    private String testAccessToken;
-    private Timestamp testAccessTokenAcquiredTimestamp;
 
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
