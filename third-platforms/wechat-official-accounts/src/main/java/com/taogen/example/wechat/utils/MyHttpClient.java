@@ -4,46 +4,53 @@ import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Map;
 
 /**
  * @author Taogen
  */
 public class MyHttpClient {
     private static final Logger logger = LogManager.getLogger();
-    public static final MediaType JSON
-            = MediaType.get("application/json; charset=utf-8");
-    private static OkHttpClient client = new OkHttpClient();
+    private static final OkHttpClient client = new OkHttpClient();
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    public static String doGet(String urlStr){
+    public static String doGet(String urlStr) {
+        logger.debug("Connecting to {}...", urlStr);
+        long start = System.currentTimeMillis();
         Request request = new Request.Builder()
                 .url(urlStr)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        String result = null;
+        result = getResponseBodyByRequest(request);
+        long elapsedTime = System.currentTimeMillis() - start;
+        logger.debug("HTTP response is: {}", result);
+        logger.debug("HTTP cost time: {} ms.", elapsedTime);
+        return result;
     }
 
     public static String doPost(String urlStr, String jsonStr) {
-        RequestBody body = RequestBody.create(jsonStr, JSON);
+        logger.debug("Connecting to {}...", urlStr);
+        long start = System.currentTimeMillis();
+        RequestBody requestBody = RequestBody.create(jsonStr, JSON);
         Request request = new Request.Builder()
                 .url(urlStr)
-                .post(body)
+                .post(requestBody)
                 .build();
+        String result = getResponseBodyByRequest(request);
+        long elapsedTime = System.currentTimeMillis() - start;
+        logger.debug("HTTP response is: {}", result);
+        logger.debug("HTTP cost time: {} ms.", elapsedTime);
+        return result;
+    }
+
+    private static String getResponseBodyByRequest(Request request){
+        String result = null;
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            result = response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
 //    public static String doGet(String urlStr) {

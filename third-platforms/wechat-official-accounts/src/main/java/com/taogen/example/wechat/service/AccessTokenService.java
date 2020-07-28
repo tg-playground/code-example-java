@@ -85,17 +85,16 @@ public class AccessTokenService {
         logger.debug("Type is {}", type);
         String getAccessTokenUri = null;
         if ("product".equals(type)) {
-            getAccessTokenUri = String.format(wxUris.ACCESS_TOKEN_GET_URL,
+            getAccessTokenUri = String.format(wxUris.ACCESS_TOKEN_GET_URI,
                     wxConfig.getAppId(), wxConfig.getAppSecret());
         }
         if ("test".equals(type)) {
-            getAccessTokenUri = String.format(wxUris.ACCESS_TOKEN_GET_URL,
+            getAccessTokenUri = String.format(wxUris.ACCESS_TOKEN_GET_URI,
                     wxConfig.getTestAppId(), wxConfig.getTestAppSecret());
         }
         logger.debug("getAccessTokenUri is {}", getAccessTokenUri);
         logger.debug("Current Wechat domain is: {}", wxDomains.getWechatDomain());
         String result = MyHttpClient.doGet(wxDomains.getWechatDomain() + getAccessTokenUri);
-        logger.debug("Weixin API return: {}", result);
         String accessToken = null;
         JSONObject json = new JSONObject(result);
         if (json != null) {
