@@ -6,5 +6,5 @@ package com.taogen.example.wechat.service;
 public interface WxAccessTokenService {
     String getAccessToken(String type);
 
-    public String getCurrentAccessToken();
+    String getCurrentAccessToken();
 }
