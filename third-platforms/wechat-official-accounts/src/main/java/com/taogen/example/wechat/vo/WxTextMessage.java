@@ -23,6 +23,21 @@ public class WxTextMessage {
     private String content;
     @XmlElement(name = "MsgId")
     private String msgId;
+    /**
+     * msgType = Event
+     */
+    @XmlElement(name = "Event")
+    private String eventType;
+    @XmlElement(name = "EventKey")
+    private String eventKey;
+    @XmlElement(name = "Ticket")
+    private String ticket;
+    @XmlElement(name = "Latitude")
+    private String latitude;
+    @XmlElement(name = "Longitude")
+    private String longitude;
+    @XmlElement(name = "Precision")
+    private String precision;
 
     public String getToUserName() {
         return toUserName;
@@ -70,6 +85,54 @@ public class WxTextMessage {
 
     public void setMsgId(String msgId) {
         this.msgId = msgId;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
+    }
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(String precision) {
+        this.precision = precision;
     }
 
     @Override
