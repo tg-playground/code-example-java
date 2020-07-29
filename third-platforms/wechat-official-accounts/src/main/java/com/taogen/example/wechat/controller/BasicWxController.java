@@ -3,7 +3,7 @@ package com.taogen.example.wechat.controller;
 import com.taogen.example.wechat.config.WxConfig;
 import com.taogen.example.wechat.config.WxDomains;
 import com.taogen.example.wechat.config.WxUris;
-import com.taogen.example.wechat.service.AccessTokenService;
+import com.taogen.example.wechat.service.WxAccessTokenService;
 import com.taogen.example.wechat.utils.MyHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ public class BasicWxController {
     @Autowired
     protected WxDomains wxDomains;
     @Autowired
-    protected AccessTokenService accessTokenService;
+    protected WxAccessTokenService accessTokenService;
 
     protected String doGetWithAccessTokenAndOtherParams(String uri, Object... params) {
         String accessToken = accessTokenService.getCurrentAccessToken();

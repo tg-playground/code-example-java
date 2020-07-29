@@ -1,8 +1,9 @@
-package com.taogen.example.wechat.service;
+package com.taogen.example.wechat.service.impl;
 
 import com.taogen.example.wechat.config.WxConfig;
 import com.taogen.example.wechat.config.WxDomains;
 import com.taogen.example.wechat.config.WxUris;
+import com.taogen.example.wechat.service.WxAccessTokenService;
 import com.taogen.example.wechat.utils.MyHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author Taogen
  */
 @Service
-public class AccessTokenService {
+public class WxAccessTokenServiceImpl implements WxAccessTokenService {
     private static final Logger logger = LogManager.getLogger();
     private static final Long ACCESS_TOKEN_VALID_TIME = 3600000L;
 
