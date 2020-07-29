@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 public class WxMessageServiceImpl implements WxMessageService {
     private static final Logger logger = LogManager.getLogger();
 
+    @Override
     public WxTextMessage getReplayMessageByReceive(WxTextMessage receiveMessage) {
         WxTextMessage replyMessage = new WxTextMessage();
         replyMessage.setMsgType("text");

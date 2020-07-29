@@ -37,6 +37,7 @@ public class WxAccessTokenServiceImpl implements WxAccessTokenService {
     @Autowired
     private WxDomains wxDomains;
 
+    @Override
     public String getAccessToken(String type) {
         String accessToken = null;
         if (isAccessTokenValid(type)) {
@@ -50,6 +51,7 @@ public class WxAccessTokenServiceImpl implements WxAccessTokenService {
         return accessToken;
     }
 
+    @Override
     public String getCurrentAccessToken() {
         if ("test".equals(WECHAT_ENVIRONMENT)) {
             return getAccessToken("test");
