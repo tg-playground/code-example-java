@@ -1,7 +1,7 @@
 package com.taogen.example.wechat.controller;
 
 import com.taogen.example.wechat.service.WxMessageService;
-import com.taogen.example.wechat.utils.XmlUtils;
+import com.taogen.example.wechat.utils.XmlObjectUtils;
 import com.taogen.example.wechat.vo.WxTextMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,10 +38,10 @@ public class WxMessageController extends BasicWxController {
     public String messageReceive(HttpEntity<String> httpEntity) {
         String requestBody = httpEntity.getBody();
         logger.debug("requestBody is {}", requestBody);
-        WxTextMessage receiveMessage = (WxTextMessage) XmlUtils.getObjectByXmlString(requestBody);
+        WxTextMessage receiveMessage = (WxTextMessage) XmlObjectUtils.getObjectByXmlString(requestBody);
         logger.debug("Wechat message object is: {}", receiveMessage);
         WxTextMessage replyMessage = wxMessageService.getReplayMessageByReceive(receiveMessage);
-        return XmlUtils.getXmlStringByObject(replyMessage);
+        return XmlObjectUtils.getXmlStringByObject(replyMessage);
     }
 
 }

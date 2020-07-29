@@ -12,7 +12,7 @@ import java.io.StringWriter;
 /**
  * @author Taogen
  */
-public class XmlUtils {
+public class XmlObjectUtils {
     public static Object getObjectByXmlString(String requestBody) {
         Object returnObject = null;
         JAXBContext jaxbContext = getJaxbContext(WxTextMessage.class);
