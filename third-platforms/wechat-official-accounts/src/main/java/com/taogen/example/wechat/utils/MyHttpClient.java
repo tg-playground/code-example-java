@@ -24,7 +24,7 @@ public class MyHttpClient {
         result = getResponseBodyByRequest(request);
         long elapsedTime = System.currentTimeMillis() - start;
         logger.debug("HTTP response is: {}", result);
-        logger.debug("HTTP cost time: {} ms.", elapsedTime);
+        logger.debug("HTTP GET elapsed time: {} ms.", elapsedTime);
         return result;
     }
 
@@ -39,7 +39,7 @@ public class MyHttpClient {
         String result = getResponseBodyByRequest(request);
         long elapsedTime = System.currentTimeMillis() - start;
         logger.debug("HTTP response is: {}", result);
-        logger.debug("HTTP cost time: {} ms.", elapsedTime);
+        logger.debug("HTTP POST elapsed time: {} ms.", elapsedTime);
         return result;
     }
 
