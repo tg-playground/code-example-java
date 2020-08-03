@@ -1,5 +1,6 @@
 package com.taogen.example.wechat;
 
+import com.taogen.example.wechat.utils.EncryptUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,16 +93,7 @@ public class App {
     }
 
     private String getEncryptedParams(String sortedParams) {
-        MessageDigest crypt = null;
-        try {
-            crypt = MessageDigest.getInstance("SHA-1");
-            crypt.reset();
-            crypt.update(sortedParams.toString().getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return new BigInteger(1, crypt.digest()).toString(16);
+        return EncryptUtils.toSHA1(sortedParams);
     }
 
 
