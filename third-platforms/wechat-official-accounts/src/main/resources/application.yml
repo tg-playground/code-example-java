@@ -1,3 +1,5 @@
+app:
+  domain: http://jtg.natapp1.cc
 wechat:
   token: "my_token"
   appId: "wx154dff7157e77bbe"
@@ -52,5 +54,12 @@ wechat:
       template_id_list_get_uri: "/cgi-bin/template/get_all_private_template?access_token=%s"
       template_remove_uri: "/cgi-bin/template/del_private_template?access_token=%s"
       template_send_uri: "/cgi-bin/message/template/send?access_token=%s"
+    jsapi:
+      jsapi_ticket_get: "/cgi-bin/ticket/getticket?type=jsapi&access_token=%s"
 server:
   port: 80
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp

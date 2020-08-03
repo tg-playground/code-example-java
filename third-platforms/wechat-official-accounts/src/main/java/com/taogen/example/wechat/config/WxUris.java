@@ -23,4 +23,7 @@ public class WxUris {
 
     @Value("${wechat.apis.user.user_info_get_uri}")
     public String USER_INFO_GET_URI;
+
+    @Value("${wechat.apis.jsapi.jsapi_ticket_get}")
+    public String JSAPI_TICKET_GET;
 }
