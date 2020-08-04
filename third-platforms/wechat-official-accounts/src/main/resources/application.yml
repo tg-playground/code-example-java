@@ -1,5 +1,5 @@
 app:
-  domain: "https://jtg.mynatapp.cc"
+  domain: "http://jtg.mynatapp.cc"
 wechat:
   token: "my_token"
   appId: "wx154dff7157e77bbe"

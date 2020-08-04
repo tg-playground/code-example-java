@@ -64,6 +64,7 @@ public class WxWebPageServiceImpl extends BasicServiceImpl implements WxWebPageS
         params.put("jsapi_ticket", wxJsapiConfig.getJsapiTicket());
         params.put("timestamp", wxJsapiConfig.getTimestamp());
         params.put("url", wxJsapiConfig.getUrl());
+        logger.debug("signature params: {}", params.toString());
         StringBuilder stringBuilder = new StringBuilder();
         for (String key : params.keySet()) {
             stringBuilder.append(key);

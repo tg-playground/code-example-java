@@ -1,5 +1,6 @@
 package com.taogen.example.wechat.controller;
 
+import com.taogen.example.wechat.config.AppConfig;
 import com.taogen.example.wechat.config.WxConfig;
 import com.taogen.example.wechat.config.WxDomains;
 import com.taogen.example.wechat.config.WxUris;
@@ -25,6 +26,8 @@ public class BasicWxController {
     protected WxDomains wxDomains;
     @Autowired
     protected WxAccessTokenService accessTokenService;
+    @Autowired
+    protected AppConfig appConfig;
 
     protected String doGetWithAccessTokenAndOtherParams(String uri, Object... params) {
         String accessToken = accessTokenService.getCurrentAccessToken();

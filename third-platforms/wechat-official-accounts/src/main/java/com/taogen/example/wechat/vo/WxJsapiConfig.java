@@ -65,4 +65,16 @@ public class WxJsapiConfig {
     public void setSignature(String signature) {
         this.signature = signature;
     }
+
+    @Override
+    public String toString() {
+        return "WxJsapiConfig{" +
+                "appId='" + appId + '\'' +
+                ", jsapiTicket='" + jsapiTicket + '\'' +
+                ", nonceStr='" + nonceStr + '\'' +
+                ", timestamp=" + timestamp +
+                ", url='" + url + '\'' +
+                ", signature='" + signature + '\'' +
+                '}';
+    }
 }
