@@ -67,4 +67,9 @@ public class WxWebPageController extends BasicWxController {
     public String toWeixinShare() {
         return "test_weixin_share";
     }
+
+    @GetMapping("/pay")
+    public String toWeixinPay(){
+        return "test_weixin_pay";
+    }
 }
