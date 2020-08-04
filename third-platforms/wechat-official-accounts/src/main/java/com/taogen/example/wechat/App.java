@@ -59,7 +59,7 @@ public class App {
      * @param echostr   随机字符串
      * @return 若确认此次GET请求来自微信服务器，请原样返回echostr参数内容
      */
-    @GetMapping("/wx")
+    @GetMapping("/wxMsg")
     public String validateToken(@RequestParam("signature") String signature,
                                 @RequestParam("timestamp") String timestamp,
                                 @RequestParam("nonce") String nonce,

@@ -1,6 +1,6 @@
 package com.taogen.example.wechat.service;
 
-import com.taogen.example.wechat.vo.JsapiConfig;
+import com.taogen.example.wechat.vo.WxJsapiConfig;
 
 /**
  * @author Taogen
@@ -8,5 +8,5 @@ import com.taogen.example.wechat.vo.JsapiConfig;
 public interface WxWebPageService {
     String getJsapiTicket(String accessToken);
 
-    String getSignature(JsapiConfig jsapiSign);
+    String getSignature(WxJsapiConfig jsapiSign);
 }

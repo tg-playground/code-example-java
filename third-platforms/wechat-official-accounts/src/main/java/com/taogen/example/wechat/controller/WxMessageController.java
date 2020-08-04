@@ -34,7 +34,7 @@ public class WxMessageController extends BasicWxController {
      * @param httpEntity
      * @return
      */
-    @PostMapping("/wx")
+    @PostMapping("/wxMsg")
     public String messageReceive(HttpEntity<String> httpEntity) {
         String requestBody = httpEntity.getBody();
         logger.debug("requestBody is {}", requestBody);

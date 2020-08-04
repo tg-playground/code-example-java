@@ -5,17 +5,19 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Taogen
  */
 @RestController
+@RequestMapping("/wxApi/wxMenu")
 public class WxMenuController extends BasicWxController {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @PostMapping("/menu/create")
+    @PostMapping("/create")
     public String menuCreate(HttpEntity<String> httpEntity) {
         String menuJson = httpEntity.getBody();
         logger.debug("menu json is:\n {}", menuJson);
@@ -26,7 +28,7 @@ public class WxMenuController extends BasicWxController {
     }
 
 
-    @GetMapping("/menu/get")
+    @GetMapping("/get")
     public String menuGet() {
         return doGetWithAccessTokenAndOtherParams(wxUris.MENU_QUERY_URI);
     }

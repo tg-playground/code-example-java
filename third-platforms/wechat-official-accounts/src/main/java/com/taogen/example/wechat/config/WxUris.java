@@ -24,6 +24,22 @@ public class WxUris {
     @Value("${wechat.apis.user.user_info_get_uri}")
     public String USER_INFO_GET_URI;
 
-    @Value("${wechat.apis.jsapi.jsapi_ticket_get}")
+    @Value("${wechat.apis.jsapi.jsapi_ticket_get_uri}")
     public String JSAPI_TICKET_GET;
+
+    @Value("${wechat.apis.jsapi.weixin_user_oauth_get_code_url}")
+    public String JSAPI_OAUTH_GET_CODE_URL;
+
+    @Value("${wechat.apis.jsapi.weixin_user_oauth_get_access_token_uri}")
+    public String JSAPI_OAUTH_GET_ACCESS_TOKEN_URI;
+
+    @Value("${wechat.apis.jsapi.weixin_user_oauth_refresh_access_token_uri}")
+    public String JSAPI_OAUTH_REFRESH_ACCESS_TOKEN_URI;
+
+    @Value("${wechat.apis.jsapi.weixin_user_oauth_get_user_info_uri}")
+    public String JSAPI_OAUTH_GET_USER_INFO_URI;
+
+    @Value("${wechat.apis.jsapi.weixin_user_oauth_verify_access_token_validity_uri}")
+    public String JSAPI_VERIFY_ACCESS_TOKEN_URI;
+
 }

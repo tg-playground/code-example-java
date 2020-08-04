@@ -1,22 +1,18 @@
 package com.taogen.example.wechat.service.impl;
 
-import com.taogen.example.wechat.config.WxConfig;
-import com.taogen.example.wechat.config.WxDomains;
-import com.taogen.example.wechat.config.WxUris;
 import com.taogen.example.wechat.service.WxAccessTokenService;
+import com.taogen.example.wechat.utils.JsonObjectUtils;
 import com.taogen.example.wechat.utils.MyHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Taogen
  */
 @Service
-public class WxAccessTokenServiceImpl implements WxAccessTokenService {
+public class WxAccessTokenServiceImpl extends BasicServiceImpl implements WxAccessTokenService {
     private static final Logger logger = LogManager.getLogger();
     private static final Long ACCESS_TOKEN_VALID_TIME = 3600000L;
 
@@ -24,18 +20,6 @@ public class WxAccessTokenServiceImpl implements WxAccessTokenService {
     private long accessTokenAcquiredTimestamp;
     private String testAccessToken;
     private long testAccessTokenAcquiredTimestamp;
-
-    @Value("${wechat.project_settings.environment}")
-    private String WECHAT_ENVIRONMENT;
-
-    @Autowired
-    private WxConfig wxConfig;
-
-    @Autowired
-    private WxUris wxUris;
-
-    @Autowired
-    private WxDomains wxDomains;
 
     @Override
     public String getAccessToken(String type) {
@@ -99,9 +83,9 @@ public class WxAccessTokenServiceImpl implements WxAccessTokenService {
         logger.debug("Current Wechat domain is: {}", wxDomains.getWechatDomain());
         String result = MyHttpClient.doGet(wxDomains.getWechatDomain() + getAccessTokenUri);
         String accessToken = null;
-        JSONObject json = new JSONObject(result);
-        if (json != null) {
-            accessToken = json.getString("access_token");
+        JSONObject jsonObject = JsonObjectUtils.getJsonObjectFromStr(result);
+        if (jsonObject != null) {
+            accessToken = JsonObjectUtils.getString(jsonObject, "access_token");
         }
         setAccessToken(type, accessToken);
         return accessToken;

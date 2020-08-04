@@ -1,12 +1,10 @@
 package com.taogen.example.wechat.service.impl;
 
-import com.taogen.example.wechat.config.WxDomains;
-import com.taogen.example.wechat.config.WxUris;
 import com.taogen.example.wechat.service.WxAccessTokenService;
 import com.taogen.example.wechat.service.WxWebPageService;
 import com.taogen.example.wechat.utils.EncryptUtils;
 import com.taogen.example.wechat.utils.MyHttpClient;
-import com.taogen.example.wechat.vo.JsapiConfig;
+import com.taogen.example.wechat.vo.WxJsapiConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -20,7 +18,7 @@ import java.util.TreeMap;
  * @author Taogen
  */
 @Service
-public class WxWebPageServiceImpl implements WxWebPageService {
+public class WxWebPageServiceImpl extends BasicServiceImpl implements WxWebPageService {
 
     public static final Logger logger = LogManager.getLogger();
     private static final Long JSAPI_TICKET_VALID_TIME = 3600000L;
@@ -28,10 +26,6 @@ public class WxWebPageServiceImpl implements WxWebPageService {
     private String jsapiTicket;
     private long jsapiTicketAcquiredTimestamp;
 
-    @Autowired
-    private WxUris wxUris;
-    @Autowired
-    private WxDomains wxDomains;
     @Autowired
     private WxAccessTokenService wxAccessTokenService;
 
@@ -64,12 +58,12 @@ public class WxWebPageServiceImpl implements WxWebPageService {
     }
 
     @Override
-    public String getSignature(JsapiConfig jsapiConfig) {
+    public String getSignature(WxJsapiConfig wxJsapiConfig) {
         SortedMap<String, Object> params = new TreeMap<>();
-        params.put("noncestr", jsapiConfig.getNonceStr());
-        params.put("jsapi_ticket", jsapiConfig.getJsapiTicket());
-        params.put("timestamp", jsapiConfig.getTimestamp());
-        params.put("url", jsapiConfig.getUrl());
+        params.put("noncestr", wxJsapiConfig.getNonceStr());
+        params.put("jsapi_ticket", wxJsapiConfig.getJsapiTicket());
+        params.put("timestamp", wxJsapiConfig.getTimestamp());
+        params.put("url", wxJsapiConfig.getUrl());
         StringBuilder stringBuilder = new StringBuilder();
         for (String key : params.keySet()) {
             stringBuilder.append(key);

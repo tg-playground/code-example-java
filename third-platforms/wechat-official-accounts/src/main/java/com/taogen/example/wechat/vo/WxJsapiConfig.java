@@ -3,7 +3,7 @@ package com.taogen.example.wechat.vo;
 /**
  * @author Taogen
  */
-public class JsapiConfig {
+public class WxJsapiConfig {
     private String appId;
     private String jsapiTicket;
     private String nonceStr;
@@ -11,7 +11,7 @@ public class JsapiConfig {
     private String url;
     private String signature;
 
-    public JsapiConfig(String jsapiTicket, String nonceStr, int timestamp, String url) {
+    public WxJsapiConfig(String jsapiTicket, String nonceStr, int timestamp, String url) {
         this.jsapiTicket = jsapiTicket;
         this.nonceStr = nonceStr;
         this.timestamp = timestamp;
