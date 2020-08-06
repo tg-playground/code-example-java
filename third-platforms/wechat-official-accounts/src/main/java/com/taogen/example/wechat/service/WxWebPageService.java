@@ -9,4 +9,6 @@ public interface WxWebPageService {
     String getJsapiTicket(String accessToken);
 
     String getSignature(WxJsapiConfig jsapiSign);
+
+    String refreshJsapiTicket(String currentAccessToken);
 }

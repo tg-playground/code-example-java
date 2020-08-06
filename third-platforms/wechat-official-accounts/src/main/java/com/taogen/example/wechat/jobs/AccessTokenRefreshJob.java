@@ -39,7 +39,7 @@ public class AccessTokenRefreshJob {
     public void refreshAccessToken() {
         if (enable) {
             logger.debug("Starting refresh accessToken job...");
-            String newAccessToken = wxAccessTokenService.getAccessToken(appConfig.WECHAT_ENVIRONMENT);
+            String newAccessToken = wxAccessTokenService.refreshAccessToken();
             if (newAccessToken != null && !newAccessToken.isEmpty()) {
                 logger.info("Refresh access token successfully");
             }

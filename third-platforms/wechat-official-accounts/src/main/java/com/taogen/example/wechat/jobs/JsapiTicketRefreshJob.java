@@ -39,7 +39,7 @@ public class JsapiTicketRefreshJob {
     public void refreshAccessToken() {
         if (enable) {
             logger.debug("Starting refresh jsapiTicket job...");
-            String newJsapiTicket = wxWebPageService.getJsapiTicket(wxAccessTokenService.getCurrentAccessToken());
+            String newJsapiTicket = wxWebPageService.refreshJsapiTicket(wxAccessTokenService.getCurrentAccessToken());
             if (newJsapiTicket != null && !newJsapiTicket.isEmpty()) {
                 logger.info("Refresh jsapiTicket successfully!");
             }

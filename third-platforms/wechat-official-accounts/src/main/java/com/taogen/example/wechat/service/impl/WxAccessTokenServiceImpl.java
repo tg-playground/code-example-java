@@ -46,6 +46,11 @@ public class WxAccessTokenServiceImpl extends BasicServiceImpl implements WxAcce
         return "";
     }
 
+    @Override
+    public String refreshAccessToken() {
+        return getAccessTokenByType(WECHAT_ENVIRONMENT);
+    }
+
     private boolean isAccessTokenValid(String type) {
         if ("product".equals(type)) {
             return accessToken != null &&

@@ -76,4 +76,9 @@ public class WxWebPageServiceImpl extends BasicServiceImpl implements WxWebPageS
         logger.debug("toSignString is {}", toSignString);
         return EncryptUtils.toSHA1(toSignString);
     }
+
+    @Override
+    public String refreshJsapiTicket(String accessToken) {
+        return toGetJsapiTicket(accessToken);
+    }
 }

@@ -7,4 +7,6 @@ public interface WxAccessTokenService {
     String getAccessToken(String type);
 
     String getCurrentAccessToken();
+
+    String refreshAccessToken();
 }
