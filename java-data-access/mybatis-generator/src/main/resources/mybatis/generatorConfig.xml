@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- Don't need to specify driver class. It's already added in pom.xml plugin dependencies. -->
+    <!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <properties resource="mybatis/db.properties"/>
+    <!-- <properties url="file:///D:\Repositories\mybatis-generator\src\main\resources\mybatis\db.properties"/>-->
+    <context id="MySQLTables" targetRuntime="MyBatis3">
+
+        <!-- suppress comments -->
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"-->
+        <!--                        connectionURL="jdbc:mysql://localhost:3306/test?serverTimezone=UTC"-->
+        <!--                        userId="root"-->
+        <!--                        password="root">-->
+        <!-- </jdbcConnection>-->
+
+        <jdbcConnection driverClass="${MYSQL_DRIVER_CLASS}"
+                        connectionURL="${MYSQL_URL}"
+                        userId="${MYSQL_USER}"
+                        password="${MYSQL_PASSWD}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.taogen.example.mybatis.generator.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.taogen.example.mybatis.generator.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.taogen.example.mybatis.generator.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="t_user" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!-- use database column name as class filed name -->
+            <!--            <property name="useActualColumnNames" value="true"/>-->
+            <!--            <generatedKey column="id" sqlStatement="MySQL" identity="true" />-->
+            <!-- override column name -->
+            <!--            <columnOverride column="DATE_FIELD" property="startDate" />-->
+            <!-- ignore generate columns -->
+            <!--            <ignoreColumn column="FRED" />&ndash;&gt;-->
+            <!-- override column data type -->
+            <!--            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        </table>
+
+    </context>
+</generatorConfiguration>
