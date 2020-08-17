@@ -1,4 +1,4 @@
-package com.taogen.example.mybatis.basic.helloworld;
+package com.taogen.example.mybatis.xml;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,4 +1,4 @@
-# mybatis-basic-helloworld Project
+# mybatis-xml Project
 
 Content
 
@@ -25,6 +25,8 @@ Dependencies
   - mockito-core v2.23.4
 - Logging
   - log4j-web v2.8.2
+- mysql
+- mybatis
 
 
 
@@ -36,7 +38,7 @@ Dependencies
 - maven-archetype-quickstart
 
 ```shell
-$ mvn archetype:generate -DgroupId=com.taogen.example.mybatis.basic.helloworld -DartifactId=mybatis-basic-helloworld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=com.taogen.example.mybatis.xml -DartifactId=mybatis-xml -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 ### Step 2: Add project directories structures  
@@ -55,6 +57,7 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     <project.java.version>1.8</project.java.version>
     <junit.version>4.12</junit.version>
     <log4j.version>2.8.2</log4j.version>
+    <mysql-connector.version>8.0.19</mysql-connector.version>
 </properties>
 
 <dependencies>
@@ -77,6 +80,20 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-web</artifactId>
         <version>${log4j.version}</version>
+    </dependency>
+	
+    <!-- MyBatis -->
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.5</version>
+    </dependency>
+
+    <!-- MySQL Connector -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector.version}</version>
     </dependency>
 
 </dependencies>
@@ -148,19 +165,30 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
-Functions, User Roles
+Functions
+
+- Basic CURD in Main
+- Service CURD
+
+User Roles
 
 Business Processes
 
 ## Implementation
 
-### Step1: xxx
+### Step1: Generate entity classes, entity mapper xmls, CRUD mapper interface classes.
+
+### Step2: Config mybatis-config.xml
+
+
 
 ...
 
 ## Test
 
+Run `Main.java`
 
+Run `UserServiceImplTest.java`
 
 ## References
 
