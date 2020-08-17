@@ -25,7 +25,7 @@ Dependencies
   - mockito-core v2.23.4
 - Logging
   - log4j-web v2.8.2
-- mysql
+- mysql-connector-java
 - mybatis
 
 
@@ -33,9 +33,6 @@ Dependencies
 ## Building Project
 
 ### Step 1: Generating Maven Project
-
-- maven-archetype-webapp 
-- maven-archetype-quickstart
 
 ```shell
 $ mvn archetype:generate -DgroupId=com.taogen.example.mybatis.annotation -DartifactId=mybatis-annotation -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
@@ -66,12 +63,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>2.23.4</version>
         <scope>test</scope>
     </dependency>
 
@@ -112,22 +103,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
                 <target>${project.java.version}</target>
             </configuration>
         </plugin>
-
-        <!-- maven package war -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.3</version>
-            <configuration>
-                <failOnMissingWebXml>false</failOnMissingWebXml>
-                <webResources>
-                    <resource>
-                        <!-- this is relative to the pom.xml directory -->
-                        <directory>src/main/resources</directory>
-                    </resource>
-                </webResources>
-            </configuration>
-        </plugin>
     </plugins>
 </build>
 ```
@@ -165,15 +140,22 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 
 ## Requirements
 
-Functions, User Roles
+Functions
 
-Business Processes
+- basic CURD in Main
+- single-table CURD in service
 
 ## Implementation
 
-### Step1: xxx
+> Get SqlSessionFactory by MyBatis API.
 
-...
+### Step1: add entity, mapper
+
+### Step2: Write Main
+
+### Step3: Write Service
+
+
 
 ## Test
 
@@ -181,8 +163,16 @@ Run `Main.java`
 
 Run `UserServiceImplTest.java`
 
+Run all tests:
+
+```
+mvn test
+```
+
+
+
 ## References
 
-Books, Docs, URLs
+[1] [Quick Guide to MyBatis](https://www.baeldung.com/mybatis)
 
-**<<<<!!{{update me}}!!>>>>**
+[2] [MyBatis Getting started](https://mybatis.org/mybatis-3/getting-started.html)
