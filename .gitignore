@@ -1,8 +1,17 @@
-# Compiled class file
-*.class
-
 # Log file
 *.log
+
+# docker files
+.env
+
+# temporary files
+.temp
+
+# Project Generating Files Begin 
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# Compiled file
+*.class
 
 # BlueJ files
 *.ctxt
@@ -10,7 +19,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -37,3 +46,6 @@ target
 
 # vs code files
 .vscode
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# Project Generating Files End 
