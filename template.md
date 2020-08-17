@@ -193,14 +193,22 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="my_pattern">%d [%t] %-5level %logger{36} - %msg%n</Property>
+        <Property name="filename">app.log</Property>
+    </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="${my_pattern}"/>
         </Console>
+        <File name="File" fileName="${filename}">
+            <PatternLayout pattern="${my_pattern}" />
+        </File>
     </Appenders>
     <Loggers>
         <Logger name="com.taogen.example" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
         </Logger>
         <Root level="error">
             <AppenderRef ref="Console"/>
