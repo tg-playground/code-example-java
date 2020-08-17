@@ -22,7 +22,6 @@ Dependencies
 
 - Test
   - junit v4.12
-  - mockito-core v2.23.4
 - Logging
   - log4j-web v2.8.2
 - mysql-connector-java
@@ -68,12 +67,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>2.23.4</version>
-        <scope>test</scope>
-    </dependency>
 
     <!-- ** Logging ** -->
     <dependency>
@@ -110,22 +103,6 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
             <configuration>
                 <source>${project.java.version}</source>
                 <target>${project.java.version}</target>
-            </configuration>
-        </plugin>
-
-        <!-- maven package war -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.3</version>
-            <configuration>
-                <failOnMissingWebXml>false</failOnMissingWebXml>
-                <webResources>
-                    <resource>
-                        <!-- this is relative to the pom.xml directory -->
-                        <directory>src/main/resources</directory>
-                    </resource>
-                </webResources>
             </configuration>
         </plugin>
     </plugins>
