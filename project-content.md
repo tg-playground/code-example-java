@@ -123,9 +123,13 @@
 
 ### Persistence Frameworks
 
-- mybatis-basic-helloworld
-- mybatis-basic-mybatis-plus
-- mybatis-basic-mybatis-generator
+- mybatis-mybatis-generator
+- mybatis-basic-xml
+- mybatis-basic-annotation
+- mybatis-sql-map-by-xml
+- mybatis-sql-map-by-annotations
+- mybatis-with-mybatis-plus
+- mybatis-plugins
 - hibernate-basic-helloworld
 
 ### NoSQL Access
