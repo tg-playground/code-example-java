@@ -1,0 +1,61 @@
+@startuml
+
+''''''''''''''''''''''''''''''''''''
+' Entity
+''''''''''''''''''''''''''''''''''''
+
+class entity.Department
+{
+    'fields
+    int id
+    String name
+}
+
+class entity.Employee
+{
+    'fields
+    int id
+    String name
+    String nickname
+    int age
+    Department dept
+}
+
+entity.Employee "1" -- "many" entity.Department : contains
+
+''''''''''''''''''''''''''''''''''''
+' Mapper
+''''''''''''''''''''''''''''''''''''
+
+interface mapper.DepartmentMapper
+{
+    int save()
+}
+interface mapper.EmployeeMapper
+{
+    int save()
+}
+
+''''''''''''''''''''''''''''''''''''
+' Service
+''''''''''''''''''''''''''''''''''''
+
+interface service.DepartmentService
+{
+}
+
+interface service.EmployeeService
+{
+}
+
+interface service.SqlSessionFactoryService
+{
+    SqlSessionFactory getSqlSessionFactory()
+}
+
+''''''''''''''''''''''''''''''''''''
+' Others
+''''''''''''''''''''''''''''''''''''
+
+
+@enduml
