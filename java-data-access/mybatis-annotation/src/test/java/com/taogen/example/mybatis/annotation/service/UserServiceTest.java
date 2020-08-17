@@ -1,14 +1,15 @@
-package com.taogen.example.mybatis.annotation.service.impl;
+package com.taogen.example.mybatis.annotation.service;
 
 import com.taogen.example.mybatis.annotation.entity.User;
 import com.taogen.example.mybatis.annotation.service.UserService;
+import com.taogen.example.mybatis.annotation.service.impl.UserServiceImpl;
 import org.junit.Test;
 
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class UserServiceImplTest {
+public class UserServiceTest {
 
     UserService userService = new UserServiceImpl();
 
