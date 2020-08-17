@@ -27,12 +27,6 @@
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>2.23.4</version>
-        <scope>test</scope>
-    </dependency>
 
     <!-- ** Logging ** -->
     <dependency>
@@ -72,21 +66,6 @@
             </configuration>
         </plugin>
 
-        <!-- maven package war -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.2.3</version>
-            <configuration>
-                <failOnMissingWebXml>false</failOnMissingWebXml>
-                <webResources>
-                    <resource>
-                        <!-- this is relative to the pom.xml directory -->
-                        <directory>src/main/resources</directory>
-                    </resource>
-                </webResources>
-            </configuration>
-        </plugin>
     </plugins>
 </build>
 </project>
