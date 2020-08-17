@@ -168,7 +168,8 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
 Functions
 
 - Basic CURD in Main
-- Service CURD
+- Single-table CURD in service and unit tests
+
 
 User Roles
 

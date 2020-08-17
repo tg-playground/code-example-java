@@ -11,6 +11,24 @@ public class User {
 
     private Integer age;
 
+    public User() {
+    }
+
+    public User(String name, String firstName, String secondName, Integer age) {
+        this.name = name;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.age = age;
+    }
+
+    public User(Integer id, String name, String firstName, String secondName, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.age = age;
+    }
+
     public Integer getId() {
         return id;
     }
