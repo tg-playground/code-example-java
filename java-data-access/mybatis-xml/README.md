@@ -25,7 +25,7 @@ Dependencies
   - mockito-core v2.23.4
 - Logging
   - log4j-web v2.8.2
-- mysql
+- mysql-connector-java
 - mybatis
 
 
@@ -170,20 +170,57 @@ Functions
 - Basic CURD in Main
 - Single-table CURD in service and unit tests
 
-
-User Roles
-
-Business Processes
-
 ## Implementation
 
-### Step1: Generate entity classes, entity mapper xmls, CRUD mapper interface classes.
+### Step1: Generate entity classes, entity mapper xmls, mapper interfaces from the generator project.
+
+```shell
+mvn mybatis-generator:generate
+```
 
 ### Step2: Config mybatis-config.xml
 
+```xml
+<configuration>
+    <properties resource="mybatis/db.properties">
+    </properties>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${MYSQL_DRIVER_CLASS}"/>
+                <property name="url" value="${MYSQL_URL}"/>
+                <property name="username" value="${MYSQL_USER}"/>
+                <property name="password" value="${MYSQL_PASSWD}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis/mapper/UserMapper.xml" />
+    </mappers>
+</configuration>
+```
+
+### Step3: Write Main.java
+
+```java
+public static void main(String[] args) throws IOException {
+    String resource = "mybatis/mybatis-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    try (SqlSession session = sqlSessionFactory.openSession()) {
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.selectByPrimaryKey(1);
+        logger.debug("user is {}", user);
+    }
+}
+```
+
+### Step4: Write Services
+
+See the source code.
 
 
-...
 
 ## Test
 
@@ -191,8 +228,16 @@ Run `Main.java`
 
 Run `UserServiceImplTest.java`
 
+Run All Tests:
+
+```shell
+mvn test
+```
+
+
+
 ## References
 
-Books, Docs, URLs
+[1] [Quick Guide to MyBatis](https://www.baeldung.com/mybatis)
 
-**<<<<!!{{update me}}!!>>>>**
+[2] [MyBatis Getting started](https://mybatis.org/mybatis-3/getting-started.html)
