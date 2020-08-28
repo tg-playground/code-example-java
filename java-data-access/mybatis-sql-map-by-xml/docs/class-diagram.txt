@@ -4,54 +4,127 @@
 ' Entity
 ''''''''''''''''''''''''''''''''''''
 
+class entity.BaseEntity
+{
+    int id
+    Timestamp createTime
+    Timestamp modifyTime
+    Boolean deleteFlag
+}
+
 class entity.Department
 {
     'fields
-    int id
     String name
 }
+
+entity.BaseEntity <|-- entity.Department
 
 class entity.Employee
 {
     'fields
-    int id
     String name
     String nickname
     int age
     Department dept
 }
 
+entity.BaseEntity <|-- entity.Employee
 entity.Employee "1" -- "many" entity.Department : contains
+
+class entity.Page
+{
+    int pageNo
+    int pageSize
+    long count
+}
 
 ''''''''''''''''''''''''''''''''''''
 ' Mapper
 ''''''''''''''''''''''''''''''''''''
 
-interface mapper.DepartmentMapper
+interface mapper.BaseMapper
+
+interface mapper.CrudMapper<T extends BaseEntity>
 {
-    int save()
+    int save(T entity)
+    int saveSelective(T entity)
+    int saveAll(Collection<T> entities)
+    int deleteById(T entity)
+    int deleteByIdLogically(T entity)
+    int deleteAllByIds(Collection<T> entities)
+    int deleteAllByFields(T entity)
+    int deleteAllByMap(Map<String, Object> params)
+    int update(T entity)
+    int updateSelective(T entity)
+    int updateAll(Collection<T> entities)
+    T getById(Integer entity)
+    T getById(Entity entity)
+    long countByMap(Map<String, Object> params)
+    List<T> findAllByFields(T entity)
+    List<T> findPage(Page<T> page, T entity)
+    List<T> findAllByMap(Map<String, Object> parameters)
+    int execDmlSql(String sql)
+    List<T> execDqlSql(String sql)
+    long execDqlSql(String sql)
 }
-interface mapper.EmployeeMapper
+
+mapper.BaseMapper <|-- mapper.CrudMapper
+
+interface mapper.DepartmentMapper<T>
 {
-    int save()
 }
+
+mapper.CrudMapper <|-- mapper.DepartmentMapper
+
+interface mapper.EmployeeMapper<T>
+{
+}
+
+mapper.CrudMapper <|-- mapper.EmployeeMapper
 
 ''''''''''''''''''''''''''''''''''''
 ' Service
 ''''''''''''''''''''''''''''''''''''
 
+interface service.BaseService
+{
+
+}
+
+interface service.CrudService<M extends BaseMapper<T>, T extends BaseEntity>
+{
+    int save(T entity)
+    int saveAll(Collection<T> entities)
+    int deleteById(T entity)
+    int deleteAllByIds(Collection<T> entities)
+    int update(T entity)
+    int updateAllByIds(Collection<T> entities)
+    T getById(int id);
+    T getById(Entity entity)
+    List<T> findPage(Page<T> page, T entity)
+    List<T> findAllByFields(T entity)
+    List<T> findAllByMap(Map<String, Object> parameters)
+}
+
+service.BaseService <|-- service.CrudService
+
 interface service.DepartmentService
 {
 }
 
+service.CrudService <|-- service.DepartmentService
+
 interface service.EmployeeService
 {
 }
+service.CrudService <|-- service.EmployeeService
 
 interface service.SqlSessionFactoryService
 {
     SqlSessionFactory getSqlSessionFactory()
 }
+service.BaseService <|-- service.SqlSessionFactoryService
 
 ''''''''''''''''''''''''''''''''''''
 ' Others

@@ -2,11 +2,11 @@
 
 Functions
 
-- curd, paging
+- curd, paging, raw sql
 - one-to-one, one-to-many
-- batch sql
+- batch operations
 - multiple parameters in mapper
 
 Business Logic
 
-- Run all service tests
+- Run all unit tests

@@ -18,29 +18,40 @@ Content
 
 t_department
 
-| Name | Type         | Length | NULL     | Default | Key  | Description |
-| ---- | ------------ | ------ | -------- | ------- | ---- | ----------- |
-| id   | INT UNSIGNED |        | not null |         | P    |             |
-| name | VARCHAR      | 64     | not null |         |      |             |
+| Name        | Type         | Length | NULL     | Default | Key  | Description |
+| ----------- | ------------ | ------ | -------- | ------- | ---- | ----------- |
+| id          | INT UNSIGNED |        | not null |         | P    |             |
+| name        | VARCHAR      | 64     | not null |         |      |             |
+| delete_flag | BOOL         |        | not null | 0       |      |             |
+| create_time | TIMESTAMP    |        | not null | NOW()   |      |             |
+| modify_time | TIMESTAMP    |        | null     |         |      |             |
 
 t_employee
 
-| Name     | Type         | Length | NULL     | Default | Key  |    Comment    |
-| -------- | ------------ | ------ | -------- | ------- | ---- | :-----------: |
-| id       | INT UNSIGNED |        | not null |         | P    |               |
-| name     | VARCHAR      | 64     | not null |         |      |               |
-| nickname | VARCHAR      | 64     | null     |         |      |               |
-| age      | INT          |        | null     |         |      |               |
-| dept_id  | INT          |        | null     |         |      | department id |
+| Name        | Type         | Length | NULL     | Default | Key  |    Comment    |
+| ----------- | ------------ | ------ | -------- | ------- | ---- | :-----------: |
+| id          | INT UNSIGNED |        | not null |         | P    |               |
+| name        | VARCHAR      | 64     | not null |         |      |               |
+| nickname    | VARCHAR      | 64     | null     |         |      |               |
+| age         | INT          |        | null     |         |      |               |
+| dept_id     | INT          |        | null     |         |      | department id |
+| delete_flag | BOOL         |        | not null | 0       |      |               |
+| create_time | TIMESTAMP    |        | not null | NOW()   |      |               |
+| modify_time | TIMESTAMP    |        | null     |         |      |               |
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `mybatis-sql-map-by-xml` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE `mybatis-sql-map-by-xml`;
 
 DROP TABLE IF EXISTS `t_department`;
 
 CREATE TABLE `t_department` (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'department ID',
-    name VARCHAR(64) NOT NULL COMMENT 'department name')
+    name VARCHAR(64) NOT NULL COMMENT 'department name',
+    delete_flag BOOL NOT NULL DEFAULT 0 comment 'delete flag',
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
+    modify_time TIMESTAMP NULL)
 ENGINE='InnoDB'
 COMMENT='department table';
 
@@ -53,7 +64,10 @@ CREATE TABLE `t_employee` (
     name VARCHAR(64) NOT NULL COMMENT 'employee name',
     nickname VARCHAR(64) NULL COMMENT '',
     age INT NULL COMMENT '',
-    dept_id INT UNSIGNED COMMENT 'department ID of employee')
+    dept_id INT UNSIGNED COMMENT 'department ID of employee',
+    delete_flag BOOL NOT NULL DEFAULT 0 comment 'delete flag',
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
+    modify_time TIMESTAMP NULL)
 ENGINE='InnoDB'
 COMMENT='employee table';
 
@@ -72,12 +86,14 @@ CREATE INDEX index_for_name_and_deptid USING BTREE ON `t_employee` (name(64), de
 Implementation Process
 
 - Generating basic entities, mappers and XML SQL map by the mybatis-generator project
-- Write all mapper interfaces
-- Write all SqlSessionFactory service and mapper service interfaces
+- Add classes hierarchy.
+- Write all service interfaces
 - Write all service unit tests
-- Write all service implementaions
+- Write all service implementations
+- Write all mapper interfaces
+- Write all mapper unit tests
 - Write all XML SQL map.
-- Pass all unit tests
+- Finally, Pass all Mapper unit tests
 
 Class Diagram
 
