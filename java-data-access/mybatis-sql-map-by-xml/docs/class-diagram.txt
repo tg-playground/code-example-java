@@ -71,13 +71,13 @@ interface mapper.CrudMapper<T extends BaseEntity>
 
 mapper.BaseMapper <|-- mapper.CrudMapper
 
-interface mapper.DepartmentMapper<T>
+interface mapper.DepartmentMapper<Department>
 {
 }
 
 mapper.CrudMapper <|-- mapper.DepartmentMapper
 
-interface mapper.EmployeeMapper<T>
+interface mapper.EmployeeMapper<Employee>
 {
 }
 
@@ -92,7 +92,7 @@ interface service.BaseService
 
 }
 
-interface service.CrudService<M extends BaseMapper<T>, T extends BaseEntity>
+interface service.CrudService<M extends CrudMapper<T>, T extends BaseEntity>
 {
     int save(T entity)
     int saveAll(Collection<T> entities)
@@ -109,13 +109,13 @@ interface service.CrudService<M extends BaseMapper<T>, T extends BaseEntity>
 
 service.BaseService <|-- service.CrudService
 
-interface service.DepartmentService
+interface service.DepartmentService<DepartmentMapper<Department>, Department>
 {
 }
 
 service.CrudService <|-- service.DepartmentService
 
-interface service.EmployeeService
+interface service.EmployeeService<EmployeeMapper<Employee>, Employee>
 {
 }
 service.CrudService <|-- service.EmployeeService
@@ -125,6 +125,43 @@ interface service.SqlSessionFactoryService
     SqlSessionFactory getSqlSessionFactory()
 }
 service.BaseService <|-- service.SqlSessionFactoryService
+
+abstract class service.AbstractBaseService
+{
+
+}
+service.BaseService <|.. service.AbstractBaseService
+
+abstract class service.AbstractCrudService
+{
+    int save(T entity)
+    int saveAll(Collection<T> entities)
+    int deleteById(T entity)
+    int deleteAllByIds(Collection<T> entities)
+    int update(T entity)
+    int updateAllByIds(Collection<T> entities)
+    T getById(int id);
+    T getById(Entity entity)
+    List<T> findPage(Page<T> page, T entity)
+    List<T> findAllByFields(T entity)
+    List<T> findAllByMap(Map<String, Object> parameters)
+}
+service.AbstractBaseService <|-- service.AbstractCrudService
+service.CrudService <|.. service.AbstractCrudService
+
+class service.impl.DepartmentServiceImpl
+{
+
+}
+service.AbstractCrudService <|-- service.impl.DepartmentServiceImpl
+service.DepartmentService <|.. service.impl.DepartmentServiceImpl
+
+class service.impl.EmployeeServiceImpl
+{
+}
+service.AbstractCrudService <|-- service.impl.EmployeeServiceImpl
+service.EmployeeService <|.. service.impl.EmployeeServiceImpl
+
 
 ''''''''''''''''''''''''''''''''''''
 ' Others

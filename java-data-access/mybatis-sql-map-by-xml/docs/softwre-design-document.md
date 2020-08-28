@@ -85,12 +85,13 @@ CREATE INDEX index_for_name_and_deptid USING BTREE ON `t_employee` (name(64), de
 
 Implementation Process
 
-- Generating basic entities, mappers and XML SQL map by the mybatis-generator project
-- Add classes hierarchy.
-- Write all service interfaces
+- Generating basic entities, mappers and XML SQL map by the mybatis-generator project.
+- Add MyBatis Configurations.
+- Add classes hierarchy files.
+- Write all service interfaces methods
 - Write all service unit tests
 - Write all service implementations
-- Write all mapper interfaces
+- Write all mapper interfaces methods
 - Write all mapper unit tests
 - Write all XML SQL map.
 - Finally, Pass all Mapper unit tests
