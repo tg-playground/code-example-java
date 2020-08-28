@@ -14,7 +14,7 @@ import java.util.Map;
 public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends BaseService {
     int save(T entity);
 
-    int saveAll(Collection<T> entities);
+    int saveAll(Collection<T> entities, Boolean testException);
 
     int deleteById(T entity);
 
@@ -27,6 +27,8 @@ public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends
     T getById(int id);
 
     T getById(T entity);
+
+    Long count();
 
     List<T> findPage(Page page, T entity);
 
