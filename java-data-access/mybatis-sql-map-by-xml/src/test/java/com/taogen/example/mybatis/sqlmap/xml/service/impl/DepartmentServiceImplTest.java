@@ -24,84 +24,72 @@ public class DepartmentServiceImplTest {
         departments.add(new Department("test"));
         departments.add(new Department("test2"));
         assertEquals(2, departmentService.saveAll(departments, false));
-        testException();
     }
 
-    private void testException() {
-        List<Department> departments = new ArrayList<>();
+    @Test
+    public void saveAllTestException() {
         String name = "test_exception" + System.currentTimeMillis();
+        Map<String, Object> conditions = new HashMap<>();
+        conditions.put("name", name);
+        departmentService.deleteAllByMap(conditions);
+        List<Department> departments = new ArrayList<>();
         departments.add(new Department(name));
         departments.add(new Department(name));
-        departmentService.saveAll(departments, true);
-        assertNull(departmentService.findAllByFields(new Department(name)));
+        assertEquals(0, departmentService.saveAll(departments, true));
+        assertEquals(0, departmentService.findAllByFields(new Department(name)).size());
+
     }
 
     @Test
     public void deleteById() {
         int deleteId = 1;
-        ensureEntityExist(deleteId);
-        assertEquals(1, departmentService.deleteById(new Department(deleteId)));
+        Department department = new Department(deleteId);
+        ensureEntityExist(department);
+        assertEquals(1, departmentService.deleteById(department));
     }
 
     @Test
     public void deleteAllByIds() {
         List<Integer> deleteIds = Arrays.asList(1, 2);
-        List<Department> departments = new ArrayList<>();
-        for (Integer id : deleteIds) {
-            ensureEntityExist(id);
-        }
-        for (Integer id : deleteIds) {
-            departments.add(new Department(id));
-        }
+        List<Department> departments = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), departmentService.deleteAllByIds(departments));
     }
 
     @Test
     public void update() {
         int updateId = 10;
-        ensureEntityExist(updateId);
-        Department department = departmentService.getById(updateId);
-        long timestamp = System.currentTimeMillis();
-        department.setName(timestamp + "");
+        Department department = new Department(updateId);
+        ensureEntityExist(department);
+        department = departmentService.getById(department);
+        String name = System.currentTimeMillis() + "";
+        department.setName(name);
         departmentService.update(department);
-        department = departmentService.getById(updateId);
-        assertEquals(timestamp, department.getName());
+        department = departmentService.getById(department);
+        assertEquals(name, department.getName());
     }
 
     @Test
     public void updateAllByIds() {
         List<Integer> updateIds = Arrays.asList(11, 12);
-        List<Department> departments = new ArrayList<>();
-        for (Integer id : updateIds) {
-            ensureEntityExist(id);
-        }
-        for (Integer id : updateIds) {
-            departments.add(departmentService.getById(id));
-        }
+        List<Department> departments = ensureEntityListExist(updateIds);
 
-        long timestamp = System.currentTimeMillis();
+        String name = System.currentTimeMillis() + "";
         for (Department department : departments) {
-            department.setName(timestamp + "");
+            department.setName(name);
         }
         departmentService.updateAllByIds(departments);
         for (Integer id : updateIds) {
-            Department department = departmentService.getById(id);
-            assertEquals(timestamp, department.getName());
+            Department department = departmentService.getById(new Department(id));
+            assertEquals(name, department.getName());
         }
     }
 
     @Test
     public void getById() {
-        int id = 20;
-        ensureEntityExist(id);
-        assertNotNull(departmentService.getById(id));
-    }
-
-    @Test
-    public void testGetById() {
-        int getUserId = 20;
-        ensureEntityExist(getUserId);
-        assertNotNull(departmentService.getById(new Department(getUserId)));
+        int getId = 20;
+        Department department = new Department(getId);
+        ensureEntityExist(department);
+        assertNotNull(departmentService.getById(department));
     }
 
     @Test
@@ -110,11 +98,10 @@ public class DepartmentServiceImplTest {
         if (count == 0) {
             departmentService.save(new Department("test_find_page"));
         }
+        int pageNo = 1;
         long pageSize = 10;
         pageSize = count > pageSize ? pageSize : count;
-        Page page = new Page();
-        page.setPageNo(1);
-        page.setPageSize((int) pageSize);
+        Page page = new Page(pageNo, (int) pageSize);
         page.setCount(count);
         List<Department> departments = departmentService.findPage(page, new Department());
         assertNotNull(departments);
@@ -124,8 +111,9 @@ public class DepartmentServiceImplTest {
     @Test
     public void findAllByFields() {
         int id = 31;
-        ensureEntityExist(id);
-        Department department = departmentService.getById(id);
+        Department department = new Department(id);
+        ensureEntityExist(department);
+        department = departmentService.getById(department);
         String name = "find_all_by_fields" + System.currentTimeMillis();
         department.setName(name);
         departmentService.update(department);
@@ -135,8 +123,9 @@ public class DepartmentServiceImplTest {
     @Test
     public void findAllByMap() {
         int id = 41;
-        ensureEntityExist(id);
-        Department department = departmentService.getById(id);
+        Department department = new Department(id);
+        ensureEntityExist(department);
+        department = departmentService.getById(department);
         String name = "find_all_by_map" + System.currentTimeMillis();
         department.setName(name);
         departmentService.update(department);
@@ -148,13 +137,23 @@ public class DepartmentServiceImplTest {
     @Test
     public void count() {
         int id = 1;
-        ensureEntityExist(id);
+        ensureEntityExist(new Department(id));
         assertTrue(departmentService.count() > 0);
     }
 
-    private void ensureEntityExist(Integer id) {
-        if (departmentService.getById(id) == null) {
-            departmentService.save(new Department(id));
+    private List<Department> ensureEntityListExist(List<Integer> ids) {
+        List<Department> departments = new ArrayList<>();
+        for (Integer id : ids) {
+            Department department = new Department(id);
+            ensureEntityExist(department);
+            departments.add(new Department(id));
+        }
+        return departments;
+    }
+
+    private void ensureEntityExist(Department department) {
+        if (departmentService.getById(department) == null) {
+            departmentService.save(new Department(department.getId(), "ensureEntityExist" + System.currentTimeMillis()));
         }
     }
 }
