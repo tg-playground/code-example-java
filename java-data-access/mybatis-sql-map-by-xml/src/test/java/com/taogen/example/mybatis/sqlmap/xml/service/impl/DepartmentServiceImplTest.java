@@ -41,6 +41,22 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
+    public void saveOrUpdte() {
+        int id = 5;
+        Department department = new Department(id, "saveOrUpdate");
+        departmentService.deleteById(department);
+        if (departmentService.getById(department) == null) {
+            assertEquals(1, departmentService.saveOrUpdate(department));
+        }
+        String name = "saveOrUpdate" + System.currentTimeMillis();
+        department.setName(name);
+        assertEquals(1, departmentService.saveOrUpdate(department));
+        department = departmentService.getById(department);
+        assertNotNull(department);
+        assertEquals(name, department.getName());
+    }
+
+    @Test
     public void deleteById() {
         int deleteId = 1;
         Department department = new Department(deleteId);
@@ -53,6 +69,21 @@ public class DepartmentServiceImplTest {
         List<Integer> deleteIds = Arrays.asList(1, 2);
         List<Department> departments = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), departmentService.deleteAllByIds(departments));
+    }
+
+    @Test
+    public void deleteAllByMap() {
+        List<Integer> deleteIds = Arrays.asList(11, 12);
+        List<Department> departments = ensureEntityListExist(deleteIds);
+        String name = "delete_all_by_map";
+        for (Department department : departments) {
+            department = departmentService.getById(department);
+            department.setName(name);
+            departmentService.update(department);
+        }
+        Map<String, Object> conditions = new HashMap<>();
+        conditions.put("name", name);
+        assertEquals(deleteIds.size(), departmentService.deleteAllByMap(conditions));
     }
 
     @Test
@@ -90,6 +121,13 @@ public class DepartmentServiceImplTest {
         Department department = new Department(getId);
         ensureEntityExist(department);
         assertNotNull(departmentService.getById(department));
+    }
+
+    @Test
+    public void count() {
+        int id = 1;
+        ensureEntityExist(new Department(id));
+        assertTrue(departmentService.count() > 0);
     }
 
     @Test
@@ -132,13 +170,6 @@ public class DepartmentServiceImplTest {
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         assertNotNull(departmentService.findAllByMap(params));
-    }
-
-    @Test
-    public void count() {
-        int id = 1;
-        ensureEntityExist(new Department(id));
-        assertTrue(departmentService.count() > 0);
     }
 
     private List<Department> ensureEntityListExist(List<Integer> ids) {
