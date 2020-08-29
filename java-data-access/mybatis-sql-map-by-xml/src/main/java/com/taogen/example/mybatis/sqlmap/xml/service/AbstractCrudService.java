@@ -31,10 +31,6 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     }
 
     private SqlSession getSqlSession() {
-        return sqlSessionFactoryService.getSqlSessionFactory().openSession(true);
-    }
-
-    private SqlSession getSqlSessionWithoutAutoCommit() {
         return sqlSessionFactoryService.getSqlSessionFactory().openSession(false);
     }
 
@@ -45,19 +41,23 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     @Override
     public int save(T entity) {
         SqlSession session = getSqlSession();
+        int result = 0;
         try {
-            return getMapperFromSession(session).saveSelective(entity);
+            result = getMapperFromSession(session).saveSelective(entity);
+            session.commit();
         } catch (Exception e) {
+            logger.error(e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
-        return 0;
+        return result;
     }
 
     @Override
     public int saveAll(Collection<T> entities, Boolean testException) {
-        SqlSession session = getSqlSessionWithoutAutoCommit();
+        SqlSession session = getSqlSession();
         int result = 0;
         try {
             for (T t : entities) {
@@ -70,7 +70,7 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
         } catch (Exception e) {
             logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);
             session.rollback();
-            return 0;
+            result = 0;
         } finally {
             session.close();
         }
@@ -80,58 +80,74 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     @Override
     public int deleteById(T entity) {
         SqlSession session = getSqlSession();
+        int result = 0;
         try {
-            return getMapperFromSession(session).deleteById(entity);
+            result = getMapperFromSession(session).deleteById(entity);
+            session.commit();
         } catch (Exception e) {
+            logger.error(e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
-        return 0;
+        return result;
     }
 
     @Override
     public int deleteAllByIds(Collection<T> entities) {
         SqlSession session = getSqlSession();
+        int result = 0;
         try {
-            return getMapperFromSession(session).deleteAll(entities);
+            result = getMapperFromSession(session).deleteAll(entities);
+            session.commit();
         } catch (Exception e) {
+            logger.error(e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
-        return 0;
+        return result;
     }
 
     @Override
     public int deleteAllByMap(Map<String, Object> conditions) {
         SqlSession session = getSqlSession();
+        int result = 0;
         try {
-            return getMapperFromSession(session).deleteAllByMap(conditions);
+            result = getMapperFromSession(session).deleteAllByMap(conditions);
+            session.commit();
         } catch (Exception e) {
+            logger.error(e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
-        return 0;
+        return result;
     }
 
     @Override
     public int update(T entity) {
         SqlSession session = getSqlSession();
+        int result = 0;
         try {
-            return getMapperFromSession(session).updateSelective(entity);
+            result = getMapperFromSession(session).updateSelective(entity);
+            session.commit();
         } catch (Exception e) {
+            logger.error(e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
-        return 0;
+        return result;
     }
 
     @Override
     public int updateAllByIds(Collection<T> entities) {
-        SqlSession session = getSqlSessionWithoutAutoCommit();
+        SqlSession session = getSqlSession();
         int result = 0;
         try {
             for (T entity : entities) {
@@ -141,6 +157,7 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
         } catch (Exception e) {
             logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);
             session.rollback();
+            result = 0;
         } finally {
             session.close();
         }
@@ -149,65 +166,50 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
 
     @Override
     public T getById(T entity) {
-        SqlSession session = getSqlSession();
-        try {
+        try (SqlSession session = getSqlSession()) {
             return getMapperFromSession(session).getById(entity);
         } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
+            logger.error(e);
         }
         return null;
     }
 
     @Override
     public Long count() {
-        SqlSession session = getSqlSession();
-        try {
+        try (SqlSession session = getSqlSession()) {
             return getMapperFromSession(session).count();
         } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
+            logger.error(e);
         }
         return null;
     }
 
     @Override
     public List<T> findPage(Page page, T entity) {
-        SqlSession session = getSqlSession();
-        try {
+        try (SqlSession session = getSqlSession()) {
             return getMapperFromSession(session).findPage(page, entity);
         } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
+            logger.error(e);
         }
         return null;
     }
 
     @Override
     public List<T> findAllByFields(T entity) {
-        SqlSession session = getSqlSession();
-        try {
+        try (SqlSession session = getSqlSession()) {
             return getMapperFromSession(session).findAllByFields(entity);
         } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
+            logger.error(e);
         }
         return null;
     }
 
     @Override
     public List<T> findAllByMap(Map<String, Object> parameters) {
-        SqlSession session = getSqlSession();
-        try {
+        try (SqlSession session = getSqlSession()) {
             return getMapperFromSession(session).findAllByMap(parameters);
         } catch (Exception e) {
-            session.rollback();
-        } finally {
-            session.close();
+            logger.error(e);
         }
         return null;
     }
