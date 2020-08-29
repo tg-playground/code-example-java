@@ -23,7 +23,7 @@
         a.modify_time,
     </sql>
 
-    <resultMap id="oneToOneResultMap" type="Employee">
+    <resultMap id="OneToOneResultMap" type="Employee">
         <id column="emp_id" jdbcType="INTEGER" property="id"/>
         <result column="emp_name" jdbcType="VARCHAR" property="name"/>
         <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
@@ -213,7 +213,7 @@
         </foreach>
     </update>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="oneToOneResultMap">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="OneToOneResultMap">
         select
         <include refid="One_To_One_Column_List"/>
         from t_employee as a
@@ -260,7 +260,7 @@
         </foreach>
     </select>
 
-    <select id="findAllByFields" parameterType="Department" resultMap="BaseResultMap">
+    <select id="findAllByFields" parameterType="Department" resultMap="OneToOneResultMap">
         select
         <include refid="One_To_One_Column_List"/>
         from t_employee as a
@@ -290,7 +290,7 @@
         </if>
     </select>
 
-    <select id="findPage" resultMap="BaseResultMap">
+    <select id="findPage" resultMap="OneToOneResultMap">
         select
         <include refid="One_To_One_Column_List"/>
         from t_employee as a
@@ -331,7 +331,7 @@
         ) as lim on a.id = lim.id
     </select>
 
-    <select id="findAllByMap" resultMap="BaseResultMap">
+    <select id="findAllByMap" resultMap="OneToOneResultMap">
         select
         <include refid="One_To_One_Column_List"/>
         from t_employee as a
