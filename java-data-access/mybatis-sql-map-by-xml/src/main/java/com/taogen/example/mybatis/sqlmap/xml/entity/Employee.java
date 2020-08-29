@@ -11,7 +11,7 @@ public class Employee extends BaseEntity {
 
     private Integer age;
 
-    private Integer deptId;
+    private Department department;
 
     public String getName() {
         return name;
@@ -37,11 +37,11 @@ public class Employee extends BaseEntity {
         this.age = age;
     }
 
-    public Integer getDeptId() {
-        return deptId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
