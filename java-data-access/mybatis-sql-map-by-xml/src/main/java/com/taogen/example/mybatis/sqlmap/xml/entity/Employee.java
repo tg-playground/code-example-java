@@ -13,6 +13,36 @@ public class Employee extends BaseEntity {
 
     private Department department;
 
+    public Employee(int id) {
+        this.id = id;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(String name) {
+        this.name = name;
+    }
+
+    public Employee(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", age=" + age +
+                ", department=" + department +
+                ", id=" + id +
+                ", deleteFlag=" + deleteFlag +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

@@ -1,128 +1,332 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.taogen.example.mybatis.sqlmap.xml.mapper.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, nickname, age, dept_id, delete_flag, create_time, modify_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_employee
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_employee
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
-    insert into t_employee (id, name, nickname, 
-      age, dept_id, delete_flag, 
-      create_time, modify_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
-    insert into t_employee
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="nickname != null">
-        nickname,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="deptId != null">
-        dept_id,
-      </if>
-      <if test="deleteFlag != null">
-        delete_flag,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modifyTime != null">
-        modify_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="deptId != null">
-        #{deptId,jdbcType=INTEGER},
-      </if>
-      <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
-    update t_employee
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="deptId != null">
-        dept_id = #{deptId,jdbcType=INTEGER},
-      </if>
-      <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
-    update t_employee
-    set name = #{name,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      dept_id = #{deptId,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <resultMap id="BaseResultMap" type="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        a.id,
+        a.name,
+        a.nickname,
+        a.age,
+        a.delete_flag,
+        a.create_time,
+        a.modify_time,
+        d.id as "department.id",
+        d.name as "department.name",
+        d.delete_flag as "department.deleteFlag",
+        d.create_time as "department.createTime",
+        d.modify_time as "department.modifyTime"
+    </sql>
+
+    <sql id="Joins">
+        LEFT JOIN t_department d ON a.dept_id = d.id
+    </sql>
+
+    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
+        insert into t_employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="department != null and department.id != null">
+                #{department.id,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_employee
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteAll" parameterType="Employee">
+        delete from t_employee
+        where id in
+        <foreach item="item" index="index" collection="entities"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAllByField" parameterType="Employee">
+        delete from t_employee
+        where
+        delete_flag = 0
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="nickname != null">
+            and nickname = #{nickname,jdbcType=VARCHAR}
+        </if>
+        <if test="age != null">
+            and age = #{age,jdbcType=INTEGER}
+        </if>
+        <if test="department != null and department.id != null">
+            and dept_id = #{department.id,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </delete>
+
+    <delete id="deleteAllByMap">
+        delete from t_employee
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </delete>
+
+    <update id="updateSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
+        update t_employee
+        <set>
+            modify_time = NOW(),
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateAllFieldsByMap">
+        update t_employee
+        <set>
+            modify_time = NOW(),
+            <if test="entity.name != null">
+                name = #{entity.name,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.nickname != null">
+                nickname = #{entity.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.age != null">
+                age = #{entity.age,jdbcType=INTEGER},
+            </if>
+            <if test="entity.department != null and entity.department.id != null">
+                dept_id = #{entity.department.id,jdbcType=INTEGER},
+            </if>
+            <if test="entity.deleteFlag != null">
+                delete_flag = #{entity.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </update>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+    </select>
+
+    <select id="countByField" parameterType="Employee" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+        where
+        delete_flag = 0
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="nickname != null">
+            and nickname = #{nickname,jdbcType=VARCHAR}
+        </if>
+        <if test="age != null">
+            and age = #{age,jdbcType=INTEGER}
+        </if>
+        <if test="department != null and department.id != null">
+            and dept_id = #{department.id,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </select>
+
+    <select id="findAllByFields" parameterType="Department" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where
+        a.delete_flag = 0
+        <if test="id != null">
+            and a.id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and a.name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="nickname != null">
+            and a.nickname = #{nickname,jdbcType=VARCHAR}
+        </if>
+        <if test="age != null">
+            and a.age = #{age,jdbcType=INTEGER}
+        </if>
+        <if test="department != null and department.id != null">
+            and a.dept_id = #{department.id,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and a.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        inner join (
+        select b.id from t_employee as b
+        where
+        b.delete_flag = 0
+        <if test="entity.name != null">
+            and b.name like
+            <if test="dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+            <if test="dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+            <if test="dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+        </if>
+        <if test="entity.nickname != null">
+            and b.nickname = #{nickname,jdbcType=VARCHAR}
+        </if>
+        <if test="entity.age != null">
+            and b.age = #{age,jdbcType=INTEGER}
+        </if>
+        <if test="entity.department != null and entity.department.id != null">
+            and b.dept_id = #{department.id,jdbcType=INTEGER}
+        </if>
+        <if test="entity.createTime != null">
+            and b.create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="entity.modifyTime != null">
+            and b.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="page != null">
+            <if test="page.orderBy != null">
+                order by ${page.orderBy}
+            </if>
+            <if test="page.start != null and page.pageSize != null ">
+                limit ${page.start}, ${page.pageSize}
+            </if>
+        </if>
+        ) as lim on a.id = lim.id
+    </select>
+
+    <select id="findAllByMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            a.${key}=#{value}
+        </foreach>
+    </select>
+
+    <insert id="execInsertSql">
+
+    </insert>
+
+    <delete id="execDeleteSql">
+
+    </delete>
+
+    <update id="execUpdateSql">
+
+    </update>
+
+    <select id="execSelectSql">
+
+    </select>
 </mapper>

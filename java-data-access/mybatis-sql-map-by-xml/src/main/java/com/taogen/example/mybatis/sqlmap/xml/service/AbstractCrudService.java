@@ -78,6 +78,28 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     }
 
     @Override
+    public int saveOrUpdate(T entity) {
+        SqlSession session = getSqlSession();
+        int result = 0;
+        try {
+            M mapper = getMapperFromSession(session);
+            if (mapper.getById(entity) == null) {
+                result = mapper.saveSelective(entity);
+            } else {
+                result = mapper.updateSelective(entity);
+            }
+            session.commit();
+        } catch (Exception e) {
+            logger.error(e);
+            session.rollback();
+            result = 0;
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+    @Override
     public int deleteById(T entity) {
         SqlSession session = getSqlSession();
         int result = 0;

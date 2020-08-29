@@ -16,6 +16,8 @@ public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends
 
     int saveAll(Collection<T> entities, Boolean testException);
 
+    int saveOrUpdate(T entity);
+
     int deleteById(T entity);
 
     int deleteAllByIds(Collection<T> entities);
