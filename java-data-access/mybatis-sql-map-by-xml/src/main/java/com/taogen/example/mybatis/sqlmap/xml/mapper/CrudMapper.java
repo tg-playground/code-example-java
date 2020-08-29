@@ -18,13 +18,13 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
 //    int saveAll(@Param("entities") Collection<T> entities);
 
-    int deleteById(Integer id);
+    int deleteById(T entity);
 
     int deleteAll(@Param("entities") Collection<T> entities);
 
     int deleteAllByField(T entity);
 
-    int deleteAllByMap(@Param("params") Map<String, Object> params);
+    int deleteAllByMap(@Param("conditions") Map<String, Object> conditions);
 
 //    int update(T entity);
 
@@ -32,19 +32,27 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
 //    int updateAll(Collection<T> entities);
 
-    int updateAllFieldsByMap(@Param("entity") T entity, @Param("params") Map<String, Object> params);
+    int updateAllFieldsByMap(@Param("entity") T entity, @Param("conditions") Map<String, Object> conditions);
 
-    T getById(Integer id);
+    T getById(T entity);
 
     long count();
 
     long countByField(T entity);
 
-    long countByMap(@Param("params") Map<String, Object> params);
+    long countByMap(@Param("conditions") Map<String, Object> conditions);
 
     List<T> findAllByFields(T entity);
 
     List<T> findPage(@Param("page") Page page, @Param("entity") T entity);
 
-    List<T> findAllByMap(@Param("params") Map<String, Object> params);
+    List<T> findAllByMap(@Param("conditions") Map<String, Object> conditions);
+
+    int execInsertSql(String sql);
+
+    int execDeleteSql(String sql);
+
+    int execUpdateSql(String sql);
+
+    List<T> execSelectSql(String sql);
 }

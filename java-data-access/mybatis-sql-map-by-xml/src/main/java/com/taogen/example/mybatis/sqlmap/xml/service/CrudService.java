@@ -20,11 +20,11 @@ public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends
 
     int deleteAllByIds(Collection<T> entities);
 
+    int deleteAllByMap(Map<String, Object> conditions);
+
     int update(T entity);
 
     int updateAllByIds(Collection<T> entities);
-
-    T getById(int id);
 
     T getById(T entity);
 

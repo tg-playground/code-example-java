@@ -7,21 +7,13 @@ public class Page {
     private int pageNo;
     private int pageSize;
     private long count;
+    private String orderBy;
+    private int start;
 
-    public int getPageNo() {
-        return pageNo;
-    }
-
-    public void setPageNo(int pageNo) {
+    public Page(int pageNo, int pageSize) {
         this.pageNo = pageNo;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+        this.start = (pageNo-1) * pageSize;
     }
 
     public long getCount() {
@@ -30,5 +22,13 @@ public class Page {
 
     public void setCount(long count) {
         this.count = count;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 }

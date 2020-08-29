@@ -9,9 +9,14 @@
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, delete_flag, create_time, modify_time
+    a.id,
+    a.name,
+    a.delete_flag,
+    a.create_time,
+    a.modify_time
   </sql>
-    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Department">
+    <!--    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Department">-->
+    <insert id="saveSelective" parameterType="Department">
         insert into t_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -63,13 +68,31 @@
         </foreach>
     </delete>
 
-    <delete id="deleteAllByField">
-
+    <delete id="deleteAllByField" parameterType="Department">
+        delete from t_department
+        where
+        delete_flag = 0
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
     </delete>
 
     <delete id="deleteAllByMap">
+        delete from t_department
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
     </delete>
-
 
     <update id="updateSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Department">
         update t_department
@@ -90,10 +113,140 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <update id="updateAllFieldsByMap">
+        update t_department
+        <set>
+            <if test="entity.name != null">
+                name = #{entity.name,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.deleteFlag != null">
+                delete_flag = #{entity.deleteFlag,jdbcType=BIT},
+            </if>
+            <if test="entity.modifyTime != null">
+                modify_time = #{entity.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </update>
+
+    <select id="getById" parameterType="Department" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from t_department
+        from t_department as a
         where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from t_department as a
+    </select>
+
+    <select id="countByField" parameterType="Department" resultType="java.lang.Long">
+        select count(*) from t_department as a
+        where
+        delete_flag = 0
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Long">
+        select count(*) from t_department as a
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </select>
+
+    <select id="findAllByFields" parameterType="Department" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_department as a
+        where
+        delete_flag = 0
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modifyTime != null">
+            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_department as a
+        inner join (
+        select d.id from t_department as d
+        where
+        d.delete_flag = 0
+        <if test="entity.name != null">
+            and d.name like
+            <if test="dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+            <if test="dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+            <if test="dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+        </if>
+        <if test="entity.createTime != null">
+            and d.create_time = #{entity.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="entity.modifyTime != null">
+            and d.modify_time = #{entity.modifyTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="page != null">
+            <if test="page.orderBy != null">
+                order by ${page.orderBy}
+            </if>
+            <if test="page.start != null and page.pageSize != null ">
+                limit ${page.start}, ${page.pageSize}
+            </if>
+        </if>
+        ) as lim on a.id = lim.id
+    </select>
+
+    <select id="findAllByMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_department as a
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </select>
+
+    <select id="execDqlSql">
+
+    </select>
+
+    <insert id="execInsertSql">
+
+    </insert>
+
+    <delete id="execDeleteSql">
+
+    </delete>
+
+    <update id="execUpdateSql">
+
+    </update>
+
+    <select id="execSelectSql">
+
     </select>
 </mapper>
