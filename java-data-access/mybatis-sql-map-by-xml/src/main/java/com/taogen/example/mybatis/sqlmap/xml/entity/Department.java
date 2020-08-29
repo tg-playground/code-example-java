@@ -9,7 +9,7 @@ public class Department extends BaseEntity {
 
     private String name;
 
-    private List<Employee> employeeList;
+    private List<Employee> employees;
 
     public Department(int id) {
         this.id = id;
@@ -35,19 +35,20 @@ public class Department extends BaseEntity {
         this.name = name == null ? null : name.trim();
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
-                ", name=" + name +
+                "name='" + name + '\'' +
+                ", employees=" + employees +
+                ", id=" + id +
                 ", deleteFlag=" + deleteFlag +
                 ", createTime=" + createTime +
                 ", modifyTime=" + modifyTime +

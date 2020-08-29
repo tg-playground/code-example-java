@@ -7,6 +7,10 @@
     <properties resource="mybatis/db.properties">
     </properties>
 
+<!--    <settings>-->
+<!--        <setting name="lazyLoadingEnabled" value="true"/>-->
+<!--    </settings>-->
+
     <!-- Type Aliases: mapper xml parameterType doesn't contains full package page just className -->
     <typeAliases>
         <package name="com.taogen.example.mybatis.sqlmap.xml.entity"></package>
@@ -24,9 +28,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis/mapper/DepartmentMapper.xml" />
-        <mapper resource="mybatis/mapper/EmployeeMapper.xml" />
-<!--        <package name="com.taogen.example.mybatis.xml.mapper"/>-->
+        <mapper resource="mybatis/mapper/DepartmentMapper.xml"/>
+        <mapper resource="mybatis/mapper/EmployeeMapper.xml"/>
+        <!--        <package name="com.taogen.example.mybatis.xml.mapper"/>-->
     </mappers>
 
 

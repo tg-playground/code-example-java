@@ -11,6 +11,8 @@ public class Employee extends BaseEntity {
 
     private Integer age;
 
+    private Integer deptId;
+
     private Department department;
 
     public Employee(int id) {
@@ -65,6 +67,14 @@ public class Employee extends BaseEntity {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     public Department getDepartment() {

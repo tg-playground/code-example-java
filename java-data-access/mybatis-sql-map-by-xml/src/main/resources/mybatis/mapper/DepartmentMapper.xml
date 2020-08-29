@@ -8,14 +8,51 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
+
     <sql id="Base_Column_List">
-    a.id,
-    a.name,
-    a.delete_flag,
-    a.create_time,
-    a.modify_time
-  </sql>
-    <!--    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Department">-->
+        a.id,
+        a.name,
+        a.delete_flag,
+        a.create_time,
+        a.modify_time
+    </sql>
+
+    <resultMap id="OneToManyResultMap" type="Department">
+        <id column="dept_id" jdbcType="INTEGER" property="id"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="name"/>
+        <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <collection property="employees" ofType="Employee">
+            <id column="emp_id" jdbcType="INTEGER" property="id"/>
+            <result column="emp_name" jdbcType="VARCHAR" property="name"/>
+            <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
+            <result column="emp_age" jdbcType="INTEGER" property="age"/>
+            <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        </collection>
+    </resultMap>
+
+    <sql id="One_To_Many_Column_List">
+        a.id as dept_id,
+        a.name as dept_name,
+        a.delete_flag as dept_delete_flag,
+        a.create_time as dept_create_time,
+        a.modify_time as dept_modify_time,
+        b.id as "emp_id",
+        b.name as "emp_name",
+        b.nickname as "emp_nickname",
+        b.age as "emp_age",
+        b.delete_flag as "emp_delete_flag",
+        b.create_time as "emp_create_time",
+        b.modify_time as "emp_modify_time"
+    </sql>
+
+    <sql id="Joins">
+        LEFT JOIN t_employee as b on a.id=b.dept_id
+    </sql>
+
     <insert id="saveSelective" parameterType="Department">
         insert into t_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -125,11 +162,12 @@
         </foreach>
     </update>
 
-    <select id="getById" parameterType="Department" resultMap="BaseResultMap">
+    <select id="getById" parameterType="Department" resultMap="OneToManyResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="One_To_Many_Column_List"/>
         from t_department as a
-        where id = #{id,jdbcType=INTEGER}
+        <include refid="Joins"/>
+        where a.id = #{id,jdbcType=INTEGER}
     </select>
 
     <select id="count" resultType="java.lang.Long">
@@ -167,18 +205,18 @@
         <include refid="Base_Column_List"/>
         from t_department as a
         where
-        delete_flag = 0
+        a.delete_flag = 0
         <if test="id != null">
-            and id = #{id,jdbcType=INTEGER}
+            and a.id = #{id,jdbcType=INTEGER}
         </if>
         <if test="name != null">
-            and name = #{name,jdbcType=VARCHAR}
+            and a.name = #{name,jdbcType=VARCHAR}
         </if>
         <if test="createTime != null">
-            and create_time = #{createTime,jdbcType=TIMESTAMP}
+            and a.create_time = #{createTime,jdbcType=TIMESTAMP}
         </if>
         <if test="modifyTime != null">
-            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+            and a.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
         </if>
     </select>
 
@@ -192,9 +230,9 @@
         d.delete_flag = 0
         <if test="entity.name != null">
             and d.name like
-            <if test="dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-            <if test="dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-            <if test="dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+            <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+            <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+            <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
         </if>
         <if test="entity.createTime != null">
             and d.create_time = #{entity.createTime,jdbcType=TIMESTAMP}
@@ -219,7 +257,7 @@
         from t_department as a
         where
         <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
-            ${key}=#{value}
+            a.${key}=#{value}
         </foreach>
     </select>
 

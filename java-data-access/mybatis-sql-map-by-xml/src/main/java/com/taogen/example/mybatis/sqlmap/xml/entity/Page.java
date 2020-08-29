@@ -4,6 +4,7 @@ package com.taogen.example.mybatis.sqlmap.xml.entity;
  * @author Taogen
  */
 public class Page {
+    private final String dbName = "mysql";
     private int pageNo;
     private int pageSize;
     private long count;
@@ -13,7 +14,7 @@ public class Page {
     public Page(int pageNo, int pageSize) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
-        this.start = (pageNo-1) * pageSize;
+        this.start = (pageNo - 1) * pageSize;
     }
 
     public long getCount() {

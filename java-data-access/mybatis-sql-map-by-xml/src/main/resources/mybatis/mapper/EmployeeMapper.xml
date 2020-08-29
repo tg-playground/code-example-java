@@ -17,18 +17,46 @@
         a.name,
         a.nickname,
         a.age,
+        a.dept_id,
         a.delete_flag,
         a.create_time,
         a.modify_time,
-        d.id as "department.id",
-        d.name as "department.name",
-        d.delete_flag as "department.deleteFlag",
-        d.create_time as "department.createTime",
-        d.modify_time as "department.modifyTime"
+    </sql>
+
+    <resultMap id="oneToOneResultMap" type="Employee">
+        <id column="emp_id" jdbcType="INTEGER" property="id"/>
+        <result column="emp_name" jdbcType="VARCHAR" property="name"/>
+        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="emp_age" jdbcType="INTEGER" property="age"/>
+        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <association property="department" javaType="Department">
+            <id column="dept_id" jdbcType="INTEGER" property="id"/>
+            <result column="dept_name" jdbcType="VARCHAR" property="name"/>
+            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        </association>
+    </resultMap>
+
+    <sql id="One_To_One_Column_List">
+        a.id as emp_id,
+        a.name as emp_name,
+        a.nickname as emp_nickname,
+        a.age as emp_age,
+        a.delete_flag as emp_delete_flag,
+        a.create_time as emp_create_time,
+        a.modify_time as emp_modify_time,
+        b.id as dept_id,
+        b.name as dept_name,
+        b.delete_flag as dept_delete_flag,
+        b.create_time as dept_create_time,
+        b.modify_time as dept_modify_time
     </sql>
 
     <sql id="Joins">
-        LEFT JOIN t_department d ON a.dept_id = d.id
+        LEFT JOIN t_department b ON a.dept_id = b.id
     </sql>
 
     <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
@@ -185,9 +213,9 @@
         </foreach>
     </update>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="oneToOneResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="One_To_One_Column_List"/>
         from t_employee as a
         <include refid="Joins"/>
         where a.id = #{id,jdbcType=INTEGER}
@@ -234,7 +262,7 @@
 
     <select id="findAllByFields" parameterType="Department" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="One_To_One_Column_List"/>
         from t_employee as a
         <include refid="Joins"/>
         where
@@ -264,33 +292,33 @@
 
     <select id="findPage" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="One_To_One_Column_List"/>
         from t_employee as a
         <include refid="Joins"/>
         inner join (
-        select b.id from t_employee as b
+        select e.id from t_employee as e
         where
-        b.delete_flag = 0
+        e.delete_flag = 0
         <if test="entity.name != null">
-            and b.name like
-            <if test="dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-            <if test="dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-            <if test="dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+            and e.name like
+            <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+            <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+            <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
         </if>
         <if test="entity.nickname != null">
-            and b.nickname = #{nickname,jdbcType=VARCHAR}
+            and e.nickname = #{nickname,jdbcType=VARCHAR}
         </if>
         <if test="entity.age != null">
-            and b.age = #{age,jdbcType=INTEGER}
+            and e.age = #{age,jdbcType=INTEGER}
         </if>
         <if test="entity.department != null and entity.department.id != null">
-            and b.dept_id = #{department.id,jdbcType=INTEGER}
+            and e.dept_id = #{department.id,jdbcType=INTEGER}
         </if>
         <if test="entity.createTime != null">
-            and b.create_time = #{createTime,jdbcType=TIMESTAMP}
+            and e.create_time = #{createTime,jdbcType=TIMESTAMP}
         </if>
         <if test="entity.modifyTime != null">
-            and b.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+            and e.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
         </if>
         <if test="page != null">
             <if test="page.orderBy != null">
@@ -305,7 +333,7 @@
 
     <select id="findAllByMap" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="One_To_One_Column_List"/>
         from t_employee as a
         <include refid="Joins"/>
         where
