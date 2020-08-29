@@ -3,9 +3,7 @@ package com.taogen.example.mybatis.sqlmap.xml.mapper;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Department;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Page;
-import com.taogen.example.mybatis.sqlmap.xml.service.DepartmentService;
 import com.taogen.example.mybatis.sqlmap.xml.service.SqlSessionFactoryService;
-import com.taogen.example.mybatis.sqlmap.xml.service.impl.DepartmentServiceImpl;
 import com.taogen.example.mybatis.sqlmap.xml.service.impl.SqlSessionFactoryServiceImpl;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
@@ -19,14 +17,15 @@ import static org.junit.Assert.*;
 public class EmployeeMapperTest {
 
     private EmployeeMapper mapper;
+    private DepartmentMapper departmentMapper;
     private SqlSessionFactoryService sqlSessionFactoryService = new SqlSessionFactoryServiceImpl();
-    private DepartmentService departmentService = new DepartmentServiceImpl();
     private SqlSession sqlSession;
 
     @Before
     public void before() {
         sqlSession = sqlSessionFactoryService.getSqlSessionFactory().openSession(true);
         mapper = sqlSession.getMapper(EmployeeMapper.class);
+        departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
     }
 
     @After
@@ -117,13 +116,22 @@ public class EmployeeMapperTest {
         Employee employee = new Employee(id);
         ensureEntityExist(employee);
 
-        Department department = new Department(1, "test");
-        departmentService.saveOrUpdate(department);
+        String deptName = "test" + System.currentTimeMillis();
+        Department department = new Department(1, deptName);
+        if (departmentMapper.getById(department) == null) {
+            departmentMapper.saveSelective(department);
+        } else {
+            departmentMapper.updateSelective(department);
+        }
+
         employee.setDepartment(department);
         mapper.updateSelective(employee);
 
-        assertNotNull(mapper.getById(employee));
-        System.out.println(mapper.getById(employee));
+        employee = mapper.getById(employee);
+        assertNotNull(employee);
+        System.out.println(employee);
+        assertNotNull(employee.getDepartment());
+        assertEquals(deptName, employee.getDepartment().getName());
     }
 
     @Test

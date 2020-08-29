@@ -1,6 +1,7 @@
 package com.taogen.example.mybatis.sqlmap.xml.mapper;
 
 import com.taogen.example.mybatis.sqlmap.xml.entity.Department;
+import com.taogen.example.mybatis.sqlmap.xml.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Page;
 import com.taogen.example.mybatis.sqlmap.xml.service.SqlSessionFactoryService;
 import com.taogen.example.mybatis.sqlmap.xml.service.impl.SqlSessionFactoryServiceImpl;
@@ -16,6 +17,7 @@ import static org.junit.Assert.*;
 public class DepartmentMapperTest {
 
     private DepartmentMapper mapper;
+    private EmployeeMapper employeeMapper;
     private SqlSessionFactoryService sqlSessionFactoryService = new SqlSessionFactoryServiceImpl();
     private SqlSession sqlSession;
 
@@ -23,6 +25,7 @@ public class DepartmentMapperTest {
     public void before() {
         sqlSession = sqlSessionFactoryService.getSqlSessionFactory().openSession(true);
         mapper = sqlSession.getMapper(DepartmentMapper.class);
+        employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
     }
 
     @After
@@ -112,7 +115,26 @@ public class DepartmentMapperTest {
         int id = 71;
         Department department = new Department(id);
         ensureEntityExist(department);
-        assertNotNull(mapper.getById(department));
+
+        String employeeName = "test_department_one_to_many" + System.currentTimeMillis();
+        System.out.println("employeeName: " + employeeName);
+        Employee employee = new Employee(1, employeeName);
+        System.out.println("deptId: " + department.getId());
+        employee.setDepartment(department);
+        if (employeeMapper.getById(employee) == null) {
+            employeeMapper.saveSelective(employee);
+        } else {
+            employeeMapper.updateSelective(employee);
+        }
+
+        department = mapper.getById(department);
+        System.out.println("department: " + department);
+        assertNotNull(department);
+        assertNotNull(department.getEmployees());
+        assertTrue(department.getEmployees()
+                .stream()
+                .map(emp -> emp.getName())
+                .anyMatch(name -> name.equals(employeeName)));
     }
 
     @Test
