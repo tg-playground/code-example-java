@@ -18,35 +18,35 @@
     </sql>
 
     <resultMap id="OneToManyResultMap" type="Department">
-        <id column="dept_id" jdbcType="INTEGER" property="id"/>
-        <result column="dept_name" jdbcType="VARCHAR" property="name"/>
-        <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>
-        <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
         <collection property="employees" ofType="Employee">
-            <id column="emp_id" jdbcType="INTEGER" property="id"/>
-            <result column="emp_name" jdbcType="VARCHAR" property="name"/>
-            <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
-            <result column="emp_age" jdbcType="INTEGER" property="age"/>
-            <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>
-            <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>
-            <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+            <id column="employee.id" jdbcType="INTEGER" property="id"/>
+            <result column="employee.name" jdbcType="VARCHAR" property="name"/>
+            <result column="employee.nickname" jdbcType="VARCHAR" property="nickname"/>
+            <result column="employee.age" jdbcType="INTEGER" property="age"/>
+            <result column="employee.delete_flag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="employee.create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="employee.modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
         </collection>
     </resultMap>
 
     <sql id="One_To_Many_Column_List">
-        a.id as dept_id,
-        a.name as dept_name,
-        a.delete_flag as dept_delete_flag,
-        a.create_time as dept_create_time,
-        a.modify_time as dept_modify_time,
-        b.id as "emp_id",
-        b.name as "emp_name",
-        b.nickname as "emp_nickname",
-        b.age as "emp_age",
-        b.delete_flag as "emp_delete_flag",
-        b.create_time as "emp_create_time",
-        b.modify_time as "emp_modify_time"
+        a.id,
+        a.name,
+        a.delete_flag,
+        a.create_time,
+        a.modify_time,
+        b.id as "employee.id",
+        b.name as "employee.name",
+        b.nickname as "employee.nickname",
+        b.age as "employee.age",
+        b.delete_flag as "employee.deleteFlag",
+        b.create_time as "employee.createTime",
+        b.modify_time as "employee.modifyTime"
     </sql>
 
     <sql id="Joins">
