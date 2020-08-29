@@ -205,9 +205,9 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     }
 
     @Override
-    public List<T> findAllByMap(Map<String, Object> parameters) {
+    public List<T> findAllByMap(Map<String, Object> conditions) {
         try (SqlSession session = getSqlSession()) {
-            return getMapperFromSession(session).findAllByMap(parameters);
+            return getMapperFromSession(session).findAllByMap(conditions);
         } catch (Exception e) {
             logger.error(e);
         }

@@ -34,6 +34,6 @@ public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends
 
     List<T> findAllByFields(T entity);
 
-    List<T> findAllByMap(Map<String, Object> parameters);
+    List<T> findAllByMap(Map<String, Object> conditions);
 
 }
