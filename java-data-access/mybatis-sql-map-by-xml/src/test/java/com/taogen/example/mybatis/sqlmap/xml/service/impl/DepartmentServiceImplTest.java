@@ -1,6 +1,7 @@
 package com.taogen.example.mybatis.sqlmap.xml.service.impl;
 
 import com.taogen.example.mybatis.sqlmap.xml.entity.Department;
+import com.taogen.example.mybatis.sqlmap.xml.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Page;
 import com.taogen.example.mybatis.sqlmap.xml.service.DepartmentService;
 import org.junit.Test;
@@ -41,8 +42,8 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    public void saveOrUpdte() {
-        int id = 5;
+    public void saveOrUpdate() {
+        int id = 104;
         Department department = new Department(id, "saveOrUpdate");
         departmentService.deleteById(department);
         if (departmentService.getById(department) == null) {
@@ -58,7 +59,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void deleteById() {
-        int deleteId = 1;
+        int deleteId = 105;
         Department department = new Department(deleteId);
         ensureEntityExist(department);
         assertEquals(1, departmentService.deleteById(department));
@@ -66,14 +67,14 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void deleteAllByIds() {
-        List<Integer> deleteIds = Arrays.asList(1, 2);
+        List<Integer> deleteIds = Arrays.asList(106, 107);
         List<Department> departments = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), departmentService.deleteAllByIds(departments));
     }
 
     @Test
     public void deleteAllByMap() {
-        List<Integer> deleteIds = Arrays.asList(11, 12);
+        List<Integer> deleteIds = Arrays.asList(108, 109);
         List<Department> departments = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_map";
         for (Department department : departments) {
@@ -88,7 +89,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void update() {
-        int updateId = 10;
+        int updateId = 110;
         Department department = new Department(updateId);
         ensureEntityExist(department);
         department = departmentService.getById(department);
@@ -101,7 +102,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void updateAllByIds() {
-        List<Integer> updateIds = Arrays.asList(11, 12);
+        List<Integer> updateIds = Arrays.asList(111, 112);
         List<Department> departments = ensureEntityListExist(updateIds);
 
         String name = System.currentTimeMillis() + "";
@@ -117,7 +118,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void getById() {
-        int getId = 20;
+        int getId = 113;
         Department department = new Department(getId);
         ensureEntityExist(department);
         assertNotNull(departmentService.getById(department));
@@ -125,30 +126,25 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void count() {
-        int id = 1;
+        int id = 114;
         ensureEntityExist(new Department(id));
         assertTrue(departmentService.count() > 0);
     }
 
     @Test
     public void findPage() {
-        long count = departmentService.count();
-        if (count == 0) {
-            departmentService.save(new Department("test_find_page"));
-        }
+        departmentService.save(new Department("test_find_page"));
+        departmentService.save(new Department("test_find_page2"));
         int pageNo = 1;
         long pageSize = 10;
-        pageSize = count > pageSize ? pageSize : count;
         Page page = new Page(pageNo, (int) pageSize);
-        page.setCount(count);
-        List<Department> departments = departmentService.findPage(page, new Department());
+        List<Department> departments = departmentService.findPage(page, new Department("test"));
         assertNotNull(departments);
-        assertEquals(pageSize, departments.size());
     }
 
     @Test
     public void findAllByFields() {
-        int id = 31;
+        int id = 115;
         Department department = new Department(id);
         ensureEntityExist(department);
         department = departmentService.getById(department);
@@ -160,7 +156,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void findAllByMap() {
-        int id = 41;
+        int id = 116;
         Department department = new Department(id);
         ensureEntityExist(department);
         department = departmentService.getById(department);

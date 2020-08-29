@@ -40,21 +40,21 @@ public class EmployeeMapperTest {
 
     @Test
     public void deleteById() {
-        int deleteId = 11;
+        int deleteId = 201;
         ensureEntityExist(new Employee(deleteId));
         assertEquals(1, mapper.deleteById(new Employee(deleteId)));
     }
 
     @Test
     public void deleteAll() {
-        List<Integer> deleteIds = Arrays.asList(21, 22);
+        List<Integer> deleteIds = Arrays.asList(202, 203);
         List<Employee> employees = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), mapper.deleteAll(employees));
     }
 
     @Test
     public void deleteAllByField() {
-        List<Integer> deleteIds = Arrays.asList(31, 32);
+        List<Integer> deleteIds = Arrays.asList(204, 205);
         List<Employee> employees = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_field" + System.currentTimeMillis();
         for (Employee employee : employees) {
@@ -66,7 +66,7 @@ public class EmployeeMapperTest {
 
     @Test
     public void deleteAllByMap() {
-        List<Integer> deleteIds = Arrays.asList(41, 42);
+        List<Integer> deleteIds = Arrays.asList(206, 207);
         List<Employee> employees = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_map" + System.currentTimeMillis();
         for (Employee employee : employees) {
@@ -80,7 +80,7 @@ public class EmployeeMapperTest {
 
     @Test
     public void updateSelective() {
-        int updateId = 51;
+        int updateId = 208;
         Employee employee = new Employee(updateId);
         ensureEntityExist(employee);
         employee = mapper.getById(employee);
@@ -93,7 +93,7 @@ public class EmployeeMapperTest {
 
     @Test
     public void updateAllFieldsByMap() {
-        List<Integer> updateIds = Arrays.asList(61, 62);
+        List<Integer> updateIds = Arrays.asList(209, 210);
         List<Employee> employees = ensureEntityListExist(updateIds);
         String name = System.currentTimeMillis() + "";
         for (Employee employee : employees) {
@@ -112,7 +112,7 @@ public class EmployeeMapperTest {
 
     @Test
     public void getById() {
-        int id = 71;
+        int id = 211;
         Employee employee = new Employee(id);
         ensureEntityExist(employee);
 
@@ -136,7 +136,7 @@ public class EmployeeMapperTest {
 
     @Test
     public void count() {
-        int id = 81;
+        int id = 212;
         ensureEntityExist(new Employee(id));
         assertTrue(mapper.count() >= 1);
     }
@@ -179,15 +179,11 @@ public class EmployeeMapperTest {
         page.setOrderBy("name");
         List<Employee> employees = mapper.findPage(page, new Employee());
         assertNotNull(employees);
-        assertEquals(pageSize, employees.size());
-//        for (Employee d : employees) {
-//            System.out.println(d.getId() + "," + d.getName());
-//        }
     }
 
     @Test
     public void findAllByMap() {
-        int id = 91;
+        int id = 213;
         Employee employee = new Employee(id);
         ensureEntityExist(employee);
         employee = mapper.getById(employee);

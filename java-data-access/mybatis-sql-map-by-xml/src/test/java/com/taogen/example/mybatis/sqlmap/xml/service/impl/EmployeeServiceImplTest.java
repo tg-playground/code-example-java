@@ -41,8 +41,8 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void saveOrUpdte() {
-        int id = 5;
+    public void saveOrUpdate() {
+        int id = 104;
         Employee employee = new Employee(id, "saveOrUpdate");
         employeeService.deleteById(employee);
         if (employeeService.getById(employee) == null) {
@@ -58,7 +58,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void deleteById() {
-        int deleteId = 1;
+        int deleteId = 105;
         Employee employee = new Employee(deleteId);
         ensureEntityExist(employee);
         assertEquals(1, employeeService.deleteById(employee));
@@ -66,14 +66,14 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void deleteAllByIds() {
-        List<Integer> deleteIds = Arrays.asList(1, 2);
+        List<Integer> deleteIds = Arrays.asList(116, 117);
         List<Employee> employees = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), employeeService.deleteAllByIds(employees));
     }
 
     @Test
     public void deleteAllByMap() {
-        List<Integer> deleteIds = Arrays.asList(11, 12);
+        List<Integer> deleteIds = Arrays.asList(106, 107);
         List<Employee> employees = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_map";
         for (Employee employee : employees) {
@@ -88,7 +88,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void update() {
-        int updateId = 10;
+        int updateId = 108;
         Employee employee = new Employee(updateId);
         ensureEntityExist(employee);
         employee = employeeService.getById(employee);
@@ -101,7 +101,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void updateAllByIds() {
-        List<Integer> updateIds = Arrays.asList(11, 12);
+        List<Integer> updateIds = Arrays.asList(109, 110);
         List<Employee> employees = ensureEntityListExist(updateIds);
 
         String name = System.currentTimeMillis() + "";
@@ -117,7 +117,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void getById() {
-        int getId = 20;
+        int getId = 111;
         Employee employee = new Employee(getId);
         ensureEntityExist(employee);
         assertNotNull(employeeService.getById(employee));
@@ -125,30 +125,26 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void count() {
-        int id = 1;
+        int id = 112;
         ensureEntityExist(new Employee(id));
         assertTrue(employeeService.count() > 0);
     }
 
     @Test
     public void findPage() {
-        long count = employeeService.count();
-        if (count == 0) {
-            employeeService.save(new Employee("test_find_page"));
-        }
+        employeeService.save(new Employee("test_find_page"));
+        employeeService.save(new Employee("test_find_page2"));
         int pageNo = 1;
         long pageSize = 10;
-        pageSize = count > pageSize ? pageSize : count;
         Page page = new Page(pageNo, (int) pageSize);
-        page.setCount(count);
-        List<Employee> employees = employeeService.findPage(page, new Employee());
+        List<Employee> employees = employeeService.findPage(page, new Employee("test"));
+        System.out.println(employees);
         assertNotNull(employees);
-        assertEquals(pageSize, employees.size());
     }
 
     @Test
     public void findAllByFields() {
-        int id = 31;
+        int id = 113;
         Employee employee = new Employee(id);
         ensureEntityExist(employee);
         employee = employeeService.getById(employee);
@@ -160,7 +156,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void findAllByMap() {
-        int id = 41;
+        int id = 114;
         Employee employee = new Employee(id);
         ensureEntityExist(employee);
         employee = employeeService.getById(employee);

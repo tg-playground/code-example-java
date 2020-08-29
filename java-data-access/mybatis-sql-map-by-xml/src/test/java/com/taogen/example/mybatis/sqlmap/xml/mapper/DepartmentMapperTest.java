@@ -40,21 +40,21 @@ public class DepartmentMapperTest {
 
     @Test
     public void deleteById() {
-        int deleteId = 11;
+        int deleteId = 202;
         ensureEntityExist(new Department(deleteId));
         assertEquals(1, mapper.deleteById(new Department(deleteId)));
     }
 
     @Test
     public void deleteAll() {
-        List<Integer> deleteIds = Arrays.asList(21, 22);
+        List<Integer> deleteIds = Arrays.asList(203, 204);
         List<Department> departments = ensureEntityListExist(deleteIds);
         assertEquals(deleteIds.size(), mapper.deleteAll(departments));
     }
 
     @Test
     public void deleteAllByField() {
-        List<Integer> deleteIds = Arrays.asList(31, 32);
+        List<Integer> deleteIds = Arrays.asList(205, 206);
         List<Department> departments = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_field" + System.currentTimeMillis();
         for (Department department : departments) {
@@ -66,7 +66,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void deleteAllByMap() {
-        List<Integer> deleteIds = Arrays.asList(41, 42);
+        List<Integer> deleteIds = Arrays.asList(207, 208);
         List<Department> departments = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_map" + System.currentTimeMillis();
         for (Department department : departments) {
@@ -80,7 +80,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void updateSelective() {
-        int updateId = 51;
+        int updateId = 209;
         Department department = new Department(updateId);
         ensureEntityExist(department);
         department = mapper.getById(department);
@@ -93,7 +93,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void updateAllFieldsByMap() {
-        List<Integer> updateIds = Arrays.asList(61, 62);
+        List<Integer> updateIds = Arrays.asList(210, 211);
         List<Department> departments = ensureEntityListExist(updateIds);
         String name = System.currentTimeMillis() + "";
         for (Department department : departments) {
@@ -112,7 +112,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void getById() {
-        int id = 71;
+        int id = 212;
         Department department = new Department(id);
         ensureEntityExist(department);
 
@@ -139,7 +139,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void count() {
-        int id = 81;
+        int id = 213;
         ensureEntityExist(new Department(id));
         assertTrue(mapper.count() >= 1);
     }
@@ -182,15 +182,11 @@ public class DepartmentMapperTest {
         page.setOrderBy("name");
         List<Department> departments = mapper.findPage(page, new Department());
         assertNotNull(departments);
-        assertEquals(pageSize, departments.size());
-//        for (Department d : departments) {
-//            System.out.println(d.getId() + "," + d.getName());
-//        }
     }
 
     @Test
     public void findAllByMap() {
-        int id = 91;
+        int id = 214;
         Department department = new Department(id);
         ensureEntityExist(department);
         department = mapper.getById(department);
