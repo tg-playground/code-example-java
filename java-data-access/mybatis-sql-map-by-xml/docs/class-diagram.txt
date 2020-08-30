@@ -6,16 +6,16 @@
 
 class entity.BaseEntity
 {
-    int id
-    Timestamp createTime
-    Timestamp modifyTime
-    Boolean deleteFlag
+    # int id
+    # Timestamp createTime
+    # Timestamp modifyTime
+    # Boolean deleteFlag
 }
 
 class entity.Department
 {
     'fields
-    String name
+    - String name
 }
 
 entity.BaseEntity <|-- entity.Department
@@ -23,20 +23,23 @@ entity.BaseEntity <|-- entity.Department
 class entity.Employee
 {
     'fields
-    String name
-    String nickname
-    int age
-    Department dept
+    - String name
+    - String nickname
+    - int age
+    - Department dept
 }
 
 entity.BaseEntity <|-- entity.Employee
-entity.Employee "1" -- "many" entity.Department : contains
+entity.Employee "many" <-- "1" entity.Department : has
 
 class entity.Page
 {
-    int pageNo
-    int pageSize
-    long count
+    - int pageNo
+    - int pageSize
+    - long count
+    - String orderBy
+    - int start
+    + Page(int pageNo, int pageSize)
 }
 
 ''''''''''''''''''''''''''''''''''''
@@ -47,26 +50,27 @@ interface mapper.BaseMapper
 
 interface mapper.CrudMapper<T extends BaseEntity>
 {
-    int save(T entity)
-    int saveSelective(T entity)
-    int saveAll(Collection<T> entities)
-    int deleteById(T entity)
-    int deleteByIdLogically(T entity)
-    int deleteAllByIds(Collection<T> entities)
-    int deleteAllByFields(T entity)
-    int deleteAllByMap(Map<String, Object> params)
-    int update(T entity)
-    int updateSelective(T entity)
-    int updateAll(Collection<T> entities)
-    T getById(Integer entity)
-    T getById(Entity entity)
-    long countByMap(Map<String, Object> params)
-    List<T> findAllByFields(T entity)
-    List<T> findPage(Page<T> page, T entity)
-    List<T> findAllByMap(Map<String, Object> parameters)
-    int execDmlSql(String sql)
-    List<T> execDqlSql(String sql)
-    long execDqlSql(String sql)
+    + {abstract} int saveSelective(T entity)
+    + {abstract} int deleteById(T entity)
+    + {abstract} int deleteByIdLogically(T entity)
+    + {abstract} int deleteAll(Collection<T> entities)
+    + {abstract} int deleteAllLogically(Collection<T> entities)
+    + {abstract} int deleteAllByFields(T entity)
+    + {abstract} int deleteAllByMap(Map<String, Object> conditions)
+    + {abstract} int updateSelective(T entity)
+    + {abstract} int updateAllFieldsByMap(T entity, Map<String,Object> conditions)
+    + {abstract} T getById(T entity)
+    + {abstract} T callById(T entity)
+    + {abstract} long count()
+    + {abstract} long countByFields(T entity)
+    + {abstract} long countByMap(Map<String, Object> conditions)
+    + {abstract} List<T> findAllByFields(T entity)
+    + {abstract} List<T> findPage(Page page, T entity)
+    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+    + {abstract} int execInsertSql(String sql)
+    + {abstract} int execDeleteSql(String sql)
+    + {abstract} int execUpdateSql(String sql)
+    + {abstract} List<T> execSelectSql(String sql)
 }
 
 mapper.BaseMapper <|-- mapper.CrudMapper
@@ -94,17 +98,20 @@ interface service.BaseService
 
 interface service.CrudService<M extends CrudMapper<T>, T extends BaseEntity>
 {
-    int save(T entity)
-    int saveAll(Collection<T> entities)
-    int deleteById(T entity)
-    int deleteAllByIds(Collection<T> entities)
-    int update(T entity)
-    int updateAllByIds(Collection<T> entities)
-    T getById(int id);
-    T getById(Entity entity)
-    List<T> findPage(Page<T> page, T entity)
-    List<T> findAllByFields(T entity)
-    List<T> findAllByMap(Map<String, Object> parameters)
+    + {abstract} int save(T entity)
+    + {abstract} int saveAll(Collection<T> entities)
+    + {abstract} int saveOrUpdate(T entity)
+    + {abstract} int deleteById(T entity)
+    + {abstract} int deleteLogically(T entity)
+    + {abstract} int deleteAll(Collection<T> entities)
+    + {abstract} int deleteAllLogically(Collection<T> entities)
+    + {abstract} int deleteAllByMap(Map<String,Object> conditions)
+    + {abstract} int update(T entity)
+    + {abstract} int updateAllByIds(Collection<T> entities)
+    + {abstract} T getById(Entity entity)
+    + {abstract} List<T> findPage(Page<T> page, T entity)
+    + {abstract} List<T> findAllByFields(T entity)
+    + {abstract} List<T> findAllByMap(Map<String, Object> parameters)
 }
 
 service.BaseService <|-- service.CrudService
@@ -122,7 +129,7 @@ service.CrudService <|-- service.EmployeeService
 
 interface service.SqlSessionFactoryService
 {
-    SqlSessionFactory getSqlSessionFactory()
+    + {abstract} SqlSessionFactory getSqlSessionFactory()
 }
 service.BaseService <|-- service.SqlSessionFactoryService
 
@@ -134,17 +141,20 @@ service.BaseService <|.. service.AbstractBaseService
 
 abstract class service.AbstractCrudService
 {
-    int save(T entity)
-    int saveAll(Collection<T> entities)
-    int deleteById(T entity)
-    int deleteAllByIds(Collection<T> entities)
-    int update(T entity)
-    int updateAllByIds(Collection<T> entities)
-    T getById(int id);
-    T getById(Entity entity)
-    List<T> findPage(Page<T> page, T entity)
-    List<T> findAllByFields(T entity)
-    List<T> findAllByMap(Map<String, Object> parameters)
+    + int save(T entity)
+    + int saveAll(Collection<T> entities)
+    + int saveOrUpdate(T entity)
+    + int deleteById(T entity)
+    + int deleteLogically(T entity)
+    + int deleteAll(Collection<T> entities)
+    + int deleteAllLogically(Collection<T> entities)
+    + int deleteAllByMap(Map<String,Object> conditions)
+    + int update(T entity)
+    + int updateAllByIds(Collection<T> entities)
+    + T getById(Entity entity)
+    + List<T> findPage(Page<T> page, T entity)
+    + List<T> findAllByFields(T entity)
+    + List<T> findAllByMap(Map<String, Object> parameters)
 }
 service.AbstractBaseService <|-- service.AbstractCrudService
 service.CrudService <|.. service.AbstractCrudService

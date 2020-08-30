@@ -111,6 +111,7 @@ Implementation Process
 - Write all mapper unit tests
 - Write all XML SQL map.
 - Finally, Pass all Mapper unit tests
+- Update documents
 
 Class Diagram
 
@@ -118,4 +119,4 @@ Class Diagram
 
 Sequence Diagram
 
-TODO
+--END--
