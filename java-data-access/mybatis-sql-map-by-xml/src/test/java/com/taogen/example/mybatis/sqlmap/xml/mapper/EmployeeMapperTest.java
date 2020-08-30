@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -53,8 +54,42 @@ public class EmployeeMapperTest {
     }
 
     @Test
+    public void deleteLogically() {
+        int deleteId = 202;
+        Employee employee = new Employee(deleteId);
+        ensureEntityExist(employee);
+        String name = "deleteLogically" + System.currentTimeMillis();
+        employee.setName(name);
+        mapper.updateSelective(employee);
+        assertEquals(1, mapper.deleteLogically(employee));
+        employee = mapper.getById(employee);
+        System.out.println(employee);
+        assertEquals(name, employee.getName());
+        assertEquals(true, employee.getDeleteFlag());
+    }
+
+    @Test
+    public void deleteAllLogically() {
+        List<Integer> deleteIds = Arrays.asList(12, 13);
+        List<Employee> employees = ensureEntityListExist(deleteIds);
+        String name = "deleteAllLogically" + System.currentTimeMillis();
+        for (Employee employee : employees) {
+            employee = mapper.getById(employee);
+            employee.setName(name);
+            mapper.updateSelective(employee);
+        }
+        mapper.deleteAllLogically(employees);
+        for (Employee employee : employees) {
+            employee = mapper.getById(employee);
+            assertEquals(name, employee.getName());
+            assertEquals(true, employee.getDeleteFlag());
+        }
+    }
+
+    @Test
     public void deleteAllByField() {
         List<Integer> deleteIds = Arrays.asList(204, 205);
+        mapper.deleteAll(deleteIds.stream().map(deleteId -> new Employee(deleteId)).collect(Collectors.toList()));
         List<Employee> employees = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_field" + System.currentTimeMillis();
         for (Employee employee : employees) {
@@ -214,7 +249,7 @@ public class EmployeeMapperTest {
         int id = 12;
         ensureEntityExist(new Employee(id, "exec_update_sql"));
         String updateName = "exec_update_sql" + System.currentTimeMillis();
-        String sql = "update t_employee set name=\""+updateName+"\" where id="+id;
+        String sql = "update t_employee set name=\"" + updateName + "\" where id=" + id;
         assertEquals(1, mapper.execUpdateSql(sql));
     }
 

@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -53,8 +54,41 @@ public class DepartmentMapperTest {
     }
 
     @Test
+    public void deleteLogically() {
+        int deleteId = 202;
+        Department department = new Department(deleteId);
+        ensureEntityExist(department);
+        String name = "deleteLogically" + System.currentTimeMillis();
+        department.setName(name);
+        mapper.updateSelective(department);
+        assertEquals(1, mapper.deleteLogically(department));
+        department = mapper.getById(department);
+        assertEquals(name, department.getName());
+        assertEquals(true, department.getDeleteFlag());
+    }
+
+    @Test
+    public void deleteAllLogically() {
+        List<Integer> deleteIds = Arrays.asList(203, 204);
+        List<Department> departments = ensureEntityListExist(deleteIds);
+        String name = "deleteAllLogically" + System.currentTimeMillis();
+        for (Department department : departments) {
+            department = mapper.getById(department);
+            department.setName(name);
+            mapper.updateSelective(department);
+        }
+        mapper.deleteAllLogically(departments);
+        for (Department department : departments) {
+            department = mapper.getById(department);
+            assertEquals(name, department.getName());
+            assertEquals(true, department.getDeleteFlag());
+        }
+    }
+
+    @Test
     public void deleteAllByField() {
         List<Integer> deleteIds = Arrays.asList(205, 206);
+        mapper.deleteAll(deleteIds.stream().map(deleteId -> new Department(deleteId)).collect(Collectors.toList()));
         List<Department> departments = ensureEntityListExist(deleteIds);
         String name = "delete_all_by_field" + System.currentTimeMillis();
         for (Department department : departments) {

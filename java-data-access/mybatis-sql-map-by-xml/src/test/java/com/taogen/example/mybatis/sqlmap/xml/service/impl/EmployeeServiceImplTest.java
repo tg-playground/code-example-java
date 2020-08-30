@@ -72,6 +72,38 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void deleteLogically() {
+        int deleteId = 202;
+        Employee employee = new Employee(deleteId);
+        ensureEntityExist(employee);
+        String name = "deleteLogically" + System.currentTimeMillis();
+        employee.setName(name);
+        employeeService.update(employee);
+        assertEquals(1, employeeService.deleteLogically(employee));
+        employee = employeeService.getById(employee);
+        System.out.println(employee);
+        assertEquals(name, employee.getName());
+        assertEquals(true, employee.getDeleteFlag());
+    }
+
+    @Test
+    public void deleteAllLogically() {
+        List<Integer> deleteIds = Arrays.asList(12, 13);
+        List<Employee> employees = ensureEntityListExist(deleteIds);
+        String name = "deleteAllLogically" + System.currentTimeMillis();
+        for (Employee employee : employees) {
+            employee = employeeService.getById(employee);
+            employee.setName(name);
+            employeeService.update(employee);
+        }
+        employeeService.deleteAllLogically(employees);
+        for (Employee employee : employees) {
+            employee = employeeService.getById(employee);
+            assertEquals(name, employee.getName());
+            assertEquals(true, employee.getDeleteFlag());
+        }
+    }
+    @Test
     public void deleteAllByMap() {
         List<Integer> deleteIds = Arrays.asList(106, 107);
         List<Employee> employees = ensureEntityListExist(deleteIds);

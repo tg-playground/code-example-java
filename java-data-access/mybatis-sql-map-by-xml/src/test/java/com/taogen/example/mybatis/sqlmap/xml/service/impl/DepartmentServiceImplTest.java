@@ -73,6 +73,38 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
+    public void deleteLogically() {
+        int deleteId = 202;
+        Department department = new Department(deleteId);
+        ensureEntityExist(department);
+        String name = "deleteLogically" + System.currentTimeMillis();
+        department.setName(name);
+        departmentService.update(department);
+        assertEquals(1, departmentService.deleteLogically(department));
+        department = departmentService.getById(department);
+        assertEquals(name, department.getName());
+        assertEquals(true, department.getDeleteFlag());
+    }
+
+    @Test
+    public void deleteAllLogically() {
+        List<Integer> deleteIds = Arrays.asList(203, 204);
+        List<Department> departments = ensureEntityListExist(deleteIds);
+        String name = "deleteAllLogically" + System.currentTimeMillis();
+        for (Department department : departments) {
+            department = departmentService.getById(department);
+            department.setName(name);
+            departmentService.update(department);
+        }
+        departmentService.deleteAllLogically(departments);
+        for (Department department : departments) {
+            department = departmentService.getById(department);
+            assertEquals(name, department.getName());
+            assertEquals(true, department.getDeleteFlag());
+        }
+    }
+
+    @Test
     public void deleteAllByMap() {
         List<Integer> deleteIds = Arrays.asList(108, 109);
         List<Department> departments = ensureEntityListExist(deleteIds);
