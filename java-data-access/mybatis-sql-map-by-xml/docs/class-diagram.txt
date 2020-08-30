@@ -108,10 +108,11 @@ interface service.CrudService<M extends CrudMapper<T>, T extends BaseEntity>
     + {abstract} int deleteAllByMap(Map<String,Object> conditions)
     + {abstract} int update(T entity)
     + {abstract} int updateAllByIds(Collection<T> entities)
-    + {abstract} T getById(Entity entity)
+    + {abstract} T getById(T entity)
+    + {abstract} long count()
     + {abstract} List<T> findPage(Page<T> page, T entity)
     + {abstract} List<T> findAllByFields(T entity)
-    + {abstract} List<T> findAllByMap(Map<String, Object> parameters)
+    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
 }
 
 service.BaseService <|-- service.CrudService
@@ -151,10 +152,11 @@ abstract class service.AbstractCrudService
     + int deleteAllByMap(Map<String,Object> conditions)
     + int update(T entity)
     + int updateAllByIds(Collection<T> entities)
-    + T getById(Entity entity)
+    + T getById(T entity)
+    + long count()
     + List<T> findPage(Page<T> page, T entity)
     + List<T> findAllByFields(T entity)
-    + List<T> findAllByMap(Map<String, Object> parameters)
+    + List<T> findAllByMap(Map<String, Object> conditions)
 }
 service.AbstractBaseService <|-- service.AbstractCrudService
 service.CrudService <|.. service.AbstractCrudService
