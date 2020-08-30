@@ -96,7 +96,7 @@ public class EmployeeMapperTest {
             employee.setName(name);
             mapper.updateSelective(employee);
         }
-        assertTrue(mapper.deleteAllByField(new Employee(name)) >= deleteIds.size());
+        assertTrue(mapper.deleteAllByFields(new Employee(name)) >= deleteIds.size());
     }
 
     @Test
@@ -189,7 +189,7 @@ public class EmployeeMapperTest {
     public void countByField() {
         String name = "count_by_field" + System.currentTimeMillis();
         mapper.saveSelective(new Employee(name));
-        assertTrue(mapper.countByField(new Employee(name)) >= 1);
+        assertTrue(mapper.countByFields(new Employee(name)) >= 1);
     }
 
     @Test

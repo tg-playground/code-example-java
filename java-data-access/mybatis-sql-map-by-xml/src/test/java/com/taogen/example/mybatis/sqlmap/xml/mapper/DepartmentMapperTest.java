@@ -95,7 +95,7 @@ public class DepartmentMapperTest {
             department.setName(name);
             mapper.updateSelective(department);
         }
-        assertTrue(mapper.deleteAllByField(new Department(name)) >= deleteIds.size());
+        assertTrue(mapper.deleteAllByFields(new Department(name)) >= deleteIds.size());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class DepartmentMapperTest {
     public void countByField() {
         String name = "count_by_field" + System.currentTimeMillis();
         mapper.saveSelective(new Department(name));
-        assertTrue(mapper.countByField(new Department(name)) >= 1);
+        assertTrue(mapper.countByFields(new Department(name)) >= 1);
     }
 
     @Test
