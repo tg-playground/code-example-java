@@ -262,18 +262,19 @@
     </select>
 
     <insert id="execInsertSql">
-
+        ${sql}
     </insert>
 
     <delete id="execDeleteSql">
-
+        ${sql}
     </delete>
 
     <update id="execUpdateSql">
-
+        ${sql}
     </update>
 
-    <select id="execSelectSql">
-
+    <select id="execSelectSql" resultType="Department">
+        ${sql}
     </select>
+
 </mapper>
