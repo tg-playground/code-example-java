@@ -170,6 +170,15 @@ public class EmployeeMapperTest {
     }
 
     @Test
+    public void callById() {
+        int id = 212;
+        ensureEntityExist(new Employee(id));
+        Employee employee = mapper.callById(new Employee(id));
+        assertNotNull(employee);
+        System.out.println(employee);
+    }
+
+    @Test
     public void count() {
         int id = 212;
         ensureEntityExist(new Employee(id));

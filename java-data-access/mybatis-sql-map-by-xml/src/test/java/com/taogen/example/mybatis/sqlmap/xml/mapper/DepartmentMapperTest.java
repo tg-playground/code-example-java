@@ -172,6 +172,15 @@ public class DepartmentMapperTest {
     }
 
     @Test
+    public void callById() {
+        int id = 212;
+        ensureEntityExist(new Department(id));
+        Department department = mapper.callById(new Department(id));
+        assertNotNull(department);
+        System.out.println(department);
+    }
+
+    @Test
     public void count() {
         int id = 213;
         ensureEntityExist(new Department(id));
