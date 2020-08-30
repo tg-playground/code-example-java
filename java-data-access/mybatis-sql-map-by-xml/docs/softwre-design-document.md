@@ -57,6 +57,14 @@ COMMENT='department table';
 
 CREATE INDEX index_for_name USING BTREE ON `t_department` (name(64));
 
+DELIMITER //
+   DROP PROCEDURE IF EXISTS get_dept_by_id //
+   CREATE PROCEDURE get_dept_by_id (IN dept_id INT)
+   BEGIN 
+      SELECT * FROM `t_department` WHERE id = dept_id; 
+   END// 
+DELIMITER ;
+
 DROP TABLE IF EXISTS `t_employee`;
 
 CREATE TABLE `t_employee` (
@@ -72,6 +80,14 @@ ENGINE='InnoDB'
 COMMENT='employee table';
 
 CREATE INDEX index_for_name_and_deptid USING BTREE ON `t_employee` (name(64), dept_id);
+
+DELIMITER //
+   DROP PROCEDURE IF EXISTS get_emp_by_id //
+   CREATE PROCEDURE get_emp_by_id (IN emp_id INT)
+   BEGIN 
+      SELECT * FROM `t_employee` WHERE id = emp_id; 
+   END// 
+DELIMITER ;
 ```
 
 
