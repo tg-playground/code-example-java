@@ -40,6 +40,8 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     T getById(T entity);
 
+    T callById(T entity);
+
     long count();
 
     long countByField(T entity);

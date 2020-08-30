@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.taogen.example.mybatis.sqlmap.xml.mapper.EmployeeMapper">
-<!--    <resultMap id="BaseResultMap" type="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">-->
-<!--        <id column="id" jdbcType="INTEGER" property="id"/>-->
-<!--        <result column="name" jdbcType="VARCHAR" property="name"/>-->
-<!--        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>-->
-<!--        <result column="age" jdbcType="INTEGER" property="age"/>-->
-<!--        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>-->
-<!--        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
-<!--        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
-<!--        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
-<!--    </resultMap>-->
+    <resultMap id="BaseResultMap" type="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
 
 <!--    <sql id="Base_Column_List">-->
 <!--        a.id,-->
@@ -251,6 +251,10 @@
         from t_employee as a
         <include refid="Joins"/>
         where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="callById" parameterType="Employee" resultMap="BaseResultMap" statementType="CALLABLE">
+        {call get_emp_by_id(#{id,jdbcType=INTEGER,mode=IN})}
     </select>
 
     <select id="count" resultType="java.lang.Long">

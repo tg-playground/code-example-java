@@ -186,6 +186,10 @@
         where a.id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="callById" parameterType="Department" resultMap="BaseResultMap" statementType="CALLABLE">
+        {call get_dept_by_id(#{id,jdbcType=INTEGER,mode=IN})}
+    </select>
+
     <select id="count" resultType="java.lang.Long">
         select count(*) from t_department as a
     </select>
