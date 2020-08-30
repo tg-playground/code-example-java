@@ -121,7 +121,7 @@
         </foreach>
     </update>
 
-    <delete id="deleteAllByField" parameterType="Department">
+    <delete id="deleteAllByFields" parameterType="Department">
         delete from t_department
         where
         delete_flag = 0
@@ -194,7 +194,7 @@
         select count(*) from t_department as a
     </select>
 
-    <select id="countByField" parameterType="Department" resultType="java.lang.Long">
+    <select id="countByFields" parameterType="Department" resultType="java.lang.Long">
         select count(*) from t_department as a
         where
         delete_flag = 0

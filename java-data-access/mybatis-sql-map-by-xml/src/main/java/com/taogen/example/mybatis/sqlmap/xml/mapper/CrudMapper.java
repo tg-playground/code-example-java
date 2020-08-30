@@ -26,7 +26,7 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     int deleteAllLogically(@Param("entities") Collection<T> entities);
 
-    int deleteAllByField(T entity);
+    int deleteAllByFields(T entity);
 
     int deleteAllByMap(@Param("conditions") Map<String, Object> conditions);
 
@@ -44,7 +44,7 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     long count();
 
-    long countByField(T entity);
+    long countByFields(T entity);
 
     long countByMap(@Param("conditions") Map<String, Object> conditions);
 

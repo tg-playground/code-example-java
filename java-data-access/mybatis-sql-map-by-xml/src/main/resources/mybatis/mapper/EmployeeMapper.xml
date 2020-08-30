@@ -161,7 +161,7 @@
         </foreach>
     </update>
 
-    <delete id="deleteAllByField" parameterType="Employee">
+    <delete id="deleteAllByFields" parameterType="Employee">
         delete from t_employee
         where
         delete_flag = 0
@@ -261,7 +261,7 @@
         select count(*) from t_employee as a
     </select>
 
-    <select id="countByField" parameterType="Employee" resultType="java.lang.Long">
+    <select id="countByFields" parameterType="Employee" resultType="java.lang.Long">
         select count(*) from t_employee as a
         where
         delete_flag = 0
