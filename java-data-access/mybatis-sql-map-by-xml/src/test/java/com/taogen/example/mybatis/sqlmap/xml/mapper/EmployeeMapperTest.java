@@ -195,24 +195,42 @@ public class EmployeeMapperTest {
         assertNotNull(mapper.findAllByMap(params));
     }
 
-//    @Test
-//    public void execSelectSql() {
-//        String name = "exec_dql_sql" + System.currentTimeMillis();
-//        mapper.saveSelective(new Employee(name));
-//        String sql = "select * from t_employee where name=\"" + name + "\"";
-//        List<Employee> employees = mapper.execSelectSql(sql);
-//        assertNotNull(employees);
-//        assertTrue(employees.size() >= 1);
-//
-//    }
+    @Test
+    public void execInsertSql() {
+        String sql = "insert into t_employee (name) values ('Tom'), ('John')";
+        assertEquals(2, mapper.execInsertSql(sql));
+    }
 
-//    @Test
-//    public void execDeleteSql() {
-//        int deleteId = 1;
-//        ensureEntityExist(new Employee(deleteId));
-//        String sql = "delete from t_employee where id=" + deleteId;
-//        assertEquals(1, mapper.execDeleteSql(sql));
-//    }
+    @Test
+    public void execDeleteSql() {
+        int id = 11;
+        ensureEntityExist(new Employee(id, "exec_delete_sql"));
+        String sql = "delete from t_employee where id=" + id;
+        assertEquals(1, mapper.execDeleteSql(sql));
+    }
+
+    @Test
+    public void execUpdateSql() {
+        int id = 12;
+        ensureEntityExist(new Employee(id, "exec_update_sql"));
+        String updateName = "exec_update_sql" + System.currentTimeMillis();
+        String sql = "update t_employee set name=\""+updateName+"\" where id="+id;
+        assertEquals(1, mapper.execUpdateSql(sql));
+    }
+
+    @Test
+    public void execSelectSql() {
+        int id = 13;
+        String name = "exec_select_sql" + System.currentTimeMillis();
+        Employee employee = new Employee(id, name);
+        ensureEntityExist(employee);
+        mapper.updateSelective(employee);
+        String sql = "select * from t_employee where name=\"" + name + "\"";
+        List<Employee> employees = mapper.execSelectSql(sql);
+        System.out.println(employees);
+        assertNotNull(employees);
+        assertTrue(employees.size() >= 1);
+    }
 
     private List<Employee> ensureEntityListExist(List<Integer> ids) {
         List<Employee> employees = new ArrayList<>();

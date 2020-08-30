@@ -198,24 +198,42 @@ public class DepartmentMapperTest {
         assertNotNull(mapper.findAllByMap(params));
     }
 
-//    @Test
-//    public void execSelectSql() {
-//        String name = "exec_dql_sql" + System.currentTimeMillis();
-//        mapper.saveSelective(new Department(name));
-//        String sql = "select * from t_department where name=\"" + name + "\"";
-//        List<Department> departments = mapper.execSelectSql(sql);
-//        assertNotNull(departments);
-//        assertTrue(departments.size() >= 1);
-//
-//    }
+    @Test
+    public void execInsertSql() {
+        String sql = "insert into t_department (name) values ('Tom'), ('John')";
+        assertEquals(2, mapper.execInsertSql(sql));
+    }
 
-//    @Test
-//    public void execDeleteSql() {
-//        int deleteId = 1;
-//        ensureEntityExist(new Department(deleteId));
-//        String sql = "delete from t_department where id=" + deleteId;
-//        assertEquals(1, mapper.execDeleteSql(sql));
-//    }
+    @Test
+    public void execDeleteSql() {
+        int id = 11;
+        ensureEntityExist(new Department(id, "exec_delete_sql"));
+        String sql = "delete from t_department where id=" + id;
+        assertEquals(1, mapper.execDeleteSql(sql));
+    }
+
+    @Test
+    public void execUpdateSql() {
+        int id = 12;
+        ensureEntityExist(new Department(id, "exec_update_sql"));
+        String updateName = "exec_update_sql" + System.currentTimeMillis();
+        String sql = "update t_department set name=\"" + updateName + "\" where id=" + id;
+        assertEquals(1, mapper.execUpdateSql(sql));
+    }
+
+    @Test
+    public void execSelectSql() {
+        int id = 13;
+        String name = "exec_select_sql" + System.currentTimeMillis();
+        Department department = new Department(id, name);
+        ensureEntityExist(department);
+        mapper.updateSelective(department);
+        String sql = "select * from t_department where name=\"" + name + "\"";
+        List<Department> departments = mapper.execSelectSql(sql);
+        System.out.println(departments);
+        assertNotNull(departments);
+        assertTrue(departments.size() >= 1);
+    }
 
     private List<Department> ensureEntityListExist(List<Integer> ids) {
         List<Department> departments = new ArrayList<>();
