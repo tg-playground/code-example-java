@@ -96,6 +96,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
+    <update id="deleteLogically" parameterType="Department">
+        update t_department
+        set delete_flag = 1
+        where id = #{id}
+    </update>
+
     <delete id="deleteAll">
         delete from t_department
         where id in
@@ -104,6 +110,16 @@
             #{item.id}
         </foreach>
     </delete>
+
+    <update id="deleteAllLogically">
+        update t_department
+        set delete_flag = 1
+        where id in
+        <foreach item="item" index="index" collection="entities"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
 
     <delete id="deleteAllByField" parameterType="Department">
         delete from t_department

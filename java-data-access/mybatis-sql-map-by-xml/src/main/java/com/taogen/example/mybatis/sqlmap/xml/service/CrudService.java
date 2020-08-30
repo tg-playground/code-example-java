@@ -20,7 +20,11 @@ public interface CrudService<M extends CrudMapper, T extends BaseEntity> extends
 
     int deleteById(T entity);
 
+    int deleteLogically(T entity);
+
     int deleteAllByIds(Collection<T> entities);
+
+    int deleteAllLogically(Collection<T> entities);
 
     int deleteAllByMap(Map<String, Object> conditions);
 

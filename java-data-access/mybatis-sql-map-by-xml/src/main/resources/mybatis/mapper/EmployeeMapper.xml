@@ -61,9 +61,9 @@
         a.name,
         a.nickname,
         a.age,
-        a.delete_flag,
-        a.create_time,
-        a.modify_time,
+        a.delete_flag as "deleteFlag",
+        a.create_time as "createTime",
+        a.modify_time as "modifyTime",
         b.id as "department.id",
         b.name as "department.name",
         b.delete_flag as "department.deleteFlag",
@@ -136,6 +136,12 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
+    <update id="deleteLogically" parameterType="Employee">
+        update t_employee
+        set delete_flag = 1
+        where id = #{id}
+    </update>
+
     <delete id="deleteAll" parameterType="Employee">
         delete from t_employee
         where id in
@@ -144,6 +150,16 @@
             #{item.id}
         </foreach>
     </delete>
+
+    <update id="deleteAllLogically">
+        update t_employee
+        set delete_flag = 1
+        where id in
+        <foreach item="item" index="index" collection="entities"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
 
     <delete id="deleteAllByField" parameterType="Employee">
         delete from t_employee

@@ -116,6 +116,24 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
         return result;
     }
 
+
+    @Override
+    public int deleteLogically(T entity) {
+        SqlSession session = getSqlSession();
+        int result = 0;
+        try {
+            result = getMapperFromSession(session).deleteLogically(entity);
+            session.commit();
+        } catch (Exception e) {
+            logger.error(e);
+            session.rollback();
+            result = 0;
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
     @Override
     public int deleteAllByIds(Collection<T> entities) {
         SqlSession session = getSqlSession();
@@ -125,6 +143,25 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
             session.commit();
         } catch (Exception e) {
             logger.error(e);
+            session.rollback();
+            result = 0;
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+    @Override
+    public int deleteAllLogically(Collection<T> entities) {
+        SqlSession session = getSqlSession();
+        int result = 0;
+        try {
+            for (T entity : entities) {
+                result += getMapperFromSession(session).deleteLogically(entity);
+            }
+            session.commit();
+        } catch (Exception e) {
+            logger.error("{}: {}", e.getClass().getName(), e.getMessage(), e);
             session.rollback();
             result = 0;
         } finally {

@@ -20,7 +20,11 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     int deleteById(T entity);
 
+    int deleteLogically(T entity);
+
     int deleteAll(@Param("entities") Collection<T> entities);
+
+    int deleteAllLogically(@Param("entities") Collection<T> entities);
 
     int deleteAllByField(T entity);
 
