@@ -26,8 +26,6 @@
 
 ### Database Design
 
-### Database Design
-
 t_department
 
 | Name        | Type         | Length | NULL     | Default | Key  | Comment |
@@ -327,3 +325,7 @@ T callById(Integer id
 
 
 ## References
+
+[1] [mybatis](https://mybatis.org/mybatis-3/java-api.html)
+
+[2] [Quick Guide to MyBatis](https://www.baeldung.com/mybatis)

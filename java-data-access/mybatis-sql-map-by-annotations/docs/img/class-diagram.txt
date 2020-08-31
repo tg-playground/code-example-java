@@ -48,62 +48,62 @@ class entity.Page
 
 interface mapper.BaseMapper
 
-interface mapper.CrudMapper<T extends BaseEntity>
+interface mapper.CrudMapper
 {
 }
 
 mapper.BaseMapper <|-- mapper.CrudMapper
 
-interface mapper.DepartmentMapper<Department>
+interface mapper.DepartmentMapper
 {
-    + {abstract} int saveSelective(T entity)
-    + {abstract} int deleteById(T entity)
-    + {abstract} int deleteByIdLogically(T entity)
-    + {abstract} int deleteAll(Collection<T> entities)
-    + {abstract} int deleteAllLogically(Collection<T> entities)
-    + {abstract} int deleteAllByFields(T entity)
+    + {abstract} int saveSelective(Department entity)
+    + {abstract} int deleteById(Department entity)
+    + {abstract} int deleteByIdLogically(Department entity)
+    + {abstract} int deleteAll(Collection<Department> entities)
+    + {abstract} int deleteAllLogically(Collection<Department> entities)
+    + {abstract} int deleteAllByFields(Department entity)
     + {abstract} int deleteAllByMap(Map<String, Object> conditions)
-    + {abstract} int updateSelective(T entity)
-    + {abstract} int updateAllFieldsByMap(T entity, Map<String,Object> conditions)
-    + {abstract} T getById(T entity)
-    + {abstract} T callById(T entity)
+    + {abstract} int updateSelective(Department entity)
+    + {abstract} int updateAllFieldsByMap(Department entity, Map<String,Object> conditions)
+    + {abstract} Department getById(Department entity)
+    + {abstract} Department callById(Department entity)
     + {abstract} long count()
-    + {abstract} long countByFields(T entity)
+    + {abstract} long countByFields(Department entity)
     + {abstract} long countByMap(Map<String, Object> conditions)
-    + {abstract} List<T> findAllByFields(T entity)
-    + {abstract} List<T> findPage(Page page, T entity)
-    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+    + {abstract} List<Department> findAllByFields(Department entity)
+    + {abstract} List<Department> findPage(Page page, Department entity)
+    + {abstract} List<Department> findAllByMap(Map<String, Object> conditions)
     + {abstract} int execInsertSql(String sql)
     + {abstract} int execDeleteSql(String sql)
     + {abstract} int execUpdateSql(String sql)
-    + {abstract} List<T> execSelectSql(String sql)
+    + {abstract} List<Department> execSelectSql(String sql)
 }
 
 mapper.CrudMapper <|-- mapper.DepartmentMapper
 
-interface mapper.EmployeeMapper<Employee>
+interface mapper.EmployeeMapper
 {
-    + {abstract} int saveSelective(T entity)
-    + {abstract} int deleteById(T entity)
-    + {abstract} int deleteByIdLogically(T entity)
-    + {abstract} int deleteAll(Collection<T> entities)
-    + {abstract} int deleteAllLogically(Collection<T> entities)
-    + {abstract} int deleteAllByFields(T entity)
+    + {abstract} int saveSelective(Employee entity)
+    + {abstract} int deleteById(Employee entity)
+    + {abstract} int deleteByIdLogically(Employee entity)
+    + {abstract} int deleteAll(Collection<Employee> entities)
+    + {abstract} int deleteAllLogically(Collection<Employee> entities)
+    + {abstract} int deleteAllByFields(Employee entity)
     + {abstract} int deleteAllByMap(Map<String, Object> conditions)
-    + {abstract} int updateSelective(T entity)
-    + {abstract} int updateAllFieldsByMap(T entity, Map<String,Object> conditions)
-    + {abstract} T getById(T entity)
-    + {abstract} T callById(T entity)
+    + {abstract} int updateSelective(Employee entity)
+    + {abstract} int updateAllFieldsByMap(Employee entity, Map<String,Object> conditions)
+    + {abstract} Employee getById(Employee entity)
+    + {abstract} Employee callById(Employee entity)
     + {abstract} long count()
-    + {abstract} long countByFields(T entity)
+    + {abstract} long countByFields(Employee entity)
     + {abstract} long countByMap(Map<String, Object> conditions)
-    + {abstract} List<T> findAllByFields(T entity)
-    + {abstract} List<T> findPage(Page page, T entity)
-    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+    + {abstract} List<Employee> findAllByFields(Employee entity)
+    + {abstract} List<Employee> findPage(Page page, Employee entity)
+    + {abstract} List<Employee> findAllByMap(Map<String, Object> conditions)
     + {abstract} int execInsertSql(String sql)
     + {abstract} int execDeleteSql(String sql)
     + {abstract} int execUpdateSql(String sql)
-    + {abstract} List<T> execSelectSql(String sql)
+    + {abstract} List<Employee> execSelectSql(String sql)
 }
 
 mapper.CrudMapper <|-- mapper.EmployeeMapper
@@ -163,34 +163,48 @@ service.BaseService <|.. service.AbstractBaseService
 
 abstract class service.AbstractCrudService
 {
-    + int save(T entity)
-    + int saveAll(Collection<T> entities)
-    + int saveOrUpdate(T entity)
-    + int deleteById(T entity)
-    + int deleteLogically(T entity)
-    + int deleteAll(Collection<T> entities)
-    + int deleteAllLogically(Collection<T> entities)
-    + int deleteAllByMap(Map<String,Object> conditions)
-    + int update(T entity)
-    + int updateAllByIds(Collection<T> entities)
-    + T getById(T entity)
-    + long count()
-    + List<T> findPage(Page<T> page, T entity)
-    + List<T> findAllByFields(T entity)
-    + List<T> findAllByMap(Map<String, Object> conditions)
 }
 service.AbstractBaseService <|-- service.AbstractCrudService
 service.CrudService <|.. service.AbstractCrudService
 
 class service.impl.DepartmentServiceImpl
 {
-
+    + int save(Department entity)
+    + int saveAll(Collection<Department> entities)
+    + int saveOrUpdate(Department entity)
+    + int deleteById(Department entity)
+    + int deleteLogically(Department entity)
+    + int deleteAll(Collection<Department> entities)
+    + int deleteAllLogically(Collection<Department> entities)
+    + int deleteAllByMap(Map<String,Object> conditions)
+    + int update(Department entity)
+    + int updateAllByIds(Collection<Department> entities)
+    + Department getById(Department entity)
+    + long count()
+    + List<Department> findPage(Page<Department> page, Department entity)
+    + List<Department> findAllByFields(Department entity)
+    + List<Department> findAllByMap(Map<String, Object> conditions)
 }
 service.AbstractCrudService <|-- service.impl.DepartmentServiceImpl
 service.DepartmentService <|.. service.impl.DepartmentServiceImpl
 
 class service.impl.EmployeeServiceImpl
 {
+    + int save(Employee entity)
+    + int saveAll(Collection<Employee> entities)
+    + int saveOrUpdate(Employee entity)
+    + int deleteById(Employee entity)
+    + int deleteLogically(Employee entity)
+    + int deleteAll(Collection<Employee> entities)
+    + int deleteAllLogically(Collection<Employee> entities)
+    + int deleteAllByMap(Map<String,Object> conditions)
+    + int update(Employee entity)
+    + int updateAllByIds(Collection<Employee> entities)
+    + Employee getById(Employee entity)
+    + long count()
+    + List<Employee> findPage(Page<Employee> page, Employee entity)
+    + List<Employee> findAllByFields(Employee entity)
+    + List<Employee> findAllByMap(Map<String, Object> conditions)
 }
 service.AbstractCrudService <|-- service.impl.EmployeeServiceImpl
 service.EmployeeService <|.. service.impl.EmployeeServiceImpl

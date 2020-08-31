@@ -77,6 +77,7 @@ Add Maven project properties, add Maven dependencies, and add Maven plugins
     <!-- dependencies version -->
     <junit.version>4.12</junit.version>
     <log4j.version>2.8.2</log4j.version>
+    <mysql-connector.version>8.0.19</mysql-connector.version>
     <!-- end -->
 </properties>
 
@@ -98,6 +99,19 @@ Add Maven project properties, add Maven dependencies, and add Maven plugins
     </dependency>
     <!-- end -->
     
+    <!-- MyBatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.5</version>
+        </dependency>
+
+        <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.version}</version>
+        </dependency>
 </dependencies>
 
 <build>
