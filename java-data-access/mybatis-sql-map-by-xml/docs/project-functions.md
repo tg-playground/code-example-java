@@ -11,7 +11,7 @@ Functions
   - [x] batch operations
   - [x] multiple parameters in mapper
 - 3
-  - [x] call store procedure
+  - [x] call stored procedure
 
 Business Logic
 

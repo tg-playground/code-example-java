@@ -18,13 +18,13 @@ Content
 
 t_department
 
-| Name        | Type         | Length | NULL     | Default | Key  | Description |
-| ----------- | ------------ | ------ | -------- | ------- | ---- | ----------- |
-| id          | INT UNSIGNED |        | not null |         | P    |             |
-| name        | VARCHAR      | 64     | not null |         |      |             |
-| delete_flag | BOOL         |        | not null | 0       |      |             |
-| create_time | TIMESTAMP    |        | not null | NOW()   |      |             |
-| modify_time | TIMESTAMP    |        | null     |         |      |             |
+| Name        | Type         | Length | NULL     | Default | Key  | Comment |
+| ----------- | ------------ | ------ | -------- | ------- | ---- | ------- |
+| id          | INT UNSIGNED |        | not null |         | P    |         |
+| name        | VARCHAR      | 64     | not null |         |      |         |
+| delete_flag | BOOL         |        | not null | 0       |      |         |
+| create_time | TIMESTAMP    |        | not null | NOW()   |      |         |
+| modify_time | TIMESTAMP    |        | null     |         |      |         |
 
 t_employee
 
