@@ -1,0 +1,12 @@
+@startuml
+
+start
+
+:Get SqlSessionFactory;
+:Get SqlSession;
+:Get Mapper by SqlSession;
+:Execute SQL map;
+
+stop
+
+@enduml

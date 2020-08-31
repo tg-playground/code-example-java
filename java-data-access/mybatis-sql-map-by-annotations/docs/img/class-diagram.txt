@@ -1,0 +1,204 @@
+@startuml
+
+''''''''''''''''''''''''''''''''''''
+' Entity
+''''''''''''''''''''''''''''''''''''
+
+class entity.BaseEntity
+{
+    # int id
+    # Timestamp createTime
+    # Timestamp modifyTime
+    # Boolean deleteFlag
+}
+
+class entity.Department
+{
+    'fields
+    - String name
+}
+
+entity.BaseEntity <|-- entity.Department
+
+class entity.Employee
+{
+    'fields
+    - String name
+    - String nickname
+    - int age
+    - Department dept
+}
+
+entity.BaseEntity <|-- entity.Employee
+entity.Employee "many" <-- "1" entity.Department : has
+
+class entity.Page
+{
+    - int pageNo
+    - int pageSize
+    - long count
+    - String orderBy
+    - int start
+    + Page(int pageNo, int pageSize)
+}
+
+''''''''''''''''''''''''''''''''''''
+' Mapper
+''''''''''''''''''''''''''''''''''''
+
+interface mapper.BaseMapper
+
+interface mapper.CrudMapper<T extends BaseEntity>
+{
+}
+
+mapper.BaseMapper <|-- mapper.CrudMapper
+
+interface mapper.DepartmentMapper<Department>
+{
+    + {abstract} int saveSelective(T entity)
+    + {abstract} int deleteById(T entity)
+    + {abstract} int deleteByIdLogically(T entity)
+    + {abstract} int deleteAll(Collection<T> entities)
+    + {abstract} int deleteAllLogically(Collection<T> entities)
+    + {abstract} int deleteAllByFields(T entity)
+    + {abstract} int deleteAllByMap(Map<String, Object> conditions)
+    + {abstract} int updateSelective(T entity)
+    + {abstract} int updateAllFieldsByMap(T entity, Map<String,Object> conditions)
+    + {abstract} T getById(T entity)
+    + {abstract} T callById(T entity)
+    + {abstract} long count()
+    + {abstract} long countByFields(T entity)
+    + {abstract} long countByMap(Map<String, Object> conditions)
+    + {abstract} List<T> findAllByFields(T entity)
+    + {abstract} List<T> findPage(Page page, T entity)
+    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+    + {abstract} int execInsertSql(String sql)
+    + {abstract} int execDeleteSql(String sql)
+    + {abstract} int execUpdateSql(String sql)
+    + {abstract} List<T> execSelectSql(String sql)
+}
+
+mapper.CrudMapper <|-- mapper.DepartmentMapper
+
+interface mapper.EmployeeMapper<Employee>
+{
+    + {abstract} int saveSelective(T entity)
+    + {abstract} int deleteById(T entity)
+    + {abstract} int deleteByIdLogically(T entity)
+    + {abstract} int deleteAll(Collection<T> entities)
+    + {abstract} int deleteAllLogically(Collection<T> entities)
+    + {abstract} int deleteAllByFields(T entity)
+    + {abstract} int deleteAllByMap(Map<String, Object> conditions)
+    + {abstract} int updateSelective(T entity)
+    + {abstract} int updateAllFieldsByMap(T entity, Map<String,Object> conditions)
+    + {abstract} T getById(T entity)
+    + {abstract} T callById(T entity)
+    + {abstract} long count()
+    + {abstract} long countByFields(T entity)
+    + {abstract} long countByMap(Map<String, Object> conditions)
+    + {abstract} List<T> findAllByFields(T entity)
+    + {abstract} List<T> findPage(Page page, T entity)
+    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+    + {abstract} int execInsertSql(String sql)
+    + {abstract} int execDeleteSql(String sql)
+    + {abstract} int execUpdateSql(String sql)
+    + {abstract} List<T> execSelectSql(String sql)
+}
+
+mapper.CrudMapper <|-- mapper.EmployeeMapper
+
+''''''''''''''''''''''''''''''''''''
+' Service
+''''''''''''''''''''''''''''''''''''
+
+interface service.BaseService
+{
+
+}
+
+interface service.CrudService<M extends CrudMapper<T>, T extends BaseEntity>
+{
+    + {abstract} int save(T entity)
+    + {abstract} int saveAll(Collection<T> entities)
+    + {abstract} int saveOrUpdate(T entity)
+    + {abstract} int deleteById(T entity)
+    + {abstract} int deleteLogically(T entity)
+    + {abstract} int deleteAll(Collection<T> entities)
+    + {abstract} int deleteAllLogically(Collection<T> entities)
+    + {abstract} int deleteAllByMap(Map<String,Object> conditions)
+    + {abstract} int update(T entity)
+    + {abstract} int updateAllByIds(Collection<T> entities)
+    + {abstract} T getById(T entity)
+    + {abstract} long count()
+    + {abstract} List<T> findPage(Page<T> page, T entity)
+    + {abstract} List<T> findAllByFields(T entity)
+    + {abstract} List<T> findAllByMap(Map<String, Object> conditions)
+}
+
+service.BaseService <|-- service.CrudService
+
+interface service.DepartmentService<DepartmentMapper<Department>, Department>
+{
+}
+
+service.CrudService <|-- service.DepartmentService
+
+interface service.EmployeeService<EmployeeMapper<Employee>, Employee>
+{
+}
+service.CrudService <|-- service.EmployeeService
+
+interface service.SqlSessionFactoryService
+{
+    + {abstract} SqlSessionFactory getSqlSessionFactory()
+}
+service.BaseService <|-- service.SqlSessionFactoryService
+
+abstract class service.AbstractBaseService
+{
+
+}
+service.BaseService <|.. service.AbstractBaseService
+
+abstract class service.AbstractCrudService
+{
+    + int save(T entity)
+    + int saveAll(Collection<T> entities)
+    + int saveOrUpdate(T entity)
+    + int deleteById(T entity)
+    + int deleteLogically(T entity)
+    + int deleteAll(Collection<T> entities)
+    + int deleteAllLogically(Collection<T> entities)
+    + int deleteAllByMap(Map<String,Object> conditions)
+    + int update(T entity)
+    + int updateAllByIds(Collection<T> entities)
+    + T getById(T entity)
+    + long count()
+    + List<T> findPage(Page<T> page, T entity)
+    + List<T> findAllByFields(T entity)
+    + List<T> findAllByMap(Map<String, Object> conditions)
+}
+service.AbstractBaseService <|-- service.AbstractCrudService
+service.CrudService <|.. service.AbstractCrudService
+
+class service.impl.DepartmentServiceImpl
+{
+
+}
+service.AbstractCrudService <|-- service.impl.DepartmentServiceImpl
+service.DepartmentService <|.. service.impl.DepartmentServiceImpl
+
+class service.impl.EmployeeServiceImpl
+{
+}
+service.AbstractCrudService <|-- service.impl.EmployeeServiceImpl
+service.EmployeeService <|.. service.impl.EmployeeServiceImpl
+
+
+''''''''''''''''''''''''''''''''''''
+' Others
+''''''''''''''''''''''''''''''''''''
+
+
+@enduml
