@@ -24,7 +24,7 @@ public class DataSourceWithC3P0Example {
     static {
         Properties properties = null;
         try {
-            properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            properties = PropertyUtils.getPropertiesByFilePath("db.properties");
             dataSource.setDriverClass(properties.getProperty(JdbcConfig.MYSQL_DRIVER_CLASS.toString()));
             dataSource.setJdbcUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
             dataSource.setUser(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));

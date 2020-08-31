@@ -23,7 +23,7 @@ public class DataSourceWithAruidExample {
     static {
         Properties properties = null;
         try {
-            properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            properties = PropertyUtils.getPropertiesByFilePath("db.properties");
             dataSource.setUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
             dataSource.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));
             dataSource.setPassword(properties.getProperty(JdbcConfig.MYSQL_PASSWD.toString()));

@@ -23,7 +23,7 @@ public class PropertyUtils {
      * @return
      * @throws IOException
      */
-    public static Properties getProperitesByFilePath(String filepath) throws IOException {
+    public static Properties getPropertiesByFilePath(String filepath) throws IOException {
         Properties properties = new Properties();
         InputStream inputStream = ClassLoader.getSystemResourceAsStream(filepath);
         try {

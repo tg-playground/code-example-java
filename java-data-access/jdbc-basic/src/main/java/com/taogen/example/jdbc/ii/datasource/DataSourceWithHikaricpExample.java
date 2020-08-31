@@ -24,7 +24,7 @@ public class DataSourceWithHikaricpExample {
     static {
         Properties properties = null;
         try {
-            properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            properties = PropertyUtils.getPropertiesByFilePath("db.properties");
             hikariConfig.setJdbcUrl(properties.getProperty(JdbcConfig.MYSQL_URL.toString()));
             hikariConfig.setDriverClassName(properties.getProperty(JdbcConfig.MYSQL_DRIVER_CLASS.toString()));
             hikariConfig.setUsername(properties.getProperty(JdbcConfig.MYSQL_USER.toString()));

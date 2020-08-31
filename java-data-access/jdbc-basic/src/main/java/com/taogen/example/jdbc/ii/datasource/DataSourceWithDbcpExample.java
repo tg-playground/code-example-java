@@ -26,7 +26,7 @@ public class DataSourceWithDbcpExample {
 
         Properties properties;
         try {
-            properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            properties = PropertyUtils.getPropertiesByFilePath("db.properties");
         } catch (IOException e) {
             LoggerUtil.loggerError(logger, e);
             throw e;

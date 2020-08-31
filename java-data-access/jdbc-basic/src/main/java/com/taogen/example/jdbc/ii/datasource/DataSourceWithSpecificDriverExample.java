@@ -23,7 +23,7 @@ public class DataSourceWithSpecificDriverExample {
     static {
         Properties properties = null;
         try {
-            properties = PropertyUtils.getProperitesByFilePath("db.properties");
+            properties = PropertyUtils.getPropertiesByFilePath("db.properties");
             dataSource.setUrl(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_URL)));
             dataSource.setUser(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_USER)));
             dataSource.setPassword(properties.getProperty(String.valueOf(JdbcConfig.MYSQL_PASSWD)));

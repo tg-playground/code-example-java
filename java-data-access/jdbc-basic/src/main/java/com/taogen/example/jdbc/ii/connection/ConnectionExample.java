@@ -23,7 +23,7 @@ public class ConnectionExample {
         if (connection == null) {
             synchronized (ConnectionExample.class) {
                 if (connection == null) {
-                    connection = getConnectionByDriverManager(PropertyUtils.getProperitesByFilePath("db.properties"));
+                    connection = getConnectionByDriverManager(PropertyUtils.getPropertiesByFilePath("db.properties"));
                 }
             }
         }
