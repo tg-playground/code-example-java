@@ -5,23 +5,23 @@ package com.taogen.example.mybatis.sqlmap.annotations.entity;
  */
 public class Page {
     private final String dbName = "mysql";
-    private int pageNo;
-    private int pageSize;
-    private long count;
+    private Integer pageNo;
+    private Integer pageSize;
+    private Long count;
     private String orderBy;
-    private int start;
+    private Integer start;
 
-    public Page(int pageNo, int pageSize) {
+    public Page(Integer pageNo, Integer pageSize) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.start = (pageNo - 1) * pageSize;
     }
 
-    public long getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(long count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 
@@ -31,5 +31,17 @@ public class Page {
 
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public Integer getStart() {
+        return start;
     }
 }
