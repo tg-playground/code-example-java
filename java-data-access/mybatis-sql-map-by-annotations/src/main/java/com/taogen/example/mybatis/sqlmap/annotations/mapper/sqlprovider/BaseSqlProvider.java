@@ -46,11 +46,28 @@ public class BaseSqlProvider {
                 .toString();
     }
 
+    public String getColumnEqualsSubstituteValue(String column, String value) {
+        return new StringBuilder()
+                .append(column)
+                .append("=")
+                .append(getSubstituteValueString(columnFieldMap.get(value)))
+                .toString();
+    }
+
     public String getColumnLikesSubstituteValue(String column) {
         return new StringBuilder()
                 .append(column)
                 .append(" LIKE CONCAT('%',")
                 .append(getSubstituteValueString(column))
+                .append(", '%')")
+                .toString();
+    }
+
+    public String getColumnLikesSubstituteValue(String column, String value) {
+        return new StringBuilder()
+                .append(column)
+                .append(" LIKE CONCAT('%',")
+                .append(getSubstituteValueString(value))
                 .append(", '%')")
                 .toString();
     }

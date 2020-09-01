@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public class EmployeeSqlProvider {
     private static final Logger logger = LogManager.getLogger();
+    private static final String TABLE_NAME = "t_employee";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DELETE_FLAG = "delete_flag";
@@ -39,12 +40,11 @@ public class EmployeeSqlProvider {
             .append("a.id, a.name, a.nickname,a.age,a.delete_flag as 'deleteFlag', a.create_time as 'createTime', a.modify_time as 'modifyTime', ")
             .append(" b.id as 'department.id', b.name as 'department.name', b.delete_flag as 'department.deleteFlag', b.create_time as 'department.createTime', b.modify_time as 'department.modifyTime' ")
             .toString();
-    private String tableName = "t_employee";
-    private BaseSqlProvider baseSqlProvider = new BaseSqlProvider(tableName, COLUMN_MAP_TO_FIELD);
+    private BaseSqlProvider baseSqlProvider = new BaseSqlProvider(TABLE_NAME, COLUMN_MAP_TO_FIELD);
 
     public String saveSelective(final Employee entity) {
         String sql = new SQL() {{
-            INSERT_INTO(tableName);
+            INSERT_INTO(TABLE_NAME);
             if (entity.getId() != null) {
                 VALUES(COLUMN_ID, BaseSqlProvider.getSubstituteValueString(COLUMN_ID));
             }
@@ -95,7 +95,7 @@ public class EmployeeSqlProvider {
     public String deleteAllByFields(Employee entity) {
         logger.debug("deleteAllByFields");
         String sql = new SQL() {{
-            DELETE_FROM(tableName);
+            DELETE_FROM(TABLE_NAME);
             WHERE(BaseSqlProvider.getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 0));
             if (entity.getId() != null) {
                 WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
@@ -131,7 +131,7 @@ public class EmployeeSqlProvider {
 
     public String updateSelective(Employee entity) {
         String sql = new SQL() {{
-            UPDATE(tableName);
+            UPDATE(TABLE_NAME);
             SET(BaseSqlProvider.getColumnEqualsDirectValue(COLUMN_MODIFY_TIME, "NOW()"));
             if (entity.getName() != null) {
                 SET(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
@@ -175,7 +175,7 @@ public class EmployeeSqlProvider {
     public String getById(Employee entity) {
         String sql = new SQL()
                 .SELECT(ONE_TO_ONE_COLUMN_LIST)
-                .FROM(tableName + " as a")
+                .FROM(TABLE_NAME + " as a")
                 .LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id")
                 .WHERE("a.id=#{id,jdbcType=INTEGER}")
                 .toString();
@@ -183,7 +183,7 @@ public class EmployeeSqlProvider {
         return sql;
     }
 
-    public String getOneToOneDepartment(Department entity){
+    public String getOneToOneDepartment(Department entity) {
         String sql = new SQL()
                 .SELECT("*")
                 .FROM("t_department")
@@ -204,7 +204,7 @@ public class EmployeeSqlProvider {
     public String countByFields(Employee entity) {
         String sql = new SQL() {{
             SELECT("count(*)");
-            FROM(tableName);
+            FROM(TABLE_NAME);
             if (entity.getDeleteFlag() != null) {
                 WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
@@ -246,28 +246,28 @@ public class EmployeeSqlProvider {
     public String findAllByFields(Employee entity) {
         String sql = new SQL() {{
             SELECT(ONE_TO_ONE_COLUMN_LIST);
-            FROM(tableName + " as a");
+            FROM(TABLE_NAME + " as a");
             LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id");
             if (entity.getDeleteFlag() != null) {
                 WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
             if (entity.getId() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
             }
             if (entity.getNickname() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NICKNAME));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NICKNAME));
             }
             if (entity.getAge() != null) {
-                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_AGE));
+                WHERE("a." + baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_AGE));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
@@ -277,25 +277,25 @@ public class EmployeeSqlProvider {
     public String findPage(@Param("page") Page page, @Param("entity") Employee entity) {
         String sql = new SQL() {{
             SELECT(ONE_TO_ONE_COLUMN_LIST);
-            FROM(tableName + " as a");
+            FROM(TABLE_NAME + " as a");
             LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id");
             if (entity.getDeleteFlag() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue("a." + COLUMN_DELETE_FLAG, "entity." + COLUMN_DELETE_FLAG));
             }
             if (entity.getName() != null) {
-                WHERE(baseSqlProvider.getColumnLikesSubstituteValue(COLUMN_NAME));
+                WHERE(baseSqlProvider.getColumnLikesSubstituteValue("a." + COLUMN_NAME, "entity." + COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue("a." + COLUMN_CREATE_TIME, "entity." + COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue("a." + COLUMN_MODIFY_TIME, "entity." + COLUMN_MODIFY_TIME));
             }
             if (entity.getNickname() != null) {
-                WHERE(baseSqlProvider.getColumnLikesSubstituteValue(COLUMN_NICKNAME));
+                WHERE(baseSqlProvider.getColumnLikesSubstituteValue("a." + COLUMN_NICKNAME, "entity." + COLUMN_NICKNAME));
             }
             if (entity.getAge() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_AGE));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue("a." + COLUMN_AGE), "entity." + COLUMN_AGE);
             }
             if (page != null) {
                 if (page.getOrderBy() != null) {

@@ -23,8 +23,7 @@ public class DepartmentSqlProvider {
     private static final String COLUMN_CREATE_TIME = "create_time";
     private static final String COLUMN_MODIFY_TIME = "modify_time";
     private static final String COLUMN_DEPT_ID = "dept_id";
-
-    private static final Map<String,String> COLUMN_MAP_TO_FIELD = Collections.unmodifiableMap(new HashMap<String, String>(){
+    private static final Map<String, String> COLUMN_MAP_TO_FIELD = Collections.unmodifiableMap(new HashMap<String, String>() {
         {
             put("id", "id");
             put("name", "name");
@@ -33,65 +32,35 @@ public class DepartmentSqlProvider {
             put("modify_time", "modifyTime");
         }
     });
-//    private static final String ONE_TO_MANY_COLUMN_LIST = new StringBuilder()
+    //    private static final String ONE_TO_MANY_COLUMN_LIST = new StringBuilder()
 //            .append("a.id, a.name, a.delete_flag, a.create_time, a.modify_time, ")
 //            .append(" b.id as 'employee.id', b.name as 'employee.name', b.nickname as 'employee.name',b.age as 'employee.age', b.delete_flag as 'employee.deleteFlag', b.create_time as 'employee.createTime', b.modify_time as 'employee.modifyTime' ")
 //            .toString();
-    public static String getSubstituteValueString(String column) {
-        return String.format("#{%s}", column);
-    }
+    private BaseSqlProvider baseSqlProvider = new BaseSqlProvider(TABLE_NAME, COLUMN_MAP_TO_FIELD);
 
-    public static String getColumnEqualsSubstituteValue(String column) {
-        return new StringBuilder().append(column).append("=").append(getSubstituteValueString(COLUMN_MAP_TO_FIELD.get(column))).toString();
-    }
-
-    public static String getColumnLikesSubstituteValue(String column) {
-        return new StringBuilder()
-                .append(column)
-                .append(" LIKE CONCAT('%',")
-                .append(getSubstituteValueString(column))
-                .append(", '%')")
-                .toString();
-    }
-
-    public static String getColumnEqualsDirectValue(String key, Object value) {
-        return new StringBuilder().append(key).append("=").append(value).toString();
-    }
-
-    public static String saveSelective(final Department entity) {
+    public String saveSelective(final Department entity) {
         String sql = new SQL() {{
             INSERT_INTO(TABLE_NAME);
             if (entity.getId() != null) {
-                VALUES(COLUMN_ID, getSubstituteValueString(COLUMN_ID));
+                VALUES(COLUMN_ID, BaseSqlProvider.getSubstituteValueString(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                VALUES(COLUMN_NAME, getSubstituteValueString(COLUMN_NAME));
+                VALUES(COLUMN_NAME, BaseSqlProvider.getSubstituteValueString(COLUMN_NAME));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
         return sql;
     }
 
-    public static String deleteById(Department entity) {
-        String sql = new SQL()
-                .DELETE_FROM(TABLE_NAME)
-                .WHERE(getColumnEqualsSubstituteValue(COLUMN_ID))
-                .toString();
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String deleteById(Department entity) {
+        return baseSqlProvider.deleteById(entity);
     }
 
-    public static String deleteLogically(Department entity) {
-        String sql = new SQL()
-                .UPDATE(TABLE_NAME)
-                .SET(getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 1))
-                .WHERE(getColumnEqualsSubstituteValue(COLUMN_ID))
-                .toString();
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String deleteLogically(Department entity) {
+        return baseSqlProvider.deleteLogically(entity);
     }
 
-//    public static String deleteAll(@Param("entities") Collection<Department> entities) {
+//    public String deleteAll(@Param("entities") Collection<Department> entities) {
 //        String sql = new SQL() {{
 //            DELETE_FROM(TABLE_NAME);
 //            for (Department department : entities) {
@@ -101,7 +70,7 @@ public class DepartmentSqlProvider {
 //        return sql;
 //    }
 
-//    public static String deleteAllLogically(@Param("entities") Collection<Department> entities) {
+//    public String deleteAllLogically(@Param("entities") Collection<Department> entities) {
 //        String sql = new SQL() {{
 //            UPDATE(TABLE_NAME);
 //            SET(getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 1));
@@ -112,26 +81,26 @@ public class DepartmentSqlProvider {
 //        return sql;
 //    }
 
-    public static String deleteAllByFields(Department entity) {
+    public String deleteAllByFields(Department entity) {
         logger.debug("deleteAllByFields");
         String sql = new SQL() {{
             DELETE_FROM(TABLE_NAME);
-            WHERE(getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 0));
+            WHERE(BaseSqlProvider.getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 0));
             if (entity.getId() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_ID));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_NAME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
         return sql;
     }
 
-//    public static String deleteAllByMap(@Param("conditions") Map<String, Object> conditions) {
+//    public String deleteAllByMap(@Param("conditions") Map<String, Object> conditions) {
 //        String sql = new SQL() {{
 //            DELETE_FROM(TABLE_NAME);
 //            WHERE(getColumnEqualsDirectValue(COLUMN_DELETE_FLAG, 0));
@@ -143,23 +112,23 @@ public class DepartmentSqlProvider {
 //        return sql;
 //    }
 
-    public static String updateSelective(Department entity) {
+    public String updateSelective(Department entity) {
         String sql = new SQL() {{
             UPDATE(TABLE_NAME);
-            SET(getColumnEqualsDirectValue(COLUMN_MODIFY_TIME, "NOW()"));
+            SET(BaseSqlProvider.getColumnEqualsDirectValue(COLUMN_MODIFY_TIME, "NOW()"));
             if (entity.getName() != null) {
-                SET(getColumnEqualsSubstituteValue(COLUMN_NAME));
+                SET(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getDeleteFlag() != null) {
-                SET(getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
+                SET(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
-            WHERE(getColumnEqualsSubstituteValue(COLUMN_ID));
+            WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
         }}.toString();
         logger.debug("sql is {}", sql);
         return sql;
     }
 
-//    public static String updateAllFieldsByMap(@Param("entity") Department entity, @Param("conditions") Map<String, Object> conditions) {
+//    public String updateAllFieldsByMap(@Param("entity") Department entity, @Param("conditions") Map<String, Object> conditions) {
 //        String sql = new SQL() {{
 //            UPDATE(TABLE_NAME);
 //            SET(getColumnEqualsDirectValue(COLUMN_MODIFY_TIME, "NOW()"));
@@ -178,68 +147,52 @@ public class DepartmentSqlProvider {
 //    }
 
     public String getById(Department entity) {
-        String sql = new SQL()
-                .SELECT("*")
-                .FROM(TABLE_NAME)
-                .WHERE(getColumnEqualsSubstituteValue(COLUMN_ID))
-                .toString();
-        logger.debug("sql is \n{}", sql);
-        return sql;
+        return baseSqlProvider.getById(entity);
     }
 
     public String getOneToManyEmployee(Integer deptId) {
         String sql = new SQL()
                 .SELECT("*")
                 .FROM("t_employee")
-                .WHERE(getColumnEqualsSubstituteValue(COLUMN_DEPT_ID))
+                .WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DEPT_ID))
                 .toString();
         logger.debug("one to many sql is \n{}", sql);
         return sql;
     }
 
-    public static String callById(Department entity) {
-        String sql = new StringBuilder()
-                .append("{call get_dept_by_id(")
-                .append(getSubstituteValueString(COLUMN_ID))
-                .append(")}").toString();
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String callById(Department entity) {
+        return baseSqlProvider.callById(entity);
     }
 
-    public static String count() {
-        String sql = new SQL()
-                .SELECT("count(*)")
-                .FROM(TABLE_NAME)
-                .toString();
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String count() {
+        return baseSqlProvider.count();
     }
 
-    public static String countByFields(Department entity) {
+    public String countByFields(Department entity) {
         String sql = new SQL() {{
             SELECT("count(*)");
             FROM(TABLE_NAME);
             if (entity.getDeleteFlag() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
             if (entity.getId() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_ID));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_NAME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
         return sql;
     }
 
-//    public static String countByMap(@Param("conditions") Map<String, Object> conditions) {
+//    public String countByMap(@Param("conditions") Map<String, Object> conditions) {
 //        String sql = new SQL() {{
 //            SELECT("count(*)");
 //            FROM(TABLE_NAME);
@@ -251,45 +204,45 @@ public class DepartmentSqlProvider {
 //        return sql;
 //    }
 
-    public static String findAllByFields(Department entity) {
+    public String findAllByFields(Department entity) {
         String sql = new SQL() {{
             SELECT("*");
             FROM(TABLE_NAME);
             if (entity.getDeleteFlag() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
             if (entity.getId() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_ID));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_NAME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
         return sql;
     }
 
-    public static String findPage(@Param("page") Page page, @Param("entity") Department entity) {
+    public String findPage(@Param("page") Page page, @Param("entity") Department entity) {
         String sql = new SQL() {{
             SELECT("*");
             FROM(TABLE_NAME);
             if (entity.getDeleteFlag() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG, "entity." + COLUMN_DELETE_FLAG));
             }
             if (entity.getName() != null) {
-                WHERE(getColumnLikesSubstituteValue(COLUMN_NAME));
+                WHERE(baseSqlProvider.getColumnLikesSubstituteValue(COLUMN_NAME, "entity." + COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME, "entity." + COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE(getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME, "entity." + COLUMN_MODIFY_TIME));
             }
             if (page != null) {
                 if (page.getOrderBy() != null) {
@@ -304,7 +257,7 @@ public class DepartmentSqlProvider {
         return sql;
     }
 
-//    public static String findAllByMap(@Param("conditions") Map<String, Object> conditions) {
+//    public String findAllByMap(@Param("conditions") Map<String, Object> conditions) {
 //        String sql = new SQL() {{
 //            SELECT("*");
 //            FROM(TABLE_NAME);
@@ -316,23 +269,19 @@ public class DepartmentSqlProvider {
 //        return sql;
 //    }
 
-    public static String execInsertSql(String sql) {
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String execInsertSql(String sql) {
+        return baseSqlProvider.execInsertSql(sql);
     }
 
-    public static String execDeleteSql(String sql) {
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String execDeleteSql(String sql) {
+        return baseSqlProvider.execDeleteSql(sql);
     }
 
-    public static String execUpdateSql(String sql) {
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String execUpdateSql(String sql) {
+        return baseSqlProvider.execUpdateSql(sql);
     }
 
-    public static String execSelectSql(String sql) {
-        logger.debug("sql is {}", sql);
-        return sql;
+    public String execSelectSql(String sql) {
+        return baseSqlProvider.execSelectSql(sql);
     }
 }
