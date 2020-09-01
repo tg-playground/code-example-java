@@ -22,6 +22,8 @@ public class DepartmentSqlProvider {
     private static final String COLUMN_DELETE_FLAG = "delete_flag";
     private static final String COLUMN_CREATE_TIME = "create_time";
     private static final String COLUMN_MODIFY_TIME = "modify_time";
+    private static final String COLUMN_DEPT_ID = "dept_id";
+
     private static final Map<String,String> COLUMN_MAP_TO_FIELD = Collections.unmodifiableMap(new HashMap<String, String>(){
         {
             put("id", "id");
@@ -31,7 +33,10 @@ public class DepartmentSqlProvider {
             put("modify_time", "modifyTime");
         }
     });
-
+//    private static final String ONE_TO_MANY_COLUMN_LIST = new StringBuilder()
+//            .append("a.id, a.name, a.delete_flag, a.create_time, a.modify_time, ")
+//            .append(" b.id as 'employee.id', b.name as 'employee.name', b.nickname as 'employee.name',b.age as 'employee.age', b.delete_flag as 'employee.deleteFlag', b.create_time as 'employee.createTime', b.modify_time as 'employee.modifyTime' ")
+//            .toString();
     public static String getSubstituteValueString(String column) {
         return String.format("#{%s}", column);
     }
@@ -178,7 +183,17 @@ public class DepartmentSqlProvider {
                 .FROM(TABLE_NAME)
                 .WHERE(getColumnEqualsSubstituteValue(COLUMN_ID))
                 .toString();
-        logger.debug("sql is {}", sql);
+        logger.debug("sql is \n{}", sql);
+        return sql;
+    }
+
+    public String getOneToManyEmployee(Integer deptId) {
+        String sql = new SQL()
+                .SELECT("*")
+                .FROM("t_employee")
+                .WHERE(getColumnEqualsSubstituteValue(COLUMN_DEPT_ID))
+                .toString();
+        logger.debug("one to many sql is \n{}", sql);
         return sql;
     }
 

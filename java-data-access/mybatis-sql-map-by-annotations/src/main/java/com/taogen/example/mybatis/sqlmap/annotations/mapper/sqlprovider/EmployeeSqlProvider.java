@@ -1,5 +1,6 @@
 package com.taogen.example.mybatis.sqlmap.annotations.mapper.sqlprovider;
 
+import com.taogen.example.mybatis.sqlmap.annotations.entity.Department;
 import com.taogen.example.mybatis.sqlmap.annotations.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.annotations.entity.Page;
 import org.apache.ibatis.annotations.Param;
@@ -34,6 +35,10 @@ public class EmployeeSqlProvider {
             put("age", "age");
         }
     });
+    private static final String ONE_TO_ONE_COLUMN_LIST = new StringBuilder()
+            .append("a.id, a.name, a.nickname,a.age,a.delete_flag as 'deleteFlag', a.create_time as 'createTime', a.modify_time as 'modifyTime', ")
+            .append(" b.id as 'department.id', b.name as 'department.name', b.delete_flag as 'department.deleteFlag', b.create_time as 'department.createTime', b.modify_time as 'department.modifyTime' ")
+            .toString();
     private String tableName = "t_employee";
     private BaseSqlProvider baseSqlProvider = new BaseSqlProvider(tableName, COLUMN_MAP_TO_FIELD);
 
@@ -168,7 +173,24 @@ public class EmployeeSqlProvider {
 //    }
 
     public String getById(Employee entity) {
-        return baseSqlProvider.getById(entity);
+        String sql = new SQL()
+                .SELECT(ONE_TO_ONE_COLUMN_LIST)
+                .FROM(tableName + " as a")
+                .LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id")
+                .WHERE("a.id=#{id,jdbcType=INTEGER}")
+                .toString();
+        logger.debug("sql is \n{}", sql);
+        return sql;
+    }
+
+    public String getOneToOneDepartment(Department entity){
+        String sql = new SQL()
+                .SELECT("*")
+                .FROM("t_department")
+                .WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID)).toString();
+
+        logger.debug("getOneToOneDepartment sql is \n{}", sql);
+        return sql;
     }
 
     public String callById(Employee entity) {
@@ -223,28 +245,29 @@ public class EmployeeSqlProvider {
 
     public String findAllByFields(Employee entity) {
         String sql = new SQL() {{
-            SELECT("*");
-            FROM(tableName);
+            SELECT(ONE_TO_ONE_COLUMN_LIST);
+            FROM(tableName + " as a");
+            LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id");
             if (entity.getDeleteFlag() != null) {
                 WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }
             if (entity.getId() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_ID));
             }
             if (entity.getName() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NAME));
             }
             if (entity.getCreateTime() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_CREATE_TIME));
             }
             if (entity.getModifyTime() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_MODIFY_TIME));
             }
             if (entity.getNickname() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NICKNAME));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_NICKNAME));
             }
             if (entity.getAge() != null) {
-                WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_AGE));
+                WHERE("a."+baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_AGE));
             }
         }}.toString();
         logger.debug("sql is {}", sql);
@@ -253,8 +276,9 @@ public class EmployeeSqlProvider {
 
     public String findPage(@Param("page") Page page, @Param("entity") Employee entity) {
         String sql = new SQL() {{
-            SELECT("*");
-            FROM(tableName);
+            SELECT(ONE_TO_ONE_COLUMN_LIST);
+            FROM(tableName + " as a");
+            LEFT_OUTER_JOIN("t_department b ON a.dept_id = b.id");
             if (entity.getDeleteFlag() != null) {
                 WHERE(baseSqlProvider.getColumnEqualsSubstituteValue(COLUMN_DELETE_FLAG));
             }

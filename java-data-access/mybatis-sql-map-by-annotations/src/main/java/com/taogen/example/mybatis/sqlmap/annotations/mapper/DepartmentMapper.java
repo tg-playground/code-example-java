@@ -1,8 +1,10 @@
 package com.taogen.example.mybatis.sqlmap.annotations.mapper;
 
 import com.taogen.example.mybatis.sqlmap.annotations.entity.Department;
+import com.taogen.example.mybatis.sqlmap.annotations.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.annotations.entity.Page;
 import com.taogen.example.mybatis.sqlmap.annotations.mapper.sqlprovider.DepartmentSqlProvider;
+import com.taogen.example.mybatis.sqlmap.annotations.mapper.sqlprovider.EmployeeSqlProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Collection;
@@ -79,9 +81,23 @@ public interface DepartmentMapper extends CrudMapper {
             @Result(property = "name", column = "name"),
             @Result(property = "deleteFlag", column = "delete_flag"),
             @Result(property = "createTime", column = "create_time"),
-            @Result(property = "modifyTime", column = "modify_time")
+            @Result(property = "modifyTime", column = "modify_time"),
+            @Result(property = "employees", column = "id", javaType = List.class,
+                    many = @Many(select = "getOneToManyEmployee"))
     })
     Department getById(Department entity);
+
+    @SelectProvider(type = DepartmentSqlProvider.class, method = "getOneToManyEmployee")
+    @Results(id = "oneToManyResult", value = {
+            @Result(property = "id", column = "id", id = true),
+            @Result(property = "name", column = "name"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "age", column = "age"),
+            @Result(property = "deleteFlag", column = "delete_flag"),
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<Employee> getOneToManyEmployee(Integer dpetId);
 
     @SelectProvider(type = DepartmentSqlProvider.class, method = "callById")
     @Results(id = "entityResultCallById", value = {
