@@ -21,15 +21,15 @@ Write mappers and services, then test it.
 Functions
 
 - 1
-- curd
-- paging
-- raw sql
+- [x] curd
+- [x] paging
+- [x] raw sql
 - 2
-- one-to-one, one-to-many
-- batch operations
-- multiple parameters in mapper
+- [x] one-to-one, one-to-many
+- [x] batch operations
+- [x] multiple parameters in mapper
 - 3
-- call stored procedure
+- [x] call stored procedure
 
 
 
