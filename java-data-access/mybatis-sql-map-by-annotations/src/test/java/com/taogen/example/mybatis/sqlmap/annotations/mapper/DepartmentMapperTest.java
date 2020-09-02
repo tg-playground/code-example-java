@@ -6,6 +6,8 @@ import com.taogen.example.mybatis.sqlmap.annotations.entity.Page;
 import com.taogen.example.mybatis.sqlmap.annotations.service.SqlSessionFactoryService;
 import com.taogen.example.mybatis.sqlmap.annotations.service.impl.SqlSessionFactoryServiceImpl;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,7 @@ import static org.junit.Assert.*;
 
 public class DepartmentMapperTest {
 
+    private static final Logger logger = LogManager.getLogger();
     private DepartmentMapper mapper;
     private EmployeeMapper employeeMapper;
     private SqlSessionFactoryService sqlSessionFactoryService = new SqlSessionFactoryServiceImpl();
@@ -36,7 +39,10 @@ public class DepartmentMapperTest {
 
     @Test
     public void saveSelective() {
-        assertEquals(1, mapper.saveSelective(new Department("test_save_selective")));
+        Department department = new Department("test_save_selective");
+        assertEquals(1, mapper.saveSelective(department));
+        assertNotNull(department.getId());
+        logger.debug("department is {}", department);
     }
 
     @Test
@@ -151,9 +157,9 @@ public class DepartmentMapperTest {
         ensureEntityExist(department);
 
         String employeeName = "test_department_one_to_many" + System.currentTimeMillis();
-        System.out.println("employeeName: " + employeeName);
+        logger.debug("employeeName is {}", employeeName);
         Employee employee = new Employee(1, employeeName);
-        System.out.println("deptId: " + department.getId());
+        logger.debug("deptId is {}", department.getId());
         employee.setDepartment(department);
         if (employeeMapper.getById(employee) == null) {
             employeeMapper.saveSelective(employee);
@@ -162,7 +168,7 @@ public class DepartmentMapperTest {
         }
 
         department = mapper.getById(department);
-        System.out.println("department: " + department);
+        logger.debug("department is {}", department);
         assertNotNull(department);
         assertNotNull(department.getEmployees());
         assertTrue(department.getEmployees()
@@ -177,7 +183,7 @@ public class DepartmentMapperTest {
         ensureEntityExist(new Department(id));
         Department department = mapper.callById(new Department(id));
         assertNotNull(department);
-        System.out.println(department);
+        logger.debug("department is {}", department);
     }
 
     @Test
@@ -223,7 +229,7 @@ public class DepartmentMapperTest {
         pageSize = count > pageSize ? pageSize : count;
         Page page = new Page(pageNo, (int) pageSize);
         page.setOrderBy("name");
-        List<Department> departments = mapper.findPage(page, new Department());
+        List<Department> departments = mapper.findPage(page, new Department("test"));
         assertNotNull(departments);
     }
 
@@ -273,7 +279,7 @@ public class DepartmentMapperTest {
         mapper.updateSelective(department);
         String sql = "select * from t_department where name=\"" + name + "\"";
         List<Department> departments = mapper.execSelectSql(sql);
-        System.out.println(departments);
+        logger.debug("departments are {}", departments);
         assertNotNull(departments);
         assertTrue(departments.size() >= 1);
     }

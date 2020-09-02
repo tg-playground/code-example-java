@@ -6,6 +6,8 @@ import com.taogen.example.mybatis.sqlmap.annotations.entity.Page;
 import com.taogen.example.mybatis.sqlmap.annotations.service.SqlSessionFactoryService;
 import com.taogen.example.mybatis.sqlmap.annotations.service.impl.SqlSessionFactoryServiceImpl;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,7 @@ import static org.junit.Assert.*;
 
 public class EmployeeMapperTest {
 
+    private static final Logger logger = LogManager.getLogger();
     private EmployeeMapper mapper;
     private DepartmentMapper departmentMapper;
     private SqlSessionFactoryService sqlSessionFactoryService = new SqlSessionFactoryServiceImpl();
@@ -36,7 +39,10 @@ public class EmployeeMapperTest {
 
     @Test
     public void saveSelective() {
-        assertEquals(1, mapper.saveSelective(new Employee("test_save_selective")));
+        Employee employee = new Employee("test_save_selective");
+        assertEquals(1, mapper.saveSelective(employee));
+        assertNotNull(employee.getId());
+        logger.debug("employee is {}", employee);
     }
 
     @Test
@@ -63,7 +69,7 @@ public class EmployeeMapperTest {
         mapper.updateSelective(employee);
         assertEquals(1, mapper.deleteLogically(employee));
         employee = mapper.getById(employee);
-        System.out.println(employee);
+        logger.debug("employee is {}", employee);
         assertEquals(name, employee.getName());
         assertEquals(true, employee.getDeleteFlag());
     }
@@ -164,7 +170,7 @@ public class EmployeeMapperTest {
 
         employee = mapper.getById(employee);
         assertNotNull(employee);
-        System.out.println(employee);
+        logger.debug("employee is {}", employee);
         assertNotNull(employee.getDepartment());
         assertEquals(deptName, employee.getDepartment().getName());
     }
@@ -175,7 +181,7 @@ public class EmployeeMapperTest {
         ensureEntityExist(new Employee(id));
         Employee employee = mapper.callById(new Employee(id));
         assertNotNull(employee);
-        System.out.println(employee);
+        logger.debug("employee is {}", employee);
     }
 
     @Test
@@ -213,7 +219,7 @@ public class EmployeeMapperTest {
         List<Employee> employees = mapper.findAllByFields(new Employee(name));
         assertNotNull(employees);
         assertTrue(employees.size() >= 1);
-        System.out.println("employees are: \n" + employees);
+        logger.debug("employees are: \n{}", employees);
     }
 
     @Test
@@ -228,7 +234,7 @@ public class EmployeeMapperTest {
         Page page = new Page(pageNo, (int) pageSize);
         page.setOrderBy("name");
         List<Employee> employees = mapper.findPage(page, new Employee());
-        System.out.println("employee is: \n" + employees);
+        logger.debug("employees are: \n {}", employees);
         assertNotNull(employees);
     }
 
@@ -245,7 +251,7 @@ public class EmployeeMapperTest {
         params.put("name", name);
         List<Employee> employees = mapper.findAllByMap(params);
         assertNotNull(employees);
-        System.out.println("employees are: \n" + employees);
+        logger.debug("employees are: \n{}", employees);
     }
 
     @Test
@@ -280,7 +286,7 @@ public class EmployeeMapperTest {
         mapper.updateSelective(employee);
         String sql = "select * from t_employee where name=\"" + name + "\"";
         List<Employee> employees = mapper.execSelectSql(sql);
-        System.out.println(employees);
+        logger.debug("employees are {}", employees);
         assertNotNull(employees);
         assertTrue(employees.size() >= 1);
     }
