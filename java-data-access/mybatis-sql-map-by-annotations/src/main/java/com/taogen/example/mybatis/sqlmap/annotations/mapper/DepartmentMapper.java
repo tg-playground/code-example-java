@@ -17,6 +17,7 @@ import java.util.Map;
 public interface DepartmentMapper extends CrudMapper {
 
     @InsertProvider(type = DepartmentSqlProvider.class, method = "saveSelective")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int saveSelective(Department entity);
 
     @DeleteProvider(type = DepartmentSqlProvider.class, method = "deleteById")

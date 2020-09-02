@@ -16,6 +16,7 @@ import java.util.Map;
 public interface EmployeeMapper extends CrudMapper {
 
     @InsertProvider(type = EmployeeSqlProvider.class, method = "saveSelective")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int saveSelective(Employee entity);
 
 
