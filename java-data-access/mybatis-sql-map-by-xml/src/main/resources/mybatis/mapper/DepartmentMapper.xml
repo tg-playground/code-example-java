@@ -53,7 +53,8 @@
         LEFT JOIN t_employee as b on a.id=b.dept_id
     </sql>
 
-    <insert id="saveSelective" parameterType="Department">
+    <insert id="saveSelective" parameterType="Department"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

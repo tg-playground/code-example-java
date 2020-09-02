@@ -75,7 +75,8 @@
         LEFT JOIN t_department b ON a.dept_id = b.id
     </sql>
 
-    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
+    <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_employee
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
