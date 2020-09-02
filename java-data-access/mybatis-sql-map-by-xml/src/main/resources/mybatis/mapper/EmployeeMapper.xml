@@ -23,40 +23,8 @@
     <!--        a.modify_time,-->
     <!--    </sql>-->
 
-    <!--    <resultMap id="OneToOneResultMap" type="Employee">-->
-    <!--        <id column="emp_id" jdbcType="INTEGER" property="id"/>-->
-    <!--        <result column="emp_name" jdbcType="VARCHAR" property="name"/>-->
-    <!--        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>-->
-    <!--        <result column="emp_age" jdbcType="INTEGER" property="age"/>-->
-    <!--        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
-    <!--        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
-    <!--        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
-    <!--        <association property="department" javaType="Department">-->
-    <!--            <id column="dept_id" jdbcType="INTEGER" property="id"/>-->
-    <!--            <result column="dept_name" jdbcType="VARCHAR" property="name"/>-->
-    <!--            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
-    <!--            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
-    <!--            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
-    <!--        </association>-->
-    <!--    </resultMap>-->
-
-    <!--    <sql id="One_To_One_Column_List">-->
-    <!--        a.id as emp_id,-->
-    <!--        a.name as emp_name,-->
-    <!--        a.nickname as emp_nickname,-->
-    <!--        a.age as emp_age,-->
-    <!--        a.delete_flag as emp_delete_flag,-->
-    <!--        a.create_time as emp_create_time,-->
-    <!--        a.modify_time as emp_modify_time,-->
-    <!--        b.id as dept_id,-->
-    <!--        b.name as dept_name,-->
-    <!--        b.delete_flag as dept_delete_flag,-->
-    <!--        b.create_time as dept_create_time,-->
-    <!--        b.modify_time as dept_modify_time-->
-    <!--    </sql>-->
-
-
-    <sql id="One_To_One_Column_List">
+    <!-- [begin] One-to-one 1: auto mapping by aliases -->
+    <sql id="One_To_One_Column_List_Auto_Mapping_By_Aliases">
         a.id,
         a.name,
         a.nickname,
@@ -70,10 +38,66 @@
         b.create_time as "department.createTime",
         b.modify_time as "department.modifyTime"
     </sql>
-
     <sql id="Joins">
         LEFT JOIN t_department b ON a.dept_id = b.id
     </sql>
+    <!-- [end] One-to-one 1: auto mapping by aliases -->
+
+    <!-- [begin] One-to-one 2: nested results -->
+    <resultMap id="OneToOneResultMap_NestedResults" type="Employee">
+        <id column="emp_id" jdbcType="INTEGER" property="id"/>
+        <result column="emp_name" jdbcType="VARCHAR" property="name"/>
+        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="emp_age" jdbcType="INTEGER" property="age"/>
+        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <association property="department" javaType="Department">
+            <id column="dept_id" jdbcType="INTEGER" property="id"/>
+            <result column="dept_name" jdbcType="VARCHAR" property="name"/>
+            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        </association>
+    </resultMap>
+
+    <sql id="One_To_One_Column_List_Nested_Results">
+            a.id as emp_id,
+            a.name as emp_name,
+            a.nickname as emp_nickname,
+            a.age as emp_age,
+            a.delete_flag as emp_delete_flag,
+            a.create_time as emp_create_time,
+            a.modify_time as emp_modify_time,
+            b.id as dept_id,
+            b.name as dept_name,
+            b.delete_flag as dept_delete_flag,
+            b.create_time as dept_create_time,
+            b.modify_time as dept_modify_time
+    </sql>
+    <!-- [end] One-to-one 2: nested results -->
+
+    <!-- [begin] One-to-one 3: nested select -->
+    <resultMap id="OneToOneResultMap_NestedSelect" type="Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <association property="department" column="dept_id" javaType="Department" select="selectAssociationDepartment"/>
+    </resultMap>
+
+    <resultMap id="OneToOneResultMap_NestedSelect_Association" type="Department">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+    <!-- [end] One-to-one 3: nested select -->
+
 
     <insert id="saveSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
@@ -251,10 +275,30 @@
 
     <select id="getById" parameterType="java.lang.Integer" resultType="Employee">
         select
-        <include refid="One_To_One_Column_List"/>
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
         from t_employee as a
         <include refid="Joins"/>
         where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getByIdWithNestedResults" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedResults">
+        select
+        <include refid="One_To_One_Column_List_Nested_Results"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getByIdWithNestedSelect" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedSelect">
+        select *
+        from t_employee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAssociationDepartment" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedSelect_Association">
+        select *
+        from t_department
+        where id = #{id,jdbcType=INTEGER}
     </select>
 
     <select id="callById" parameterType="Employee" resultMap="BaseResultMap" statementType="CALLABLE">
@@ -305,7 +349,7 @@
 
     <select id="findAllByFields" parameterType="Department" resultType="Employee">
         select
-        <include refid="One_To_One_Column_List"/>
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
         from t_employee as a
         <include refid="Joins"/>
         <trim prefix="where" suffixOverrides="and">
@@ -338,7 +382,7 @@
 
     <select id="findPage" resultType="Employee">
         select
-        <include refid="One_To_One_Column_List"/>
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
         from t_employee as a
         <include refid="Joins"/>
         inner join (
@@ -383,7 +427,7 @@
 
     <select id="findAllByMap" resultType="Employee">
         select
-        <include refid="One_To_One_Column_List"/>
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
         from t_employee as a
         <include refid="Joins"/>
         where
@@ -404,7 +448,7 @@
         ${sql}
     </update>
 
-    <select id="execSelectSql" resultType="Employee">
+    <select id="execSelectSql" resultMap="BaseResultMap">
         ${sql}
     </select>
 </mapper>

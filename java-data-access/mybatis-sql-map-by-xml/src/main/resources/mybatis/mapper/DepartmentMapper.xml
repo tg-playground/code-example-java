@@ -17,7 +17,8 @@
         a.modify_time
     </sql>
 
-    <resultMap id="OneToManyResultMap" type="Department">
+    <!-- [begin] One-to-many 1: nested results -->
+    <resultMap id="OneToManyResultMap_NestedResults" type="Department">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
@@ -28,13 +29,13 @@
             <result column="employee.name" jdbcType="VARCHAR" property="name"/>
             <result column="employee.nickname" jdbcType="VARCHAR" property="nickname"/>
             <result column="employee.age" jdbcType="INTEGER" property="age"/>
-            <result column="employee.delete_flag" jdbcType="BIT" property="deleteFlag"/>
-            <result column="employee.create_time" jdbcType="TIMESTAMP" property="createTime"/>
-            <result column="employee.modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+            <result column="employee.deleteFlag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="employee.createTime" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="employee.modifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
         </collection>
     </resultMap>
 
-    <sql id="One_To_Many_Column_List">
+    <sql id="One_To_Many_Column_List_Nested_Results">
         a.id,
         a.name,
         a.delete_flag,
@@ -52,6 +53,29 @@
     <sql id="Joins">
         LEFT JOIN t_employee as b on a.id=b.dept_id
     </sql>
+    <!-- [end] One-to-many 1: nested results -->
+
+    <!-- [begin] One-to-many 2: nested select -->
+    <resultMap id="OneToManyResultMap_NestedSelect" type="Department">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <collection property="employees" javaType="ArrayList" column="id"
+                    ofType="Employee" select="selectAssociationEmployees"/>
+    </resultMap>
+
+    <resultMap id="OneToManyResultMap_NestedSelect_Association" type="Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+    <!-- [end] One-to-many 2: nested select -->
 
     <insert id="saveSelective" parameterType="Department"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
@@ -182,14 +206,26 @@
         </foreach>
     </update>
 
-    <select id="getById" parameterType="Department" resultMap="OneToManyResultMap">
+    <select id="getById" parameterType="Department" resultMap="OneToManyResultMap_NestedResults">
         select
-        <include refid="One_To_Many_Column_List"/>
+        <include refid="One_To_Many_Column_List_Nested_Results"/>
         from t_department as a
         <include refid="Joins"/>
         where a.id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="getByIdWithNestedSelect" parameterType="Department" resultMap="OneToManyResultMap_NestedSelect">
+        select *
+        from t_department
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAssociationEmployees" resultMap="OneToManyResultMap_NestedSelect_Association">
+        select *
+        from t_employee
+        where dept_id = #{id}
+    </select>
+    
     <select id="callById" parameterType="Department" resultMap="BaseResultMap" statementType="CALLABLE">
         {call get_dept_by_id(#{id,jdbcType=INTEGER,mode=IN})}
     </select>
