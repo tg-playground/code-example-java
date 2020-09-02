@@ -175,6 +175,56 @@ public class EmployeeMapperTest {
     }
 
     @Test
+    public void getByIdWithNestedResults(){
+        int id = 312;
+        Employee employee = new Employee(id);
+        ensureEntityExist(employee);
+
+        String deptName = "test" + System.currentTimeMillis();
+        Department department = new Department(1, deptName);
+        if (departmentMapper.getById(department) == null) {
+            departmentMapper.saveSelective(department);
+        } else {
+            departmentMapper.updateSelective(department);
+        }
+
+        employee.setDepartment(department);
+        mapper.updateSelective(employee);
+
+        logger.debug("to get entity one-to-one...");
+        employee = mapper.getByIdWithNestedResults(employee);
+        logger.debug("employee is {}", employee);
+        assertNotNull(employee);
+        assertNotNull(employee.getDepartment());
+        assertEquals(deptName, employee.getDepartment().getName());
+    }
+
+    @Test
+    public void getByIdWithNestedSelect(){
+        int id = 412;
+        Employee employee = new Employee(id);
+        ensureEntityExist(employee);
+
+        String deptName = "test" + System.currentTimeMillis();
+        Department department = new Department(1, deptName);
+        if (departmentMapper.getById(department) == null) {
+            departmentMapper.saveSelective(department);
+        } else {
+            departmentMapper.updateSelective(department);
+        }
+
+        employee.setDepartment(department);
+        mapper.updateSelective(employee);
+
+        logger.debug("to get entity one-to-one...");
+        employee = mapper.getByIdWithNestedSelect(employee);
+        logger.debug("employee is {}", employee);
+        assertNotNull(employee);
+        assertNotNull(employee.getDepartment());
+        assertEquals(deptName, employee.getDepartment().getName());
+    }
+
+    @Test
     public void callById() {
         int id = 212;
         ensureEntityExist(new Employee(id));

@@ -180,6 +180,34 @@ public class DepartmentMapperTest {
     }
 
     @Test
+    public void getByIdWithNestedSelect() {
+        int id = 212;
+        Department department = new Department(id);
+        ensureEntityExist(department);
+
+        String employeeName = "test_department_one_to_many" + System.currentTimeMillis();
+        logger.debug("employeeName is {}", employeeName);
+        Employee employee = new Employee(1, employeeName);
+        logger.debug("deptId is {}", department.getId());
+        employee.setDepartment(department);
+        if (employeeMapper.getById(employee) == null) {
+            employeeMapper.saveSelective(employee);
+        } else {
+            employeeMapper.updateSelective(employee);
+        }
+
+        logger.debug("to get one-to-many entity...");
+        department = mapper.getByIdWithNestedSelect(department);
+        logger.debug("department is {}", department);
+        assertNotNull(department);
+        assertNotNull(department.getEmployees());
+        assertTrue(department.getEmployees()
+                .stream()
+                .map(emp -> emp.getName())
+                .anyMatch(name -> name.equals(employeeName)));
+    }
+
+    @Test
     public void callById() {
         int id = 212;
         ensureEntityExist(new Department(id));
