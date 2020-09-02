@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -111,7 +112,7 @@ public class EmployeeServiceImplTest {
     public void deleteAllByMap() {
         List<Integer> deleteIds = Arrays.asList(106, 107);
         List<Employee> employees = ensureEntityListExist(deleteIds);
-        String name = "delete_all_by_map";
+        String name = "delete_all_by_map" + System.currentTimeMillis();
         for (Employee employee : employees) {
             employee = employeeService.getById(employee);
             employee.setName(name);

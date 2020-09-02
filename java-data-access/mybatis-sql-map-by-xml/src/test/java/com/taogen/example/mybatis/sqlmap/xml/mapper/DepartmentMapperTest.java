@@ -100,7 +100,10 @@ public class DepartmentMapperTest {
             department.setName(name);
             mapper.updateSelective(department);
         }
-        assertTrue(mapper.deleteAllByFields(new Department(name)) >= deleteIds.size());
+        logger.debug("to delete by fields...");
+        Department department = new Department(name);
+        department.setDeleteFlag(false);
+        assertTrue(mapper.deleteAllByFields(department) >= deleteIds.size());
     }
 
     @Test
