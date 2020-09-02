@@ -12,48 +12,48 @@
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
 
-<!--    <sql id="Base_Column_List">-->
-<!--        a.id,-->
-<!--        a.name,-->
-<!--        a.nickname,-->
-<!--        a.age,-->
-<!--        a.dept_id,-->
-<!--        a.delete_flag,-->
-<!--        a.create_time,-->
-<!--        a.modify_time,-->
-<!--    </sql>-->
+    <!--    <sql id="Base_Column_List">-->
+    <!--        a.id,-->
+    <!--        a.name,-->
+    <!--        a.nickname,-->
+    <!--        a.age,-->
+    <!--        a.dept_id,-->
+    <!--        a.delete_flag,-->
+    <!--        a.create_time,-->
+    <!--        a.modify_time,-->
+    <!--    </sql>-->
 
-<!--    <resultMap id="OneToOneResultMap" type="Employee">-->
-<!--        <id column="emp_id" jdbcType="INTEGER" property="id"/>-->
-<!--        <result column="emp_name" jdbcType="VARCHAR" property="name"/>-->
-<!--        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>-->
-<!--        <result column="emp_age" jdbcType="INTEGER" property="age"/>-->
-<!--        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
-<!--        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
-<!--        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
-<!--        <association property="department" javaType="Department">-->
-<!--            <id column="dept_id" jdbcType="INTEGER" property="id"/>-->
-<!--            <result column="dept_name" jdbcType="VARCHAR" property="name"/>-->
-<!--            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
-<!--            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
-<!--            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
-<!--        </association>-->
-<!--    </resultMap>-->
+    <!--    <resultMap id="OneToOneResultMap" type="Employee">-->
+    <!--        <id column="emp_id" jdbcType="INTEGER" property="id"/>-->
+    <!--        <result column="emp_name" jdbcType="VARCHAR" property="name"/>-->
+    <!--        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>-->
+    <!--        <result column="emp_age" jdbcType="INTEGER" property="age"/>-->
+    <!--        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
+    <!--        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
+    <!--        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
+    <!--        <association property="department" javaType="Department">-->
+    <!--            <id column="dept_id" jdbcType="INTEGER" property="id"/>-->
+    <!--            <result column="dept_name" jdbcType="VARCHAR" property="name"/>-->
+    <!--            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>-->
+    <!--            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
+    <!--            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
 
-<!--    <sql id="One_To_One_Column_List">-->
-<!--        a.id as emp_id,-->
-<!--        a.name as emp_name,-->
-<!--        a.nickname as emp_nickname,-->
-<!--        a.age as emp_age,-->
-<!--        a.delete_flag as emp_delete_flag,-->
-<!--        a.create_time as emp_create_time,-->
-<!--        a.modify_time as emp_modify_time,-->
-<!--        b.id as dept_id,-->
-<!--        b.name as dept_name,-->
-<!--        b.delete_flag as dept_delete_flag,-->
-<!--        b.create_time as dept_create_time,-->
-<!--        b.modify_time as dept_modify_time-->
-<!--    </sql>-->
+    <!--    <sql id="One_To_One_Column_List">-->
+    <!--        a.id as emp_id,-->
+    <!--        a.name as emp_name,-->
+    <!--        a.nickname as emp_nickname,-->
+    <!--        a.age as emp_age,-->
+    <!--        a.delete_flag as emp_delete_flag,-->
+    <!--        a.create_time as emp_create_time,-->
+    <!--        a.modify_time as emp_modify_time,-->
+    <!--        b.id as dept_id,-->
+    <!--        b.name as dept_name,-->
+    <!--        b.delete_flag as dept_delete_flag,-->
+    <!--        b.create_time as dept_create_time,-->
+    <!--        b.modify_time as dept_modify_time-->
+    <!--    </sql>-->
 
 
     <sql id="One_To_One_Column_List">
@@ -164,29 +164,32 @@
 
     <delete id="deleteAllByFields" parameterType="Employee">
         delete from t_employee
-        where
-        delete_flag = 0
-        <if test="id != null">
-            and id = #{id,jdbcType=INTEGER}
-        </if>
-        <if test="name != null">
-            and name = #{name,jdbcType=VARCHAR}
-        </if>
-        <if test="nickname != null">
-            and nickname = #{nickname,jdbcType=VARCHAR}
-        </if>
-        <if test="age != null">
-            and age = #{age,jdbcType=INTEGER}
-        </if>
-        <if test="department != null and department.id != null">
-            and dept_id = #{department.id,jdbcType=INTEGER}
-        </if>
-        <if test="createTime != null">
-            and create_time = #{createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="modifyTime != null">
-            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-        </if>
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
     </delete>
 
     <delete id="deleteAllByMap">
@@ -199,7 +202,7 @@
 
     <update id="updateSelective" parameterType="com.taogen.example.mybatis.sqlmap.xml.entity.Employee">
         update t_employee
-        <set>
+        <trim prefix="SET" suffixOverrides=",">
             modify_time = NOW(),
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
@@ -216,7 +219,7 @@
             <if test="deleteFlag != null">
                 delete_flag = #{deleteFlag,jdbcType=BIT},
             </if>
-        </set>
+        </trim>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -264,29 +267,32 @@
 
     <select id="countByFields" parameterType="Employee" resultType="java.lang.Long">
         select count(*) from t_employee as a
-        where
-        delete_flag = 0
-        <if test="id != null">
-            and id = #{id,jdbcType=INTEGER}
-        </if>
-        <if test="name != null">
-            and name = #{name,jdbcType=VARCHAR}
-        </if>
-        <if test="nickname != null">
-            and nickname = #{nickname,jdbcType=VARCHAR}
-        </if>
-        <if test="age != null">
-            and age = #{age,jdbcType=INTEGER}
-        </if>
-        <if test="department != null and department.id != null">
-            and dept_id = #{department.id,jdbcType=INTEGER}
-        </if>
-        <if test="createTime != null">
-            and create_time = #{createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="modifyTime != null">
-            and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-        </if>
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
     </select>
 
     <select id="countByMap" resultType="java.lang.Long">
@@ -302,29 +308,32 @@
         <include refid="One_To_One_Column_List"/>
         from t_employee as a
         <include refid="Joins"/>
-        where
-        a.delete_flag = 0
-        <if test="id != null">
-            and a.id = #{id,jdbcType=INTEGER}
-        </if>
-        <if test="name != null">
-            and a.name = #{name,jdbcType=VARCHAR}
-        </if>
-        <if test="nickname != null">
-            and a.nickname = #{nickname,jdbcType=VARCHAR}
-        </if>
-        <if test="age != null">
-            and a.age = #{age,jdbcType=INTEGER}
-        </if>
-        <if test="department != null and department.id != null">
-            and a.dept_id = #{department.id,jdbcType=INTEGER}
-        </if>
-        <if test="createTime != null">
-            and a.create_time = #{createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="modifyTime != null">
-            and a.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-        </if>
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                a.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                a.id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                a.name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                a.nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                a.age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                a.dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                a.create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                a.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
     </select>
 
     <select id="findPage" resultType="Employee">
@@ -334,29 +343,33 @@
         <include refid="Joins"/>
         inner join (
         select e.id from t_employee as e
-        where
-        e.delete_flag = 0
-        <if test="entity.name != null">
-            and e.name like
-            <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-            <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-            <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
-        </if>
-        <if test="entity.nickname != null">
-            and e.nickname = #{nickname,jdbcType=VARCHAR}
-        </if>
-        <if test="entity.age != null">
-            and e.age = #{age,jdbcType=INTEGER}
-        </if>
-        <if test="entity.department != null and entity.department.id != null">
-            and e.dept_id = #{department.id,jdbcType=INTEGER}
-        </if>
-        <if test="entity.createTime != null">
-            and e.create_time = #{createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="entity.modifyTime != null">
-            and e.modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-        </if>
+        <trim prefix="where" suffixOverrides="and">
+            <if test="entity.deleteFlag != null">
+                e.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="entity.name != null">
+                e.name like
+                <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+                <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+                <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                and
+            </if>
+            <if test="entity.nickname != null">
+                e.nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="entity.age != null">
+                e.age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="entity.department != null and entity.department.id != null">
+                e.dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="entity.createTime != null">
+                e.create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="entity.modifyTime != null">
+                e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
         <if test="page != null">
             <if test="page.orderBy != null">
                 order by ${page.orderBy}
