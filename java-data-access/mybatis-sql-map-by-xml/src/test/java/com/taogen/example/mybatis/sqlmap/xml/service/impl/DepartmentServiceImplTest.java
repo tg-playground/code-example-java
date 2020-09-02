@@ -4,6 +4,8 @@ import com.taogen.example.mybatis.sqlmap.xml.entity.Department;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Page;
 import com.taogen.example.mybatis.sqlmap.xml.service.DepartmentService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import java.util.*;
@@ -12,6 +14,7 @@ import static org.junit.Assert.*;
 
 public class DepartmentServiceImplTest {
 
+    private static final Logger logger = LogManager.getLogger();
     private DepartmentService departmentService = new DepartmentServiceImpl();
 
     @Test

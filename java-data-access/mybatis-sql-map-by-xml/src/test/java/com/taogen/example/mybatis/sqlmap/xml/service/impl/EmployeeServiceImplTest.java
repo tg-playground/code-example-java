@@ -3,6 +3,8 @@ package com.taogen.example.mybatis.sqlmap.xml.service.impl;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Employee;
 import com.taogen.example.mybatis.sqlmap.xml.entity.Page;
 import com.taogen.example.mybatis.sqlmap.xml.service.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class EmployeeServiceImplTest {
 
+    private static final Logger logger = LogManager.getLogger();
     private EmployeeService employeeService = new EmployeeServiceImpl();
 
     @Test
@@ -81,7 +84,7 @@ public class EmployeeServiceImplTest {
         employeeService.update(employee);
         assertEquals(1, employeeService.deleteLogically(employee));
         employee = employeeService.getById(employee);
-        System.out.println(employee);
+        logger.debug("employee is {}", employee);
         assertEquals(name, employee.getName());
         assertEquals(true, employee.getDeleteFlag());
     }
@@ -103,6 +106,7 @@ public class EmployeeServiceImplTest {
             assertEquals(true, employee.getDeleteFlag());
         }
     }
+
     @Test
     public void deleteAllByMap() {
         List<Integer> deleteIds = Arrays.asList(106, 107);
@@ -170,7 +174,7 @@ public class EmployeeServiceImplTest {
         long pageSize = 10;
         Page page = new Page(pageNo, (int) pageSize);
         List<Employee> employees = employeeService.findPage(page, new Employee("test"));
-        System.out.println(employees);
+        logger.debug("employees are {}", employees);
         assertNotNull(employees);
     }
 
