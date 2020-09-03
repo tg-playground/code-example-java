@@ -1,0 +1,34 @@
+@startuml
+
+'selectById'
+Client -> Mapper : select(id)
+Mapper -> MapperProxy : invoke(proxy, method, args)
+MapperProxy -> PlainMethodInvoker : invoke(proxy, method, args, sqlSession)
+PlainMethodInvoker -> MapperMethod : execute(sqlSession, args)
+MapperMethod -> DefaultSqlSession : selectOne(statement, parameter)
+DefaultSqlSession -> DefaultSqlSession : selectList(statement, parameter)
+DefaultSqlSession -> DefaultSqlSession : selectList(statement, parameter, rowBounds)
+DefaultSqlSession -> Configuration : getMappedStatement(statement)
+Configuration -> DefaultSqlSession : return mappedStatement
+DefaultSqlSession -> CachingExecutor : query(mappedStatement, parameterObject, rowBounds, resultHandler))
+CachingExecutor -> CachingExecutor : query(mappedStatement, parameterObject, rowBounds, resultHandler, key, boundSql)
+CachingExecutor -> BaseExecutor : query(mappedStatement, parameter, rowBounds, resultHandler, key, boundSql)
+BaseExecutor -> BaseExecutor : queryFromDatabase(mappedStatement, parameter, rowBounds, resultHandler, key, boundSql)
+BaseExecutor -> SimpleExecutor : doQuery(mappedStatement, parameter, rowBounds, resultHandler, boundSql)
+SimpleExecutor -> MappedStatement : getConfiguration()
+MappedStatement -> SimpleExecutor : return configuration
+SimpleExecutor -> Configuration : newStatementHandler(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql)
+Configuration -> SimpleExecutor : return StatementHandler
+SimpleExecutor -> SimpleExecutor : prepareStatement(handler, ms.getStatementLog())
+SimpleExecutor -> RoutingStatementHandler : query(statement, resultHandler)
+RoutingStatementHandler -> PreparedStatementHandler : query(statement, resultHandler)
+PreparedStatementHandler -> PrepareStatement : execute()
+PrepareStatement -> PreparedStatementLogger : invoke(proxy, method, params)
+PreparedStatementLogger -> Method : invoke(statement, params)
+Method -> RoutingStatementHandler : return result
+
+RoutingStatementHandler -> DefaultResultSetHandler : handleResultSets(preparedStatement)
+DefaultResultSetHandler -> RoutingStatementHandler : return xxx
+
+
+@enduml

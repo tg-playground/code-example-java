@@ -1,0 +1,17 @@
+@startuml
+
+
+Client -> SqlSessionFactoryService : openSession()
+SqlSessionFactoryService -> Client : return sqlSession
+Client -> DefaultSqlSession : getMapper(class)
+DefaultSqlSession -> Configuration : getMapper(type, this)
+Configuration -> MapperRegistry : getMapper(type, sqlSession)
+MapperRegistry -> MapperRegistry : knownMappers.get(type)
+MapperRegistry -> MapperProxyFactory : newInstance(sqlSession)
+MapperProxyFactory -> MapperProxyFactory : new MapperProxy<>(sqlSession, mapperInterface, methodCache)
+MapperProxyFactory -> MapperProxyFactory : newInstance(mapperProxy)
+MapperProxyFactory -> Proxy : newProxyInstance(classLoader, interfaces, mapperProxy)
+Proxy -> Client : return Mapper instance
+
+
+@enduml

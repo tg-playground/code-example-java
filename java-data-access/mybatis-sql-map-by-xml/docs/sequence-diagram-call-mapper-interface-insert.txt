@@ -1,0 +1,36 @@
+@startuml
+
+Client -> Mapper : insert(entity)
+Mapper -> MapperProxy : invoke(proxy, method, args)
+MapperProxy -> MapperProxy: cachedInvoker(method)
+MapperProxy -> PlainMethodInvoker : invoke(proxy, method, args, sqlSession)
+PlainMethodInvoker -> MapperMethod: execute(sqlSession, args)
+MapperMethod -> DefaultSqlSession : insert(statement, parameter)
+DefaultSqlSession -> Configuration : getMappedStatement(statement)
+Configuration -> DefaultSqlSession : return mappedStatement
+DefaultSqlSession -> CachingExecutor : update(mappedStatement, wrapCollection(parameter))
+CachingExecutor -> BaseExecutor : update(ms, parameterObject)
+BaseExecutor -> SimpleExecutor : doUpdate(mappedStatement, parameter)
+SimpleExecutor -> MappedStatement : getConfiguration()
+MappedStatement -> SimpleExecutor : return configuration
+SimpleExecutor -> Configuration : newStatementHandler(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql)
+Configuration -> SimpleExecutor : return StatementHandler
+SimpleExecutor -> SimpleExecutor : prepareStatement(handler, ms.getStatementLog())
+SimpleExecutor -> RoutingStatementHandler : update(stmt)
+RoutingStatementHandler -> PreparedStatementHandler : update(statement)
+PreparedStatementHandler -> PrepareStatement : execute()
+PrepareStatement -> PreparedStatementLogger : invoke(proxy, method, params)
+PreparedStatementLogger -> Method : invoke(statement, params)
+Method -> PreparedStatementHandler
+PreparedStatementHandler -> PrepareStatement : getUpdateCount()
+PrepareStatement -> PreparedStatementLogger : invoke(proxy, method, params)
+PreparedStatementLogger -> Method : invoke(statement, params)
+Method -> PreparedStatementHandler : return updateCount
+PreparedStatementHandler -> KeyGenerator : processAfter(executor, mappedStatement, ps, parameterObject)
+KeyGenerator -> PreparedStatementHandler
+PreparedStatementHandler -> MapperMethod : return rows
+MapperMethod -> MapperMethod : rowCountResult(rows)
+MapperMethod -> Client : return result
+
+@enduml
+
