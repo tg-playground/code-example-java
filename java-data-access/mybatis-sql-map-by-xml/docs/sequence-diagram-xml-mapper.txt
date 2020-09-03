@@ -1,0 +1,69 @@
+@startuml
+
+'Client'
+
+Client -> SqlSessionFactoryBuilder : new
+Client -> SqlSessionFactoryBuilder : build(inputStream)
+
+'SqlSessionFactoryBuilder'
+
+SqlSessionFactoryBuilder -> SqlSessionFactoryBuilder : build(inputStream, env, properties)
+
+'XMLConfigBuilder'
+
+SqlSessionFactoryBuilder -> XMLConfigBuilder : new XMLConfigBuilder(inputStream, env, properties)
+XMLConfigBuilder -> XPathParser : new XPathParser(inputStream, validation, properties, entityResolver)
+XPathParser -> XMLConfigBuilder : return xPathParser
+XMLConfigBuilder -> SqlSessionFactoryBuilder : return xmlConfigBuilder
+SqlSessionFactoryBuilder -> XMLConfigBuilder : parse()
+XMLConfigBuilder -> XPathParser : evalNode(expression)
+XPathParser -> XMLConfigBuilder : return rootXNode
+XMLConfigBuilder -> XMLConfigBuilder : parseConfiguration(XNode root)
+
+XMLConfigBuilder -> XPathParser : evalNode("typeAliases")
+XPathParser -> XMLConfigBuilder : return typeAliasesXNode
+XMLConfigBuilder -> XMLConfigBuilder : typeAliasesElement(typeAliasesXNode)
+XMLConfigBuilder -> TypeAliasRegistry : registerAliases(typeAliasPackage)
+
+
+XMLConfigBuilder -> XPathParser : evalNode("mappers")
+XPathParser -> XMLConfigBuilder : return mappersXNode
+XMLConfigBuilder -> XMLConfigBuilder : mapperElement(mappersXNode)
+XMLConfigBuilder -> Configuration : addMappers(mapperPackage)
+Configuration -> MapperRegistry : addMappers(packageName)
+MapperRegistry -> MapperRegistry : addMappers(packageName, superType)
+MapperRegistry -> ResolverUtil : getClasses()
+ResolverUtil -> MapperRegistry : return mapperClassSet
+MapperRegistry -> MapperRegistry : addMapper(mapperClass)
+MapperRegistry -> MapperProxyFactory : new MapperProxyFactory(mapperClass)
+MapperProxyFactory -> MapperRegistry : return mapperProxyFactory
+MapperRegistry -> MapperRegistry : knownMappers.put(type, mapperProxyFactory)
+MapperRegistry -> MapperAnnotationBuilder : new MapperAnnotationBuilder(config, type)
+MapperRegistry -> MapperAnnotationBuilder : parse()
+MapperAnnotationBuilder -> MapperAnnotationBuilder : loadXmlResource()
+MapperAnnotationBuilder -> MapperAnnotationBuilder : Resources.getResourceAsStream(mapperXmlPath)
+MapperAnnotationBuilder -> XMLMapperBuilder : new XMLMapperBuilder(inputStream, configuration, \n\tresource, sqlFragments, namespace)
+MapperAnnotationBuilder -> XMLMapperBuilder : parse()
+XMLMapperBuilder -> Configuration : addLoadedResource(resource)
+XMLMapperBuilder -> XMLMapperBuilder : bindMapperForNamespace()
+XMLMapperBuilder -> XMLMapperBuilder : parsePendingResultMaps()
+XMLMapperBuilder -> XMLMapperBuilder : parsePendingStatements()
+XMLMapperBuilder -> XMLStatementBuilder : parseStatementNode()
+XMLStatementBuilder -> BuilderAssistant : addMappedStatement(id, sqlSource, statementType, sqlCommandType,\n\
+    fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,\n\
+    resultSetTypeEnum, flushCache, useCache, resultOrdered,\n\
+    keyGenerator, keyProperty, keyColumn, databaseId, langDriver, resultSets)
+BuilderAssistant -> MappedStatement.Builder: build()
+MappedStatement.Builder -> BuilderAssistant : return MappedStatement
+BuilderAssistant -> Configuration : addMappedStatement(mappedStatement)
+
+XMLConfigBuilder -> SqlSessionFactoryBuilder : return configuration of baseBuilder
+SqlSessionFactoryBuilder -> SqlSessionFactoryBuilder : build(configuration)
+
+'DefaultSqlSessionFactory'
+
+SqlSessionFactoryBuilder -> DefaultSqlSessionFactory : new DefaultSqlSessionFactory(configuration)
+DefaultSqlSessionFactory -> SqlSessionFactoryBuilder : return defaultSqlSessionFactory
+SqlSessionFactoryBuilder -> Client : return sqlSessionFactory
+
+@enduml
