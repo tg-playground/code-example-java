@@ -16,7 +16,6 @@ public class JdbcHello {
         String url = "jdbc:mysql://localhost:3306/test?serverTimezone=UTC";
         String user = "root";
         String password = "root";
-        ResultSet resultSet = null;
         try (
                 Connection connection = DriverManager.getConnection(url, user, password);
                 Statement statement = connection.createStatement()
@@ -26,21 +25,16 @@ public class JdbcHello {
             statement.execute("create table if not exists user(id int not null primary key auto_increment, name varchar(64) not null, age int null)");
             int insertCount = statement.executeUpdate("insert into user (name, age) values ('Tom', 18), ('John', 21)");
             logger.debug("insert {} row(s)", insertCount);
-            resultSet = statement.executeQuery("select * from user");
-            while (resultSet.next()) {
-                logger.debug("name is {}, age is {}", resultSet.getString(2), resultSet.getString(3));
+            try (
+                    ResultSet resultSet = statement.executeQuery("select * from user");
+            ) {
+                while (resultSet.next()) {
+                    logger.debug("name is {}, age is {}", resultSet.getString(2), resultSet.getString(3));
+                }
             }
             return true;
         } catch (Exception e) {
             LoggerUtil.loggerError(logger, e);
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    LoggerUtil.loggerError(logger, e);
-                }
-            }
         }
         return false;
     }
