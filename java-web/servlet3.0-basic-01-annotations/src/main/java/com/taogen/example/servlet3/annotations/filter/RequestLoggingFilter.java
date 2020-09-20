@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebFilter(urlPatterns = {"/*"}, initParams = {
-        @WebInitParam(name = "test-param", value = "Initialization Paramter")})
+        @WebInitParam(name = "test-param", value = "Initialization Parameter")})
 public class RequestLoggingFilter implements Filter {
 
     private static final Logger logger = LogManager.getLogger();

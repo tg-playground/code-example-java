@@ -21,7 +21,7 @@ public class ServletAnnotationsServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    protected void doGet(HttpServletRequest reqest, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.debug("doGet() called.");
         response.setContentType("text/html");
