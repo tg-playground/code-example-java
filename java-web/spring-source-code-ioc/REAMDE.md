@@ -241,13 +241,7 @@ Business Processes
 
 ### Running and Visiting Project
 
-Running Maven Project by Maven Tomcat 7 Plugin
-
-```shell
-$ mvn tomcat7:run
-# or
-$ mvn tomcat7:run-war
-```
+In Intellij IDEA, in the `Maven` tab --> Plugins --> tomcat7 --> tomcat7:run --> Right Click --> Debug <project>.
 
 Visiting Index Page
 

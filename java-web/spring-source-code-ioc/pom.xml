@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taogen.example</groupId>
-    <artifactId>spring-framework-ioc</artifactId>
+    <artifactId>spring-source-code-ioc</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>spring-framework-ioc Maven Webapp</name>
+    <name>spring-source-code-ioc Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
 
