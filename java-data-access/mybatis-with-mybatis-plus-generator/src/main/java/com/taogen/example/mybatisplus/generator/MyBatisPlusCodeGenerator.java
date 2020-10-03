@@ -31,6 +31,11 @@ public class MyBatisPlusCodeGenerator {
     private MyBatisPlusCodeGeneratorConfig config;
 
     public Boolean generate() {
+        config.getTableConfigs().forEach(tableConfig -> generateTable(getGenerator(config), tableConfig));
+        return true;
+    }
+
+    private AutoGenerator getGenerator(MyBatisPlusCodeGeneratorConfig config) {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -49,12 +54,7 @@ public class MyBatisPlusCodeGenerator {
         dsc.setUsername(config.getDataSourceUsername());
         dsc.setPassword(config.getDataSourcePasswd());
         mpg.setDataSource(dsc);
-
-        /*
-         * Table Settings
-         */
-        config.getTableConfigs().forEach(tableConfig -> generateTable(mpg, tableConfig));
-        return true;
+        return mpg;
     }
 
     private void generateTable(AutoGenerator generator, MyBatisPlusCodeGeneratorConfig.TableConfig tableConfig) {
@@ -62,7 +62,9 @@ public class MyBatisPlusCodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         // TODO UPDATE_ME
-        pc.setModuleName(tableConfig.getModuleName());
+        if (tableConfig.getModuleName() != null) {
+            pc.setModuleName(tableConfig.getModuleName());
+        }
         pc.setParent(tableConfig.getParentPackage());
         generator.setPackageInfo(pc);
 
@@ -146,5 +148,6 @@ public class MyBatisPlusCodeGenerator {
         generator.setTemplateEngine(new FreemarkerTemplateEngine());
 
         generator.execute();
+        logger.info("generate {}...", tableConfig.getTableName());
     }
 }
