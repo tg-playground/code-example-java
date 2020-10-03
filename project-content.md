@@ -132,7 +132,7 @@
 - mybatis-plugins
 - [x] mybatis-with-mybatis-plus-hello
 - [x] mybatis-with-mybatis-plus-generator
-- [ ] mybatis-with-mybatis-plus-crud
+- [x] mybatis-with-mybatis-plus-crud
 - spring-with-mybatis
 - springboot-with-mybatis
 - hibernate-basic-helloworld
