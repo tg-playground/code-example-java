@@ -130,7 +130,9 @@
 - [x] mybatis-sql-map-by-annotations
 - [x] mybatis-with-mybatis-plus
 - mybatis-plugins
-- mybatis-with-mybatis-plus
+- [x] mybatis-with-mybatis-plus-hello
+- [x] mybatis-with-mybatis-plus-generator
+- [ ] mybatis-with-mybatis-plus-crud
 - spring-with-mybatis
 - springboot-with-mybatis
 - hibernate-basic-helloworld
