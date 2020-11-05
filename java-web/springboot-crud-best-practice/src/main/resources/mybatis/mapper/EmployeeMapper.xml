@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taogen.demo.springbootcrud.module.employee.dao.EmployeeMapper">
+    <resultMap id="BaseResultMap" type="com.taogen.demo.springbootcrud.module.employee.entity.Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="dept_id" jdbcType="INTEGER" property="department.id"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <!--    <sql id="Base_Column_List">-->
+    <!--        a.id,-->
+    <!--        a.name,-->
+    <!--        a.nickname,-->
+    <!--        a.age,-->
+    <!--        a.dept_id,-->
+    <!--        a.delete_flag,-->
+    <!--        a.create_time,-->
+    <!--        a.modify_time,-->
+    <!--    </sql>-->
+
+    <!-- [begin] One-to-one 1: auto mapping by aliases -->
+    <sql id="One_To_One_Column_List_Auto_Mapping_By_Aliases">
+        a.id,
+        a.name,
+        a.nickname,
+        a.age,
+        a.delete_flag as "deleteFlag",
+        a.create_time as "createTime",
+        a.modify_time as "modifyTime",
+        b.id as "department.id",
+        b.name as "department.name",
+        b.delete_flag as "department.deleteFlag",
+        b.create_time as "department.createTime",
+        b.modify_time as "department.modifyTime"
+    </sql>
+    <sql id="Joins">
+        LEFT JOIN t_department b ON a.dept_id = b.id
+    </sql>
+    <!-- [end] One-to-one 1: auto mapping by aliases -->
+
+    <!-- [begin] One-to-one 2: nested results -->
+    <resultMap id="OneToOneResultMap_NestedResults" type="Employee">
+        <id column="emp_id" jdbcType="INTEGER" property="id"/>
+        <result column="emp_name" jdbcType="VARCHAR" property="name"/>
+        <result column="emp_nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="emp_age" jdbcType="INTEGER" property="age"/>
+        <result column="emp_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="emp_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="emp_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <association property="department" javaType="Department">
+            <id column="dept_id" jdbcType="INTEGER" property="id"/>
+            <result column="dept_name" jdbcType="VARCHAR" property="name"/>
+            <result column="dept_delete_flag" jdbcType="BIT" property="deleteFlag"/>
+            <result column="dept_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="dept_modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        </association>
+    </resultMap>
+
+    <sql id="One_To_One_Column_List_Nested_Results">
+            a.id as emp_id,
+            a.name as emp_name,
+            a.nickname as emp_nickname,
+            a.age as emp_age,
+            a.delete_flag as emp_delete_flag,
+            a.create_time as emp_create_time,
+            a.modify_time as emp_modify_time,
+            b.id as dept_id,
+            b.name as dept_name,
+            b.delete_flag as dept_delete_flag,
+            b.create_time as dept_create_time,
+            b.modify_time as dept_modify_time
+    </sql>
+    <!-- [end] One-to-one 2: nested results -->
+
+    <!-- [begin] One-to-one 3: nested select -->
+    <resultMap id="OneToOneResultMap_NestedSelect" type="Employee">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <association property="department" column="dept_id" javaType="Department" select="selectAssociationDepartment"/>
+    </resultMap>
+
+    <resultMap id="OneToOneResultMap_NestedSelect_Association" type="Department">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+    <!-- [end] One-to-one 3: nested select -->
+
+
+    <insert id="saveSelective" parameterType="Employee"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="department != null and department.id != null">
+                #{department.id,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_employee
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="deleteLogically" parameterType="Employee">
+        update t_employee
+        set delete_flag = 1
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAll" parameterType="Employee">
+        delete from t_employee
+        where id in
+        <foreach item="item" index="index" collection="entities"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+
+    <update id="deleteAllLogically">
+        update t_employee
+        set delete_flag = 1
+        where id in
+        <foreach item="item" index="index" collection="entities"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="deleteAllByFields" parameterType="Employee">
+        delete from t_employee
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteAllByMap">
+        delete from t_employee
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </delete>
+
+    <update id="updateSelective" parameterType="Employee">
+        update t_employee
+        <trim prefix="SET" suffixOverrides=",">
+            modify_time = NOW(),
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateAllFieldsByMap">
+        update t_employee
+        <set>
+            modify_time = NOW(),
+            <if test="entity.name != null">
+                name = #{entity.name,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.nickname != null">
+                nickname = #{entity.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.age != null">
+                age = #{entity.age,jdbcType=INTEGER},
+            </if>
+            <if test="entity.department != null and entity.department.id != null">
+                dept_id = #{entity.department.id,jdbcType=INTEGER},
+            </if>
+            <if test="entity.deleteFlag != null">
+                delete_flag = #{entity.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </update>
+
+    <select id="getById" resultType="Employee">
+        select
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getByIdWithNestedResults" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedResults">
+        select
+        <include refid="One_To_One_Column_List_Nested_Results"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getByIdWithNestedSelect" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedSelect">
+        select *
+        from t_employee
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAssociationDepartment" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedSelect_Association">
+        select *
+        from t_department
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="callById" parameterType="Employee" resultMap="BaseResultMap" statementType="CALLABLE">
+        {call get_emp_by_id(#{id,jdbcType=INTEGER,mode=IN})}
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+    </select>
+
+    <select id="countByFields" parameterType="Employee" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Long">
+        select count(*) from t_employee as a
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            ${key}=#{value}
+        </foreach>
+    </select>
+
+    <select id="findAllByFields" parameterType="Department" resultType="Employee">
+        select
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deleteFlag != null">
+                a.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="id != null">
+                a.id = #{id,jdbcType=INTEGER} and
+            </if>
+            <if test="name != null">
+                a.name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="nickname != null">
+                a.nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="age != null">
+                a.age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="department != null and department.id != null">
+                a.dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="createTime != null">
+                a.create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="modifyTime != null">
+                a.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
+    </select>
+
+    <select id="findPage" resultType="Employee">
+        select
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        inner join (
+        select e.id from t_employee as e
+        <trim prefix="where" suffixOverrides="and">
+            <if test="entity.deleteFlag != null">
+                e.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            </if>
+            <if test="entity.name != null">
+                e.name like
+                <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+                <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+                <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                and
+            </if>
+            <if test="entity.nickname != null">
+                e.nickname = #{nickname,jdbcType=VARCHAR} and
+            </if>
+            <if test="entity.age != null">
+                e.age = #{age,jdbcType=INTEGER} and
+            </if>
+            <if test="entity.department != null and entity.department.id != null">
+                e.dept_id = #{department.id,jdbcType=INTEGER} and
+            </if>
+            <if test="entity.createTime != null">
+                e.create_time = #{createTime,jdbcType=TIMESTAMP} and
+            </if>
+            <if test="entity.modifyTime != null">
+                e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            </if>
+        </trim>
+        <if test="page != null">
+            <if test="page.orderBy != null">
+                order by ${page.orderBy}
+            </if>
+            <if test="page.start != null and page.pageSize != null ">
+                limit ${page.start}, ${page.pageSize}
+            </if>
+        </if>
+        ) as lim on a.id = lim.id
+    </select>
+
+    <select id="findAllByMap" resultType="Employee">
+        select
+        <include refid="One_To_One_Column_List_Auto_Mapping_By_Aliases"/>
+        from t_employee as a
+        <include refid="Joins"/>
+        where
+        <foreach collection="conditions" index="key" item="value" open="" separator=" and " close="">
+            a.${key}=#{value}
+        </foreach>
+    </select>
+
+    <insert id="execInsertSql">
+        ${sql}
+    </insert>
+
+    <delete id="execDeleteSql">
+        ${sql}
+    </delete>
+
+    <update id="execUpdateSql">
+        ${sql}
+    </update>
+
+    <select id="execSelectSql" resultMap="BaseResultMap">
+        ${sql}
+    </select>
+</mapper>
