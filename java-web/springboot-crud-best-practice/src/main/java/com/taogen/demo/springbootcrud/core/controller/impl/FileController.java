@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Taogen
  */
 @RestController
-@RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/files", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FileController extends AbstractRestController<FileService, File> {
 
     @Autowired
