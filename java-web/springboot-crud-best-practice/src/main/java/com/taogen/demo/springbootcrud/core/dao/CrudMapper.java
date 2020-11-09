@@ -1,7 +1,7 @@
-package com.taogen.demo.springbootcrud.common.dao;
+package com.taogen.demo.springbootcrud.core.dao;
 
-import com.taogen.demo.springbootcrud.common.entity.BaseEntity;
-import com.taogen.demo.springbootcrud.common.vo.Page;
+import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.vo.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.entity;
+package com.taogen.demo.springbootcrud.core.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

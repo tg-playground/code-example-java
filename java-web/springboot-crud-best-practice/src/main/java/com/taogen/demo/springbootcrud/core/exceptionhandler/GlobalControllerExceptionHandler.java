@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.exceptionhandler;
+package com.taogen.demo.springbootcrud.core.exceptionhandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;

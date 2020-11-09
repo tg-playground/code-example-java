@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.dao;
+package com.taogen.demo.springbootcrud.core.dao;
 
 /**
  * @author Taogen

@@ -1,8 +1,8 @@
-package com.taogen.demo.springbootcrud.common.service;
+package com.taogen.demo.springbootcrud.core.service;
 
-import com.taogen.demo.springbootcrud.common.dao.CrudMapper;
-import com.taogen.demo.springbootcrud.common.entity.BaseEntity;
-import com.taogen.demo.springbootcrud.common.vo.Page;
+import com.taogen.demo.springbootcrud.core.dao.CrudMapper;
+import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.vo.Page;
 
 import java.io.Serializable;
 import java.util.Collection;

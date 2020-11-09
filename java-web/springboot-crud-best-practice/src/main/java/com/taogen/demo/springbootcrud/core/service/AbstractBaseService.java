@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.service;
+package com.taogen.demo.springbootcrud.core.service;
 
 /**
  * @author Taogen

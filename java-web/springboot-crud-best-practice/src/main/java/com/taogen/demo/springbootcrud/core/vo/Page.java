@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.vo;
+package com.taogen.demo.springbootcrud.core.vo;
 
 /**
  * @author Taogen

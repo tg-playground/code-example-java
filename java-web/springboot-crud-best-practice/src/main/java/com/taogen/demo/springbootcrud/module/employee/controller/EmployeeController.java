@@ -1,10 +1,9 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
-import com.taogen.demo.springbootcrud.common.controller.AbstractController;
-import com.taogen.demo.springbootcrud.common.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.common.vo.Page;
-import com.taogen.demo.springbootcrud.common.vo.ResponseModel;
-import com.taogen.demo.springbootcrud.module.employee.dao.EmployeeMapper;
+import com.taogen.demo.springbootcrud.core.controller.AbstractController;
+import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.vo.Page;
+import com.taogen.demo.springbootcrud.core.vo.ResponseModel;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

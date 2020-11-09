@@ -1,8 +1,8 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
-import com.taogen.demo.springbootcrud.common.controller.AbstractRestController;
-import com.taogen.demo.springbootcrud.common.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.common.vo.Page;
+import com.taogen.demo.springbootcrud.core.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.vo.Page;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;

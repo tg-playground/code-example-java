@@ -1,9 +1,9 @@
-package com.taogen.demo.springbootcrud.common.controller;
+package com.taogen.demo.springbootcrud.core.controller;
 
-import com.taogen.demo.springbootcrud.common.entity.BaseEntity;
-import com.taogen.demo.springbootcrud.common.service.CrudService;
-import com.taogen.demo.springbootcrud.common.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.common.vo.Page;
+import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.service.CrudService;
+import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.vo.Page;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;

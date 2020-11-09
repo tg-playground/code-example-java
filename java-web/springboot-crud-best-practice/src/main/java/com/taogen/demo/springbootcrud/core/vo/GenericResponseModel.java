@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.common.vo;
+package com.taogen.demo.springbootcrud.core.vo;
 
 public class GenericResponseModel<T> extends ResponseModel {
     private static final long serialVersionUID = 7100791756352030649L;

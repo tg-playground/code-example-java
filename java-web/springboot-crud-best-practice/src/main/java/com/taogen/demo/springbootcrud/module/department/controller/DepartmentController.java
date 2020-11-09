@@ -1,10 +1,9 @@
 package com.taogen.demo.springbootcrud.module.department.controller;
 
-import com.taogen.demo.springbootcrud.common.controller.AbstractController;
-import com.taogen.demo.springbootcrud.common.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.common.vo.Page;
-import com.taogen.demo.springbootcrud.common.vo.ResponseModel;
-import com.taogen.demo.springbootcrud.module.department.dao.DepartmentMapper;
+import com.taogen.demo.springbootcrud.core.controller.AbstractController;
+import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.vo.Page;
+import com.taogen.demo.springbootcrud.core.vo.ResponseModel;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
