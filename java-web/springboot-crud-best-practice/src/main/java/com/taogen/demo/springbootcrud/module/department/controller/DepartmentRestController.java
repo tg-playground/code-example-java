@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
 
@@ -44,26 +45,31 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
 
     @Override
     @DeleteMapping("/{id}")
-    public GenericResponseModel delete(HttpServletRequest request, @PathVariable("id") Serializable id) {
+    public GenericResponseModel delete(HttpServletRequest request,
+                                       @PathVariable("id") Serializable id) {
         return super.delete(request, id);
     }
 
     @Override
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel deleteAll(HttpServletRequest request, @RequestBody String value) {
+    public GenericResponseModel deleteAll(HttpServletRequest request,
+                                          @RequestBody String value) {
         return super.deleteAll(request, value);
     }
 
 
     @Override
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel save(HttpServletRequest request, @RequestBody Department department) {
+    public GenericResponseModel save(HttpServletRequest request,
+                                     @Valid @RequestBody Department department) {
         return super.save(request, department);
     }
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel update(HttpServletRequest request, @PathVariable("id") Serializable id, @RequestBody Department department) {
+    public GenericResponseModel update(HttpServletRequest request,
+                                       @PathVariable("id") Serializable id,
+                                       @Valid @RequestBody Department department) {
         return super.update(request, id, department);
     }
 }

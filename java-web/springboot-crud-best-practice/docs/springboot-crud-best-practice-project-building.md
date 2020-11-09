@@ -428,6 +428,72 @@ springdoc:
 
 ### Data Validation
 
+#### JPA Data Validation
+
+`pom.xml`
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+
+`{Entity}.java`
+
+```java
+import javax.persistence.Entity;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+public class Employee extends BaseEntity {
+
+    @NotBlank(message = "Name is mandatory")
+    private String name;
+
+    private String nickname;
+
+    @Min(value = 1, message = "Age can't less than 1")
+    @Max(value = 150, message = "Age can't greater than 150")
+    private Integer age;
+}
+```
+
+`{GlobalExcpetionHandler}.java`
+
+```java
+@ControllerAdvice
+@RestController
+public class GlobalControllerExceptionHandler {
+
+    /**
+     * 400: BAD_REQUEST
+     * @param ex
+     * @return
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
+}
+```
+
+
+
 ### Error Handling
 
 ### AOP
