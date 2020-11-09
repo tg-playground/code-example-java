@@ -40,6 +40,8 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
 
     @Override
     public GenericResponseModel update(HttpServletRequest request, Serializable id, T entity) {
+        Integer intId = Integer.parseInt(String.valueOf(id));
+        entity.setId(intId);
         GenericResponseModel result = new GenericResponseModel("");
         result.setResponseBody(service.update(entity));
         return result;

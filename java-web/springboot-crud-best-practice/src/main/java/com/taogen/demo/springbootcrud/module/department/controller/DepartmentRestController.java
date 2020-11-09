@@ -58,10 +58,7 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
     @Override
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel save(HttpServletRequest request, @RequestBody Department department) {
-//        return super.save(request, value);
-        GenericResponseModel genericResponseModel = new GenericResponseModel("");
-        genericResponseModel.setResponseBody(service.save(department));
-        return genericResponseModel;
+        return super.save(request, department);
     }
 
     @Override

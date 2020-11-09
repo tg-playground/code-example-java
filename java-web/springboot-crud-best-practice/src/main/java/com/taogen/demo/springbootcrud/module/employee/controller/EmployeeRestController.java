@@ -1,10 +1,69 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.taogen.demo.springbootcrud.common.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.common.vo.GenericResponseModel;
+import com.taogen.demo.springbootcrud.common.vo.Page;
+import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
+import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Taogen
  */
 @RestController
-public class EmployeeRestController {
+@RequestMapping("/employees")
+public class EmployeeRestController extends AbstractRestController<EmployeeService, Employee> {
+
+    @Autowired
+    public void init(EmployeeService service) {
+        this.service = service;
+        this.type = Employee.class;
+        this.logger = LogManager.getLogger();
+    }
+
+    @Override
+    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
+                                                         @RequestBody Page<Employee> page) {
+        return super.findList(request, page);
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public GenericResponseModel<Employee> get(HttpServletRequest request,
+                                              @PathVariable("id") Serializable id) {
+        return super.get(request, id);
+    }
+
+    @Override
+    @DeleteMapping("/{id}")
+    public GenericResponseModel delete(HttpServletRequest request, @PathVariable("id") Serializable id) {
+        return super.delete(request, id);
+    }
+
+    @Override
+    @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel deleteAll(HttpServletRequest request, @RequestBody String value) {
+        return super.deleteAll(request, value);
+    }
+
+
+    @Override
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel save(HttpServletRequest request, @RequestBody Employee employee) {
+        return super.save(request, employee);
+    }
+
+    @Override
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel update(HttpServletRequest request, @PathVariable("id") Serializable id, @RequestBody Employee employee) {
+        return super.update(request, id, employee);
+    }
 }
