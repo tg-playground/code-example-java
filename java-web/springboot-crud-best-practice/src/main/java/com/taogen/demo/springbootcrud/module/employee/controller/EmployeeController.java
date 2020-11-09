@@ -27,19 +27,11 @@ public class EmployeeController extends AbstractController<EmployeeService, Empl
         this.service = service;
     }
 
-    @PostMapping("/findPage")
+    @PostMapping("/findList")
     @Override
-    public GenericResponseModel<List<Employee>> findPage(HttpServletRequest request,
-                                                         @ModelAttribute("entity") Employee entity,
-                                                         @ModelAttribute("page") Page page) {
-        return super.findPage(request, entity, page);
-    }
-
-    @PostMapping("/findAll")
-    @Override
-    public GenericResponseModel<List<Employee>> findAll(HttpServletRequest request,
-                                                        @ModelAttribute("entity") Employee entity) {
-        return super.findAll(request, entity);
+    public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
+                                                         @ModelAttribute("page") Page<Employee> page) {
+        return super.findList(request, page);
     }
 
     @GetMapping("/get")

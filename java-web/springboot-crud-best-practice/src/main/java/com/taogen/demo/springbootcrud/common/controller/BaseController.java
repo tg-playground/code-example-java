@@ -12,17 +12,15 @@ import java.util.List;
  * @author Taogen
  */
 public interface BaseController<T extends BaseEntity> {
-    ResponseModel findPage(HttpServletRequest request, T entity, Page page);
-
-    ResponseModel findAll(HttpServletRequest request, T entity);
-
-    ResponseModel get(HttpServletRequest request, Serializable id);
+    ResponseModel save(HttpServletRequest request, T entity);
 
     ResponseModel delete(HttpServletRequest request, Serializable id);
 
-    ResponseModel deleteAll(HttpServletRequest request, List<Serializable> ids);
-
-    ResponseModel save(HttpServletRequest request, T entity);
-
     ResponseModel update(HttpServletRequest request, T entity);
+
+    ResponseModel get(HttpServletRequest request, Serializable id);
+
+    ResponseModel findList(HttpServletRequest request, Page<T> page);
+
+    ResponseModel deleteAll(HttpServletRequest request, List<Serializable> ids);
 }

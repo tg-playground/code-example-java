@@ -27,19 +27,11 @@ public class DepartmentController extends AbstractController<DepartmentService, 
         this.service = service;
     }
 
-    @PostMapping("/findPage")
+    @PostMapping("/findList")
     @Override
-    public GenericResponseModel<List<Department>> findPage(HttpServletRequest request,
-                                                           @ModelAttribute("entity") Department entity,
+    public GenericResponseModel<List<Department>> findList(HttpServletRequest request,
                                                            @ModelAttribute("page") Page page) {
-        return super.findPage(request, entity, page);
-    }
-
-    @PostMapping("/findAll")
-    @Override
-    public GenericResponseModel<List<Department>> findAll(HttpServletRequest request,
-                                                          @ModelAttribute("entity") Department entity) {
-        return super.findAll(request, entity);
+        return super.findList(request, page);
     }
 
     @GetMapping("/get")

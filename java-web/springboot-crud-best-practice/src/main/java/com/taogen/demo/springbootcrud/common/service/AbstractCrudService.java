@@ -1,10 +1,8 @@
 package com.taogen.demo.springbootcrud.common.service;
 
+import com.taogen.demo.springbootcrud.common.dao.CrudMapper;
 import com.taogen.demo.springbootcrud.common.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.common.vo.Page;
-import com.taogen.demo.springbootcrud.common.dao.CrudMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -17,7 +15,7 @@ import java.util.Map;
 public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends BaseEntity>
         extends AbstractBaseService implements CrudService<T> {
 
-    private static final Logger logger = LogManager.getLogger();
+//    private static final Logger logger = LogManager.getLogger();
 
     protected M mapper;
 

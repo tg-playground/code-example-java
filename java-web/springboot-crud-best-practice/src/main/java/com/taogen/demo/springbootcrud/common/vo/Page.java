@@ -3,7 +3,7 @@ package com.taogen.demo.springbootcrud.common.vo;
 /**
  * @author Taogen
  */
-public class Page {
+public class Page<T> {
     private final String dbName = "mysql";
 
     private Integer pageNo;
@@ -11,6 +11,7 @@ public class Page {
     private Long count;
     private String orderBy;
     private Integer start;
+    private T entity;
 
     public Page(int pageNo, int pageSize) {
         this.pageNo = pageNo;
@@ -59,6 +60,14 @@ public class Page {
         this.start = start;
     }
 
+    public T getEntity() {
+        return entity;
+    }
+
+    public void setEntity(T entity) {
+        this.entity = entity;
+    }
+
     @Override
     public String toString() {
         return "Page{" +
@@ -67,6 +76,7 @@ public class Page {
                 ", count=" + count +
                 ", orderBy='" + orderBy + '\'' +
                 ", start=" + start +
+                ", entity=" + entity +
                 '}';
     }
 }

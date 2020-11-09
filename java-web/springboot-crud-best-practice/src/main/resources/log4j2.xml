@@ -9,15 +9,23 @@
             <PatternLayout pattern="${my_pattern}"/>
         </Console>
         <File name="File" fileName="${filename}">
-            <PatternLayout pattern="${my_pattern}" />
+            <PatternLayout pattern="${my_pattern}"/>
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.taogen.demo" level="debug" additivity="false">
+        <Logger name="com.taogen.demo.springbootcrud" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Logger>
-        <Root level="error">
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </logger>
+        <logger name="org.mybatis" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </logger>
+        <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

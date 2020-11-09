@@ -27,18 +27,10 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     }
 
     @Override
-    public GenericResponseModel<List<T>> findPage(HttpServletRequest request, T entity, Page page) {
+    public GenericResponseModel<List<T>> findList(HttpServletRequest request, Page<T> page) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.findPage(entity, page));
-        return result;
-    }
-
-    @Override
-    public GenericResponseModel<List<T>> findAll(HttpServletRequest request, T entity) {
-        String requestId = request.getHeader("X-Request-Id");
-        GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.findAllByFields(entity));
+        result.setResponseBody(service.findPage(page.getEntity(), page));
         return result;
     }
 

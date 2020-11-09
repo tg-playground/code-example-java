@@ -3,6 +3,8 @@ package com.taogen.demo.springbootcrud.module.department.entity;
 import com.taogen.demo.springbootcrud.common.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -10,6 +12,7 @@ import java.util.List;
  */
 public class Department extends BaseEntity {
 
+    @NotNull(message = "Name cannot be null")
     private String name;
 
     private List<Employee> employees;

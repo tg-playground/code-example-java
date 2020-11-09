@@ -156,7 +156,7 @@
         </trim>
     </insert>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteById">
         delete from t_employee
         where id = #{id,jdbcType=INTEGER}
     </delete>
@@ -172,7 +172,7 @@
         where id in
         <foreach item="item" index="index" collection="entities"
                  open="(" separator="," close=")">
-            #{item.id}
+            #{item}
         </foreach>
     </delete>
 
@@ -295,7 +295,8 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <select id="selectAssociationDepartment" parameterType="java.lang.Integer" resultMap="OneToOneResultMap_NestedSelect_Association">
+    <select id="selectAssociationDepartment" parameterType="java.lang.Integer"
+            resultMap="OneToOneResultMap_NestedSelect_Association">
         select *
         from t_department
         where id = #{id,jdbcType=INTEGER}
@@ -388,38 +389,40 @@
         inner join (
         select e.id from t_employee as e
         <trim prefix="where" suffixOverrides="and">
-            <if test="entity.deleteFlag != null">
-                e.delete_flag = #{deleteFlag,jdbcType=BIT} and
-            </if>
-            <if test="entity.name != null">
-                e.name like
-                <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-                <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-                <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
-                and
-            </if>
-            <if test="entity.nickname != null">
-                e.nickname = #{nickname,jdbcType=VARCHAR} and
-            </if>
-            <if test="entity.age != null">
-                e.age = #{age,jdbcType=INTEGER} and
-            </if>
-            <if test="entity.department != null and entity.department.id != null">
-                e.dept_id = #{department.id,jdbcType=INTEGER} and
-            </if>
-            <if test="entity.createTime != null">
-                e.create_time = #{createTime,jdbcType=TIMESTAMP} and
-            </if>
-            <if test="entity.modifyTime != null">
-                e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+            <if test="entity != null">
+                <if test="entity.deleteFlag != null">
+                    e.delete_flag = #{deleteFlag,jdbcType=BIT} and
+                </if>
+                <if test="entity.name != null">
+                    e.name like
+                    <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+                    <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+                    <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                    and
+                </if>
+                <if test="entity.nickname != null">
+                    e.nickname = #{nickname,jdbcType=VARCHAR} and
+                </if>
+                <if test="entity.age != null">
+                    e.age = #{age,jdbcType=INTEGER} and
+                </if>
+                <if test="entity.department != null and entity.department.id != null">
+                    e.dept_id = #{department.id,jdbcType=INTEGER} and
+                </if>
+                <if test="entity.createTime != null">
+                    e.create_time = #{createTime,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="entity.modifyTime != null">
+                    e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+                </if>
             </if>
         </trim>
         <if test="page != null">
             <if test="page.orderBy != null">
                 order by ${page.orderBy}
             </if>
-            <if test="page.start != null and page.pageSize != null ">
-                limit ${page.start}, ${page.pageSize}
+            <if test="page.pageNo != null and page.pageSize != null ">
+                limit ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
             </if>
         </if>
         ) as lim on a.id = lim.id
