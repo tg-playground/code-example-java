@@ -1,5 +1,6 @@
 package com.taogen.demo.springbootcrud.core.controller;
 
+import com.taogen.demo.springbootcrud.core.dto.Id;
 import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.service.CrudService;
 import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
@@ -62,7 +63,8 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public ResponseModel save(HttpServletRequest request, T entity) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.save(entity));
+        service.save(entity);
+        result.setResponseBody(new Id(entity.getId()));
         return result;
     }
 

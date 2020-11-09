@@ -1,12 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `springboot-curd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `springboot-crud` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE `springboot-curd`;
+USE `springboot-crud`;
 
 DROP TABLE IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'user ID',
     name VARCHAR(64) NOT NULL COMMENT 'user name',
+    password VARCHAR(64) NOT NULL COMMENT 'user password',
     nickname VARCHAR(64) NULL COMMENT '',
     age INT NULL COMMENT '',
     delete_flag BOOL NOT NULL DEFAULT 0 comment 'delete flag',
@@ -14,6 +15,18 @@ CREATE TABLE `t_user` (
     modify_time TIMESTAMP NULL)
 ENGINE='InnoDB'
 COMMENT='user table';
+
+DROP TABLE IF EXISTS `t_file`;
+
+CREATE TABLE `t_file` (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'file ID',
+    name VARCHAR(64) NOT NULL COMMENT 'file name',
+    uri VARCHAR(255) NOT NULL COMMENT 'file uri',
+    delete_flag BOOL NOT NULL DEFAULT 0 comment 'delete flag',
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
+    modify_time TIMESTAMP NULL)
+ENGINE='InnoDB'
+COMMENT='file table';
 
 DROP TABLE IF EXISTS `t_department`;
 
