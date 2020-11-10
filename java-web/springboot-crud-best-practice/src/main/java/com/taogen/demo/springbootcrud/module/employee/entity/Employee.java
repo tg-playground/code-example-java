@@ -1,6 +1,6 @@
 package com.taogen.demo.springbootcrud.module.employee.entity;
 
-import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 
 import javax.persistence.CascadeType;

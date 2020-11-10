@@ -11,7 +11,7 @@
 <!--        <setting name="lazyLoadingEnabled" value="true"/>-->
 <!--    </settings>-->
 
-    <!-- Type Aliases: mapper xml parameterType doesn't contains full package page just className -->
+    <!-- Type Aliases: mapper xml parameterType doesn't contains full package queryPage just className -->
     <typeAliases>
         <package name="com.taogen.example.mybatis.sqlmap.xml.entity"></package>
     </typeAliases>

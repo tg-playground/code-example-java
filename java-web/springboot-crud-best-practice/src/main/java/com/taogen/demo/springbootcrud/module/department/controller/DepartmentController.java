@@ -1,9 +1,9 @@
 package com.taogen.demo.springbootcrud.module.department.controller;
 
-import com.taogen.demo.springbootcrud.core.controller.AbstractController;
-import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.core.vo.Page;
-import com.taogen.demo.springbootcrud.core.vo.ResponseModel;
+import com.taogen.demo.springbootcrud.core.web.controller.AbstractController;
+import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
+import com.taogen.demo.springbootcrud.core.web.dto.ResponseModel;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class DepartmentController extends AbstractController<DepartmentService, 
     @PostMapping("/findList")
     @Override
     public GenericResponseModel<List<Department>> findList(HttpServletRequest request,
-                                                           @ModelAttribute("page") Page page) {
-        return super.findList(request, page);
+                                                           @ModelAttribute("page") QueryPage queryPage) {
+        return super.findList(request, queryPage);
     }
 
     @GetMapping("/get")

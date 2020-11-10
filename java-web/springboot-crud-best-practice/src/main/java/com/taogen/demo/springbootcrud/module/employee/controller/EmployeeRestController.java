@@ -1,8 +1,8 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
-import com.taogen.demo.springbootcrud.core.controller.AbstractRestController;
-import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.core.vo.Page;
+import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;
@@ -32,8 +32,8 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
-                                                         @RequestBody Page<Employee> page) {
-        return super.findList(request, page);
+                                                         @RequestBody QueryPage<Employee> queryPage) {
+        return super.findList(request, queryPage);
     }
 
     @Override

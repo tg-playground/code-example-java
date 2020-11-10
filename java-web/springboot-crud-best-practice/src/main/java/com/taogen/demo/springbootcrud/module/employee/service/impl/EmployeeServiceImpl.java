@@ -1,7 +1,7 @@
 package com.taogen.demo.springbootcrud.module.employee.service.impl;
 
 
-import com.taogen.demo.springbootcrud.core.service.AbstractCrudService;
+import com.taogen.demo.springbootcrud.core.web.service.AbstractCrudService;
 import com.taogen.demo.springbootcrud.module.employee.dao.EmployeeMapper;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;

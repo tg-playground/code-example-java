@@ -1,8 +1,8 @@
 package com.taogen.demo.springbootcrud.module.department.controller;
 
-import com.taogen.demo.springbootcrud.core.controller.AbstractRestController;
-import com.taogen.demo.springbootcrud.core.vo.GenericResponseModel;
-import com.taogen.demo.springbootcrud.core.vo.Page;
+import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
@@ -32,8 +32,8 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<Department>> findList(HttpServletRequest request,
-                                                           @RequestBody Page<Department> page) {
-        return super.findList(request, page);
+                                                           @RequestBody QueryPage<Department> queryPage) {
+        return super.findList(request, queryPage);
     }
 
     @Override

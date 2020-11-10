@@ -1,7 +1,7 @@
 package com.taogen.demo.springbootcrud.module.employee.dao;
 
 
-import com.taogen.demo.springbootcrud.core.dao.CrudMapper;
+import com.taogen.demo.springbootcrud.core.persistence.mapper.CrudMapper;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

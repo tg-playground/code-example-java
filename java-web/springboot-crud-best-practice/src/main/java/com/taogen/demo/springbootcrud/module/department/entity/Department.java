@@ -1,6 +1,6 @@
 package com.taogen.demo.springbootcrud.module.department.entity;
 
-import com.taogen.demo.springbootcrud.core.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 
 import javax.persistence.Entity;

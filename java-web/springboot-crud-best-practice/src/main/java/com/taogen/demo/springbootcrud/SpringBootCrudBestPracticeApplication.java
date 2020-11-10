@@ -1,6 +1,6 @@
 package com.taogen.demo.springbootcrud;
 
-import com.taogen.demo.springbootcrud.core.properites.FileStorageProperties;
+import com.taogen.demo.springbootcrud.core.filehandling.properites.FileStorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,9 +14,6 @@ import java.util.Date;
 @RestController
 @RequestMapping("/")
 @SpringBootApplication
-@EnableConfigurationProperties({
-        FileStorageProperties.class
-})
 public class SpringBootCrudBestPracticeApplication {
 
     public static void main(String[] args) {

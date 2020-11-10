@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.taogen.demo.springbootcrud.core.dao.FileMapper">
-  <resultMap id="BaseResultMap" type="com.taogen.demo.springbootcrud.core.entity.File">
+<mapper namespace="com.taogen.demo.springbootcrud.core.filehandling.mapper.FileMapper">
+  <resultMap id="BaseResultMap" type="com.taogen.demo.springbootcrud.core.filehandling.entity.File">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="uri" jdbcType="VARCHAR" property="uri" />
@@ -25,7 +25,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="saveSelective" parameterType="com.taogen.demo.springbootcrud.core.entity.File"
+  <insert id="saveSelective" parameterType="com.taogen.demo.springbootcrud.core.filehandling.entity.File"
           useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into t_file
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -70,7 +70,7 @@
     </trim>
   </insert>
 
-  <update id="updateSelective" parameterType="com.taogen.demo.springbootcrud.core.entity.File">
+  <update id="updateSelective" parameterType="com.taogen.demo.springbootcrud.core.filehandling.entity.File">
     update t_file
     <set>
       <if test="name != null">

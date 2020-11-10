@@ -395,9 +395,9 @@
                 </if>
                 <if test="entity.name != null">
                     e.name like
-                    <if test="page.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-                    <if test="page.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-                    <if test="page.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                    <if test="queryPage.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+                    <if test="queryPage.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
                     and
                 </if>
                 <if test="entity.nickname != null">
@@ -417,12 +417,12 @@
                 </if>
             </if>
         </trim>
-        <if test="page != null">
-            <if test="page.orderBy != null">
-                order by ${page.orderBy}
+        <if test="queryPage != null">
+            <if test="queryPage.orderBy != null">
+                order by ${queryPage.orderBy}
             </if>
-            <if test="page.pageNo != null and page.pageSize != null ">
-                limit ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+            <if test="queryPage.pageNo != null and queryPage.pageSize != null ">
+                limit ${(queryPage.pageNo - 1) * queryPage.pageSize}, ${queryPage.pageSize}
             </if>
         </if>
         ) as lim on a.id = lim.id
