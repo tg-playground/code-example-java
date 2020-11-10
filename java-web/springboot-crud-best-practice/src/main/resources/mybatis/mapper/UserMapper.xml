@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taogen.demo.springbootcrud.module.user.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.taogen.demo.springbootcrud.module.user.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, password, nickname, age, delete_flag, create_time, modify_time
+  </sql>
+
+    <select id="getById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteById">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="saveSelective" parameterType="com.taogen.demo.springbootcrud.module.user.entity.User"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSelective" parameterType="com.taogen.demo.springbootcrud.module.user.entity.User">
+        update t_user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findPage" resultType="User">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user as a
+        <trim prefix="where" suffixOverrides="and">
+            <if test="entity != null">
+                <if test="entity.deleteFlag != null">
+                    e.delete_flag = #{deleteFlag,jdbcType=BIT} and
+                </if>
+                <if test="entity.name != null">
+                    e.name like
+                    <if test="queryPage.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
+                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
+                    <if test="queryPage.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                    and
+                </if>
+                <if test="entity.nickname != null">
+                    e.nickname = #{nickname,jdbcType=VARCHAR} and
+                </if>
+                <if test="entity.age != null">
+                    e.age = #{age,jdbcType=INTEGER} and
+                </if>
+                <if test="entity.createTime != null">
+                    e.create_time = #{createTime,jdbcType=TIMESTAMP} and
+                </if>
+                <if test="entity.modifyTime != null">
+                    e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+                </if>
+            </if>
+        </trim>
+        <if test="queryPage != null">
+            <if test="queryPage.orderBy != null">
+                order by ${queryPage.orderBy}
+            </if>
+            <if test="queryPage.pageNo != null and queryPage.pageSize != null ">
+                limit ${(queryPage.pageNo - 1) * queryPage.pageSize}, ${queryPage.pageSize}
+            </if>
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from t_user as a
+    </select>
+
+</mapper>
