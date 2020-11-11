@@ -1,6 +1,8 @@
 package com.taogen.demo.springbootcrud.core.exceptionhandling.handler;
 
 import com.taogen.demo.springbootcrud.core.exceptionhandling.exception.KnownException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,11 +23,14 @@ import java.util.Map;
 @RestController
 public class SystemExceptionHandler {
 
+    private static final Logger logger = LogManager.getLogger();
+
     @Autowired
     private MessageSource messageSource;
 
     @ExceptionHandler(value = KnownException.class)
     public ResponseEntity<Map<String, Object>> handleKnownException(KnownException exception) {
+        logger.error("Known Exception", exception);
         Map<String, Object> result = new HashMap<>();
         result.put("errorMessage", exception.getMessage());
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -33,6 +38,7 @@ public class SystemExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Map<String, Object>> handleUnknownException(Exception exception) {
+        logger.error("Unknown Exception", exception);
         Map<String, Object> result = new HashMap<>();
         Locale locale = LocaleContextHolder.getLocale();
         result.put("errorMessage", messageSource.getMessage(
