@@ -2,7 +2,7 @@ package com.taogen.demo.springbootcrud.core.web.controller;
 
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
-import com.taogen.demo.springbootcrud.core.web.dto.ResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;

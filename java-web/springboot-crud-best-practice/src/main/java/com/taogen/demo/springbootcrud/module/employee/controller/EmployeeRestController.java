@@ -1,7 +1,7 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
 import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
-import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;

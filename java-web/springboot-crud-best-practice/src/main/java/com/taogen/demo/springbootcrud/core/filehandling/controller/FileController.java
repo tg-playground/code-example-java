@@ -5,7 +5,7 @@ import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController
 import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.filehandling.service.FileService;
 import com.taogen.demo.springbootcrud.core.filehandling.service.FileStorageService;
-import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;

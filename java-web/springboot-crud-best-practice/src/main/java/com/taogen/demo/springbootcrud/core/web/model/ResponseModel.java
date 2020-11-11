@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.core.web.dto;
+package com.taogen.demo.springbootcrud.core.web.model;
 
 import java.io.Serializable;
 

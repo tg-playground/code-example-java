@@ -2,7 +2,7 @@ package com.taogen.demo.springbootcrud.core.web.controller;
 
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
-import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
