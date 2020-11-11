@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -33,17 +34,18 @@ public class SystemExceptionHandler {
         logger.error("Known Exception", exception);
         Map<String, Object> result = new HashMap<>();
         result.put("errorMessage", exception.getMessage());
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<Map<String, Object>> handleUnknownException(Exception exception) {
+    public Map<String, Object> handleUnknownException(Exception exception) {
         logger.error("Unknown Exception", exception);
         Map<String, Object> result = new HashMap<>();
         Locale locale = LocaleContextHolder.getLocale();
         result.put("errorMessage", messageSource.getMessage(
                 "errorMessage.systemInternalError", null, locale));
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return result;
     }
 
 }
