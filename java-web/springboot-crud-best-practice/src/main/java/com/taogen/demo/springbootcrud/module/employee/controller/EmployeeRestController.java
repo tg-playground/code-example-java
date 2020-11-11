@@ -32,6 +32,12 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
         return queryPage;
     }
 
+    /**
+     * Using GET Request with URL query for REST findPage API
+     * @param request
+     * @param queryPage
+     * @return
+     */
     @Override
     @GetMapping(value = "")
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
