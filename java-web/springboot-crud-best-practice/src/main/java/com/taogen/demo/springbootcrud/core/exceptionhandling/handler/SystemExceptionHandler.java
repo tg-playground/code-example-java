@@ -1,6 +1,7 @@
 package com.taogen.demo.springbootcrud.core.exceptionhandling.handler;
 
 import com.taogen.demo.springbootcrud.core.exceptionhandling.exception.KnownException;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,14 @@ public class SystemExceptionHandler {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public Map<String, Object> handleUnknownException(Exception exception) {
+    public ResponseModel handleUnknownException(Exception exception) {
         logger.error("Unknown Exception", exception);
-        Map<String, Object> result = new HashMap<>();
+        ResponseModel responseModel = new ResponseModel();
         Locale locale = LocaleContextHolder.getLocale();
-        result.put("errorMessage", messageSource.getMessage(
-                "errorMessage.systemInternalError", null, locale));
-        return result;
+        String errorMsg = messageSource.getMessage(
+                "errorMessage.systemInternalError", null, locale);
+        responseModel.setErrorMessage(errorMsg);
+        return responseModel;
     }
 
 }
