@@ -2,10 +2,8 @@ package com.taogen.demo.springbootcrud.module.user.entity;
 
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
 public class User extends BaseEntity {
 
     @NotEmpty(message = "{name.notempty}")

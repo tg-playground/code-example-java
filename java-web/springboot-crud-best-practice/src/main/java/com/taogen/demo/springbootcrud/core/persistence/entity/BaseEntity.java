@@ -3,29 +3,31 @@ package com.taogen.demo.springbootcrud.core.persistence.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
 /**
+ * Data Validation
+ * 1. @Valid or @Validate in Controller
+ * Spring @Validate + ExceptionHandler (global)
+ * or
+ * Spring @Validate + BindingResult
+ * 2. @Valid in entity nested objects
+ *
  * @author Taogen
+ * @Valid nested objects are also validated
  */
-@Entity
 public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     protected Integer id;
 
     protected Boolean deleteFlag;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected Date createTime;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected Date modifyTime;
 
     public Integer getId() {

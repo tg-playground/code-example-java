@@ -3,21 +3,17 @@ package com.taogen.demo.springbootcrud.module.department.entity;
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
  * @author Taogen
  */
-@Entity
 public class Department extends BaseEntity {
 
     @NotNull(message = "Name cannot be null")
     private String name;
 
-    @OneToMany
     private List<Employee> employees;
 
     public Department(int id) {

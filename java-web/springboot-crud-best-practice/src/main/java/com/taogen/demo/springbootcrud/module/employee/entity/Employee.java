@@ -3,10 +3,6 @@ package com.taogen.demo.springbootcrud.module.employee.entity;
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -14,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 /**
  * @author Taogen
  */
-@Entity
 public class Employee extends BaseEntity {
 
     @NotBlank(message = "Name is mandatory")
@@ -26,8 +21,6 @@ public class Employee extends BaseEntity {
     @Max(value = 150, message = "Age can't greater than 150")
     private Integer age;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dept_id", referencedColumnName = "id")
     private Department department;
 
     public Employee(int id) {
