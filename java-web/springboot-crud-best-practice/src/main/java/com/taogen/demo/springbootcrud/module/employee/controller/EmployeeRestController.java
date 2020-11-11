@@ -17,7 +17,7 @@ import java.util.List;
  * @author Taogen
  */
 @RestController
-@RequestMapping("/employees")
+@RequestMapping(value = "/employees", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmployeeRestController extends AbstractRestController<EmployeeService, Employee> {
 
 
