@@ -1,6 +1,5 @@
 package com.taogen.demo.springbootcrud.core.i18n.resolver;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
@@ -26,7 +25,6 @@ public class CustomLocaleResolver extends AcceptHeaderLocaleResolver {
             return Locale.getDefault();
         }
         List<Locale.LanguageRange> list = Locale.LanguageRange.parse(request.getHeader(ACCEPT_LANGUAGE));
-        Locale locale = Locale.lookup(list, LOCALES);
-        return locale;
+        return Locale.lookup(list, LOCALES);
     }
 }

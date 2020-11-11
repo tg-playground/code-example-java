@@ -5,7 +5,6 @@ import com.taogen.demo.springbootcrud.core.web.service.AbstractCrudService;
 import com.taogen.demo.springbootcrud.module.employee.dao.EmployeeMapper;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

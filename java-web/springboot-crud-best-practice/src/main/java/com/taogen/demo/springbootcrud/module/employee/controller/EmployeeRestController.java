@@ -5,8 +5,6 @@ import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
-import org.apache.logging.log4j.LogManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

@@ -33,7 +33,6 @@ public class ErrorMessageI18nConfig {
 
     @Bean
     public LocaleResolver sessionLocaleResolver() {
-        CustomLocaleResolver localeResolver = new CustomLocaleResolver();
-        return localeResolver;
+        return new CustomLocaleResolver();
     }
 }

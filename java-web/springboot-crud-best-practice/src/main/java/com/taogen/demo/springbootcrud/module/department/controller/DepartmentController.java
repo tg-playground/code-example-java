@@ -2,11 +2,10 @@ package com.taogen.demo.springbootcrud.module.department.controller;
 
 import com.taogen.demo.springbootcrud.core.web.controller.AbstractController;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
-import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
+import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

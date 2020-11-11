@@ -2,8 +2,8 @@ package com.taogen.demo.springbootcrud.core.web.controller;
 
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
-import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.dto.Id;
+import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
