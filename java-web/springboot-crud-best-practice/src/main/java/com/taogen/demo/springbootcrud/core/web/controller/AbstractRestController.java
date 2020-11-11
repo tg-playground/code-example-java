@@ -1,19 +1,20 @@
 package com.taogen.demo.springbootcrud.core.web.controller;
 
-import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
-import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
-import com.taogen.demo.springbootcrud.core.web.service.CrudService;
+import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
 import com.taogen.demo.springbootcrud.core.web.dto.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.dto.Id;
+import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Taogen
@@ -74,10 +75,15 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
     public GenericResponseModel deleteAll(HttpServletRequest request, String value) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        List<Serializable> ids = null;
+        List<Serializable> ids = new ArrayList<>();
         JSONObject jsonObject = new JSONObject(value);
         try {
-            ids = jsonObject.getJSONArray("ids").toList().stream().map(id -> (Serializable) id).collect(Collectors.toList());
+            JSONArray jsonArray = jsonObject.getJSONArray("ids");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                ids.add((Serializable) jsonArray.get(i));
+            }
+            // running test has error: NoSuchMethodError: org.json.JSONArray.toList()
+//            ids = jsonObject.getJSONArray("ids").toList().stream().map(id -> (Serializable) id).collect(Collectors.toList());
         } catch (JSONException e) {
             e.printStackTrace();
         }
