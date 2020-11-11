@@ -26,25 +26,11 @@ import java.util.Map;
 public class EmployeeRestController extends AbstractRestController<EmployeeService, Employee> {
 
 
+    @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
-                                                         @Validated @RequestBody QueryPage<Employee> queryPage,
-                                                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return getErrorMessage(bindingResult);
-        }
+                                                         @Validated @RequestBody QueryPage<Employee> queryPage) {
         return super.findList(request, queryPage);
-    }
-
-    private GenericResponseModel<List<Employee>> getErrorMessage(BindingResult bindingResult) {
-        Map<String, Object> errors = new HashMap<>();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            logger.debug("data validation error: {} ", fieldError.getDefaultMessage());
-            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
-        }
-        GenericResponseModel genericResponseModel = new GenericResponseModel("");
-        genericResponseModel.setResponseBody(errors);
-        return genericResponseModel;
     }
 
     @Override

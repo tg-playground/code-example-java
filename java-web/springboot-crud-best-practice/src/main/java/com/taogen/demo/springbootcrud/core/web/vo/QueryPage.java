@@ -1,8 +1,15 @@
 package com.taogen.demo.springbootcrud.core.web.vo;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 /**
+ * Query Page
+ * <p>
+ * Spring @Validate + ExceptionHandler (global)
+ * or
+ * Spring @Validate + BindingResult
+ *
  * @author Taogen
  */
 public class QueryPage<T> {
@@ -16,6 +23,11 @@ public class QueryPage<T> {
     private Long count;
     private String orderBy;
     private Integer start;
+
+    /**
+     * @Valid nested objects are also validated
+     */
+    @Valid
     private T entity;
 
     public QueryPage(int pageNo, int pageSize) {
