@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -31,7 +32,8 @@ public class SystemExceptionHandler {
     private MessageSource messageSource;
 
     @ExceptionHandler(value = KnownException.class)
-    public ResponseEntity<Map<String, Object>> handleKnownException(KnownException exception) {
+    public ResponseEntity<Map<String, Object>> handleKnownException(HttpServletRequest request,
+                                                                    KnownException exception) {
         logger.error("Known Exception", exception);
         Map<String, Object> result = new HashMap<>();
         result.put("errorMessage", exception.getMessage());
@@ -40,7 +42,8 @@ public class SystemExceptionHandler {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public ResponseModel handleUnknownException(Exception exception) {
+    public ResponseModel handleUnknownException(HttpServletRequest request,
+                                                Exception exception) {
         logger.error("Unknown Exception", exception);
         ResponseModel responseModel = new ResponseModel();
         Locale locale = LocaleContextHolder.getLocale();
@@ -49,5 +52,4 @@ public class SystemExceptionHandler {
         responseModel.setErrorMessage(errorMsg);
         return responseModel;
     }
-
 }
