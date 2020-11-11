@@ -6,17 +6,12 @@ import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
 import org.springframework.http.MediaType;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Taogen
@@ -29,7 +24,7 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
-                                                         @Validated @RequestBody QueryPage<Employee> queryPage) {
+                                                         @RequestBody QueryPage<Employee> queryPage) {
         return super.findList(request, queryPage);
     }
 

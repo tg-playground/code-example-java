@@ -1,33 +1,16 @@
 package com.taogen.demo.springbootcrud.core.web.vo;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-
 /**
- * Query Page
- * <p>
- * Spring @Validate + ExceptionHandler (global)
- * or
- * Spring @Validate + BindingResult
- *
  * @author Taogen
  */
 public class QueryPage<T> {
     private final String dbName = "mysql";
-
-    @Min(value = 1, message = "pageNo can't less than 1")
     private Integer pageNo;
-
-    @Min(value = 1, message = "pageSize can't less than 1")
     private Integer pageSize;
     private Long count;
     private String orderBy;
     private Integer start;
 
-    /**
-     * @Valid nested objects are also validated
-     */
-    @Valid
     private T entity;
 
     public QueryPage(int pageNo, int pageSize) {
