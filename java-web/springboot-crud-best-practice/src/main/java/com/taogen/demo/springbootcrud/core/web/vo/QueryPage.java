@@ -13,6 +13,9 @@ public class QueryPage<T> {
 
     private T entity;
 
+    public QueryPage() {
+    }
+
     public QueryPage(int pageNo, int pageSize) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;

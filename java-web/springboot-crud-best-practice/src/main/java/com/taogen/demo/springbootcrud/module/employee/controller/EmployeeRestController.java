@@ -21,10 +21,21 @@ import java.util.List;
 public class EmployeeRestController extends AbstractRestController<EmployeeService, Employee> {
 
 
+    /**
+     * Resolve ModelAttribute nest subclass is null
+     * @return
+     */
+    @ModelAttribute
+    public QueryPage<Employee> setupModelAttribute() {
+        QueryPage<Employee> queryPage = new QueryPage<>();
+        queryPage.setEntity(new Employee());
+        return queryPage;
+    }
+
     @Override
-    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "")
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
-                                                         @RequestBody QueryPage<Employee> queryPage) {
+                                                         @ModelAttribute("queryPage") QueryPage<Employee> queryPage) {
         return super.findList(request, queryPage);
     }
 

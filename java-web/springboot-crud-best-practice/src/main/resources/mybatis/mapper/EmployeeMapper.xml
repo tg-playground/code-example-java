@@ -394,10 +394,7 @@
                     e.delete_flag = #{queryPage.entity.deleteFlag,jdbcType=BIT} and
                 </if>
                 <if test="queryPage.entity.name != null">
-                    e.name like
-                    <if test="queryPage.dbName == 'oracle'">'%'||#{queryPage.entity.name,jdbcType=VARCHAR}||'%'</if>
-                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{queryPage.entity.name,jdbcType=VARCHAR}, '%')</if>
-                    <if test="queryPage.dbName == 'mssql'">'%'+#{queryPage.entity.name,jdbcType=VARCHAR}+'%'</if>
+                    e.name like CONCAT('%', #{queryPage.entity.name,jdbcType=VARCHAR}, '%')
                     and
                 </if>
                 <if test="queryPage.entity.nickname != null">
@@ -406,7 +403,7 @@
                 <if test="queryPage.entity.age != null">
                     e.age = #{queryPage.entity.age,jdbcType=INTEGER} and
                 </if>
-                <if test="queryPage.entity.department != null and queryPage.entity.department.id != null">
+                <if test="queryPage.entity.department != null and entity.department.id != null">
                     e.dept_id = #{queryPage.entity.department.id,jdbcType=INTEGER} and
                 </if>
                 <if test="queryPage.entity.createTime != null">
