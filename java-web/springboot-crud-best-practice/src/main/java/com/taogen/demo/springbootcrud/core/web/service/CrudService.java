@@ -36,7 +36,7 @@ public interface CrudService<T> extends BaseService {
 
     Long count();
 
-    List<T> findPage(T entity, QueryPage queryPage);
+    List<T> findPage(QueryPage<T> queryPage);
 
     List<T> findAllByFields(T entity);
 

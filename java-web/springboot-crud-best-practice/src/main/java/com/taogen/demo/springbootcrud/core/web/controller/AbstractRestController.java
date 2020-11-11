@@ -63,7 +63,7 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
     public GenericResponseModel findList(HttpServletRequest request, QueryPage<T> queryPage) {
         logger.debug("Param page is {}", queryPage);
         GenericResponseModel result = new GenericResponseModel("");
-        List<T> list = service.findPage(queryPage.getEntity(), queryPage);
+        List<T> list = service.findPage(queryPage);
         logger.debug("list: {}", list.size());
         Long total = service.count();
         DataPage<List<T>> dataPage = new DataPage(total, list);

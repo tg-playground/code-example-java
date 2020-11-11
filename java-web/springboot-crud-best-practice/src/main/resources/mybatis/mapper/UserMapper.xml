@@ -117,28 +117,28 @@
         <include refid="Base_Column_List"/>
         from t_user as a
         <trim prefix="where" suffixOverrides="and">
-            <if test="entity != null">
-                <if test="entity.deleteFlag != null">
-                    e.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            <if test="queryPage.entity != null">
+                <if test="queryPage.entity.deleteFlag != null">
+                    e.delete_flag = #{queryPage.entity.deleteFlag,jdbcType=BIT} and
                 </if>
-                <if test="entity.name != null">
+                <if test="queryPage.entity.name != null">
                     e.name like
-                    <if test="queryPage.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-                    <if test="queryPage.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                    <if test="queryPage.dbName == 'oracle'">'%'||#{queryPage.entity.name,jdbcType=VARCHAR}||'%'</if>
+                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{queryPage.entity.name,jdbcType=VARCHAR}, '%')</if>
+                    <if test="queryPage.dbName == 'mssql'">'%'+#{queryPage.entity.name,jdbcType=VARCHAR}+'%'</if>
                     and
                 </if>
-                <if test="entity.nickname != null">
-                    e.nickname = #{nickname,jdbcType=VARCHAR} and
+                <if test="queryPage.entity.nickname != null">
+                    e.nickname = #{queryPage.entity.nickname,jdbcType=VARCHAR} and
                 </if>
-                <if test="entity.age != null">
-                    e.age = #{age,jdbcType=INTEGER} and
+                <if test="queryPage.entity.age != null">
+                    e.age = #{queryPage.entity.age,jdbcType=INTEGER} and
                 </if>
-                <if test="entity.createTime != null">
-                    e.create_time = #{createTime,jdbcType=TIMESTAMP} and
+                <if test="queryPage.entity.createTime != null">
+                    e.create_time = #{queryPage.entity.createTime,jdbcType=TIMESTAMP} and
                 </if>
-                <if test="entity.modifyTime != null">
-                    e.modify_time = #{modifyTime,jdbcType=TIMESTAMP} and
+                <if test="queryPage.entity.modifyTime != null">
+                    e.modify_time = #{queryPage.entity.modifyTime,jdbcType=TIMESTAMP} and
                 </if>
             </if>
         </trim>

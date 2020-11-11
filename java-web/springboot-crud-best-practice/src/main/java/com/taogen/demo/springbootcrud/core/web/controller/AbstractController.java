@@ -32,7 +32,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public GenericResponseModel findList(HttpServletRequest request, QueryPage<T> queryPage) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        List<T> list = service.findPage(queryPage.getEntity(), queryPage);
+        List<T> list = service.findPage(queryPage);
         Long total = service.count();
         DataPage<List<T>> dataPage = new DataPage(total, list);
         result.setResponseBody(dataPage);

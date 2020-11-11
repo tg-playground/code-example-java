@@ -293,22 +293,22 @@
         inner join (
         select d.id from t_department as d
         <trim prefix="where" suffixOverrides="and">
-            <if test="entity != null">
-                <if test="entity.deleteFlag != null">
-                    d.delete_flag = #{deleteFlag,jdbcType=BIT} and
+            <if test="queryPage.entity != null">
+                <if test="queryPage.entity.deleteFlag != null">
+                    d.delete_flag = #{queryPage.entity.deleteFlag,jdbcType=BIT} and
                 </if>
-                <if test="entity.name != null">
+                <if test="queryPage.entity.name != null">
                     d.name like
-                    <if test="queryPage.dbName == 'oracle'">'%'||#{entity.name,jdbcType=VARCHAR}||'%'</if>
-                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{entity.name,jdbcType=VARCHAR}, '%')</if>
-                    <if test="queryPage.dbName == 'mssql'">'%'+#{entity.name,jdbcType=VARCHAR}+'%'</if>
+                    <if test="queryPage.dbName == 'oracle'">'%'||#{queryPage.entity.name,jdbcType=VARCHAR}||'%'</if>
+                    <if test="queryPage.dbName == 'mysql'">CONCAT('%', #{queryPage.entity.name,jdbcType=VARCHAR}, '%')</if>
+                    <if test="queryPage.dbName == 'mssql'">'%'+#{queryPage.entity.name,jdbcType=VARCHAR}+'%'</if>
                     and
                 </if>
-                <if test="entity.createTime != null">
-                    d.create_time = #{entity.createTime,jdbcType=TIMESTAMP} and
+                <if test="queryPage.entity.createTime != null">
+                    d.create_time = #{queryPage.entity.createTime,jdbcType=TIMESTAMP} and
                 </if>
-                <if test="entity.modifyTime != null">
-                    d.modify_time = #{entity.modifyTime,jdbcType=TIMESTAMP} and
+                <if test="queryPage.entity.modifyTime != null">
+                    d.modify_time = #{queryPage.entity.modifyTime,jdbcType=TIMESTAMP} and
                 </if>
             </if>
         </trim>

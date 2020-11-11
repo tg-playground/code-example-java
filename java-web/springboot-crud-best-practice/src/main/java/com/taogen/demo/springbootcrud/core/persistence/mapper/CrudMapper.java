@@ -52,8 +52,7 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     List<T> findAllByFields(T entity);
 
-    List<T> findPage(@Param("entity") T entity,
-                     @Param("queryPage") QueryPage queryPage);
+    List<T> findPage(@Param("queryPage") QueryPage<T> queryPage);
 
     List<T> findAllByMap(@Param("conditions") Map<String, Object> conditions);
 

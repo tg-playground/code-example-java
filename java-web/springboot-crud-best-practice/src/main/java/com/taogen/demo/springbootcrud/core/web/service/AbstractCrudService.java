@@ -96,8 +96,8 @@ public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends Bas
     }
 
     @Override
-    public List<T> findPage(T entity, QueryPage queryPage) {
-        return mapper.findPage(entity, queryPage);
+    public List<T> findPage(QueryPage<T> queryPage) {
+        return mapper.findPage(queryPage);
     }
 
     @Override
