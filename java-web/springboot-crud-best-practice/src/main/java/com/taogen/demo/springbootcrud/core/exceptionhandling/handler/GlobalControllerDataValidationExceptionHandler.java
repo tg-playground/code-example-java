@@ -1,4 +1,4 @@
-package com.taogen.demo.springbootcrud.core.datavalidation;
+package com.taogen.demo.springbootcrud.core.exceptionhandling.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @ControllerAdvice
 @RestController
-public class GlobalControllerExceptionHandler {
+public class GlobalControllerDataValidationExceptionHandler {
 
     /**
      * 400: BAD_REQUEST
