@@ -7,6 +7,7 @@ import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -18,15 +19,8 @@ import java.util.List;
 public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
         implements BaseController<T> {
 
+    @Autowired
     protected S service;
-
-    public S getService() {
-        return service;
-    }
-
-    public void setService(S service) {
-        this.service = service;
-    }
 
     @Override
     public GenericResponseModel findList(HttpServletRequest request, QueryPage<T> queryPage) {

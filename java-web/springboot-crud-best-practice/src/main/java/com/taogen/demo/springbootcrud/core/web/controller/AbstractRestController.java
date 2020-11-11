@@ -6,13 +6,16 @@ import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +25,9 @@ import java.util.List;
 public class AbstractRestController<S extends CrudService<T>, T extends BaseEntity>
         implements BaseRestController<T> {
 
-    protected Logger logger;
-    protected Class<T> type;
+    protected final Logger logger = LogManager.getLogger(getClass());
+
+    @Autowired
     protected S service;
 
     @Override

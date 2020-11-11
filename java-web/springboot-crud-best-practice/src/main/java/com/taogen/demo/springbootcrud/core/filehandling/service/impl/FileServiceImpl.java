@@ -14,9 +14,4 @@ import org.springframework.stereotype.Service;
 public class FileServiceImpl
         extends AbstractCrudService<FileMapper, File>
         implements FileService {
-    @Autowired
-    @Override
-    public void setMapper(FileMapper mapper) {
-        this.mapper = mapper;
-    }
 }

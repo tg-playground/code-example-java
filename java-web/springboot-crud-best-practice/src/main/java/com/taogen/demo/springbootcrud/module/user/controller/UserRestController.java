@@ -22,13 +22,6 @@ import java.util.List;
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController extends AbstractRestController<UserService, User> {
 
-    @Autowired
-    public void init(UserService service) {
-        this.service = service;
-        this.type = User.class;
-        this.logger = LogManager.getLogger();
-    }
-
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<User>> findList(HttpServletRequest request,

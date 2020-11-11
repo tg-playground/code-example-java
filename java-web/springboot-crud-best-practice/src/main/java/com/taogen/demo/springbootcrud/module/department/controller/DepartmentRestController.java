@@ -5,8 +5,6 @@ import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
-import org.apache.logging.log4j.LogManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/departments", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DepartmentRestController extends AbstractRestController<DepartmentService, Department> {
-
-    @Autowired
-    public void init(DepartmentService service) {
-        this.service = service;
-        this.type = Department.class;
-        this.logger = LogManager.getLogger();
-    }
 
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)

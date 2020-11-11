@@ -3,6 +3,9 @@ package com.taogen.demo.springbootcrud.core.web.service;
 import com.taogen.demo.springbootcrud.core.persistence.mapper.CrudMapper;
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -15,17 +18,10 @@ import java.util.Map;
 public abstract class AbstractCrudService<M extends CrudMapper<T>, T extends BaseEntity>
         extends AbstractBaseService implements CrudService<T> {
 
-//    private static final Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger(getClass());
 
+    @Autowired
     protected M mapper;
-
-    public M getMapper() {
-        return mapper;
-    }
-
-    public void setMapper(M mapper) {
-        this.mapper = mapper;
-    }
 
     @Override
     public int save(T entity) {

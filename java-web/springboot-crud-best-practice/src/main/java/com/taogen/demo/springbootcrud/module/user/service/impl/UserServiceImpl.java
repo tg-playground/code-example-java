@@ -14,10 +14,4 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl
         extends AbstractCrudService<UserMapper, User>
         implements UserService {
-
-    @Autowired
-    @Override
-    public void setMapper(UserMapper mapper) {
-        this.mapper = mapper;
-    }
 }

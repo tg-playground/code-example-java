@@ -20,12 +20,6 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController extends AbstractController<EmployeeService, Employee> {
 
-    @Autowired
-    @Override
-    public void setService(EmployeeService service) {
-        this.service = service;
-    }
-
     @PostMapping("/findList")
     @Override
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,

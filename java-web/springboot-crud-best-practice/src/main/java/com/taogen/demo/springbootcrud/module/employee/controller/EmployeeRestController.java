@@ -22,13 +22,6 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeRestController extends AbstractRestController<EmployeeService, Employee> {
 
-    @Autowired
-    public void init(EmployeeService service) {
-        this.service = service;
-        this.type = Employee.class;
-        this.logger = LogManager.getLogger();
-    }
-
     @Override
     @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,

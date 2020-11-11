@@ -32,13 +32,6 @@ public class FileController extends AbstractRestController<FileService, File> {
     @Autowired
     private FileStorageService fileStorageService;
 
-    @Autowired
-    public void init(FileService service) {
-        this.service = service;
-        this.type = File.class;
-        this.logger = LogManager.getLogger();
-    }
-
     @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public GenericResponseModel<File> uploadFile(HttpServletRequest request,
                                                  @RequestParam("file") MultipartFile file) {

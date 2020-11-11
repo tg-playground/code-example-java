@@ -15,9 +15,4 @@ import org.springframework.stereotype.Service;
 public class EmployeeServiceImpl
         extends AbstractCrudService<EmployeeMapper, Employee>
         implements EmployeeService {
-    @Autowired
-    @Override
-    public void setMapper(EmployeeMapper mapper) {
-        this.mapper = mapper;
-    }
 }

@@ -15,9 +15,4 @@ import org.springframework.stereotype.Service;
 public class DepartmentServiceImpl
         extends AbstractCrudService<DepartmentMapper, Department>
         implements DepartmentService {
-    @Autowired
-    @Override
-    public void setMapper(DepartmentMapper mapper) {
-        this.mapper = mapper;
-    }
 }

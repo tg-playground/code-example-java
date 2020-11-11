@@ -20,12 +20,6 @@ import java.util.List;
 @RequestMapping("/department")
 public class DepartmentController extends AbstractController<DepartmentService, Department> {
 
-    @Autowired
-    @Override
-    public void setService(DepartmentService service) {
-        this.service = service;
-    }
-
     @PostMapping("/findList")
     @Override
     public GenericResponseModel<List<Department>> findList(HttpServletRequest request,
