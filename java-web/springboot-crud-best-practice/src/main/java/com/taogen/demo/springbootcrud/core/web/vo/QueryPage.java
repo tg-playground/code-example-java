@@ -1,12 +1,17 @@
 package com.taogen.demo.springbootcrud.core.web.vo;
 
+import javax.validation.constraints.Min;
+
 /**
  * @author Taogen
  */
 public class QueryPage<T> {
     private final String dbName = "mysql";
 
+    @Min(value = 1, message = "pageNo can't less than 1")
     private Integer pageNo;
+
+    @Min(value = 1, message = "pageSize can't less than 1")
     private Integer pageSize;
     private Long count;
     private String orderBy;
