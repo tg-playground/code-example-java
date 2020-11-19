@@ -23,6 +23,7 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
 
     /**
      * Resolve ModelAttribute nest subclass is null
+     *
      * @return
      */
     @ModelAttribute
@@ -32,17 +33,18 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
         return queryPage;
     }
 
-    /**
-     * Using GET Request with URL query for REST findPage API
-     * @param request
-     * @param queryPage
-     * @return
-     */
     @Override
-    @GetMapping(value = "")
-    public GenericResponseModel<List<Employee>> findList(HttpServletRequest request,
-                                                         @ModelAttribute("queryPage") QueryPage<Employee> queryPage) {
-        return super.findList(request, queryPage);
+    @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<Employee>> findPage(HttpServletRequest request,
+                                                         @Valid @RequestBody QueryPage<Employee> queryPage) {
+        return super.findPage(request, queryPage);
+    }
+
+    @Override
+    @PostMapping(value = "/searches", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<Employee>> findAll(HttpServletRequest request,
+                                                        @RequestBody Employee employee) {
+        return super.findAll(request, employee);
     }
 
     @Override

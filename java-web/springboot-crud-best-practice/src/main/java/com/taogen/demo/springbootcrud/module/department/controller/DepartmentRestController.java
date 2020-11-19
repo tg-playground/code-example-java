@@ -20,17 +20,18 @@ import java.util.List;
 @RequestMapping(value = "/departments", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DepartmentRestController extends AbstractRestController<DepartmentService, Department> {
 
-    /**
-     * Using GET request with requestBody query for REST findPage API
-     * @param request
-     * @param queryPage
-     * @return
-     */
     @Override
-    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel<List<Department>> findList(HttpServletRequest request,
-                                                           @RequestBody QueryPage<Department> queryPage) {
-        return super.findList(request, queryPage);
+    @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<Department>> findPage(HttpServletRequest request,
+                                                           @Valid @RequestBody QueryPage<Department> queryPage) {
+        return super.findPage(request, queryPage);
+    }
+
+    @Override
+    @PostMapping(value = "/searches", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<Department>> findAll(HttpServletRequest request,
+                                                          @RequestBody Department department) {
+        return super.findAll(request, department);
     }
 
     @Override

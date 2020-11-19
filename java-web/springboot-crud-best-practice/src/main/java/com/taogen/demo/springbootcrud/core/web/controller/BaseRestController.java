@@ -21,7 +21,9 @@ public interface BaseRestController<T extends BaseEntity> {
 
     GenericResponseModel<T> get(HttpServletRequest request, Serializable id);
 
-    GenericResponseModel<List<T>> findList(HttpServletRequest request, QueryPage<T> queryPage);
+    GenericResponseModel<List<T>> findPage(HttpServletRequest request, QueryPage<T> queryPage);
+
+    GenericResponseModel<List<T>> findAll(HttpServletRequest request, T entity);
 
     GenericResponseModel deleteAll(HttpServletRequest request, String value);
 }

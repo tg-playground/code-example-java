@@ -21,10 +21,17 @@ import java.util.List;
 public class UserRestController extends AbstractRestController<UserService, User> {
 
     @Override
-    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel<List<User>> findList(HttpServletRequest request,
-                                                     @RequestBody QueryPage<User> queryPage) {
-        return super.findList(request, queryPage);
+    @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<User>> findPage(HttpServletRequest request,
+                                                     @Valid @RequestBody QueryPage<User> queryPage) {
+        return super.findPage(request, queryPage);
+    }
+
+    @Override
+    @PostMapping(value = "/searches", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponseModel<List<User>> findAll(HttpServletRequest request,
+                                                    @RequestBody User user) {
+        return super.findAll(request, user);
     }
 
     @Override
