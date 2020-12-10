@@ -1,6 +1,8 @@
 package com.taogen.demo.springbootcrud.core.exceptionhandling.handler;
 
-import com.taogen.demo.springbootcrud.core.exceptionhandling.exception.KnownException;
+import com.taogen.demo.springbootcrud.core.exceptionhandling.exception.KnownExceptionWithEnum;
+import com.taogen.demo.springbootcrud.core.exceptionhandling.model.ErrorEnum;
+import com.taogen.demo.springbootcrud.core.exceptionhandling.model.ErrorMessage;
 import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,9 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Taogen
@@ -29,25 +30,45 @@ public class SystemExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler(value = KnownException.class)
-    public ResponseEntity<Map<String, Object>> handleKnownException(HttpServletRequest request,
-                                                                    KnownException exception) {
+    /**
+     * Known Exceptions
+     *
+     * @param request
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(value = KnownExceptionWithEnum.class)
+    public ResponseEntity<ErrorMessage> handleKnownException(HttpServletRequest request,
+                                                             KnownExceptionWithEnum exception) {
         logger.error("Known Exception", exception);
-        Map<String, Object> result = new HashMap<>();
-        result.put("errorMessage", exception.getMessage());
-        return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(new ErrorMessage(exception.getErrorEnum()), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Unknown Exceptions
+     *
+     * @param request
+     * @param exception
+     * @return
+     */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public ResponseModel handleUnknownException(HttpServletRequest request,
-                                                Exception exception) {
+    public ErrorMessage handleUnknownException(HttpServletRequest request,
+                                               Exception exception) {
         logger.error("Unknown Exception", exception);
         ResponseModel responseModel = new ResponseModel();
+        return new ErrorMessage(ErrorEnum.SYSTEM_ERROR,
+                Arrays.asList(new StringBuilder()
+                        .append(exception.getClass().getName())
+                        .append(": ")
+                        .append(exception.getMessage())
+                        .toString()));
+    }
+
+    private String getI18nErrorMsg() {
         Locale locale = LocaleContextHolder.getLocale();
         String errorMsg = messageSource.getMessage(
                 "errorMessage.systemInternalError", null, locale);
-        responseModel.setErrorMessage(errorMsg);
-        return responseModel;
+        return errorMsg;
     }
 }
