@@ -11,6 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -41,7 +42,27 @@ public class SystemExceptionHandler {
     public ResponseEntity<ErrorMessage> handleKnownException(HttpServletRequest request,
                                                              KnownExceptionWithEnum exception) {
         logger.error("Known Exception", exception);
-        return new ResponseEntity(new ErrorMessage(exception.getErrorEnum()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new ErrorMessage(exception.getErrorEnum()),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * HttpRequestMethodNotSupportedException
+     * @param request
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ErrorMessage> handleHttpRequestMethodNotSupportedException(
+            HttpServletRequest request,
+            HttpRequestMethodNotSupportedException exception) {
+        logger.error("Exception", exception);
+        return new ResponseEntity<>(new ErrorMessage(ErrorEnum.METHOD_NOT_ALLOWED,
+                Arrays.asList(new StringBuilder()
+                        .append(exception.getClass().getName())
+                        .append(": ")
+                        .append(exception.getMessage())
+                        .toString())), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -51,18 +72,16 @@ public class SystemExceptionHandler {
      * @param exception
      * @return
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Exception.class)
-    public ErrorMessage handleUnknownException(HttpServletRequest request,
-                                               Exception exception) {
+    public ResponseEntity<ErrorMessage> handleUnknownException(HttpServletRequest request,
+                                                               Exception exception) {
         logger.error("Unknown Exception", exception);
-        ResponseModel responseModel = new ResponseModel();
-        return new ErrorMessage(ErrorEnum.SYSTEM_ERROR,
+        return new ResponseEntity<>(new ErrorMessage(ErrorEnum.SYSTEM_ERROR,
                 Arrays.asList(new StringBuilder()
                         .append(exception.getClass().getName())
                         .append(": ")
                         .append(exception.getMessage())
-                        .toString()));
+                        .toString())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private String getI18nErrorMsg() {

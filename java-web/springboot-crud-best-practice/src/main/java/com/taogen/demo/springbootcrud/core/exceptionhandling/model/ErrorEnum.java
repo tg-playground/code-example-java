@@ -14,6 +14,8 @@ public enum ErrorEnum {
      */
     BAD_REQUEST("BAD_REQUEST", "错误的请求"),
 
+    METHOD_NOT_ALLOWED("METHOD_NOT_ALLOWED", "请求方法不允许"),
+
     PARAM_ERROR("PARAM_ERROR", "参数错误"),
     ;
 
