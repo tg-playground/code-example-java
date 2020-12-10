@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class ResponseModel implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	public static final ResponseModel OK = new ResponseModel(0, "success!");
 	protected Integer errorCode;
 	protected String errorMessage;
 	protected String requestId;

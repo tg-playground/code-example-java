@@ -32,7 +32,7 @@ public class FileController extends AbstractRestController<FileService, File> {
     private FileStorageService fileStorageService;
 
     @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public GenericResponseModel<File> uploadFile(HttpServletRequest request,
+    public GenericResponseModel<Id> uploadFile(HttpServletRequest request,
                                                  @RequestParam("file") MultipartFile file) {
         fileStorageService.storeFile(file);
         File fileObj = new File();
@@ -56,7 +56,7 @@ public class FileController extends AbstractRestController<FileService, File> {
                 });
 
         GenericResponseModel<List<Id>> genericResponseModel = new GenericResponseModel<>("");
-        genericResponseModel.setResponseBody(fileList.stream().map(file -> new Id(file.getId())).collect(Collectors.toList()));
+        genericResponseModel.setData(fileList.stream().map(file -> new Id(file.getId())).collect(Collectors.toList()));
         return genericResponseModel;
     }
 

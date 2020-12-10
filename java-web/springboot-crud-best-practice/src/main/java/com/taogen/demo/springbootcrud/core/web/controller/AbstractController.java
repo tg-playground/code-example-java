@@ -29,7 +29,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
         List<T> list = service.findPage(queryPage);
         Long total = service.count();
         DataPage<List<T>> dataPage = new DataPage(total, list);
-        result.setResponseBody(dataPage);
+        result.setData(dataPage);
         return result;
     }
 
@@ -37,7 +37,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public GenericResponseModel<T> get(HttpServletRequest request, Serializable id) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.getById(id));
+        result.setData(service.getById(id));
         return result;
     }
 
@@ -45,7 +45,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public ResponseModel delete(HttpServletRequest request, Serializable id) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.deleteById(id));
+        result.setData(service.deleteById(id));
         return result;
     }
 
@@ -53,7 +53,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public ResponseModel deleteAll(HttpServletRequest request, List<Serializable> ids) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.deleteAllByIds(ids));
+        result.setData(service.deleteAllByIds(ids));
         return result;
     }
 
@@ -62,7 +62,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
         service.save(entity);
-        result.setResponseBody(new Id(entity.getId()));
+        result.setData(new Id(entity.getId()));
         return result;
     }
 
@@ -70,7 +70,7 @@ public class AbstractController<S extends CrudService<T>, T extends BaseEntity>
     public ResponseModel update(HttpServletRequest request, T entity) {
         String requestId = request.getHeader("X-Request-Id");
         GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.update(entity));
+        result.setData(service.update(entity));
         return result;
     }
 }

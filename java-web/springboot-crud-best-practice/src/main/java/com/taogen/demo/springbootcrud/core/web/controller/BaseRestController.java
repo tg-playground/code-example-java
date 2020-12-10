@@ -1,7 +1,10 @@
 package com.taogen.demo.springbootcrud.core.web.controller;
 
 import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
+import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
+import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,17 +16,17 @@ import java.util.List;
  */
 public interface BaseRestController<T extends BaseEntity> {
 
-    GenericResponseModel save(HttpServletRequest request, T entity);
+    GenericResponseModel<Id> save(HttpServletRequest request, T entity);
 
-    GenericResponseModel delete(HttpServletRequest request, Serializable id);
+    ResponseModel delete(HttpServletRequest request, Serializable id);
 
-    GenericResponseModel update(HttpServletRequest request, Serializable id, T entity);
+    ResponseModel update(HttpServletRequest request, Serializable id, T entity);
 
     GenericResponseModel<T> get(HttpServletRequest request, Serializable id);
 
-    GenericResponseModel<List<T>> findPage(HttpServletRequest request, QueryPage<T> queryPage);
+    GenericResponseModel<DataPage<List<T>>> findPage(HttpServletRequest request, QueryPage<T> queryPage);
 
     GenericResponseModel<List<T>> findAll(HttpServletRequest request, T entity);
 
-    GenericResponseModel deleteAll(HttpServletRequest request, String value);
+    ResponseModel deleteAll(HttpServletRequest request, String value);
 }

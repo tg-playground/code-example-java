@@ -1,7 +1,9 @@
 package com.taogen.demo.springbootcrud.module.department.controller;
 
 import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.department.entity.Department;
 import com.taogen.demo.springbootcrud.module.department.service.DepartmentService;
@@ -22,8 +24,8 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
 
     @Override
     @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel<List<Department>> findPage(HttpServletRequest request,
-                                                           @Valid @RequestBody QueryPage<Department> queryPage) {
+    public GenericResponseModel<DataPage<List<Department>>> findPage(HttpServletRequest request,
+                                                                    @Valid @RequestBody QueryPage<Department> queryPage) {
         return super.findPage(request, queryPage);
     }
 
@@ -43,14 +45,14 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
 
     @Override
     @DeleteMapping("/{id}")
-    public GenericResponseModel delete(HttpServletRequest request,
-                                       @PathVariable("id") Serializable id) {
+    public ResponseModel delete(HttpServletRequest request,
+                                @PathVariable("id") Serializable id) {
         return super.delete(request, id);
     }
 
     @Override
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel deleteAll(HttpServletRequest request,
+    public ResponseModel deleteAll(HttpServletRequest request,
                                           @RequestBody String value) {
         return super.deleteAll(request, value);
     }
@@ -65,7 +67,7 @@ public class DepartmentRestController extends AbstractRestController<DepartmentS
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel update(HttpServletRequest request,
+    public ResponseModel update(HttpServletRequest request,
                                        @PathVariable("id") Serializable id,
                                        @Valid @RequestBody Department department) {
         return super.update(request, id, department);

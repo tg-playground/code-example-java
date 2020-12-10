@@ -1,7 +1,9 @@
 package com.taogen.demo.springbootcrud.module.user.controller;
 
 import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.user.entity.User;
 import com.taogen.demo.springbootcrud.module.user.service.UserService;
@@ -22,8 +24,8 @@ public class UserRestController extends AbstractRestController<UserService, User
 
     @Override
     @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel<List<User>> findPage(HttpServletRequest request,
-                                                     @Valid @RequestBody QueryPage<User> queryPage) {
+    public GenericResponseModel<DataPage<List<User>>> findPage(HttpServletRequest request,
+                                                              @Valid @RequestBody QueryPage<User> queryPage) {
         return super.findPage(request, queryPage);
     }
 
@@ -43,15 +45,15 @@ public class UserRestController extends AbstractRestController<UserService, User
 
     @Override
     @DeleteMapping("/{id}")
-    public GenericResponseModel delete(HttpServletRequest request,
+    public ResponseModel delete(HttpServletRequest request,
                                        @PathVariable("id") Serializable id) {
         return super.delete(request, id);
     }
 
     @Override
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel deleteAll(HttpServletRequest request,
-                                          @RequestBody String value) {
+    public ResponseModel deleteAll(HttpServletRequest request,
+                                   @RequestBody String value) {
         return super.deleteAll(request, value);
     }
 
@@ -65,7 +67,7 @@ public class UserRestController extends AbstractRestController<UserService, User
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel update(HttpServletRequest request,
+    public ResponseModel update(HttpServletRequest request,
                                        @PathVariable("id") Serializable id,
                                        @Valid @RequestBody User User) {
         return super.update(request, id, User);

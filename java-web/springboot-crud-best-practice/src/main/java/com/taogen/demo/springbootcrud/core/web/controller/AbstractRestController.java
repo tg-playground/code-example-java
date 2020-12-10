@@ -4,6 +4,7 @@ import com.taogen.demo.springbootcrud.core.persistence.entity.BaseEntity;
 import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
 import com.taogen.demo.springbootcrud.core.web.dto.Id;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import com.taogen.demo.springbootcrud.core.web.service.CrudService;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import org.apache.logging.log4j.LogManager;
@@ -42,10 +43,10 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel save(HttpServletRequest request, T entity) {
-        GenericResponseModel result = new GenericResponseModel("");
+    public GenericResponseModel<Id> save(HttpServletRequest request, T entity) {
+        GenericResponseModel result = GenericResponseModel.OK;
         service.save(entity);
-        result.setResponseBody(new Id(entity.getId()));
+        result.setData(new Id(entity.getId()));
         return result;
     }
 
@@ -61,10 +62,10 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel delete(HttpServletRequest request, Serializable id) {
+    public ResponseModel delete(HttpServletRequest request, Serializable id) {
         String requestId = request.getHeader("X-Request-Id");
-        GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.deleteById(id));
+        service.deleteById(id);
+        ResponseModel result = ResponseModel.OK;
         return result;
     }
 
@@ -81,11 +82,11 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel update(HttpServletRequest request, Serializable id, T entity) {
+    public ResponseModel update(HttpServletRequest request, Serializable id, T entity) {
         Integer intId = Integer.parseInt(String.valueOf(id));
         entity.setId(intId);
-        GenericResponseModel result = new GenericResponseModel("");
-        result.setResponseBody(service.update(entity));
+        service.update(entity);
+        ResponseModel result = new ResponseModel("");
         return result;
     }
 
@@ -103,8 +104,8 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
     @Override
     public GenericResponseModel<T> get(HttpServletRequest request, Serializable id) {
         String requestId = request.getHeader("X-Request-Id");
-        GenericResponseModel result = new GenericResponseModel(requestId);
-        result.setResponseBody(service.getById(id));
+        GenericResponseModel result = GenericResponseModel.OK;
+        result.setData(service.getById(id));
         return result;
     }
 
@@ -120,14 +121,14 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel findPage(HttpServletRequest request, @RequestBody QueryPage<T> queryPage) {
+    public GenericResponseModel<DataPage<List<T>>> findPage(HttpServletRequest request, @RequestBody QueryPage<T> queryPage) {
         logger.debug("Param page is {}", queryPage);
-        GenericResponseModel result = new GenericResponseModel("");
+        GenericResponseModel result = GenericResponseModel.OK;
         List<T> list = service.findPage(queryPage);
         logger.debug("list: {}", list.size());
         Long total = service.count();
         DataPage<List<T>> dataPage = new DataPage(total, list);
-        result.setResponseBody(dataPage);
+        result.setData(dataPage);
         return result;
     }
 
@@ -143,17 +144,14 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel findAll(HttpServletRequest request, @RequestBody T entity) {
+    public GenericResponseModel<List<T>> findAll(HttpServletRequest request, @RequestBody T entity) {
         logger.debug("Param page is {}", entity);
-        GenericResponseModel result = new GenericResponseModel("");
+        GenericResponseModel result = GenericResponseModel.OK;
         List<T> list = service.findAllByFields(entity);
         logger.debug("list: {}", list.size());
-        Long total = service.count();
-        DataPage<List<T>> dataPage = new DataPage(total, list);
-        result.setResponseBody(dataPage);
+        result.setData(list);
         return result;
     }
-
 
 
     /**
@@ -168,9 +166,9 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
      * @return
      */
     @Override
-    public GenericResponseModel deleteAll(HttpServletRequest request, String value) {
+    public ResponseModel deleteAll(HttpServletRequest request, String value) {
         String requestId = request.getHeader("X-Request-Id");
-        GenericResponseModel result = new GenericResponseModel(requestId);
+        ResponseModel result = ResponseModel.OK;
         List<Serializable> ids = new ArrayList<>();
         JSONObject jsonObject = new JSONObject(value);
         try {
@@ -183,7 +181,7 @@ public class AbstractRestController<S extends CrudService<T>, T extends BaseEnti
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        result.setResponseBody(service.deleteAllByIds(ids));
+        service.deleteAllByIds(ids);
         return result;
     }
 }

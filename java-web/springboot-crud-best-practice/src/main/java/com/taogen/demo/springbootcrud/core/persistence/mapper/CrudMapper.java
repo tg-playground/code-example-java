@@ -23,7 +23,7 @@ public interface CrudMapper<T extends BaseEntity> extends BaseMapper {
 
     int deleteLogically(Serializable id);
 
-    int deleteAll(@Param("entities") Collection<Serializable> entities);
+    int deleteAll(@Param("ids") Collection<Serializable> ids);
 
     int deleteAllLogically(@Param("entities") Collection<T> entities);
 

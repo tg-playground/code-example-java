@@ -1,7 +1,9 @@
 package com.taogen.demo.springbootcrud.module.employee.controller;
 
 import com.taogen.demo.springbootcrud.core.web.controller.AbstractRestController;
+import com.taogen.demo.springbootcrud.core.web.dto.DataPage;
 import com.taogen.demo.springbootcrud.core.web.model.GenericResponseModel;
+import com.taogen.demo.springbootcrud.core.web.model.ResponseModel;
 import com.taogen.demo.springbootcrud.core.web.vo.QueryPage;
 import com.taogen.demo.springbootcrud.module.employee.entity.Employee;
 import com.taogen.demo.springbootcrud.module.employee.service.EmployeeService;
@@ -35,8 +37,8 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
 
     @Override
     @PostMapping(value = "/pages", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel<List<Employee>> findPage(HttpServletRequest request,
-                                                         @Valid @RequestBody QueryPage<Employee> queryPage) {
+    public GenericResponseModel<DataPage<List<Employee>>> findPage(HttpServletRequest request,
+                                                                  @Valid @RequestBody QueryPage<Employee> queryPage) {
         return super.findPage(request, queryPage);
     }
 
@@ -56,15 +58,15 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
 
     @Override
     @DeleteMapping("/{id}")
-    public GenericResponseModel delete(HttpServletRequest request,
+    public ResponseModel delete(HttpServletRequest request,
                                        @PathVariable("id") Serializable id) {
         return super.delete(request, id);
     }
 
     @Override
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel deleteAll(HttpServletRequest request,
-                                          @RequestBody String value) {
+    public ResponseModel deleteAll(HttpServletRequest request,
+                                   @RequestBody String value) {
         return super.deleteAll(request, value);
     }
 
@@ -78,7 +80,7 @@ public class EmployeeRestController extends AbstractRestController<EmployeeServi
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponseModel update(HttpServletRequest request,
+    public ResponseModel update(HttpServletRequest request,
                                        @PathVariable("id") Serializable id,
                                        @Valid @RequestBody Employee employee) {
         return super.update(request, id, employee);
