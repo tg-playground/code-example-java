@@ -1,5 +1,6 @@
 package com.taogen.demo.springbootcrud.core.web.vo;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ public class QueryPage<T> {
 
     private String orderBy;
 
+    @Valid
     private T entity;
 
     public QueryPage() {
