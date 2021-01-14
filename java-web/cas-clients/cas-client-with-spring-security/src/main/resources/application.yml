@@ -1,0 +1,11 @@
+server:
+  port: 9999
+  ssl:
+    key-store: classpath:cert/thekeystore
+    key-store-password: changeit
+app:
+  cas:
+    server-logout-url: https://localhost:8443/cas/logout
+    server-url-prefix: https://localhost:8443/cas
+    server-login-url: https://localhost:8443/cas/login
+    client-host-url: https://localhost:9999

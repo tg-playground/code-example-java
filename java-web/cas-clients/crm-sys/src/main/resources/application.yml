@@ -1,0 +1,13 @@
+server:
+  port: 7777
+  ssl:
+    key-store: classpath:cert/thekeystore
+    key-store-password: changeit
+cas:
+  server-url-prefix: https://localhost:8443/cas
+  server-login-url: https://localhost:8443/cas/login
+  client-host-url: https://localhost:7777
+  validation-type: cas3
+app:
+  cas:
+    server-logout-url: https://localhost:8443/cas/logout
