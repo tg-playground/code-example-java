@@ -15,6 +15,7 @@ Software
 
 - JDK 1.8
 - Maven
+- Elasticsearch v7.x
 
 Dependencies
 
