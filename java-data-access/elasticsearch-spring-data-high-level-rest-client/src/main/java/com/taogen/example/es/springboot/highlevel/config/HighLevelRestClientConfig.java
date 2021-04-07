@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfig
  * @author Taogen
  */
 @Configuration
-public class RestClientConfig extends AbstractElasticsearchConfiguration {
+public class HighLevelRestClientConfig extends AbstractElasticsearchConfiguration {
     @Override
     public RestHighLevelClient elasticsearchClient() {
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()

@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Taogen
  */
 @SpringBootApplication
-public class ElasticsearchBasicApplication {
+public class ElasticsearchSpringDataHighLevelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ElasticsearchBasicApplication.class, args);
+		SpringApplication.run(ElasticsearchSpringDataHighLevelApplication.class, args);
 	}
 
 }

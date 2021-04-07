@@ -1,4 +1,4 @@
-package com.taogen.example.es.springboot.highlevel.controller.highlevelrestclient;
+package com.taogen.example.es.springboot.highlevel.controller.operation;
 
 import com.taogen.example.es.springboot.highlevel.entity.Bank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/restTemplate")
-public class RestTemplateController {
+public class OperationController {
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
