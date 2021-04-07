@@ -1,6 +1,6 @@
-package com.taogen.example.es.basic.controller.highlevelrestclient;
+package com.taogen.example.es.springboot.highlevel.controller.highlevelrestclient;
 
-import com.taogen.example.es.basic.entity.Bank;
+import com.taogen.example.es.springboot.highlevel.entity.Bank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.GetQuery;

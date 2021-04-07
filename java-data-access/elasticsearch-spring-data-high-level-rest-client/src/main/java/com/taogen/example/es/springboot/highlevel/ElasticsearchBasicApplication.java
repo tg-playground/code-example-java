@@ -1,4 +1,4 @@
-package com.taogen.example.es.basic;
+package com.taogen.example.es.springboot.highlevel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

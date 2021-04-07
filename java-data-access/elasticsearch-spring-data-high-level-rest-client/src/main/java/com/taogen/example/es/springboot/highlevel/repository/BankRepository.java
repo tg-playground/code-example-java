@@ -1,6 +1,6 @@
-package com.taogen.example.es.basic.repository;
+package com.taogen.example.es.springboot.highlevel.repository;
 
-import com.taogen.example.es.basic.entity.Bank;
+import com.taogen.example.es.springboot.highlevel.entity.Bank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;

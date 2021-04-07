@@ -1,7 +1,7 @@
-package com.taogen.example.es.basic.controller.repository;
+package com.taogen.example.es.springboot.highlevel.controller.repository;
 
-import com.taogen.example.es.basic.entity.Bank;
-import com.taogen.example.es.basic.repository.BankRepository;
+import com.taogen.example.es.springboot.highlevel.entity.Bank;
+import com.taogen.example.es.springboot.highlevel.repository.BankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

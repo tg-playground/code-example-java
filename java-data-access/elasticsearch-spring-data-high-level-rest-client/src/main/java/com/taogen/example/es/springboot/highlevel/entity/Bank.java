@@ -1,4 +1,4 @@
-package com.taogen.example.es.basic.entity;
+package com.taogen.example.es.springboot.highlevel.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

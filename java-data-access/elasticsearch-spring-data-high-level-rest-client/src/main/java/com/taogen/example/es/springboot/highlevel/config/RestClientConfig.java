@@ -1,4 +1,4 @@
-package com.taogen.example.es.basic.config;
+package com.taogen.example.es.springboot.highlevel.config;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Configuration;
