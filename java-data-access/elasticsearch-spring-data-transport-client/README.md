@@ -23,7 +23,7 @@ Required
 
 - `spring-boot-starter-data-elasticsearch`
 - `spring-boot-starter-web`
-- `org.elasticsearch.client.transport v7.12.0`
+- `org.elasticsearch.client:transport v7.12.0`
 
 Optional
 
