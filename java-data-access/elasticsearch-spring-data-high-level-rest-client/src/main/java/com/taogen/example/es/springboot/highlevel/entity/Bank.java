@@ -13,7 +13,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "bank")
 public class Bank {
     @Id
-    private Integer id;
+    private String id;
 
     @Field(name = "account_number")
     private Long accountNumber;
