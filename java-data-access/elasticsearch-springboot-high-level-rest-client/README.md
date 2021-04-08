@@ -54,9 +54,7 @@ Configurations
   - Lombok
   - Spring Web
 
-### Building Project
-
-Add dependencies
+Add other dependencies
 
 ```xml
 <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
