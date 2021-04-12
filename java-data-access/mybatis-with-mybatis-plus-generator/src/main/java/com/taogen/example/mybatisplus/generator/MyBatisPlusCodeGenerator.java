@@ -143,7 +143,9 @@ public class MyBatisPlusCodeGenerator {
         strategy.setInclude(tableConfig.getTableName());
         strategy.setControllerMappingHyphenStyle(true);
         // TODO UPDATE_ME
-        strategy.setTablePrefix(tableConfig.getTablePrefix());
+        if (tableConfig.getTablePrefix() != null && !tableConfig.getTablePrefix().isEmpty()) {
+            strategy.setTablePrefix(tableConfig.getTablePrefix());
+        }
         generator.setStrategy(strategy);
         generator.setTemplateEngine(new FreemarkerTemplateEngine());
 
