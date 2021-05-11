@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -46,6 +47,17 @@ public class SystemExceptionHandler {
                 HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorMessage> handleIntegrityViolationException(Exception exception) {
+        logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(new ErrorMessage(ErrorEnum.METHOD_NOT_ALLOWED,
+                Arrays.asList(new StringBuilder()
+                        .append(exception.getClass().getName())
+                        .append(": ")
+                        .append(exception.getMessage())
+                        .toString())), HttpStatus.BAD_REQUEST);
+    }
+
     /**
      * HttpRequestMethodNotSupportedException
      * @param request
@@ -56,7 +68,7 @@ public class SystemExceptionHandler {
     public ResponseEntity<ErrorMessage> handleHttpRequestMethodNotSupportedException(
             HttpServletRequest request,
             HttpRequestMethodNotSupportedException exception) {
-        logger.error("Exception", exception);
+        logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(new ErrorMessage(ErrorEnum.METHOD_NOT_ALLOWED,
                 Arrays.asList(new StringBuilder()
                         .append(exception.getClass().getName())
@@ -75,7 +87,7 @@ public class SystemExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorMessage> handleUnknownException(HttpServletRequest request,
                                                                Exception exception) {
-        logger.error("Unknown Exception", exception);
+        logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(new ErrorMessage(ErrorEnum.SYSTEM_ERROR,
                 Arrays.asList(new StringBuilder()
                         .append(exception.getClass().getName())
