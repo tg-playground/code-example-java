@@ -93,6 +93,8 @@ public class SystemExceptionHandler {
                         .append(exception.getClass().getName())
                         .append(": ")
                         .append(exception.getMessage())
+                        .append(". ")
+                        .append(Arrays.asList(exception.getStackTrace()))
                         .toString())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
