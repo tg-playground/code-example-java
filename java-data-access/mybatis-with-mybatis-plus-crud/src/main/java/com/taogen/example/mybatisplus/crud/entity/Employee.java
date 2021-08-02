@@ -1,9 +1,9 @@
 package com.taogen.example.mybatisplus.crud.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.taogen.example.mybatisplus.crud.core.annotation.Related;
+import com.taogen.example.mybatisplus.crud.core.vo.IdName;
+import com.taogen.example.mybatisplus.crud.service.IDepartmentService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,6 +44,10 @@ public class Employee implements Serializable {
      * department ID of employee
      */
     private Integer deptId;
+
+    @TableField(exist = false)
+    @Related(serviceClass = IDepartmentService.class, returnType = IdName.class, relatedFieldName = "deptId")
+    private IdName department;
 
     /**
      * delete flag
