@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Related {
-    public RelatedType relatedType() default RelatedType.SINGLE;
+    public RelatedType relatedType();
 
     /**
      * It's MyBatis Plus service subclass

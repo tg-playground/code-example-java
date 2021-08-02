@@ -46,7 +46,8 @@ public class Employee implements Serializable {
     private Integer deptId;
 
     @TableField(exist = false)
-    @Related(serviceClass = IDepartmentService.class, returnType = IdName.class, relatedFieldName = "deptId")
+    @Related(relatedType = Related.RelatedType.SINGLE, relatedFieldName = "deptId",
+            serviceClass = IDepartmentService.class, returnType = IdName.class)
     private IdName department;
 
     /**
