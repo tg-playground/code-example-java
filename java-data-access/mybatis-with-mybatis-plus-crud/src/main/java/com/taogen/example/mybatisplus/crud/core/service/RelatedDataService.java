@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 public class RelatedDataService {
 
     public static void setRelatedDataForList(List list, Class cls) {
+        if (list == null || list.isEmpty() || cls == null) {
+            return;
+        }
+
         // get all fields of the class and its parent class
         List<Field> fields = getAllFieldsOfClassAndItsParent(cls);
         if (fields == null || fields.isEmpty()) {
