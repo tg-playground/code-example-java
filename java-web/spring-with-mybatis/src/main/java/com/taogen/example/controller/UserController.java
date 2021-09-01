@@ -2,6 +2,7 @@ package com.taogen.example.controller;
 
 import com.taogen.example.entity.User;
 import com.taogen.example.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/user")
+@Log4j2
 public class UserController {
 
     @Autowired
@@ -30,6 +32,7 @@ public class UserController {
         List<User> userList = userService.listAllUsers();
         Map<String, Object> map = new HashMap<>(0);
         map.put("users", userList);
+        log.info("users: {}", userList);
         return map;
     }
 
