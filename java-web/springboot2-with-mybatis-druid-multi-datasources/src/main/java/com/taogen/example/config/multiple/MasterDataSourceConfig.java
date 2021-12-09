@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
  * @author Taogen
  */
 @Configuration
+@Profile("multidatasources")
 @MapperScan(basePackages = "com.taogen.example.mapper.master",
         sqlSessionFactoryRef = "masterSqlSessionFactory")
 public class MasterDataSourceConfig {
