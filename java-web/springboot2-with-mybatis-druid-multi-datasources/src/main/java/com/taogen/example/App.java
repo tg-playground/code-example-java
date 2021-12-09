@@ -3,6 +3,7 @@ package com.taogen.example;
 import com.taogen.example.entity.Employee;
 import com.taogen.example.entity.User;
 import com.taogen.example.service.EmployeeService;
+import com.taogen.example.service.MyTransactionService;
 import com.taogen.example.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.mybatis.spring.annotation.MapperScan;
@@ -34,6 +35,9 @@ public class App {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private MyTransactionService myTransactionService;
 
     @GetMapping(value = "hello", produces = "text/plain;charset=UTF-8")
     public String hello() {
@@ -69,5 +73,15 @@ public class App {
                 .append("\r\n")
                 .append(employeeList)
                 .toString();
+    }
+
+    @GetMapping(value = "multipleDataSourcesTransaction", produces = "text/plain;charset=UTF-8")
+    public String multipleDataSourcesTransaction() {
+        try {
+            myTransactionService.testOverDataSourceTransactions();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return new Date().toString();
     }
 }

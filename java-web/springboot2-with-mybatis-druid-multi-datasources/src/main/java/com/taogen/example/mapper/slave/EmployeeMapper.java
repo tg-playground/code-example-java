@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface EmployeeMapper {
     List<Employee> queryList();
+
+    int insert(Employee employee);
 }

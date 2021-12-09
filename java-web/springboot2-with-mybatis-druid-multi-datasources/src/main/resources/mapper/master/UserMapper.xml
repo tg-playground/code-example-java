@@ -10,6 +10,11 @@
         <result column="user_email" property="userEmail" />
     </resultMap>
 
+    <insert id="insert">
+        insert into user (user_name, user_password, user_email)
+        values (#{userName}, #{userPassword}, #{userEmail})
+    </insert>
+
     <select id="queryList" resultMap="userResultMap">
         select * from user
     </select>
