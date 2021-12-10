@@ -5,14 +5,14 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/my_test?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/my_test?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8
         username: root
         password: root
       # 从库数据源
       slave:
         enabled: true
         # 从数据源开关/默认关闭
-        url: jdbc:mysql://localhost:3306/springboot-crud?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/springboot-crud?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8
         username: root
         password: root
       # 初始连接数
