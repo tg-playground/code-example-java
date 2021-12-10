@@ -62,7 +62,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
+            <!-- 注意：高版本mysql驱动中的接口com.mysql.cj.conf.PropertySet不存在getBooleanReadableProperty方法 -->
+            <version>8.0.11</version>
+        </dependency>
+        <!-- distributed transaction -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
         </dependency>
 
         <!-- test -->

@@ -2,6 +2,7 @@ package com.taogen.example;
 
 import com.taogen.example.entity.Employee;
 import com.taogen.example.entity.User;
+import com.taogen.example.service.DistributedTransactionService;
 import com.taogen.example.service.EmployeeService;
 import com.taogen.example.service.MyTransactionService;
 import com.taogen.example.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class App {
 
     @Autowired
     private MyTransactionService myTransactionService;
+
+    @Autowired
+    private DistributedTransactionService distributedTransactionService;
 
     @GetMapping(value = "hello", produces = "text/plain;charset=UTF-8")
     public String hello() {
@@ -75,11 +80,42 @@ public class App {
 
     @GetMapping(value = "multipleDataSourcesTransaction", produces = "text/plain;charset=UTF-8")
     public String multipleDataSourcesTransaction() {
+        Exception exception = null;
         try {
             myTransactionService.testOverDataSourceTransactions();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            exception = e;
         }
-        return new Date().toString();
+        StringBuilder result = new StringBuilder()
+                .append(new Date());
+        if (exception != null) {
+            result.append("\r\n")
+                    .append(exception.getMessage())
+                    .append("\r\n")
+                    .append(Arrays.asList(exception.getStackTrace()));
+        }
+        return result.toString();
+
+    }
+
+    @GetMapping(value = "atomikosDistributedTransaction", produces = "text/plain;charset=UTF-8")
+    public String multipleDataSourcesTransaction2() {
+        Exception exception = null;
+        try {
+            distributedTransactionService.testDistributedTransaction();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            exception = e;
+        }
+        StringBuilder result = new StringBuilder()
+                .append(new Date());
+        if (exception != null) {
+            result.append("\r\n")
+                    .append(exception.getMessage())
+                    .append("\r\n")
+                    .append(Arrays.asList(exception.getStackTrace()));
+        }
+        return result.toString();
     }
 }

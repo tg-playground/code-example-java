@@ -4,11 +4,9 @@ import com.taogen.example.entity.Employee;
 import com.taogen.example.entity.User;
 import com.taogen.example.mapper.master.UserMapper;
 import com.taogen.example.mapper.slave.EmployeeMapper;
-import com.taogen.example.service.EmployeeService;
-import com.taogen.example.service.MyTransactionService;
-import org.apache.ibatis.transaction.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.taogen.example.service.DistributedTransactionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -18,7 +16,7 @@ import java.util.Date;
  * @author Taogen
  */
 @Service
-public class MyTransactionServiceImpl implements MyTransactionService {
+public class DistributedTransactionServiceImpl implements DistributedTransactionService {
 
     @Resource
     private UserMapper userMapper;
@@ -26,13 +24,11 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     @Resource
     private EmployeeMapper employeeMapper;
 
-    /**
-     * This is a distributed transaction. So, we can't use @Transactional to rollback multiple data source transactions.
-     * if occur exceptions, in this project only rollback the master data source transaction.
-     */
-    @Transactional(rollbackFor = Exception.class)
+
+    @Transactional(transactionManager = "xatx",
+            propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     @Override
-    public void testOverDataSourceTransactions() {
+    public void testDistributedTransaction() {
         User user = new User();
         user.setUserName("Tom_" + new Date());
         user.setUserEmail("tom@123.com");
@@ -45,6 +41,6 @@ public class MyTransactionServiceImpl implements MyTransactionService {
         employee.setAge(18);
         int result2 = employeeMapper.insert(employee);
 
-        throw new RuntimeException("test Over DataSource Transactions");
+        throw new RuntimeException("test distributed transaction");
     }
 }

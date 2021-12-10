@@ -13,7 +13,7 @@ import javax.sql.DataSource;
  * @author Taogen
  */
 @Configuration
-@Profile("multidatasources")
+@Profile("multi-datasources")
 public class DruidDataSourceConfig {
     @Primary
     @Bean(name = "masterDataSource")

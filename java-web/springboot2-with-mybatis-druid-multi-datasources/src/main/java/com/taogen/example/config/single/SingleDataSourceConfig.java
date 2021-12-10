@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author Taogen
  */
 @Configuration
-@Profile("singledatasource")
+@Profile("single-datasource")
 @MapperScan("com.taogen.example.mapper")
 public class SingleDataSourceConfig {
 }

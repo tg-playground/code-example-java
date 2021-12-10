@@ -1,4 +1,4 @@
-package com.taogen.example.config.multiple;
+package com.taogen.example.config.distributedtransaction.atomikos;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -17,24 +17,19 @@ import javax.sql.DataSource;
  * @author Taogen
  */
 @Configuration
-@Profile("multi-datasources")
+@Profile("distributed-transaction-atomikos")
 @MapperScan(basePackages = "com.taogen.example.mapper.slave",
         sqlSessionFactoryRef = "slaveSqlSessionFactory")
-public class SlaveDataSourceMyBatisConfig {
+public class AtomikosSlaveDataSourceMyBatisConfig {
+
     @Bean(name = "slaveSqlSessionFactory")
     public SqlSessionFactory slaveSqlSessionFactory(
-            @Qualifier("slaveDataSource") DataSource slaveDataSource) throws Exception {
+            @Qualifier("distributedSlaveDataSource") DataSource slaveDataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(slaveDataSource);
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath:mapper/slave/*.xml"));
         return sqlSessionFactoryBean.getObject();
-    }
-
-    @Bean(name = "slaveTransactionManager")
-    public DataSourceTransactionManager slaveTransactionManager(
-            @Qualifier("slaveDataSource") DataSource slaveDataSource) {
-        return new DataSourceTransactionManager(slaveDataSource);
     }
 
     @Bean(name = "slaveSqlSessionTemplate")

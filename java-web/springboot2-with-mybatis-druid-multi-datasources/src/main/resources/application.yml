@@ -1,4 +1,5 @@
 spring:
   profiles:
-#    active: singledatasource
-    active: multidatasources
+    active: distributed-transaction-atomikos
+#    active: single-datasource
+#    active: multi-datasources
