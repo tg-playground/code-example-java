@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @Profile("multidatasources")
 @MapperScan(basePackages = "com.taogen.example.mapper.master",
         sqlSessionFactoryRef = "masterSqlSessionFactory")
-public class MasterDataSourceConfig {
+public class MasterDataSourceMyBatisConfig {
     @Bean(name = "masterSqlSessionFactory")
     @Primary
     public SqlSessionFactory masterSqlSessionFactory(

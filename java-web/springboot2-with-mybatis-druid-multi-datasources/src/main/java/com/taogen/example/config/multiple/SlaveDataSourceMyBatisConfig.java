@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 @Profile("multidatasources")
 @MapperScan(basePackages = "com.taogen.example.mapper.slave",
         sqlSessionFactoryRef = "slaveSqlSessionFactory")
-public class SlaveDataSourceConfig {
+public class SlaveDataSourceMyBatisConfig {
     @Bean(name = "slaveSqlSessionFactory")
     public SqlSessionFactory slaveSqlSessionFactory(
             @Qualifier("slaveDataSource") DataSource slaveDataSource) throws Exception {
