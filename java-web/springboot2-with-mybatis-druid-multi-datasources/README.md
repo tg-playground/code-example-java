@@ -8,3 +8,4 @@ Atomikos
 - [Distributed Transactions with JTA - Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/boot-features-jta.html)
 - [Failed to grow the connection pool](http://support.sas.com/kb/57/264.html)
 - [atomikos 异常报错 java.lang.NoSuchMethodException:com.mysql.cj.conf.PropertySet.getBooleanReadablePrope](https://blog.csdn.net/idongit/article/details/108582479)
+- [Spring Boot Integration - Atomikos](https://www.atomikos.com/Documentation/SpringBootIntegration)
