@@ -1,0 +1,5 @@
+spring:
+  profiles:
+#    active: single-datasource
+#    active: multi-datasources
+    active: distributed-transaction-atomikos
