@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:3306/my_test?serverTimezone=Asia/Shanghai&useUnicode=true&useSSL=false&characterEncoding=utf8
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.taogen.example.entity
