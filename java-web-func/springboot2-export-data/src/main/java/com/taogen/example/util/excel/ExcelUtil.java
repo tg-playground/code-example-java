@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
  */
 public class ExcelUtil {
 
+    public static final String EXCEL_SUFFIX = ".xlsx";
+
     public static final List<Class> DATE_TIME_CLASS_TYPES = Arrays.asList(Date.class, LocalTime.class);
 
     public static XSSFWorkbook generateWorkbook(Class cls, List list, String sheetName) {

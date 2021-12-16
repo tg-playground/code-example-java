@@ -94,7 +94,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- excel -->
+        <!-- Java API To Access Microsoft Format Files -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
