@@ -14,17 +14,17 @@ import lombok.Data;
 @Builder
 public class IndentationSetting {
     /**
-     * 1/20 point
+     * 1/20th point
      */
     private Integer indentationFirstLine;
 
     /**
-     * 1/20 point
+     * 1/20th point
      */
     private Integer indentationLeft;
 
     /**
-     * 1/20 point
+     * 1/20th point
      */
     private Integer indentationRight;
 }

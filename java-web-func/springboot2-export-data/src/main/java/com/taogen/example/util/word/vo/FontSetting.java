@@ -19,7 +19,7 @@ import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
 @Builder
 public class FontSetting {
     /**
-     * unit: point
+     * unit: 1 point
      * default 11 points
      */
     private Integer fontSize = 11;
@@ -34,5 +34,8 @@ public class FontSetting {
     private Boolean italic = false;
     private UnderlinePatterns underline;
     private Boolean strikeThrough = false;
+    /**
+     * unit: 1/20th point
+     */
     private Integer characterSpacing;
 }

@@ -15,84 +15,14 @@ import java.util.Arrays;
 import java.util.UUID;
 
 /**
+ * Generate Word files by custom wrapper classes
+ *
  * @author Taogen
  */
 public class WordUtil {
     public static final String WORD_SUFFIX = ".docx";
 
-    public static XWPFDocument generateDocument() throws IOException, XmlException, InvalidFormatException, URISyntaxException {
-        XWPFDocument document = new XWPFDocument();
-        addCustomHeadingStyle(document, "标题 1", 1);
-
-        int blankLines = 11;
-        addBlankLineParagraph(document, blankLines);
-        XWPFParagraph outlineOneParagraph = document.createParagraph();
-        outlineOneParagraph.setStyle("标题 1");
-        outlineOneParagraph.createRun().setText("Heading 1");
-
-        TextParagraph textParagraph = TextParagraph.builder()
-                .textAndFontSettingList(Arrays.asList(TextAndFontSetting.builder()
-                        .text("互联网媒体内容合规检查" + "\r\n" + "审核报告")
-                        .fontSetting(FontSetting.builder()
-                                .fontFamily("黑体")
-                                .fontSize(24)
-                                .build())
-                        .build()))
-                .paragraphAlignment(ParagraphAlignment.CENTER)
-                .indentationSetting(null)
-                .spacingSetting(null)
-                .build();
-        addTextToDocument(document, textParagraph);
-
-        blankLines = 8;
-        addBlankLineParagraph(document, blankLines);
-
-        addTextToDocument(document, TextParagraph.builder()
-                .textAndFontSettingList(Arrays.asList(TextAndFontSetting.builder()
-                        .text("站点组：蚌埠市宣传部、昆山教育、无锡产权交易所、全椒网信办、绍兴市网信办、抚州市网信办、马鞍山市网信办、望江宣传部2、江西日报社、嵊州网信办、嵊州网信办1、丰城市人民政府、南京市网信办、赣州网信办、江西省网信办、泰兴市融媒体中心、苏高新集团有限公司、江西省林业局"
-                                + "\r\n" + "站点/新媒体数量：1401" + "\r\n" + "生成时间：2021年10月9日")
-                        .fontSetting(FontSetting.builder()
-                                .fontSize(10)
-                                .fontFamily("黑体")
-                                .color("FF0000")
-                                .build())
-                        .build()))
-                .paragraphAlignment(ParagraphAlignment.CENTER)
-                .spacingSetting(SpacingSetting.builder()
-                        .lineSpacingRule(LineSpacingRule.EXACT)
-                        .spacingBetween(30)
-                        .build())
-                .build());
-
-        String filepath = "D:\\Repositories\\GitRepositories\\Code Repositories\\code-example-java\\java-web-func\\springboot2-export-data\\src\\main\\resources\\forestcon.jpg";
-        ImageParagraph imageParagraph = ImageParagraph.builder()
-                .paragraphAlignment(ParagraphAlignment.CENTER)
-                .textPosition(20)
-                .inputStream(new FileInputStream(filepath))
-                .filename(UUID.randomUUID().toString())
-                .pictureType(XWPFDocument.PICTURE_TYPE_JPEG)
-                .width(200)
-                .height(200)
-                .build();
-        addPictureToDocument(document, imageParagraph);
-
-        addTextToDocument(document, TextParagraph.builder()
-                .textAndFontSettingList(Arrays.asList(
-                        TextAndFontSetting.builder()
-                                .text("end")
-                                .build(),
-                        TextAndFontSetting.builder()
-                                .text("abc")
-                                .fontSetting(FontSetting.builder()
-                                        .color("FF0000")
-                                        .build())
-                                .build()
-                ))
-                .build());
-        return document;
-    }
-
-    private static void addTextToDocument(XWPFDocument document, TextParagraph textParagraph) {
+    public static void addTextToDocument(XWPFDocument document, TextParagraph textParagraph) {
         XWPFParagraph paragraph = document.createParagraph();
         if (textParagraph.getParagraphAlignment() != null) {
             paragraph.setAlignment(textParagraph.getParagraphAlignment());
@@ -172,8 +102,8 @@ public class WordUtil {
         }
     }
 
-    private static void addPictureToDocument(XWPFDocument document,
-                                             ImageParagraph imageParagraph)
+    public static void addPictureToDocument(XWPFDocument document,
+                                            ImageParagraph imageParagraph)
             throws IOException, InvalidFormatException {
         XWPFParagraph image = document.createParagraph();
         if (imageParagraph.getParagraphAlignment() != null) {
@@ -190,9 +120,9 @@ public class WordUtil {
                 Units.toEMU(imageParagraph.getHeight()));
     }
 
-    private static void addCustomHeadingStyle(XWPFDocument docxDocument,
-                                              String strStyleId,
-                                              int headingLevel) {
+    public static void addCustomHeadingStyle(XWPFDocument docxDocument,
+                                             String strStyleId,
+                                             int headingLevel) {
 
         CTStyle ctStyle = CTStyle.Factory.newInstance();
         ctStyle.setStyleId(strStyleId);
@@ -228,7 +158,7 @@ public class WordUtil {
 
     }
 
-    private static void addBlankLineParagraph(XWPFDocument document, int blankLines) {
+    public static void addBlankLineParagraph(XWPFDocument document, int blankLines) {
         XWPFParagraph paragraph = document.createParagraph();
         addBreak(paragraph.createRun(), blankLines - 1);
     }
@@ -237,9 +167,5 @@ public class WordUtil {
         for (int i = 0; i < blankLines; i++) {
             run.addBreak();
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(1 * 20 / 2.54 * 72);
     }
 }

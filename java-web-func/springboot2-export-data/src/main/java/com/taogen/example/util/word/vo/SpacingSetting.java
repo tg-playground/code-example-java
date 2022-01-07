@@ -17,13 +17,13 @@ import org.apache.poi.xwpf.usermodel.LineSpacingRule;
 public class SpacingSetting {
 
     /**
-     * unit: 1/20 point
+     * unit: 1/20th point
      */
     private Integer spacingBefore;
 
 
     /**
-     * unit: 1/100 line
+     * unit: 1/100th line
      */
     private Integer spacingBeforeLines;
 
@@ -33,7 +33,7 @@ public class SpacingSetting {
 
     /**
      * Line spacing
-     * unit: line or point
+     * unit: 1 line or 1 point, It depends on what LineSpacingRule used.
      */
     private Integer spacingBetween;
 

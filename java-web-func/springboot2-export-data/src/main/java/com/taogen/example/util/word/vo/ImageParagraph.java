@@ -17,7 +17,7 @@ public class ImageParagraph {
 
     /**
      * the amount by which text shall be raised or lowered for this picture
-     *
+     * unit: 1/2nd point
      */
     private Integer textPosition = 0;
 
@@ -31,12 +31,12 @@ public class ImageParagraph {
     private Integer pictureType;
 
     /**
-     * unit: point
+     * unit: 1 point
      */
     private Integer width;
 
     /**
-     * unit: point
+     * unit: 1 point
      */
     private Integer height;
 }
