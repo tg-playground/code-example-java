@@ -29,7 +29,7 @@ public class ExcelExportController extends BaseController {
 
     @GetMapping("/export")
     public void export(HttpServletResponse response) throws IOException {
-        setFileDownloadResponse(response, FileUtil.getFileNameWithSuffix(
+        setFileDownloadResponse(response, FileUtil.addDatetimeToFileName(
                 "用户信息", ExcelUtil.EXCEL_SUFFIX));
         List<User> userList = userService.list();
         log.info("userList: {}", userList);

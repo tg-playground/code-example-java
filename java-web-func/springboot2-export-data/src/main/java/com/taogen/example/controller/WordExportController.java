@@ -26,7 +26,7 @@ public class WordExportController extends BaseController {
 
     @GetMapping("/export")
     public void export(HttpServletResponse response) throws IOException, XmlException, URISyntaxException, InvalidFormatException {
-        setFileDownloadResponse(response, FileUtil.getFileNameWithSuffix(
+        setFileDownloadResponse(response, FileUtil.addDatetimeToFileName(
                 "用户信息", WordUtil.WORD_SUFFIX));
         generateDocument().write(response.getOutputStream());
     }
