@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel;
+package com.taogen.example.util.excel.util;
 
 import com.taogen.example.util.excel.annotation.Excel;
 import com.taogen.example.util.excel.vo.FieldExcel;

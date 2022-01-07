@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.lang.reflect.Field;
 
 /**
+ * Java Object list to Excel rows
  * @author Taogen
  */
 @Data
