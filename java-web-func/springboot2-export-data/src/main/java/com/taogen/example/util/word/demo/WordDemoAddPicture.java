@@ -23,11 +23,12 @@ public class WordDemoAddPicture {
                 .append(System.currentTimeMillis())
                 .append(".docx")
                 .toString();
-        String imageFilePath = "C:\\Users\\Taogen\\Desktop\\androidparty.png";
+        String imageFilePath = "image/icon.jpg";
         try (
                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(outputFilePath));
                 XWPFDocument document = new XWPFDocument();
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(imageFilePath));
+                InputStream inputStream = WordDemoAddPicture.class.getClassLoader().getResourceAsStream(imageFilePath);
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream)
         ) {
             XWPFParagraph paragraph = document.createParagraph();
             XWPFRun run = paragraph.createRun();

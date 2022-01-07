@@ -1,6 +1,7 @@
 package com.taogen.example.util.excel.demo;
 
 import com.taogen.example.util.excel.ExcelBuildUtil;
+import com.taogen.example.util.word.demo.WordDemoAddPicture;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -8,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author Taogen
@@ -19,8 +21,10 @@ public class ExcelDemoAddPicture {
         XSSFRow row = sheet.createRow(0);
         XSSFCell cell = row.createCell(0);
         cell.setCellValue("Hello World");
+        String imageFilePath = "image/icon.jpg";
+        InputStream inputStream = WordDemoAddPicture.class.getClassLoader().getResourceAsStream(imageFilePath);
         ExcelBuildUtil.addPictureToExcel(workbook, sheet, 2, 1,
-                "C:\\Users\\Taogen\\Desktop\\androidparty.png", 0.1);
+                inputStream, 0.5);
         String filePath = new StringBuilder()
                 .append("C:\\Users\\Taogen\\Desktop\\excel_add_picture")
                 .append(System.currentTimeMillis())

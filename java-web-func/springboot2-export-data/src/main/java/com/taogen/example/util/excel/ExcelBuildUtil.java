@@ -38,8 +38,7 @@ public class ExcelBuildUtil {
      */
     public static void addPictureToExcel(XSSFWorkbook workbook, XSSFSheet sheet,
                                          int rowNum, int colNum,
-                                         String imageFilePath, double imageScale) throws IOException {
-        InputStream inputStream = new FileInputStream(imageFilePath);
+                                         InputStream inputStream, double imageScale) throws IOException {
         byte[] bytes = IOUtils.toByteArray(inputStream);
         int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
         inputStream.close();
