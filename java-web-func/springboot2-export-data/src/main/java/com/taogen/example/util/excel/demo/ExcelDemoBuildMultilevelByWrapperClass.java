@@ -1,7 +1,7 @@
-package com.taogen.example.util.excel;
+package com.taogen.example.util.excel.demo;
 
 import com.taogen.example.util.excel.entity.Article;
-import com.taogen.example.util.excel.util.ExcelBuildUtil;
+import com.taogen.example.util.excel.ExcelBuildUtil;
 import com.taogen.example.util.excel.vo.MyCellPosition;
 import com.taogen.example.util.excel.vo.MyExcelCell;
 import com.taogen.example.util.excel.vo.MyExcelRow;

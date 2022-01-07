@@ -1,6 +1,6 @@
-package com.taogen.example.util.excel;
+package com.taogen.example.util.excel.demo;
 
-import com.taogen.example.util.excel.util.ExcelBuildUtil;
+import com.taogen.example.util.excel.ExcelBuildUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

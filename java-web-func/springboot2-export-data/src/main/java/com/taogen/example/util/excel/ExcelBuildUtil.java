@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel.util;
+package com.taogen.example.util.excel;
 
 import com.taogen.example.util.excel.vo.MyCellPosition;
 import com.taogen.example.util.excel.vo.MyCellStyle;
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Generate multiple levels Excel file by custom wrapper class
+ *
  * @author Taogen
  */
 public class ExcelBuildUtil {

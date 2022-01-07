@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel.util;
+package com.taogen.example.util.excel;
 
 import com.taogen.example.util.excel.annotation.Excel;
 import com.taogen.example.util.excel.vo.FieldExcel;
@@ -17,6 +17,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * Generate Excel file by @Excel annotation
+ *
  * @author Taogen
  */
 public class ExcelUtil {
