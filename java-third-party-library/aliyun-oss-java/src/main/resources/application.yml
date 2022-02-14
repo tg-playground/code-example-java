@@ -8,4 +8,6 @@ app:
       bucketName: ${aliyun_oss_bucketName}
 spring:
   config:
+    # additional configuration file path
+    # passed by OS environment variables or Command Line Properties
     import: ${aliyun.oss.java.config.import}
