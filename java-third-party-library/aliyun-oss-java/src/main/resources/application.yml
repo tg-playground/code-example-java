@@ -1,6 +1,7 @@
 app:
   aliyun:
-    # reference spring.config.import configuration file
+    # passed by OS environment variables or Command Line Properties
+    # or overridden by {spring.config.import} configuration file
     oss:
       endpoint: ${aliyun_oss_endpoint}
       accessKeyId: ${aliyun_oss_accessKeyId}
