@@ -1,0 +1,11 @@
+app:
+  aliyun:
+    # reference spring.config.import configuration file
+    oss:
+      endpoint: ${aliyun_oss_endpoint}
+      accessKeyId: ${aliyun_oss_accessKeyId}
+      accessKeySecret: ${aliyun_oss_accessKeySecret}
+      bucketName: ${aliyun_oss_bucketName}
+spring:
+  config:
+    import: ${aliyun.oss.java.config.import}
