@@ -1,5 +1,6 @@
-package com.taogen.example.wecom;
+package com.taogen.example.wecom.service;
 
+import com.taogen.example.wecom.service.WeComAccessTokenService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

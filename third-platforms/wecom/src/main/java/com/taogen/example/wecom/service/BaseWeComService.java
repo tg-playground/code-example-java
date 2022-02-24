@@ -1,4 +1,4 @@
-package com.taogen.example.wecom;
+package com.taogen.example.wecom.service;
 
 import com.taogen.example.config.WeComProperties;
 import org.springframework.beans.factory.annotation.Autowired;

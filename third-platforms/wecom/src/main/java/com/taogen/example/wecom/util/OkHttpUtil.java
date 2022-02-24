@@ -1,4 +1,4 @@
-package com.taogen.example.util;
+package com.taogen.example.wecom.util;
 
 import okhttp3.*;
 

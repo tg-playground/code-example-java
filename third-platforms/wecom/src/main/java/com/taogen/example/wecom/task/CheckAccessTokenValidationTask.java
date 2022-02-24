@@ -1,13 +1,11 @@
 package com.taogen.example.wecom.task;
 
-import com.taogen.example.util.AccessTokenCacheHandler;
-import com.taogen.example.wecom.WeComAccessTokenService;
-import org.checkerframework.checker.units.qual.A;
+import com.taogen.example.wecom.service.WeComAccessTokenService;
+import com.taogen.example.wecom.cache.AccessTokenCacheHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 /**

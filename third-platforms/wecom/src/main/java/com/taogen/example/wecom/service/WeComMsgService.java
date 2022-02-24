@@ -1,6 +1,6 @@
-package com.taogen.example.wecom;
+package com.taogen.example.wecom.service;
 
-import com.taogen.example.util.OkHttpUtil;
+import com.taogen.example.wecom.util.OkHttpUtil;
 import okhttp3.HttpUrl;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

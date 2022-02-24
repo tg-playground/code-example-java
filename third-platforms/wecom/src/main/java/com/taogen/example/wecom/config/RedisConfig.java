@@ -1,4 +1,4 @@
-package com.taogen.example.config;
+package com.taogen.example.wecom.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
