@@ -5,10 +5,12 @@ app:
     appSecret: ${wecom.appSecret}
     api:
       requestPrefix: https://qyapi.weixin.qq.com/cgi-bin/
-    # guava or redis
     tokenCache:
+      # guava or redis
       type: redis
       expiredTimeInSecond: 7200
+      # unit: millisecond
+      checkTokenValidationTaskRate: 600000
 spring:
   redis:
     host: ${redis.host}

@@ -30,13 +30,6 @@ public class WeComAccessTokenService extends BaseWeComService {
             cacheHandler.setKeyValue(ACCESS_TOKEN_KEY, accessToken);
         } else {
             System.out.println("access token exists in cache");
-            if (!isAccessTokenValid()) {
-                System.out.println("access token is invalid");
-                accessToken = getAccessTokenFromWeCom();
-                cacheHandler.setKeyValue(ACCESS_TOKEN_KEY, accessToken);
-            } else {
-                System.out.println("access token is valid");
-            }
         }
         return accessToken;
     }
@@ -59,7 +52,7 @@ public class WeComAccessTokenService extends BaseWeComService {
         cacheHandler.deleteKey(ACCESS_TOKEN_KEY);
     }
 
-    private String getAccessTokenFromWeCom() throws IOException {
+    public String getAccessTokenFromWeCom() throws IOException {
         // {"errcode":0,"errmsg":"ok","access_token":"","expires_in":7200}
         // 开发者需要缓存access_token，用于后续接口的调用（注意：不能频繁调用gettoken接口，否则会受到频率拦截）。当access_token失效或过期时，需要重新获取。
         // access_token的有效期通过返回的expires_in来传达，正常情况下为7200秒（2小时），有效期内重复获取返回相同结果，过期后获取会返回新的access_token。
