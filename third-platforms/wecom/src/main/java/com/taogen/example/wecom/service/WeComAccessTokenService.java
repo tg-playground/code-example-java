@@ -65,6 +65,7 @@ public class WeComAccessTokenService extends BaseWeComService {
                 .build();
         String responseBody = OkHttpUtil.sendGet(httpUrl);
         JSONObject jsonObject = new JSONObject(responseBody);
+        System.out.println("Get access token from weCom successfully");
         return jsonObject.getString(ACCESS_TOKEN_KEY);
     }
 }

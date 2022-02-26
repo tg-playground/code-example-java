@@ -9,8 +9,8 @@ app:
       # guava or redis
       type: redis
       expiredTimeInSecond: 7200
-      # unit: millisecond
-      checkTokenValidationTaskRate: 600000
+      # unit: millisecond. 10 minutes = 600000 millisecond
+      refreshTokenTaskRate: 600000
 spring:
   redis:
     host: ${redis.host}
