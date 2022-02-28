@@ -27,8 +27,9 @@ public class SpringRestTemplateUtil {
      * @param method
      * @param params
      * @param headers
-     * @param body    when request content-type is application/json, body is string object.
+     * @param body    when request content-type is application/json, body is JSON string object.
      *                when request content-type is application/x-www-form-urlencoded, body is MultiValueMap<String, String> object.
+     *                when request content-type is multipart/form-data, body is MultiValueMap<String, Object> object. The file value is FileSystemResource object.
      * @return String object or entity object
      */
     public <T> ResponseEntity<T> request(String url,
