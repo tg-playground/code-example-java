@@ -1,0 +1,5 @@
+app:
+  fileUpload:
+    uploadDir: D:\upload\test
+server:
+  port: 8081
