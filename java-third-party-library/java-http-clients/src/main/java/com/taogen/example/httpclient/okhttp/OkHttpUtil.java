@@ -1,6 +1,6 @@
 package com.taogen.example.httpclient.okhttp;
 
-import com.taogen.example.httpclient.okhttp.vo.HttpResponse;
+import com.taogen.example.httpclient.okhttp.vo.OkHttpResponse;
 import okhttp3.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.MultiValueMap;
@@ -22,10 +22,10 @@ public class OkHttpUtil {
             .writeTimeout(15, TimeUnit.SECONDS)
             .build();
 
-    public static HttpResponse requestWithoutBody(String url,
-                                                  HttpMethod method,
-                                                  MultiValueMap<String, String> queryStringParams,
-                                                  Headers headers) throws IOException {
+    public static OkHttpResponse requestWithoutBody(String url,
+                                                    HttpMethod method,
+                                                    MultiValueMap<String, String> queryStringParams,
+                                                    Headers headers) throws IOException {
         Request.Builder requestBuilder = new Request.Builder()
                 .url(getHttpUrl(url, queryStringParams))
                 .headers(headers);
@@ -33,15 +33,15 @@ public class OkHttpUtil {
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
             // after response closed, the response body can't be read again.
             // so we need to save to a wrapper class object
-            return new HttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
         }
     }
 
-    public static HttpResponse requestWithJson(String url,
-                                               HttpMethod method,
-                                               MultiValueMap<String, String> queryStringParams,
-                                               Headers headers,
-                                               String json) throws IOException {
+    public static OkHttpResponse requestWithJson(String url,
+                                                 HttpMethod method,
+                                                 MultiValueMap<String, String> queryStringParams,
+                                                 Headers headers,
+                                                 String json) throws IOException {
         if (method == HttpMethod.GET) {
             throw new IllegalArgumentException("GET method can't use json body");
         }
@@ -51,15 +51,15 @@ public class OkHttpUtil {
                 .headers(headers);
         addRequestBody(requestBuilder, requestBody, method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new HttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
         }
     }
 
-    public static HttpResponse requestWithFormUrlEncoded(String url,
-                                                         HttpMethod method,
-                                                         MultiValueMap<String, String> queryStringParams,
-                                                         Headers headers,
-                                                         MultiValueMap<String, String> formData) throws IOException {
+    public static OkHttpResponse requestWithFormUrlEncoded(String url,
+                                                           HttpMethod method,
+                                                           MultiValueMap<String, String> queryStringParams,
+                                                           Headers headers,
+                                                           MultiValueMap<String, String> formData) throws IOException {
         if (method == HttpMethod.GET) {
             throw new IllegalArgumentException("GET method can't use form data body");
         }
@@ -68,7 +68,7 @@ public class OkHttpUtil {
                 .headers(headers);
         addRequestBody(requestBuilder, getFormDataBody(formData), method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new HttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
         }
     }
 
@@ -81,11 +81,11 @@ public class OkHttpUtil {
      * @return
      * @throws IOException
      */
-    public static HttpResponse requestWithFormData(String url,
-                                                   HttpMethod method,
-                                                   MultiValueMap<String, String> queryStringParams,
-                                                   Headers headers,
-                                                   MultiValueMap<String, Object> formData) throws IOException {
+    public static OkHttpResponse requestWithFormData(String url,
+                                                     HttpMethod method,
+                                                     MultiValueMap<String, String> queryStringParams,
+                                                     Headers headers,
+                                                     MultiValueMap<String, Object> formData) throws IOException {
         if (method == HttpMethod.GET) {
             throw new IllegalArgumentException("GET method can't use form data body");
         }
@@ -94,7 +94,7 @@ public class OkHttpUtil {
                 .headers(headers);
         addRequestBody(requestBuilder, getMultipartBody(formData), method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new HttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
         }
     }
 

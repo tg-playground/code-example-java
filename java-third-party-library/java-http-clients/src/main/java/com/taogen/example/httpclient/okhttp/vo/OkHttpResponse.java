@@ -11,7 +11,7 @@ import okhttp3.Headers;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HttpResponse {
+public class OkHttpResponse {
     private Integer statusCode;
     private Headers headers;
     private String body;

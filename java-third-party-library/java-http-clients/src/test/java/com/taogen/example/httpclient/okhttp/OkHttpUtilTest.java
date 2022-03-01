@@ -4,13 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taogen.example.controller.UserController;
 import com.taogen.example.entity.User;
 import com.taogen.example.httpclient.BaseTest;
-import com.taogen.example.httpclient.okhttp.vo.HttpResponse;
+import com.taogen.example.httpclient.okhttp.vo.OkHttpResponse;
 import okhttp3.Headers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -58,14 +59,16 @@ class OkHttpUtilTest extends BaseTest {
 
     @Test
     void sendGet() throws IOException {
-        HttpResponse result = OkHttpUtil.requestWithoutBody(userEndpointUrl, HttpMethod.GET,
+        OkHttpResponse result = OkHttpUtil.requestWithoutBody(userEndpointUrl, HttpMethod.GET,
                 getBasicParam(), getBasicHeaders());
         System.out.println(result.getBody());
+        assertEquals(HttpStatus.OK.value(), result.getStatusCode());
         assertNotNull(result.getBody());
         assertTrue(result.getBody().contains("\"id\":1"));
-        HttpResponse result2 = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/1", HttpMethod.GET,
+        OkHttpResponse result2 = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/1", HttpMethod.GET,
                 getBasicParam(), getBasicHeaders());
         System.out.println(result2.getBody());
+        assertEquals(HttpStatus.OK.value(), result2.getStatusCode());
         assertNotNull(result2.getBody());
         assertTrue(result2.getBody().contains("\"id\":1"));
     }
@@ -73,9 +76,10 @@ class OkHttpUtilTest extends BaseTest {
     @Test
     void postWithJson() throws IOException {
         String name = "test" + System.currentTimeMillis();
-        HttpResponse response = OkHttpUtil.requestWithJson(userEndpointUrl, HttpMethod.POST,
+        OkHttpResponse response = OkHttpUtil.requestWithJson(userEndpointUrl, HttpMethod.POST,
                 getBasicParam(), getBasicHeaders(), "{\"name\":\"" + name + "\"}");
         System.out.println(response.getBody());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(response.getBody());
         assertTrue(response.getBody().contains("\"name\":\"" + name + "\""));
     }
@@ -87,11 +91,12 @@ class OkHttpUtilTest extends BaseTest {
         user.setId(id);
         String name = "test" + System.currentTimeMillis();
         user.setName(name);
-        HttpResponse response = OkHttpUtil.requestWithFormUrlEncoded(userEndpointUrl + "/" + id, HttpMethod.PUT,
+        OkHttpResponse response = OkHttpUtil.requestWithFormUrlEncoded(userEndpointUrl + "/" + id, HttpMethod.PUT,
                 getBasicParam(), getBasicHeaders(), convertObjectToMultiValueMap(user));
         System.out.println(response.getBody());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(response.getBody());
-        HttpResponse getUserResponse = OkHttpUtil.requestWithoutBody(
+        OkHttpResponse getUserResponse = OkHttpUtil.requestWithoutBody(
                 userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getBasicHeaders());
         assertTrue(getUserResponse.getBody().contains("\"name\":\"" + name + "\""));
     }
@@ -99,15 +104,16 @@ class OkHttpUtilTest extends BaseTest {
     @Test
     void delete() throws IOException {
         String name = "test" + System.currentTimeMillis();
-        HttpResponse response = OkHttpUtil.requestWithJson(userEndpointUrl, HttpMethod.POST,
-                getBasicParam(), getBasicHeaders(), "{\"name\":\"" + name + "\"}");
+        OkHttpResponse response = OkHttpUtil.requestWithJson(userEndpointUrl,
+                HttpMethod.POST, getBasicParam(), getBasicHeaders(), "{\"name\":\"" + name + "\"}");
         System.out.println(response.getBody());
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(response.getBody(), User.class);
         Long id = user.getId();
-        OkHttpUtil.requestWithoutBody(userEndpointUrl + "/" + id, HttpMethod.DELETE,
-                getBasicParam(), getBasicHeaders());
-        HttpResponse getResponse = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getBasicHeaders());
+        OkHttpResponse deleteResponse = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/" + id,
+                HttpMethod.DELETE, getBasicParam(), getBasicHeaders());
+        assertEquals(HttpStatus.OK.value(), deleteResponse.getStatusCode());
+        OkHttpResponse getResponse = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getBasicHeaders());
         assertEquals("", getResponse.getBody());
     }
 
@@ -116,13 +122,14 @@ class OkHttpUtilTest extends BaseTest {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         File file = ResourceUtils.getFile("classpath:static/icon.jpg");
         body.add("file", file);
-        HttpResponse response = OkHttpUtil.requestWithFormData(fileEndpointUrl + "/upload", HttpMethod.POST, getBasicParam(), getBasicHeaders(), body);
+        OkHttpResponse response = OkHttpUtil.requestWithFormData(fileEndpointUrl + "/upload", HttpMethod.POST, getBasicParam(), getBasicHeaders(), body);
         System.out.println(response.getBody());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(response.getBody());
         assertTrue(response.getBody().contains(file.getName()));
         MultiValueMap<String, String> fileExistQueryParam = getBasicParam();
         fileExistQueryParam.add("fileUri", response.getBody());
-        HttpResponse fileExistResponse = OkHttpUtil.requestWithoutBody(fileEndpointUrl + "/doesFileExist", HttpMethod.GET, fileExistQueryParam, getBasicHeaders());
+        OkHttpResponse fileExistResponse = OkHttpUtil.requestWithoutBody(fileEndpointUrl + "/doesFileExist", HttpMethod.GET, fileExistQueryParam, getBasicHeaders());
         assertEquals("true", fileExistResponse.getBody());
         OkHttpUtil.requestWithoutBody(fileEndpointUrl + "/deleteFile1", HttpMethod.DELETE, fileExistQueryParam, getBasicHeaders());
     }
