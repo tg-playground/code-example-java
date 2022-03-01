@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taogen.example.controller.UserController;
 import com.taogen.example.entity.User;
+import com.taogen.example.httpclient.BaseTest;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class SpringRestTemplateUtilTest {
+class SpringRestTemplateUtilTest extends BaseTest {
 
     public static final String domain = "http://localhost";
 
@@ -127,7 +128,7 @@ class SpringRestTemplateUtilTest {
     }
 
     @Test
-    void putWithFormUrlEncoded() throws JsonProcessingException {
+    void putWithFormUrlEncoded() {
         Long id = 1L;
         User user = new User();
         String newName = "test" + System.currentTimeMillis();
@@ -182,12 +183,6 @@ class SpringRestTemplateUtilTest {
         return headers;
     }
 
-    private MultiValueMap<String, String> getBasicParam() {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("token", UserController.RANDOM_TOKEN);
-        return params;
-    }
-
     private ResponseEntity<User> getUserById(Long id) {
         ResponseEntity<User> userResponse = springRestTemplateUtil.request(
                 userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getBasicHeaders(), null, User.class);
@@ -211,15 +206,9 @@ class SpringRestTemplateUtilTest {
         String url = userEndpointUrl + "/" + user.getId();
         MultiValueMap headers = getBasicHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> map = objectMapper.convertValue(user, Map.class);
-        MultiValueMap<String, String> linkedMultiValueMap =
-                CollectionUtils.toMultiValueMap(map.entrySet().stream()
-                        .collect(Collectors.toMap(e -> e.getKey().toString(),
-                                e -> Arrays.asList(e.getValue().toString()))));
         ResponseEntity response = springRestTemplateUtil.request(
                 url, HttpMethod.PUT, getBasicParam(), headers,
-                linkedMultiValueMap, User.class);
+                convertObjectToMultiValueMap(user), User.class);
         return response;
     }
 
