@@ -97,6 +97,19 @@ public class Java11HttpClientUtil {
         return response;
     }
 
+    /**
+     * The file value is File object.
+     *
+     * @param url
+     * @param method
+     * @param params
+     * @param headers
+     * @param formData
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static HttpResponse<String> requestWithFormData(String url,
                                                            HttpMethod method,
                                                            MultiValueMap<String, String> params,
@@ -142,7 +155,12 @@ public class Java11HttpClientUtil {
         List<byte[]> byteArrays = new ArrayList<>();
 
         // Separator with boundary
-        byte[] separator = ("--" + boundary + "\r\nContent-Disposition: form-data; name=").getBytes(StandardCharsets.UTF_8);
+        byte[] separator = (new StringBuilder()
+                .append("--")
+                .append(boundary)
+                .append("\r\nContent-Disposition: form-data; name=")
+                .toString()
+                .getBytes(StandardCharsets.UTF_8));
 
         // Iterating over data parts
         for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
@@ -157,12 +175,26 @@ public class Java11HttpClientUtil {
                     if (value instanceof File) {
                         var path = ((File) value).toPath();
                         String mimeType = Files.probeContentType(path);
-                        byteArrays.add(("\"" + entry.getKey() + "\"; filename=\"" + path.getFileName()
-                                + "\"\r\nContent-Type: " + mimeType + "\r\n\r\n").getBytes(StandardCharsets.UTF_8));
+                        byteArrays.add(new StringBuilder()
+                                .append("\"")
+                                .append(entry.getKey())
+                                .append("\"; filename=\"")
+                                .append(path.getFileName())
+                                .append("\"\r\nContent-Type: ")
+                                .append(mimeType)
+                                .append("\r\n\r\n")
+                                .toString()
+                                .getBytes(StandardCharsets.UTF_8));
                         byteArrays.add(Files.readAllBytes(path));
                         byteArrays.add("\r\n".getBytes(StandardCharsets.UTF_8));
                     } else {
-                        byteArrays.add(("\"" + entry.getKey() + "\"\r\n\r\n" + value + "\r\n")
+                        byteArrays.add(new StringBuilder()
+                                .append("\"")
+                                .append(entry.getKey())
+                                .append("\"\r\n\r\n")
+                                .append(value)
+                                .append("\r\n")
+                                .toString()
                                 .getBytes(StandardCharsets.UTF_8));
                     }
                 }
@@ -170,7 +202,12 @@ public class Java11HttpClientUtil {
         }
 
         // Closing boundary
-        byteArrays.add(("--" + boundary + "--").getBytes(StandardCharsets.UTF_8));
+        byteArrays.add(new StringBuilder()
+                .append("--")
+                .append(boundary)
+                .append("--")
+                .toString()
+                .getBytes(StandardCharsets.UTF_8));
 
 //        System.out.println(byteArrays.stream().map(String::new).collect(Collectors.joining("")));
         // Serializing as byte array
