@@ -34,39 +34,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SpringRestTemplateUtilTest extends BaseTest {
 
-    public static final String domain = "http://localhost";
-
-    public static final String USER_ENDPOINT = "users";
-
-    public static final String FILE_ENDPOINT = "files";
-
     @Autowired
     private SpringRestTemplateUtil springRestTemplateUtil;
-
-    @Value("${server.port}")
-    private String serverPort;
-
-    private String userEndpointUrl;
-
-    private String fileEndpointUrl;
-
-    @PostConstruct
-    public void init() {
-        userEndpointUrl = new StringBuilder()
-                .append(domain)
-                .append(":")
-                .append(serverPort)
-                .append("/")
-                .append(USER_ENDPOINT)
-                .toString();
-        fileEndpointUrl = new StringBuilder()
-                .append(domain)
-                .append(":")
-                .append(serverPort)
-                .append("/")
-                .append(FILE_ENDPOINT)
-                .toString();
-    }
 
     @Test
     void getString() {
@@ -177,11 +146,6 @@ class SpringRestTemplateUtilTest extends BaseTest {
         assertEquals(HttpStatus.OK, responseOfDeleteFile.getStatusCode());
     }
 
-    private MultiValueMap<String, String> getBasicHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(UserController.APP_HEADER_KEY, UserController.APP_HEADER_VALUE);
-        return headers;
-    }
 
     private ResponseEntity<User> getUserById(Long id) {
         ResponseEntity<User> userResponse = springRestTemplateUtil.request(
