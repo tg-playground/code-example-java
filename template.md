@@ -199,10 +199,10 @@ Set Maven project properties, add Maven dependencies, and add Maven plugins
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${my_pattern}"/>
+            <PatternLayout pattern="${my_pattern}" disableAnsi="false"/>
         </Console>
         <File name="File" fileName="${filename}">
-            <PatternLayout pattern="${my_pattern}" />
+            <PatternLayout pattern="${my_pattern}" disableAnsi="false"/>
         </File>
     </Appenders>
     <Loggers>
