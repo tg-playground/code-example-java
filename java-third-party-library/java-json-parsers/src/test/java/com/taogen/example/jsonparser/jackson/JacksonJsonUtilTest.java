@@ -8,14 +8,13 @@ import com.taogen.example.jsonparser.jackson.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Log4j2
 class JacksonJsonUtilTest extends BaseTest {
@@ -23,14 +22,17 @@ class JacksonJsonUtilTest extends BaseTest {
 
     public static User user;
 
+    public static List<Role> roles;
+
     static {
+        roles = Arrays.asList(new Role(1L, "admin"), new Role(2L, "user"));
         try {
             user = new User().builder()
                     .id(1L)
                     .name("Jack")
                     .age(18)
                     .birthDate(dateFormat.parse("1990-01-01"))
-                    .roles(Arrays.asList(new Role(1L, "admin"), new Role(2L, "user")))
+                    .roles(roles)
                     .build();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -42,52 +44,62 @@ class JacksonJsonUtilTest extends BaseTest {
     void objectToMap() {
         Map<String, Object> map = JacksonJsonUtil.objectToMap(user);
         log.debug("map: {}", map);
-        assertNotNull(map);
-        assertEquals(1L, Long.valueOf(map.get("id").toString()));
+        validateMap(map);
     }
 
     @Test
     void mapToObject() {
-        Map<String, Object> map = JacksonJsonUtil.objectToMap(user);
-        User user = JacksonJsonUtil.mapToObject(map, User.class);
+        User user = JacksonJsonUtil.mapToObject(USER_MAP, User.class);
         log.debug(user);
-        assertNotNull(user);
-        assertEquals(1L, user.getId().longValue());
+        validateUser(user);
     }
 
     @Test
     void objectToJsonStr() throws JsonProcessingException {
         String jsonStr = JacksonJsonUtil.objectToJsonStr(user);
         log.debug(jsonStr);
-        assertNotNull(jsonStr);
-        assertTrue(jsonStr.contains("\"id\":1,"));
-        assertTrue(jsonStr.contains("roles"));
+        super.validateJsonStr(jsonStr);
     }
 
     @Test
     void mapToJsonStr() throws JsonProcessingException {
-        Map<String, Object> map = JacksonJsonUtil.objectToMap(user);
-        String jsonStr = JacksonJsonUtil.mapToJsonStr(map);
+        String jsonStr = JacksonJsonUtil.mapToJsonStr(USER_MAP);
+        log.debug(jsonStr);
+        super.validateJsonStr(jsonStr);
+    }
+
+    @Test
+    void listToJsonStr() throws JsonProcessingException {
+        String jsonStr = JacksonJsonUtil.listToJsonStr(roles);
         log.debug(jsonStr);
         assertNotNull(jsonStr);
+        assertEquals(jsonRoleArray, jsonStr);
+        assertTrue(jsonStr.startsWith("[") && jsonStr.endsWith("]"));
         assertTrue(jsonStr.contains("\"id\":1,"));
-        assertTrue(jsonStr.contains("roles"));
     }
 
     @Test
     void jsonStrToObject() throws JsonProcessingException {
         User user = JacksonJsonUtil.jsonStrToObject(json, User.class);
         log.debug(user);
+        validateUser(user);
+    }
+
+    private void validateUser(User user) {
         assertNotNull(user);
         assertEquals(1L, user.getId().longValue());
+        assertEquals("Jack", user.getName());
+        assertEquals(18, user.getAge());
+        assertEquals("1990-01-01", dateFormat.format(user.getBirthDate()));
+        assertNotNull(user.getRoles());
+        assertEquals(2, user.getRoles().size());
     }
 
     @Test
     void jsonStrToMap() throws JsonProcessingException {
         Map<String, Object> map = JacksonJsonUtil.jsonStrToMap(json);
         log.debug(map);
-        assertNotNull(map);
-        assertEquals(1L, Long.valueOf(map.get("id").toString()));
+        validateMap(map);
     }
 
     @Test

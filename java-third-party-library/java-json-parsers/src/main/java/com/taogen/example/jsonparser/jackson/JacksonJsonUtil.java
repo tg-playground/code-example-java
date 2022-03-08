@@ -41,6 +41,11 @@ public class JacksonJsonUtil {
         return objectMapper.writeValueAsString(map);
     }
 
+    public static String listToJsonStr(List list) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(list);
+    }
+
     public static <T> T jsonStrToObject(String jsonStr, Class<T> clazz) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(jsonStr, clazz);

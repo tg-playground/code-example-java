@@ -23,7 +23,7 @@ public class User {
     private Integer age;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @JsonProperty(value = "birthDate")
+    @JsonProperty(value = "birth_date")
     private Date birthDate;
 
     private List<Role> roles;
