@@ -24,8 +24,8 @@ public class UserForGson {
     /**
      * Change the field name: Using Gson @SerializedName.
      * Format date:
-     * 1) Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
-     * 2)registerTypeAdapter(Date.class, MyDateJsonSerializer);
+     * 1) Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+     * 2) Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, MyDateJsonSerializer);
      */
     @SerializedName(value = "birth_date")
     private Date birthDate;
