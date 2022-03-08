@@ -12,8 +12,7 @@ import java.util.*;
 /**
  * Gson Util
  * <p>
- * 1. Convert json string to object(entity, map, jsonObject, List<entity>) and vice versa.
- * 2. Conversion between entity, map and jsonObject
+ * Convert json string to object(entity, map, jsonObject, List<entity>) and vice versa.
  *
  * @author Taogen
  */
