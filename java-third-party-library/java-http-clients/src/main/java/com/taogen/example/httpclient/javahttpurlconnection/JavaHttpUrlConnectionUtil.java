@@ -45,6 +45,7 @@ public class JavaHttpUrlConnectionUtil {
         urlConnection.setRequestMethod(method.name());
         addHeaders(urlConnection, headers);
         urlConnection.setRequestProperty("Content-Type", "application/json");
+        // Connection Will Be Used to Send Content
         urlConnection.setDoOutput(true);
         byte[] postData = jsonString.getBytes(StandardCharsets.UTF_8);
         urlConnection.setRequestProperty("Content-Length", String.valueOf(postData.length));
