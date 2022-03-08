@@ -21,6 +21,14 @@ public class JacksonJsonUtil {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
+    /**
+     * warning:
+     * field data types are only primitive types.
+     * Other data types will convert to String, such as Date type will be converted to String.
+     *
+     * @param object
+     * @return
+     */
     public static Map objectToMap(Object object) {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.convertValue(object, Map.class);

@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.taogen.example.jsonparser.gson.jsondeserializer.MapDeserializerDoubleAsIntFix;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -17,8 +18,6 @@ import java.util.*;
  * @author Taogen
  */
 public class GsonUtil {
-    public static final JsonSerializer<Date> DATE_JSON_SERIALIZER = (src, typeOfSrc, context) -> src == null ? null
-            : new JsonPrimitive(new SimpleDateFormat("yyyy-MM-dd").format(src));
 
     private GsonUtil() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
@@ -64,6 +63,12 @@ public class GsonUtil {
         return new Gson().fromJson(jsonStr, clazz);
     }
 
+    public static <T> T jsonStrToObject(String jsonStr, Class<T> clazz, Map<Type, Object> typeAdapters) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        registerTypeAdapters(gsonBuilder, typeAdapters);
+        return gsonBuilder.create().fromJson(jsonStr, clazz);
+    }
+
     public static Map<String, Object> jsonStrToMap(String jsonStr) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(new TypeToken<Map<String, Object>>() {
@@ -82,5 +87,22 @@ public class GsonUtil {
     public static <T> List<T> jsonArrayStrToList(String jsonStr, Class<T[]> clazz) {
         return new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonStr, clazz)));
 //        return new Gson().fromJson(jsonStr, new TypeToken<List<T>>(){}.getType());
+    }
+
+    public static JsonSerializer<Date> getDateJsonSerializer(String datetimeFormat) {
+        return (date, type, context) -> date == null ? null :
+                new JsonPrimitive(new SimpleDateFormat(datetimeFormat).format(date));
+    }
+
+    public static JsonDeserializer<Date> getDateJsonDeserializer(String datetimeFormat) {
+        return (jsonElement, type, context) -> {
+            try {
+                return jsonElement == null ? null :
+                        new SimpleDateFormat(datetimeFormat).parse(jsonElement.getAsString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return null;
+        };
     }
 }

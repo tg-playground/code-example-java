@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Log4j2
 class JacksonJsonUtilTest extends BaseTest {

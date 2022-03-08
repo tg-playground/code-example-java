@@ -38,7 +38,7 @@ class GsonUtilTest extends BaseTest {
     @Test
     void objectToJsonStr() {
         Map<Type, Object> typeAdapterMap = new HashMap<>();
-        typeAdapterMap.put(Date.class, GsonUtil.DATE_JSON_SERIALIZER);
+        typeAdapterMap.put(Date.class, GsonUtil.getDateJsonSerializer("yyyy-MM-dd"));
         String jsonStr = GsonUtil.objectToJsonStr(user, typeAdapterMap);
         log.debug(jsonStr);
         super.validateJsonStr(jsonStr);
@@ -47,7 +47,7 @@ class GsonUtilTest extends BaseTest {
     @Test
     void mapToJsonStr() {
         Map<Type, Object> typeAdapterMap = new HashMap<>();
-        typeAdapterMap.put(Date.class, GsonUtil.DATE_JSON_SERIALIZER);
+        typeAdapterMap.put(Date.class, GsonUtil.getDateJsonSerializer("yyyy-MM-dd"));
         String jsonStr = GsonUtil.mapToJsonStr(super.USER_MAP, typeAdapterMap);
         log.debug(jsonStr);
         super.validateJsonStr(jsonStr);
@@ -73,7 +73,9 @@ class GsonUtilTest extends BaseTest {
 
     @Test
     void jsonStrToObj() {
-        UserForGson user = GsonUtil.jsonStrToObject(json, UserForGson.class);
+        Map<Type, Object> typeAdapterMap = new HashMap<>();
+        typeAdapterMap.put(Date.class, GsonUtil.getDateJsonDeserializer("yyyy-MM-dd"));
+        UserForGson user = GsonUtil.jsonStrToObject(json, UserForGson.class, typeAdapterMap);
         log.debug(user);
         validateUser(user);
     }
