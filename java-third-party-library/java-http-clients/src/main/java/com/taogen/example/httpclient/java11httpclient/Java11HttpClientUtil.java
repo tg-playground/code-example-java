@@ -1,5 +1,6 @@
 package com.taogen.example.httpclient.java11httpclient;
 
+import com.taogen.example.util.HttpRequestUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.MultiValueMap;
 
@@ -36,7 +37,7 @@ public class Java11HttpClientUtil {
                                                           MultiValueMap<String, String> params,
                                                           MultiValueMap<String, String> headers) throws IOException, InterruptedException, URISyntaxException {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .uri(new URI(url + multiValueMapToQueryString(params)));
+                .uri(new URI(url + HttpRequestUtil.multiValueMapToQueryString(params)));
         addMethod(requestBuilder, method, HttpRequest.BodyPublishers.noBody());
         addHeaders(requestBuilder, headers);
         HttpResponse<String> response = HttpClient.newHttpClient().send(
@@ -50,7 +51,7 @@ public class Java11HttpClientUtil {
                                                        MultiValueMap<String, String> headers,
                                                        String body) throws IOException, InterruptedException, URISyntaxException {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .uri(new URI(url + multiValueMapToQueryString(params)));
+                .uri(new URI(url + HttpRequestUtil.multiValueMapToQueryString(params)));
         addMethod(requestBuilder, method, HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8));
         headers.add("Content-Type", "application/json");
         addHeaders(requestBuilder, headers);
@@ -88,9 +89,9 @@ public class Java11HttpClientUtil {
                                                                  MultiValueMap<String, String> headers,
                                                                  MultiValueMap<String, String> formData) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .uri(new URI(url + multiValueMapToQueryString(params)));
+                .uri(new URI(url + HttpRequestUtil.multiValueMapToQueryString(params)));
         headers.add("Content-Type", "application/x-www-form-urlencoded");
-        addMethod(requestBuilder, method, HttpRequest.BodyPublishers.ofString(multiValueMapToQueryString(formData).substring(1), StandardCharsets.UTF_8));
+        addMethod(requestBuilder, method, HttpRequest.BodyPublishers.ofString(HttpRequestUtil.multiValueMapToQueryString(formData).substring(1), StandardCharsets.UTF_8));
         addHeaders(requestBuilder, headers);
         HttpResponse<String> response = HttpClient.newHttpClient().send(
                 requestBuilder.build(), HttpResponse.BodyHandlers.ofString());
@@ -116,7 +117,7 @@ public class Java11HttpClientUtil {
                                                            MultiValueMap<String, String> headers,
                                                            MultiValueMap<String, Object> formData) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                .uri(new URI(url + multiValueMapToQueryString(params)));
+                .uri(new URI(url + HttpRequestUtil.multiValueMapToQueryString(params)));
         headers.add("Content-Type", "multipart/form-data; boundary=" + MULTIPART_BODY_BOUNDARY);
         addMethod(requestBuilder, method, ofMimeMultipartData(formData, MULTIPART_BODY_BOUNDARY));
         addHeaders(requestBuilder, headers);
@@ -151,67 +152,7 @@ public class Java11HttpClientUtil {
      */
     public static HttpRequest.BodyPublisher ofMimeMultipartData(MultiValueMap<String, Object> data,
                                                                 String boundary) throws IOException {
-        // Result request body
-        List<byte[]> byteArrays = new ArrayList<>();
-
-        // Separator with boundary
-        byte[] separator = (new StringBuilder()
-                .append("--")
-                .append(boundary)
-                .append("\r\nContent-Disposition: form-data; name=")
-                .toString()
-                .getBytes(StandardCharsets.UTF_8));
-
-        // Iterating over data parts
-        for (Map.Entry<String, List<Object>> entry : data.entrySet()) {
-
-            List<Object> values = entry.getValue();
-            if (values.size() > 0) {
-                for (Object value : values) {
-                    // Opening boundary
-                    byteArrays.add(separator);
-
-                    // If value is type of Path (file) append content type with file name and file binaries, otherwise simply append key=value
-                    if (value instanceof File) {
-                        var path = ((File) value).toPath();
-                        String mimeType = Files.probeContentType(path);
-                        byteArrays.add(new StringBuilder()
-                                .append("\"")
-                                .append(entry.getKey())
-                                .append("\"; filename=\"")
-                                .append(path.getFileName())
-                                .append("\"\r\nContent-Type: ")
-                                .append(mimeType)
-                                .append("\r\n\r\n")
-                                .toString()
-                                .getBytes(StandardCharsets.UTF_8));
-                        byteArrays.add(Files.readAllBytes(path));
-                        byteArrays.add("\r\n".getBytes(StandardCharsets.UTF_8));
-                    } else {
-                        byteArrays.add(new StringBuilder()
-                                .append("\"")
-                                .append(entry.getKey())
-                                .append("\"\r\n\r\n")
-                                .append(value)
-                                .append("\r\n")
-                                .toString()
-                                .getBytes(StandardCharsets.UTF_8));
-                    }
-                }
-            }
-        }
-
-        // Closing boundary
-        byteArrays.add(new StringBuilder()
-                .append("--")
-                .append(boundary)
-                .append("--")
-                .toString()
-                .getBytes(StandardCharsets.UTF_8));
-
-//        System.out.println(byteArrays.stream().map(String::new).collect(Collectors.joining("")));
-        // Serializing as byte array
-        return HttpRequest.BodyPublishers.ofByteArrays(byteArrays);
+        return HttpRequest.BodyPublishers.ofByteArray(HttpRequestUtil.multiValueMapToMultipartData(data, boundary));
     }
 
     private static void addMethod(HttpRequest.Builder requestBuilder,
@@ -240,28 +181,4 @@ public class Java11HttpClientUtil {
         }
     }
 
-    static String multiValueMapToQueryString(MultiValueMap<String, String> params) {
-        if (params == null || params.isEmpty()) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("?");
-        for (Map.Entry<String, List<String>> entry : params.entrySet()) {
-            if (sb.length() > 0) {
-                sb.append("&");
-            }
-            List<String> values = entry.getValue();
-            if (values != null) {
-                for (int i = 0; i < values.size(); i++) {
-                    sb.append(URLEncoder.encode(entry.getKey().toString(), StandardCharsets.UTF_8))
-                            .append("=")
-                            .append(URLEncoder.encode(values.get(i).toString(), StandardCharsets.UTF_8));
-                    if (i < values.size() - 1) {
-                        sb.append("&");
-                    }
-                }
-            }
-        }
-        return sb.toString();
-    }
 }
