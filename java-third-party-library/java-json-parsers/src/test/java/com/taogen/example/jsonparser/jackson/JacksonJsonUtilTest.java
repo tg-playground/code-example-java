@@ -2,6 +2,7 @@ package com.taogen.example.jsonparser.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.taogen.example.jsonparser.BaseTest;
 import com.taogen.example.jsonparser.jackson.entity.Role;
 import com.taogen.example.jsonparser.jackson.entity.User;
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +18,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
-class JacksonJsonUtilTest {
+class JacksonJsonUtilTest extends BaseTest {
 
-    public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-    private static final String json = "{\"id\":1,\"name\":\"Jack\",\"age\":18,\"birthDate\":\"1990-01-01\", \"roles\": [{\"id\":1,\"name\":\"admin\"},{\"id\":2,\"name\":\"user\"}]}";
-    public static final String jsonRoleArray = "[{\"id\":1,\"name\":\"admin\"},{\"id\":2,\"name\":\"user\"}]";
 
     public static User user;
 
@@ -63,7 +60,7 @@ class JacksonJsonUtilTest {
         String jsonStr = JacksonJsonUtil.objectToJsonStr(user);
         log.debug(jsonStr);
         assertNotNull(jsonStr);
-        assertTrue(jsonStr.contains("\"id\":1"));
+        assertTrue(jsonStr.contains("\"id\":1,"));
         assertTrue(jsonStr.contains("roles"));
     }
 
@@ -73,7 +70,7 @@ class JacksonJsonUtilTest {
         String jsonStr = JacksonJsonUtil.mapToJsonStr(map);
         log.debug(jsonStr);
         assertNotNull(jsonStr);
-        assertTrue(jsonStr.contains("\"id\":1"));
+        assertTrue(jsonStr.contains("\"id\":1,"));
         assertTrue(jsonStr.contains("roles"));
     }
 

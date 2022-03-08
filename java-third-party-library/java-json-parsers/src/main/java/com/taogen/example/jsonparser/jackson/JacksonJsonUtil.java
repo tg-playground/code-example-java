@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Taogen
  */
 public class JacksonJsonUtil {
-    public JacksonJsonUtil() {
+    private JacksonJsonUtil() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
