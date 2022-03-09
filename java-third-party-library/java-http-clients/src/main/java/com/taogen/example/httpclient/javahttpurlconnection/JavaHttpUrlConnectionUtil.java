@@ -118,8 +118,10 @@ public class JavaHttpUrlConnectionUtil {
             for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
                 String key = entry.getKey();
                 List<String> values = entry.getValue();
-                for (String value : values) {
-                    urlConnection.addRequestProperty(key, value);
+                if (values != null) {
+                    for (String value : values) {
+                        urlConnection.addRequestProperty(key, value);
+                    }
                 }
             }
         }

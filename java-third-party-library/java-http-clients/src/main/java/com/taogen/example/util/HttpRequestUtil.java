@@ -42,6 +42,9 @@ public class HttpRequestUtil {
     }
 
     public static byte[] multiValueMapToMultipartData(Map<String, List<Object>> data, String boundary) throws IOException {
+        if (data == null || data.isEmpty()) {
+            return new byte[0];
+        }
         // Result request body
         List<byte[]> byteArrays = new ArrayList<>();
 

@@ -125,12 +125,14 @@ public class ApacheHttpClientUtil {
         if (formData != null) {
             for (Map.Entry<String, List<Object>> entry : formData.entrySet()) {
                 List<Object> values = entry.getValue();
-                for (Object value : values) {
-                    if (value instanceof File) {
-                        File file = (File) value;
-                        multipartEntityBuilder.addPart(entry.getKey(), new FileBody(file));
-                    } else {
-                        multipartEntityBuilder.addTextBody(entry.getKey(), value.toString());
+                if (values != null) {
+                    for (Object value : values) {
+                        if (value instanceof File) {
+                            File file = (File) value;
+                            multipartEntityBuilder.addPart(entry.getKey(), new FileBody(file));
+                        } else {
+                            multipartEntityBuilder.addTextBody(entry.getKey(), value.toString());
+                        }
                     }
                 }
             }
@@ -142,8 +144,10 @@ public class ApacheHttpClientUtil {
         List<NameValuePair> nameValuePairs = new ArrayList<>();
         if (formData != null) {
             for (Map.Entry<String, List<String>> entry : formData.entrySet()) {
-                for (String value : entry.getValue()) {
-                    nameValuePairs.add(new BasicNameValuePair(entry.getKey(), value));
+                if (entry.getValue() != null) {
+                    for (String value : entry.getValue()) {
+                        nameValuePairs.add(new BasicNameValuePair(entry.getKey(), value));
+                    }
                 }
             }
         }
