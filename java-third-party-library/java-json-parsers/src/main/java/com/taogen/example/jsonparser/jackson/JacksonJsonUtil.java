@@ -12,6 +12,10 @@ import java.util.Map;
  * Jackson json utility
  * <p>
  * Convert json string to object(entity, map, jsonObject, List<entity>) and vice versa.
+ * <p>
+ * change field name: @JsonProperty(value = "birth_date")
+ * format date time: @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+ * ignore field: @JsonIgnore
  *
  * @author Taogen
  */

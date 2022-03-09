@@ -13,6 +13,12 @@ import java.util.*;
  * Gson Util
  * <p>
  * Convert json string to object(entity, map, jsonObject, List<entity>) and vice versa.
+ * <p>
+ * change field name: @SerializedName(value = "birth_date")
+ * format date time:
+ * 1) Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+ * 2) Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, MyDateJsonSerializer);
+ * ignore field: @Expose(serialize = false, deserialize = false)
  *
  * @author Taogen
  */
