@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -73,9 +75,8 @@ public class JacksonJsonUtil {
         return objectMapper.readTree(jsonStr);
     }
 
-    public static <T> List<T> jsonArrayStrToList(String jsonArrayStr, Class<T> clazz) throws JsonProcessingException {
+    public static <T> List<T> jsonArrayStrToList(String jsonArrayStr, Class<T[]> clazz) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(jsonArrayStr, new TypeReference<List<T>>() {
-        });
+        return new ArrayList<>(Arrays.asList(objectMapper.readValue(jsonArrayStr, clazz)));
     }
 }
