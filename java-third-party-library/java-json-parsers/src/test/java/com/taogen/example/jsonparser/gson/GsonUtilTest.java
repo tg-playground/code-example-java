@@ -114,5 +114,6 @@ class GsonUtilTest extends BaseTest {
         log.debug(roles);
         assertNotNull(roles);
         assertEquals(2, roles.size());
+        assertTrue(roles.get(0) instanceof RoleForGson);
     }
 }

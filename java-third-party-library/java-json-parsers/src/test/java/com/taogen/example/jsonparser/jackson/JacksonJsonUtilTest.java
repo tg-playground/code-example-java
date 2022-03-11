@@ -114,9 +114,10 @@ class JacksonJsonUtilTest extends BaseTest {
 
     @Test
     void jsonArrayStrToList() throws JsonProcessingException {
-        List<Role> roles = JacksonJsonUtil.jsonArrayStrToList(jsonRoleArray, Role.class);
+        List<Role> roles = JacksonJsonUtil.jsonArrayStrToList(jsonRoleArray, Role[].class);
         log.debug(roles);
         assertNotNull(roles);
         assertEquals(2, roles.size());
+        assertTrue(roles.get(0) instanceof Role);
     }
 }
