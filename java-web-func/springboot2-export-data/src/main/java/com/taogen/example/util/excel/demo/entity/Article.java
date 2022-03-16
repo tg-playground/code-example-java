@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel.entity;
+package com.taogen.example.util.excel.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**

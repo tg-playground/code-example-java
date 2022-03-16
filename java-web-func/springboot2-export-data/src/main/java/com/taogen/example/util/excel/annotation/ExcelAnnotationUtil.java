@@ -1,10 +1,7 @@
-package com.taogen.example.util.excel;
+package com.taogen.example.util.excel.annotation;
 
-import com.taogen.example.util.excel.annotation.Excel;
-import com.taogen.example.util.excel.vo.FieldExcel;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -21,29 +18,20 @@ import java.util.stream.Collectors;
  *
  * @author Taogen
  */
-public class ExcelUtil {
+public class ExcelAnnotationUtil {
 
     public static final String EXCEL_SUFFIX = ".xlsx";
 
     public static final List<Class> DATE_TIME_CLASS_TYPES = Arrays.asList(Date.class, LocalTime.class);
 
-    public static XSSFWorkbook generateWorkbook(Class cls, List list, String sheetName) {
-        XSSFWorkbook workbook = createWorkbook();
-        XSSFSheet sheet = createSheet(workbook, sheetName);
-        List<FieldExcel> fieldExcelList = getFieldExcelList(cls);
-        writeHeaderToSheet(workbook, sheet, fieldExcelList);
-        writeDataToSheet(workbook, sheet, fieldExcelList, list);
-        return workbook;
-    }
-
-    public static XSSFWorkbook createWorkbook() {
+    public static XSSFWorkbook generateWorkbook(Class entityClass, List entityList,
+                                                String sheetName) {
         XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet(sheetName);
+        List<FieldExcel> fieldExcelList = getFieldExcelList(entityClass);
+        writeHeaderToSheet(workbook, sheet, fieldExcelList);
+        writeDataToSheet(workbook, sheet, fieldExcelList, entityList);
         return workbook;
-    }
-
-    public static XSSFSheet createSheet(Workbook workbook, String sheetName) {
-        XSSFSheet sheet = (XSSFSheet) workbook.createSheet(sheetName);
-        return sheet;
     }
 
     public static List<FieldExcel> getFieldExcelList(Class cls) {

@@ -1,10 +1,10 @@
 package com.taogen.example.util.excel.demo;
 
-import com.taogen.example.util.excel.entity.Article;
-import com.taogen.example.util.excel.ExcelBuildUtil;
-import com.taogen.example.util.excel.vo.MyCellPosition;
-import com.taogen.example.util.excel.vo.MyExcelCell;
-import com.taogen.example.util.excel.vo.MyExcelRow;
+import com.taogen.example.util.excel.demo.entity.Article;
+import com.taogen.example.util.excel.build.ExcelBuildUtil;
+import com.taogen.example.util.excel.build.vo.MyCellPosition;
+import com.taogen.example.util.excel.build.vo.MyExcelCell;
+import com.taogen.example.util.excel.build.vo.MyExcelRow;
 import lombok.extern.log4j.Log4j2;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -41,7 +41,7 @@ public class ExcelDemoBuildMultilevelByWrapperClass {
         rowNum += (topRow.getEndRow() - topRow.getStartRow() + 1);
 
         List<String> titles = Arrays.asList("序号", "站点", "发布时间", "标题", "错误类型", "错误和修改建议");
-        ExcelBuildUtil.generateOneLineRowByValues(sheet, rowNum, titles);
+        ExcelBuildUtil.generateOneLineRowByValues(sheet, rowNum, null, titles, null);
         rowNum++;
 
         for (int i = 0; i < articles.size(); i++) {

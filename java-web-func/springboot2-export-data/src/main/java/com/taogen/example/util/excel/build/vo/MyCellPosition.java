@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel.vo;
+package com.taogen.example.util.excel.build.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package com.taogen.example.util.excel.demo;
 
-import com.taogen.example.util.excel.ExcelBuildUtil;
+import com.taogen.example.util.excel.common.ExcelUtil;
 import com.taogen.example.util.word.demo.WordDemoAddPicture;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -23,7 +23,7 @@ public class ExcelDemoAddPicture {
         cell.setCellValue("Hello World");
         String imageFilePath = "image/icon.jpg";
         InputStream inputStream = WordDemoAddPicture.class.getClassLoader().getResourceAsStream(imageFilePath);
-        ExcelBuildUtil.addPictureToExcel(workbook, sheet, 2, 1,
+        ExcelUtil.addPictureToExcel(workbook, sheet, 2, 1,
                 inputStream, 0.5);
         String filePath = new StringBuilder()
                 .append("C:\\Users\\Taogen\\Desktop\\excel_add_picture")

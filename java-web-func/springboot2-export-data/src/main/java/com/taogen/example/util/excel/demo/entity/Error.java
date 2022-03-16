@@ -1,4 +1,4 @@
-package com.taogen.example.util.excel.entity;
+package com.taogen.example.util.excel.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
