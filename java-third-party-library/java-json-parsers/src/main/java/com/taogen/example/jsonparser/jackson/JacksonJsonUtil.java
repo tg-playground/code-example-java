@@ -2,8 +2,8 @@ package com.taogen.example.jsonparser.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,9 +70,9 @@ public class JacksonJsonUtil {
         });
     }
 
-    public static JsonNode jsonStrToJsonObject(String jsonStr) throws JsonProcessingException {
+    public static ObjectNode jsonStrToJsonObject(String jsonStr) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readTree(jsonStr);
+        return (ObjectNode) objectMapper.readTree(jsonStr);
     }
 
     public static <T> List<T> jsonArrayStrToList(String jsonArrayStr, Class<T[]> clazz) throws JsonProcessingException {
