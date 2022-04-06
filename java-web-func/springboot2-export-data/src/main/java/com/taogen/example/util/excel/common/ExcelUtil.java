@@ -62,6 +62,13 @@ public class ExcelUtil {
         return link;
     }
 
+    public static XSSFFont getHyperLinkFont(XSSFWorkbook workbook) {
+        XSSFFont font = workbook.createFont();
+        font.setUnderline(FontUnderline.SINGLE);
+        font.setColor(IndexedColors.BLUE.getIndex());
+        return font;
+    }
+
     public static XSSFColor getXssfColorByRgb(int red, int green, int blue) {
         return new XSSFColor(new byte[]{(byte) red, (byte) green, (byte) blue}, new DefaultIndexedColorMap());
     }
