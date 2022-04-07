@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: git-ssh
+# local system file config need spring.profiles.active=native, so use spring.config.import
+#  config:
+#    import: classpath:application-local-files.yml

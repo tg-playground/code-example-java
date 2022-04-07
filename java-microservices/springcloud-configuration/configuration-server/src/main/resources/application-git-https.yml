@@ -1,0 +1,19 @@
+spring:
+  config:
+    import: D:\config\github-application.yml
+  security:
+    user:
+      name: admin
+      password: admin123
+  cloud:
+    config:
+      server:
+        git:
+          cloneOnStart: true
+          timeout: 10
+          uri: https://github.com/tagnja/spring-cloud-config
+          username: taogenjia@gmail.com
+          password: ${githubPersonalAccessToken}
+server:
+  port: 8888
+
