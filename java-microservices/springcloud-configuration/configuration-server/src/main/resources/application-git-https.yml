@@ -11,7 +11,7 @@ spring:
         git:
           cloneOnStart: true
           timeout: 10
-          # Suggest to use Gitee for Chinese users. Using GitHub URL often throws connect timeout exception.
+          # Suggest using Gitee for Chinese users. Using GitHub URL often throws connect timeout exception.
           uri: https://gitee.com/tagnja/spring-cloud-config.git
           username: taogenjia@gmail.com
           password: ${giteePersonalAccessToken}
