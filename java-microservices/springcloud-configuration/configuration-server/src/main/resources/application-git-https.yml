@@ -1,6 +1,6 @@
 spring:
   config:
-    import: D:\config\github-application.yml
+    import: D:\config\gitee-application.yml
   security:
     user:
       name: admin
@@ -11,9 +11,11 @@ spring:
         git:
           cloneOnStart: true
           timeout: 10
-          uri: https://github.com/tagnja/spring-cloud-config
+          # Suggest to use Gitee for Chinese users. Using GitHub URL often throws connect timeout exception.
+          uri: https://gitee.com/tagnja/spring-cloud-config.git
           username: taogenjia@gmail.com
-          password: ${githubPersonalAccessToken}
+          password: ${giteePersonalAccessToken}
+          default-label: master
 server:
   port: 8888
 
