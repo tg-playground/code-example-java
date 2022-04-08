@@ -13,9 +13,9 @@ spring:
           timeout: 10
           # Suggest using Gitee for Chinese users. Using GitHub URL often throws connect timeout exception.
           uri: https://gitee.com/tagnja/spring-cloud-config.git
+          defaultLabel: master
           username: taogenjia@gmail.com
           password: ${giteePersonalAccessToken}
-          default-label: master
 server:
   port: 8888
 

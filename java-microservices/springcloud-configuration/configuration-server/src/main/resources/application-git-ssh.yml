@@ -12,6 +12,7 @@ spring:
           cloneOnStart: true
           timeout: 10
           uri: git@github.com:tagnja/spring-cloud-config.git
+          defaultLabel: main
           ignoreLocalSshSettings: true
           hostKey: ${hostKey}
           hostKeyAlgorithm: ecdsa-sha2-nistp256
