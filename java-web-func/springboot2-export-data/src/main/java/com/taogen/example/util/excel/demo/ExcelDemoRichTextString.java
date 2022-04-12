@@ -22,9 +22,9 @@ public class ExcelDemoRichTextString {
         try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(outputFilepath))) {
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("test");
+            sheet.setColumnWidth(0, 20 * 256);
             crateCell1(sheet, 0, 0);
             crateCell2(sheet, 1, 0);
-            sheet.setColumnWidth(0, 150 * 20);
             workbook.write(bufferedOutputStream);
         }
         System.out.println("success");

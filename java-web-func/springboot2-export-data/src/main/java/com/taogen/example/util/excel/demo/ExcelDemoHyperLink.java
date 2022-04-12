@@ -3,6 +3,8 @@ package com.taogen.example.util.excel.demo;
 import com.taogen.example.util.excel.common.ExcelUtil;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.FontUnderline;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.BufferedOutputStream;
@@ -45,7 +47,10 @@ public class ExcelDemoHyperLink {
         hyperlink.setAddress(url);
         cell.setHyperlink(hyperlink);
         XSSFCellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setFont(ExcelUtil.getHyperLinkFont(workbook));
+        XSSFFont font = workbook.createFont();
+        font.setUnderline(FontUnderline.SINGLE);
+        font.setColor(IndexedColors.BLUE.getIndex());
+        cellStyle.setFont(font);
         cell.setCellStyle(cellStyle);
         return cell;
     }
