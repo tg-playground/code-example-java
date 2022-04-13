@@ -40,6 +40,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- With the goal added, you have to call only mvn package -->
+                <!-- Otherwise you would need to call the plugin explicitly as mvn package spring-boot:repackage -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
