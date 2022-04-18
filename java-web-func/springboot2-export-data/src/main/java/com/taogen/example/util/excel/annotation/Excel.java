@@ -20,4 +20,6 @@ public @interface Excel {
     public double width() default 16;
 
     public String dateFormat() default "";
+
+    public int sortNum() default Integer.MIN_VALUE;
 }

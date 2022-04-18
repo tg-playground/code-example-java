@@ -49,6 +49,7 @@ public class ExcelAnnotationUtil {
                     item.setAccessible(true);
                     return new FieldExcel(item, item.getAnnotation(Excel.class));
                 })
+                .sorted(Comparator.comparing(item -> item.getExcel().sortNum()))
                 .collect(Collectors.toList());
     }
 
