@@ -1,6 +1,6 @@
 package com.taogen.example.util.word.demo;
 
-import com.taogen.example.util.word.WordUtil;
+import com.taogen.example.util.word.build.WordBuildUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
@@ -50,7 +50,7 @@ public class WordDemoAddPicture {
             int scaledHeight = (int) (imageHeight * scalePercent);
             String fileName = imageFilePath.substring(imageFilePath.lastIndexOf(File.separator) + 1);
             imageRun.addPicture(new ByteArrayInputStream(imageBytes),
-                    WordUtil.getImageFormat(fileName),
+                    WordBuildUtil.getImageFormat(fileName),
                     fileName,
                     Units.toEMU(scaledWidth),
                     Units.toEMU(scaledHeight));

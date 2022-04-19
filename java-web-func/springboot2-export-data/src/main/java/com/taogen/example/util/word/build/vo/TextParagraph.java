@@ -1,4 +1,4 @@
-package com.taogen.example.util.word.vo;
+package com.taogen.example.util.word.build.vo;
 
 import lombok.Builder;
 import lombok.Data;
