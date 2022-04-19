@@ -14,7 +14,7 @@ import org.apache.poi.xwpf.usermodel.LineSpacingRule;
  */
 @Data
 @Builder
-public class SpacingSetting {
+public class MySpacingSetting {
 
     /**
      * unit: 1/20th point

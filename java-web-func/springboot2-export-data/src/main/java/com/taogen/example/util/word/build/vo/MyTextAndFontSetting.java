@@ -8,10 +8,10 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class TextAndFontSetting {
+public class MyTextAndFontSetting {
     /**
      * convert /r/n to poi break line
      */
     private String text;
-    private FontSetting fontSetting;
+    private MyFontSetting myFontSetting;
 }

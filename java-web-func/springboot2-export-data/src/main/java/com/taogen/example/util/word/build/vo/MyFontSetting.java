@@ -17,7 +17,7 @@ import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
  */
 @Data
 @Builder
-public class FontSetting {
+public class MyFontSetting {
     /**
      * unit: 1 point
      * default 11 points

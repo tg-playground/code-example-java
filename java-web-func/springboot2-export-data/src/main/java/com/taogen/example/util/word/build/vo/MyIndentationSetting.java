@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class IndentationSetting {
+public class MyIndentationSetting {
     /**
      * 1/20th point
      */

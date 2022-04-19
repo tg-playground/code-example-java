@@ -12,13 +12,13 @@ import java.util.List;
  */
 @Data
 @Builder
-public class TextParagraph {
+public class MyTextParagraph {
 
-    private List<TextAndFontSetting> textAndFontSettingList;
+    private List<MyTextAndFontSetting> myTextAndFontSettingList;
 
     private ParagraphAlignment paragraphAlignment;
 
-    private IndentationSetting indentationSetting;
+    private MyIndentationSetting myIndentationSetting;
 
-    private SpacingSetting spacingSetting;
+    private MySpacingSetting mySpacingSetting;
 }

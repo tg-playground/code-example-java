@@ -12,7 +12,7 @@ import java.io.InputStream;
  */
 @Data
 @Builder
-public class ImageParagraph {
+public class MyImageParagraph {
     private ParagraphAlignment paragraphAlignment = ParagraphAlignment.CENTER;
 
     /**

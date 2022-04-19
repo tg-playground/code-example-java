@@ -1,9 +1,9 @@
 package com.taogen.example.util.word.build;
 
-import com.taogen.example.util.word.build.vo.FontSetting;
-import com.taogen.example.util.word.build.vo.ImageParagraph;
-import com.taogen.example.util.word.build.vo.TextAndFontSetting;
-import com.taogen.example.util.word.build.vo.TextParagraph;
+import com.taogen.example.util.word.build.vo.MyFontSetting;
+import com.taogen.example.util.word.build.vo.MyImageParagraph;
+import com.taogen.example.util.word.build.vo.MyTextAndFontSetting;
+import com.taogen.example.util.word.build.vo.MyTextParagraph;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
@@ -20,75 +20,75 @@ import java.math.BigInteger;
 public class WordBuildUtil {
     public static final String WORD_SUFFIX = ".docx";
 
-    public static void addTextToDocument(XWPFDocument document, TextParagraph textParagraph) {
+    public static void addTextToDocument(XWPFDocument document, MyTextParagraph myTextParagraph) {
         XWPFParagraph paragraph = document.createParagraph();
-        if (textParagraph.getParagraphAlignment() != null) {
-            paragraph.setAlignment(textParagraph.getParagraphAlignment());
+        if (myTextParagraph.getParagraphAlignment() != null) {
+            paragraph.setAlignment(myTextParagraph.getParagraphAlignment());
         }
-        if (textParagraph.getIndentationSetting() != null) {
-            if (textParagraph.getIndentationSetting().getIndentationFirstLine() != null) {
-                paragraph.setIndentationFirstLine(textParagraph.getIndentationSetting().getIndentationFirstLine());
+        if (myTextParagraph.getMyIndentationSetting() != null) {
+            if (myTextParagraph.getMyIndentationSetting().getIndentationFirstLine() != null) {
+                paragraph.setIndentationFirstLine(myTextParagraph.getMyIndentationSetting().getIndentationFirstLine());
             }
-            if (textParagraph.getIndentationSetting().getIndentationLeft() != null) {
-                paragraph.setIndentationLeft(textParagraph.getIndentationSetting().getIndentationLeft());
+            if (myTextParagraph.getMyIndentationSetting().getIndentationLeft() != null) {
+                paragraph.setIndentationLeft(myTextParagraph.getMyIndentationSetting().getIndentationLeft());
             }
-            if (textParagraph.getIndentationSetting().getIndentationRight() != null) {
-                paragraph.setIndentationRight(textParagraph.getIndentationSetting().getIndentationRight());
+            if (myTextParagraph.getMyIndentationSetting().getIndentationRight() != null) {
+                paragraph.setIndentationRight(myTextParagraph.getMyIndentationSetting().getIndentationRight());
             }
         }
-        if (textParagraph.getSpacingSetting() != null) {
-            if (textParagraph.getSpacingSetting().getSpacingBefore() != null) {
-                paragraph.setSpacingBefore(textParagraph.getSpacingSetting().getSpacingBefore());
+        if (myTextParagraph.getMySpacingSetting() != null) {
+            if (myTextParagraph.getMySpacingSetting().getSpacingBefore() != null) {
+                paragraph.setSpacingBefore(myTextParagraph.getMySpacingSetting().getSpacingBefore());
             }
-            if (textParagraph.getSpacingSetting().getSpacingBeforeLines() != null) {
-                paragraph.setSpacingBeforeLines(textParagraph.getSpacingSetting().getSpacingBeforeLines());
+            if (myTextParagraph.getMySpacingSetting().getSpacingBeforeLines() != null) {
+                paragraph.setSpacingBeforeLines(myTextParagraph.getMySpacingSetting().getSpacingBeforeLines());
             }
-            if (textParagraph.getSpacingSetting().getSpacingAfter() != null) {
-                paragraph.setSpacingAfter(textParagraph.getSpacingSetting().getSpacingAfter());
+            if (myTextParagraph.getMySpacingSetting().getSpacingAfter() != null) {
+                paragraph.setSpacingAfter(myTextParagraph.getMySpacingSetting().getSpacingAfter());
             }
-            if (textParagraph.getSpacingSetting().getSpacingAfterLines() != null) {
-                paragraph.setSpacingAfterLines(textParagraph.getSpacingSetting().getSpacingAfterLines());
+            if (myTextParagraph.getMySpacingSetting().getSpacingAfterLines() != null) {
+                paragraph.setSpacingAfterLines(myTextParagraph.getMySpacingSetting().getSpacingAfterLines());
             }
-            if (textParagraph.getSpacingSetting().getLineSpacingRule() != null) {
-                if (LineSpacingRule.AUTO.equals(textParagraph.getSpacingSetting().getLineSpacingRule())) {
-                    paragraph.setSpacingBetween(textParagraph.getSpacingSetting().getSpacingBetween(), LineSpacingRule.AUTO);
+            if (myTextParagraph.getMySpacingSetting().getLineSpacingRule() != null) {
+                if (LineSpacingRule.AUTO.equals(myTextParagraph.getMySpacingSetting().getLineSpacingRule())) {
+                    paragraph.setSpacingBetween(myTextParagraph.getMySpacingSetting().getSpacingBetween(), LineSpacingRule.AUTO);
                 } else {
-                    paragraph.setSpacingBetween(textParagraph.getSpacingSetting().getSpacingBetween(), LineSpacingRule.EXACT);
+                    paragraph.setSpacingBetween(myTextParagraph.getMySpacingSetting().getSpacingBetween(), LineSpacingRule.EXACT);
                 }
             }
         }
-        if (textParagraph.getTextAndFontSettingList() != null && textParagraph.getTextAndFontSettingList().size() > 0) {
-            for (TextAndFontSetting textAndFontSetting : textParagraph.getTextAndFontSettingList()) {
+        if (myTextParagraph.getMyTextAndFontSettingList() != null && myTextParagraph.getMyTextAndFontSettingList().size() > 0) {
+            for (MyTextAndFontSetting myTextAndFontSetting : myTextParagraph.getMyTextAndFontSettingList()) {
                 XWPFRun run = paragraph.createRun();
-                if (textAndFontSetting.getFontSetting() != null) {
-                    FontSetting fontSetting = textAndFontSetting.getFontSetting();
-                    if (fontSetting.getFontSize() != null) {
-                        run.setFontSize(fontSetting.getFontSize());
+                if (myTextAndFontSetting.getMyFontSetting() != null) {
+                    MyFontSetting myFontSetting = myTextAndFontSetting.getMyFontSetting();
+                    if (myFontSetting.getFontSize() != null) {
+                        run.setFontSize(myFontSetting.getFontSize());
                     }
-                    if (fontSetting.getFontFamily() != null) {
-                        run.setFontFamily(fontSetting.getFontFamily());
+                    if (myFontSetting.getFontFamily() != null) {
+                        run.setFontFamily(myFontSetting.getFontFamily());
                     }
-                    if (fontSetting.getColor() != null) {
-                        run.setColor(fontSetting.getColor());
+                    if (myFontSetting.getColor() != null) {
+                        run.setColor(myFontSetting.getColor());
                     }
-                    if (fontSetting.getBold() != null) {
-                        run.setBold(fontSetting.getBold());
+                    if (myFontSetting.getBold() != null) {
+                        run.setBold(myFontSetting.getBold());
                     }
-                    if (fontSetting.getItalic() != null) {
-                        run.setItalic(fontSetting.getItalic());
+                    if (myFontSetting.getItalic() != null) {
+                        run.setItalic(myFontSetting.getItalic());
                     }
-                    if (fontSetting.getUnderline() != null) {
-                        run.setUnderline(fontSetting.getUnderline());
+                    if (myFontSetting.getUnderline() != null) {
+                        run.setUnderline(myFontSetting.getUnderline());
                     }
-                    if (fontSetting.getStrikeThrough() != null) {
-                        run.setStrikeThrough(fontSetting.getStrikeThrough());
+                    if (myFontSetting.getStrikeThrough() != null) {
+                        run.setStrikeThrough(myFontSetting.getStrikeThrough());
                     }
-                    if (fontSetting.getCharacterSpacing() != null) {
-                        run.setCharacterSpacing(fontSetting.getCharacterSpacing());
+                    if (myFontSetting.getCharacterSpacing() != null) {
+                        run.setCharacterSpacing(myFontSetting.getCharacterSpacing());
                     }
                 }
-                if (textAndFontSetting.getText() != null) {
-                    String[] sections = textAndFontSetting.getText().split("\r\n");
+                if (myTextAndFontSetting.getText() != null) {
+                    String[] sections = myTextAndFontSetting.getText().split("\r\n");
                     for (int i = 0; i < sections.length; i++) {
                         run.setText(sections[i]);
                         if (i < sections.length - 1) {
@@ -101,21 +101,21 @@ public class WordBuildUtil {
     }
 
     public static void addPictureToDocument(XWPFDocument document,
-                                            ImageParagraph imageParagraph)
+                                            MyImageParagraph myImageParagraph)
             throws IOException, InvalidFormatException {
         XWPFParagraph image = document.createParagraph();
-        if (imageParagraph.getParagraphAlignment() != null) {
-            image.setAlignment(imageParagraph.getParagraphAlignment());
+        if (myImageParagraph.getParagraphAlignment() != null) {
+            image.setAlignment(myImageParagraph.getParagraphAlignment());
         }
         XWPFRun imageRun = image.createRun();
-        if (imageParagraph.getTextPosition() != null) {
-            imageRun.setTextPosition(imageParagraph.getTextPosition());
+        if (myImageParagraph.getTextPosition() != null) {
+            imageRun.setTextPosition(myImageParagraph.getTextPosition());
         }
-        imageRun.addPicture(imageParagraph.getInputStream(),
-                imageParagraph.getPictureType(),
-                imageParagraph.getFilename(),
-                Units.toEMU(imageParagraph.getWidth()),
-                Units.toEMU(imageParagraph.getHeight()));
+        imageRun.addPicture(myImageParagraph.getInputStream(),
+                myImageParagraph.getPictureType(),
+                myImageParagraph.getFilename(),
+                Units.toEMU(myImageParagraph.getWidth()),
+                Units.toEMU(myImageParagraph.getHeight()));
     }
 
     public static int getImageFormat(String imgFileName) {
@@ -148,52 +148,4 @@ public class WordBuildUtil {
         return format;
     }
 
-    public static void addCustomHeadingStyle(XWPFDocument docxDocument,
-                                             String strStyleId,
-                                             int headingLevel) {
-
-        CTStyle ctStyle = CTStyle.Factory.newInstance();
-        ctStyle.setStyleId(strStyleId);
-
-        CTString styleName = CTString.Factory.newInstance();
-        styleName.setVal(strStyleId);
-        ctStyle.setName(styleName);
-
-        CTDecimalNumber indentNumber = CTDecimalNumber.Factory.newInstance();
-        indentNumber.setVal(BigInteger.valueOf(headingLevel));
-
-        // lower number > style is more prominent in the formats bar
-        ctStyle.setUiPriority(indentNumber);
-
-        CTOnOff onoffnull = CTOnOff.Factory.newInstance();
-        ctStyle.setUnhideWhenUsed(onoffnull);
-
-        // style shows up in the formats bar
-        ctStyle.setQFormat(onoffnull);
-
-        // style defines a heading of the given level
-        CTPPrGeneral ppr = CTPPrGeneral.Factory.newInstance();
-        ppr.setOutlineLvl(indentNumber);
-        ctStyle.setPPr(ppr);
-
-        XWPFStyle style = new XWPFStyle(ctStyle);
-
-        // is a null op if already defined
-        XWPFStyles styles = docxDocument.createStyles();
-
-        style.setType(STStyleType.PARAGRAPH);
-        styles.addStyle(style);
-
-    }
-
-    public static void addBlankLineParagraph(XWPFDocument document, int blankLines) {
-        XWPFParagraph paragraph = document.createParagraph();
-        addBreak(paragraph.createRun(), blankLines - 1);
-    }
-
-    private static void addBreak(XWPFRun run, int blankLines) {
-        for (int i = 0; i < blankLines; i++) {
-            run.addBreak();
-        }
-    }
 }

@@ -2,9 +2,9 @@ package com.taogen.example.controller;
 
 import com.taogen.example.util.FileUtil;
 import com.taogen.example.util.word.build.WordBuildUtil;
-import com.taogen.example.util.word.build.vo.FontSetting;
-import com.taogen.example.util.word.build.vo.TextAndFontSetting;
-import com.taogen.example.util.word.build.vo.TextParagraph;
+import com.taogen.example.util.word.build.vo.MyFontSetting;
+import com.taogen.example.util.word.build.vo.MyTextAndFontSetting;
+import com.taogen.example.util.word.build.vo.MyTextParagraph;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.xmlbeans.XmlException;
@@ -33,11 +33,11 @@ public class WordExportController extends BaseController {
 
     public static XWPFDocument generateDocument() throws IOException, XmlException, InvalidFormatException, URISyntaxException {
         XWPFDocument document = new XWPFDocument();
-        WordBuildUtil.addTextToDocument(document, TextParagraph.builder()
-                .textAndFontSettingList(Arrays.asList(
-                        TextAndFontSetting.builder()
+        WordBuildUtil.addTextToDocument(document, MyTextParagraph.builder()
+                .myTextAndFontSettingList(Arrays.asList(
+                        MyTextAndFontSetting.builder()
                                 .text("Hello World")
-                                .fontSetting(FontSetting.builder()
+                                .myFontSetting(MyFontSetting.builder()
                                         .fontSize(20)
                                         .build())
                                 .build()
