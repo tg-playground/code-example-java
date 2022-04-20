@@ -70,7 +70,7 @@ public class JacksonJsonUtil {
         });
     }
 
-    public static ObjectNode jsonStrToJsonObject(String jsonStr) throws JsonProcessingException {
+    public static ObjectNode jsonStrToJsonObject(String jsonStr) throws JsonProcessingException, ClassCastException {
         ObjectMapper objectMapper = new ObjectMapper();
         // JsonNode is immutable(read-only), but ObjectNode is mutable.
         return (ObjectNode) objectMapper.readTree(jsonStr);
