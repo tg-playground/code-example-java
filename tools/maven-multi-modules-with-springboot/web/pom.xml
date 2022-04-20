@@ -29,6 +29,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.taogen.demo</groupId>
             <artifactId>service</artifactId>
             <version>${project.parent.version}</version>
