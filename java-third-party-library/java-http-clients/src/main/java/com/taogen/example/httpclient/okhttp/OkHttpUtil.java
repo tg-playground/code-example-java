@@ -27,13 +27,15 @@ public class OkHttpUtil {
                                                     MultiValueMap<String, String> queryStringParams,
                                                     Headers headers) throws IOException {
         Request.Builder requestBuilder = new Request.Builder()
-                .url(getHttpUrl(url, queryStringParams))
-                .headers(headers);
+                .url(getHttpUrl(url, queryStringParams));
+        if (headers != null) {
+            requestBuilder.headers(headers);
+        }
         addRequestMethod(requestBuilder, method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
             // after response closed, the response body can't be read again.
             // so we need to save to a wrapper class object
-            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().bytes());
         }
     }
 
@@ -47,11 +49,13 @@ public class OkHttpUtil {
         }
         RequestBody requestBody = getJsonRequestBody(json);
         Request.Builder requestBuilder = new Request.Builder()
-                .url(getHttpUrl(url, queryStringParams))
-                .headers(headers);
+                .url(getHttpUrl(url, queryStringParams));
+        if (headers != null) {
+            requestBuilder.headers(headers);
+        }
         addRequestBody(requestBuilder, requestBody, method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().bytes());
         }
     }
 
@@ -64,11 +68,13 @@ public class OkHttpUtil {
             throw new IllegalArgumentException("GET method can't use form data body");
         }
         Request.Builder requestBuilder = new Request.Builder()
-                .url(getHttpUrl(url, queryStringParams))
-                .headers(headers);
+                .url(getHttpUrl(url, queryStringParams));
+        if (headers != null) {
+            requestBuilder.headers(headers);
+        }
         addRequestBody(requestBuilder, getFormDataBody(formData), method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().bytes());
         }
     }
 
@@ -77,7 +83,7 @@ public class OkHttpUtil {
      * @param method
      * @param queryStringParams
      * @param headers
-     * @param formData
+     * @param formData          multipart fields are File objects
      * @return
      * @throws IOException
      */
@@ -90,11 +96,13 @@ public class OkHttpUtil {
             throw new IllegalArgumentException("GET method can't use form data body");
         }
         Request.Builder requestBuilder = new Request.Builder()
-                .url(getHttpUrl(url, queryStringParams))
-                .headers(headers);
+                .url(getHttpUrl(url, queryStringParams));
+        if (headers != null) {
+            requestBuilder.headers(headers);
+        }
         addRequestBody(requestBuilder, getMultipartBody(formData), method);
         try (Response response = OKHTTP_CLIENT.newCall(requestBuilder.build()).execute()) {
-            return new OkHttpResponse(response.code(), response.headers(), response.body().string());
+            return new OkHttpResponse(response.code(), response.headers(), response.body().bytes());
         }
     }
 

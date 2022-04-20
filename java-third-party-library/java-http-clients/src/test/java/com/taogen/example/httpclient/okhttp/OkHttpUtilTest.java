@@ -32,13 +32,13 @@ class OkHttpUtilTest extends BaseTest {
         System.out.println(result.getBody());
         assertEquals(HttpStatus.OK.value(), result.getStatusCode());
         assertNotNull(result.getBody());
-        assertTrue(result.getBody().contains("\"id\":1"));
+        assertTrue(result.getBodyString().contains("\"id\":1"));
         OkHttpResponse result2 = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/1", HttpMethod.GET,
                 getBasicParam(), getOkHttpBasicHeaders());
         System.out.println(result2.getBody());
         assertEquals(HttpStatus.OK.value(), result2.getStatusCode());
         assertNotNull(result2.getBody());
-        assertTrue(result2.getBody().contains("\"id\":1"));
+        assertTrue(result2.getBodyString().contains("\"id\":1"));
     }
 
     @Test
@@ -49,7 +49,7 @@ class OkHttpUtilTest extends BaseTest {
         System.out.println(response.getBody());
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(response.getBody());
-        assertTrue(response.getBody().contains("\"name\":\"" + name + "\""));
+        assertTrue(response.getBodyString().contains("\"name\":\"" + name + "\""));
     }
 
     @Test
@@ -66,7 +66,7 @@ class OkHttpUtilTest extends BaseTest {
         assertNotNull(response.getBody());
         OkHttpResponse getUserResponse = OkHttpUtil.requestWithoutBody(
                 userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getOkHttpBasicHeaders());
-        assertTrue(getUserResponse.getBody().contains("\"name\":\"" + name + "\""));
+        assertTrue(getUserResponse.getBodyString().contains("\"name\":\"" + name + "\""));
     }
 
     @Test
@@ -82,7 +82,7 @@ class OkHttpUtilTest extends BaseTest {
                 HttpMethod.DELETE, getBasicParam(), getOkHttpBasicHeaders());
         assertEquals(HttpStatus.OK.value(), deleteResponse.getStatusCode());
         OkHttpResponse getResponse = OkHttpUtil.requestWithoutBody(userEndpointUrl + "/" + id, HttpMethod.GET, getBasicParam(), getOkHttpBasicHeaders());
-        assertEquals("", getResponse.getBody());
+        assertEquals("", getResponse.getBodyString());
     }
 
     @Test
@@ -94,11 +94,11 @@ class OkHttpUtilTest extends BaseTest {
         System.out.println(response.getBody());
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertNotNull(response.getBody());
-        assertTrue(response.getBody().contains(file.getName()));
+        assertTrue(response.getBodyString().contains(file.getName()));
         MultiValueMap<String, String> fileExistQueryParam = getBasicParam();
-        fileExistQueryParam.add("fileUri", response.getBody());
+        fileExistQueryParam.add("fileUri", response.getBodyString());
         OkHttpResponse fileExistResponse = OkHttpUtil.requestWithoutBody(fileEndpointUrl + "/doesFileExist", HttpMethod.GET, fileExistQueryParam, getOkHttpBasicHeaders());
-        assertEquals("true", fileExistResponse.getBody());
+        assertEquals("true", fileExistResponse.getBodyString());
         OkHttpResponse deleteResponse = OkHttpUtil.requestWithoutBody(fileEndpointUrl + "/deleteFile", HttpMethod.DELETE, fileExistQueryParam, getOkHttpBasicHeaders());
         assertEquals(HttpStatus.OK.value(), deleteResponse.getStatusCode());
     }
