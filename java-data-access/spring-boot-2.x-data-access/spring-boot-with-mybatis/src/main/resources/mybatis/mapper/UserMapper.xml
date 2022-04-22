@@ -8,12 +8,36 @@
         <result property="userPassword" column="user_password"/>
         <result property="userEmail" column="user_email"/>
     </resultMap>
-    <select id="listAllUsers" resultMap="userResultMap">
+    <select id="listUsers" resultMap="userResultMap">
         SELECT user_id,
-               user_name,
-               user_password,
-               user_email
-        FROM user;
+        user_name,
+        user_password,
+        user_email
+        FROM user
+        <trim prefix="where" suffixOverrides="and">
+            <if test="user != null">
+                <if test="user.userId != null">
+                    user_id = #{user.userId} and
+                </if>
+                <if test="userName != null and !userName.isEmpty()">
+                    user_name = #{user.userName} and
+                </if>
+                <if test="userPassword != null and !userPassword.isEmpty()">
+                    user_password = #{user.userPassword} and
+                </if>
+                <if test="userEmail != null and !userEmail.isEmpty()">
+                    user_email = #{user.userEmail}
+                </if>
+            </if>
+        </trim>
+        <if test="page != null">
+            <if test="page.orderBy != null">
+                order by ${page.orderBy}
+            </if>
+            <if test="page.pageNo != null and page.pageSize != null ">
+                limit ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+            </if>
+        </if>
     </select>
     <select id="getUser" parameterType="java.lang.Integer"
             resultMap="userResultMap">

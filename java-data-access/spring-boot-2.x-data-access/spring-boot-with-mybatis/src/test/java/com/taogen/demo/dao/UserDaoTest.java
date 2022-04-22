@@ -18,33 +18,26 @@ class UserDaoTest extends BaseUserCrudTest {
 
     @Test
     void listAllUsers() {
-        User user = addRandomEntity(userDao::saveUser, User::getUserId);
-        testListEntities(userDao::listAllUsers);
+        addRandomEntity(userDao::saveUser, User::getUserId);
+        testListEntities(userDao::listUsers);
     }
 
     @Test
     void getUser() {
-        User fetchUser = userDao.getUser(addRandomEntity(userDao::saveUser, User::getUserId).getUserId());
-        assertNotNull(fetchUser);
-        assertNotNull(fetchUser.getUserId());
+        User user = addRandomEntity(userDao::saveUser, User::getUserId);
+        testGetEntityById(userDao::getUser, user.getUserId());
     }
 
     @Test
     void saveUser() {
-        User fetchUser = userDao.getUser(addRandomEntity(userDao::saveUser, User::getUserId).getUserId());
-        log.info("fetchUser: {}", fetchUser);
-        assertNotNull(fetchUser);
+        addRandomEntity(userDao::saveUser, User::getUserId);
     }
 
     @Test
     void updateUser() {
         User user = addRandomEntity(userDao::saveUser, User::getUserId);
-        String newUserName = "new-test-name" + System.currentTimeMillis();
-        user.setUserName(newUserName);
-        int result = userDao.updateUser(user);
-        assertEquals(1, result);
-        User fetchUser = userDao.getUser(user.getUserId());
-        assertEquals(newUserName, fetchUser.getUserName());
+        testUpdateEntityById(userDao::getUser, user.getUserId(),
+                User::setUserName, userDao::updateUser, User::getUserName);
     }
 
     @Test

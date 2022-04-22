@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @Slf4j
 class UserServiceImplTest extends BaseUserCrudTest {
 
@@ -15,21 +14,27 @@ class UserServiceImplTest extends BaseUserCrudTest {
     private UserService userService;
 
     @Test
-    void listAllUsers() {
+    void listUsers() {
         addRandomEntity(userService::saveUser, User::getUserId);
-        testListEntities(userService::listAllUsers);
+        testListEntities(userService::listUsers);
     }
 
     @Test
     void getUser() {
+        User user = addRandomEntity(userService::saveUser, User::getUserId);
+        testGetEntityById(userService::getUser, user.getUserId());
     }
 
     @Test
     void saveUser() {
+        addRandomEntity(userService::saveUser, User::getUserId);
     }
 
     @Test
     void updateUser() {
+        User user = addRandomEntity(userService::saveUser, User::getUserId);
+        testUpdateEntityById(userService::getUser, user.getUserId(),
+                User::setUserName, userService::updateUser, User::getUserName);
     }
 
     @Test

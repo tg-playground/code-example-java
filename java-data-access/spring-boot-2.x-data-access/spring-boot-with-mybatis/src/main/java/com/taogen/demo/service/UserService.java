@@ -2,6 +2,7 @@ package com.taogen.demo.service;
 
 
 import com.taogen.demo.entity.User;
+import com.taogen.demo.vo.Page;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author Taogen
  */
 public interface UserService {
-    List<User> listAllUsers();
+    List<User> listUsers(Page page, User user);
 
     User getUser(Integer id);
 

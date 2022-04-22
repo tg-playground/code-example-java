@@ -1,14 +1,29 @@
 package com.taogen.demo.common;
 
 
+import com.taogen.demo.vo.Page;
+
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public interface BaseCrudTest<T> {
-    public <T> T addRandomEntity(Function<T, Integer> addEntityFunction, Function<T, Integer> getEntityIdFunction);
+    <T> T addRandomEntity(Function<T, Integer> addEntityFunction,
+                          Function<T, Integer> getEntityIdFunction);
 
-    public void testDeleteEntityById(Function<Integer, Integer> deleteEntityFunction, Integer id, Function<Integer, T> getEntityFunction);
+    void testDeleteEntityById(Function<Integer, Integer> deleteEntityFunction,
+                              Integer id,
+                              Function<Integer, T> getEntityFunction);
 
-    public void testListEntities(Supplier<List<T>> listEntityFunction);
+    void testUpdateEntityById(Function<Integer, T> getEntityFunction,
+                              Integer id,
+                              BiConsumer<T, String> setUpdateFieldConsumer,
+                              Function<T, Integer> updateEntityFunction,
+                              Function<T, String> getUpdateFieldSupplier);
+
+    void testGetEntityById(Function<Integer, T> getEntityFunction,
+                           Integer id);
+
+    void testListEntities(BiFunction<Page, T, List<T>> listEntityBiFunction);
 }
