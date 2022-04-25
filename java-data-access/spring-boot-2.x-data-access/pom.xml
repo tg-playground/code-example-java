@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
@@ -14,7 +15,10 @@
         <module>spring-boot-with-mybatis</module>
         <module>spring-boot-data-access-common</module>
         <module>spring-boot-with-mybatis-plus</module>
-  </modules>
+        <module>spring-boot-with-spring-data-jpa</module>
+<!--        <module>spring-boot-with-spring-data-jdbc</module>-->
+<!--        <module>spring-boot-with-spring-jdbctemplate</module>-->
+    </modules>
 
     <groupId>com.taogen.demo</groupId>
     <artifactId>spring-boot-2.x-data-access</artifactId>
