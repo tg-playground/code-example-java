@@ -1,8 +1,8 @@
-package com.taogen.demo.service.impl;
+package com.taogen.demo.mybatis.service.impl;
 
-import com.taogen.demo.dao.UserDao;
-import com.taogen.demo.entity.User;
-import com.taogen.demo.service.UserService;
+import com.taogen.demo.mybatis.dao.UserDao;
+import com.taogen.demo.mybatis.entity.User;
+import com.taogen.demo.mybatis.service.UserService;
 import com.taogen.demo.common.vo.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

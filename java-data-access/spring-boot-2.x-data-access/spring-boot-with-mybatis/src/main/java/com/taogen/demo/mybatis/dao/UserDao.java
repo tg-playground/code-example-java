@@ -1,6 +1,6 @@
-package com.taogen.demo.dao;
+package com.taogen.demo.mybatis.dao;
 
-import com.taogen.demo.entity.User;
+import com.taogen.demo.mybatis.entity.User;
 import com.taogen.demo.common.vo.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

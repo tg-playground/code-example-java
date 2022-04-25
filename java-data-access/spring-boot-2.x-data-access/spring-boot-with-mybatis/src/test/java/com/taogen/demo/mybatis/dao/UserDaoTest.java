@@ -1,7 +1,7 @@
-package com.taogen.demo.dao;
+package com.taogen.demo.mybatis.dao;
 
-import com.taogen.demo.common.BaseUserCrudTest;
-import com.taogen.demo.entity.User;
+import com.taogen.demo.mybatis.common.BaseUserCrudTest;
+import com.taogen.demo.mybatis.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

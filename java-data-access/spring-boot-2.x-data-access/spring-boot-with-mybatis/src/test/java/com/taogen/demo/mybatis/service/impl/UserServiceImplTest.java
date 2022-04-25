@@ -1,8 +1,8 @@
-package com.taogen.demo.service.impl;
+package com.taogen.demo.mybatis.service.impl;
 
-import com.taogen.demo.common.BaseUserCrudTest;
-import com.taogen.demo.entity.User;
-import com.taogen.demo.service.UserService;
+import com.taogen.demo.mybatis.common.BaseUserCrudTest;
+import com.taogen.demo.mybatis.entity.User;
+import com.taogen.demo.mybatis.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

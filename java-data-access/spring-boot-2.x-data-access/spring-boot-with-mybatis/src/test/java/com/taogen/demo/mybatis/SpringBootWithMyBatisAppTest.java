@@ -1,4 +1,4 @@
-package com.taogen.demo;
+package com.taogen.demo.mybatis;
 
 
 import org.junit.jupiter.api.Test;

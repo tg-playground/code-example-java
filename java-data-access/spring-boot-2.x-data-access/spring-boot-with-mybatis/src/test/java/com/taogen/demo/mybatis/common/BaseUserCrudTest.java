@@ -1,7 +1,7 @@
-package com.taogen.demo.common;
+package com.taogen.demo.mybatis.common;
 
 import com.taogen.demo.common.test.AbstractCrudTest;
-import com.taogen.demo.entity.User;
+import com.taogen.demo.mybatis.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;

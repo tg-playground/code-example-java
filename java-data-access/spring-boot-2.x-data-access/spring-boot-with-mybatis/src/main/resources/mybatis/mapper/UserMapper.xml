@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.taogen.demo.dao.UserDao">
+<mapper namespace="com.taogen.demo.mybatis.dao.UserDao">
 
-    <resultMap id="userResultMap" type="com.taogen.demo.entity.User">
+    <resultMap id="userResultMap" type="com.taogen.demo.mybatis.entity.User">
         <id property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
         <result property="userPassword" column="user_password"/>
@@ -46,7 +46,7 @@
         WHERE user_id = #{id,jdbcType=INTEGER};
     </select>
     <insert id="saveUser"
-            parameterType="com.taogen.demo.entity.User"
+            parameterType="com.taogen.demo.mybatis.entity.User"
             useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
         INSERT
         INTO user(user_name, user_password,
@@ -56,7 +56,7 @@
                 #{userEmail,jdbcType=VARCHAR});
     </insert>
     <update id="updateUser"
-            parameterType="com.taogen.demo.entity.User">
+            parameterType="com.taogen.demo.mybatis.entity.User">
         UPDATE user
         SET user_name=#{userName,jdbcType=VARCHAR},
             user_password=#{userPassword,jdbcType=VARCHAR},

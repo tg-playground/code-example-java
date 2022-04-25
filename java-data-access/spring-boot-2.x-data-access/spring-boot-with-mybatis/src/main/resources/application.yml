@@ -6,4 +6,4 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.taogen.demo.entity
+  type-aliases-package: com.taogen.demo.mybatis.entity

@@ -1,4 +1,4 @@
-package com.taogen.demo.entity;
+package com.taogen.demo.mybatis.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

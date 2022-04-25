@@ -1,7 +1,7 @@
-package com.taogen.demo.service;
+package com.taogen.demo.mybatis.service;
 
 
-import com.taogen.demo.entity.User;
+import com.taogen.demo.mybatis.entity.User;
 import com.taogen.demo.common.vo.Page;
 
 import java.util.List;
