@@ -1,5 +1,6 @@
 package com.taogen.demo.mybatis.service.impl;
 
+import com.taogen.demo.common.vo.Page;
 import com.taogen.demo.mybatis.common.BaseUserCrudTest;
 import com.taogen.demo.mybatis.entity.User;
 import com.taogen.demo.mybatis.service.UserService;
@@ -16,7 +17,7 @@ class UserServiceImplTest extends BaseUserCrudTest {
     @Test
     void listUsers() {
         addRandomEntity(userService::saveUser, User::getUserId);
-        testListEntities(userService::listUsers);
+        testListEntities(userService::listUsers, new Page(1, 10), null);
     }
 
     @Test

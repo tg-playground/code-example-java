@@ -1,5 +1,6 @@
 package com.taogen.demo.mybatis.dao;
 
+import com.taogen.demo.common.vo.Page;
 import com.taogen.demo.mybatis.common.BaseUserCrudTest;
 import com.taogen.demo.mybatis.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ class UserDaoTest extends BaseUserCrudTest {
     @Test
     void listAllUsers() {
         addRandomEntity(userDao::saveUser, User::getUserId);
-        testListEntities(userDao::listUsers);
+        testListEntities(userDao::listUsers, new Page(1, 10), null);
     }
 
     @Test

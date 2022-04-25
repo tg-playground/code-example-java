@@ -63,8 +63,8 @@ public abstract class AbstractCrudTest<T> implements BaseCrudTest<T> {
     }
 
     @Override
-    public void testListEntities(BiFunction<Page, T, List<T>> listEntityBiFunction) {
-        List<T> list = listEntityBiFunction.apply(new Page(1, 10), null);
+    public void testListEntities(BiFunction<Page, T, List<T>> listEntityBiFunction, Page page, T t) {
+        List<T> list = listEntityBiFunction.apply(page, t);
         assertNotNull(list);
         assertFalse(list.isEmpty());
         log.info("list size: {}", list.size());

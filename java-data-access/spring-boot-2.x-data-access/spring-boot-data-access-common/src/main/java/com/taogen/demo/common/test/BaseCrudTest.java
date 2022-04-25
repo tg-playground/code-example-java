@@ -28,5 +28,5 @@ public interface BaseCrudTest<T> {
     void testGetEntityById(Function<Integer, T> getEntityFunction,
                            Integer id);
 
-    void testListEntities(BiFunction<Page, T, List<T>> listEntityBiFunction);
+    void testListEntities(BiFunction<Page, T, List<T>> listEntityBiFunction, Page page, T t);
 }
