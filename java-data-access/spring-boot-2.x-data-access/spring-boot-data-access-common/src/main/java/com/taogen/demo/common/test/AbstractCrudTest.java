@@ -1,6 +1,6 @@
-package com.taogen.demo.common;
+package com.taogen.demo.common.test;
 
-import com.taogen.demo.vo.Page;
+import com.taogen.demo.common.vo.Page;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

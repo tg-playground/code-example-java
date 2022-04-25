@@ -1,6 +1,6 @@
 package com.taogen.demo.service.impl;
 
-import com.taogen.demo.common.impl.BaseUserCrudTest;
+import com.taogen.demo.common.BaseUserCrudTest;
 import com.taogen.demo.entity.User;
 import com.taogen.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;

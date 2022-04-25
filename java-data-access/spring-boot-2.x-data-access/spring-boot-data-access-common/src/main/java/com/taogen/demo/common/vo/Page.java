@@ -1,4 +1,4 @@
-package com.taogen.demo.vo;
+package com.taogen.demo.common.vo;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.taogen.demo.common.impl;
+package com.taogen.demo.common;
 
-import com.taogen.demo.common.AbstractCrudTest;
+import com.taogen.demo.common.test.AbstractCrudTest;
 import com.taogen.demo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Slf4j
 // Auto rollback for all tests by add @Transactional
 // By default, Spring will start a new transaction surrounding your test method and @Before/@After callbacks, rolling back at the end.
-//@Transactional
+@Transactional
 public class BaseUserCrudTest extends AbstractCrudTest<User> {
     @Override
     protected User buildEntityWithoutId() {

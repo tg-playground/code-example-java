@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.taogen.demo</groupId>
+            <artifactId>spring-boot-data-access-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- basic -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

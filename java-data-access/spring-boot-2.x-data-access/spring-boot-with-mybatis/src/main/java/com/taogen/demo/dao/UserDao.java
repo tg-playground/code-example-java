@@ -1,7 +1,7 @@
 package com.taogen.demo.dao;
 
 import com.taogen.demo.entity.User;
-import com.taogen.demo.vo.Page;
+import com.taogen.demo.common.vo.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

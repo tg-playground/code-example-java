@@ -3,7 +3,7 @@ package com.taogen.demo.service.impl;
 import com.taogen.demo.dao.UserDao;
 import com.taogen.demo.entity.User;
 import com.taogen.demo.service.UserService;
-import com.taogen.demo.vo.Page;
+import com.taogen.demo.common.vo.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

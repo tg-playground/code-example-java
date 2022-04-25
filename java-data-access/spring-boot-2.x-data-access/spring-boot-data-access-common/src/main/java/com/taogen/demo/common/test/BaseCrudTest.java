@@ -1,13 +1,16 @@
-package com.taogen.demo.common;
+package com.taogen.demo.common.test;
 
 
-import com.taogen.demo.vo.Page;
+import com.taogen.demo.common.vo.Page;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * @author Taogen
+ */
 public interface BaseCrudTest<T> {
     <T> T addRandomEntity(Function<T, Integer> addEntityFunction,
                           Function<T, Integer> getEntityIdFunction);

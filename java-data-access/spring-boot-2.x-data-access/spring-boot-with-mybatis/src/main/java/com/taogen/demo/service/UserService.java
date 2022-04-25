@@ -2,7 +2,7 @@ package com.taogen.demo.service;
 
 
 import com.taogen.demo.entity.User;
-import com.taogen.demo.vo.Page;
+import com.taogen.demo.common.vo.Page;
 
 import java.util.List;
 

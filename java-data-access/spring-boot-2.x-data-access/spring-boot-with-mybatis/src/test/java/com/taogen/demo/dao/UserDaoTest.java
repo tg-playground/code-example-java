@@ -1,6 +1,6 @@
 package com.taogen.demo.dao;
 
-import com.taogen.demo.common.impl.BaseUserCrudTest;
+import com.taogen.demo.common.BaseUserCrudTest;
 import com.taogen.demo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
