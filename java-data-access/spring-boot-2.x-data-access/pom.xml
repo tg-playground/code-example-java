@@ -16,7 +16,7 @@
         <module>spring-boot-data-access-common</module>
         <module>spring-boot-with-mybatis-plus</module>
         <module>spring-boot-with-spring-data-jpa</module>
-<!--        <module>spring-boot-with-spring-data-jdbc</module>-->
+        <module>spring-boot-with-spring-data-jdbc</module>
 <!--        <module>spring-boot-with-spring-jdbctemplate</module>-->
     </modules>
 
