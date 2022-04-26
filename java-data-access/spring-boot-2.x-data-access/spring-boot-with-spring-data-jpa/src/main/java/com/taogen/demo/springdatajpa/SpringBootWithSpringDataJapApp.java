@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Hello world!
+ * @author Taogen
  */
 @SpringBootApplication
-public class App {
+public class SpringBootWithSpringDataJapApp {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(SpringBootWithSpringDataJapApp.class, args);
     }
 }

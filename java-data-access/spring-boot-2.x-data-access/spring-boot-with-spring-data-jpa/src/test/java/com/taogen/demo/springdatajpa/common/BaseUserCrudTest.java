@@ -1,6 +1,6 @@
 package com.taogen.demo.springdatajpa.common;
 
-import com.taogen.demo.springdatajpa.App;
+import com.taogen.demo.springdatajpa.SpringBootWithSpringDataJapApp;
 import com.taogen.demo.springdatajpa.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Taogen
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {App.class})
+@SpringBootTest(classes = {SpringBootWithSpringDataJapApp.class})
 @Slf4j
 // Auto rollback for all tests by add @Transactional
 // By default, Spring will start a new transaction surrounding your test method and @Before/@After callbacks, rolling back at the end.
