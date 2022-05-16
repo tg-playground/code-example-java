@@ -11,3 +11,6 @@ spring:
         max-active: 8
         max-wait: -1ms
     database: 0
+  profiles:
+    # jedis, lettuce. For @Profile on Redis Config
+    active: jedis

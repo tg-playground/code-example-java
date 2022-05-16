@@ -1,4 +1,4 @@
-package com.taogen.demo.springdataredis;
+package com.taogen.demo.springdataredis.redistemplate;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
-class RedisOperationsTest {
+class RedisValueOperationsTest {
 
     @Autowired
-    private RedisOperations redisOperations;
+    private RedisValueOperations redisValueOperations;
 
     @Test
     void getString() {
         String key = "test:" + System.currentTimeMillis();
         String value = "test-" + System.currentTimeMillis();
-        redisOperations.setString(key, value, 10000L);
-        String fetchValue = redisOperations.getString(key);
+        redisValueOperations.set(key, value, 10000L);
+        String fetchValue = redisValueOperations.getString(key);
         assertNotNull(fetchValue);
         assertEquals(value, fetchValue);
     }
@@ -32,8 +32,8 @@ class RedisOperationsTest {
         String key = "test:" + System.currentTimeMillis();
         log.debug("key: " + key);
         String value = "test-" + System.currentTimeMillis();
-        redisOperations.setString(key, value, null);
-        String fetchValue = redisOperations.getString(key);
+        redisValueOperations.set(key, value, null);
+        String fetchValue = redisValueOperations.getString(key);
         assertNotNull(fetchValue);
         assertEquals(value, fetchValue);
     }
@@ -44,12 +44,12 @@ class RedisOperationsTest {
         String key = "test:" + System.currentTimeMillis();
         log.debug("key: " + key);
         String value = "test-" + System.currentTimeMillis();
-        redisOperations.setString(key, value, timeout);
-        String fetchValue = redisOperations.getString(key);
+        redisValueOperations.set(key, value, timeout);
+        String fetchValue = redisValueOperations.getString(key);
         assertNotNull(fetchValue);
         assertEquals(value, fetchValue);
         Thread.sleep(timeout * 1000);
-        fetchValue = redisOperations.getString(key);
+        fetchValue = redisValueOperations.getString(key);
         assertNull(fetchValue);
     }
 
@@ -58,11 +58,11 @@ class RedisOperationsTest {
         String key = "test:" + System.currentTimeMillis();
         log.debug("key: " + key);
         String value = "test-" + System.currentTimeMillis();
-        redisOperations.setString(key, value, null);
-        String fetchValueBeforeDelete = redisOperations.getString(key);
+        redisValueOperations.set(key, value, null);
+        String fetchValueBeforeDelete = redisValueOperations.getString(key);
         assertNotNull(fetchValueBeforeDelete);
-        redisOperations.delete(key);
-        String fetchValueAfterDelete = redisOperations.getString(key);
+        redisValueOperations.delete(key);
+        String fetchValueAfterDelete = redisValueOperations.getString(key);
         assertNull(fetchValueAfterDelete);
     }
 
@@ -71,12 +71,12 @@ class RedisOperationsTest {
         String key = "test:" + System.currentTimeMillis();
         log.debug("key: " + key);
         String value = "test-" + System.currentTimeMillis();
-        redisOperations.setString(key, value, null);
-        String fetchValueBeforeUpdate = redisOperations.getString(key);
+        redisValueOperations.set(key, value, null);
+        String fetchValueBeforeUpdate = redisValueOperations.getString(key);
         assertNotNull(fetchValueBeforeUpdate);
         String updateValue = "update-" + System.currentTimeMillis();
-        redisOperations.update(key, updateValue, null);
-        String fetchValueAfterUpdate = redisOperations.getString(key);
+        redisValueOperations.update(key, updateValue, null);
+        String fetchValueAfterUpdate = redisValueOperations.getString(key);
         assertNotNull(fetchValueAfterUpdate);
         assertEquals(updateValue, fetchValueAfterUpdate);
     }
