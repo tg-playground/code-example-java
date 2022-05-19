@@ -17,10 +17,13 @@
         <module>spring-boot-with-spring-data-jpa</module>
         <module>spring-boot-with-spring-data-jdbc</module>
         <module>spring-boot-with-spring-jdbctemplate</module>
-<!--        <module>spring-boot-with-hibernate</module>-->
-<!--        <module>spring-boot-with-paoding-rose-jade</module>-->
-<!--        <module>spring-boot-with-jooq</module>-->
-      <module>spring-boot-with-spring-data-redis</module>
+        <!--        <module>spring-boot-with-hibernate</module>-->
+        <!--        <module>spring-boot-with-paoding-rose-jade</module>-->
+        <!--        <module>spring-boot-with-jooq</module>-->
+        <!-- cache -->
+        <module>spring-boot-with-spring-data-redis</module>
+        <module>spring-boot-with-spring-data-mongodb</module>
+        <!-- search engines -->
   </modules>
 
     <groupId>com.taogen.demo</groupId>

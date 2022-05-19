@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      # if the database is not exist, it will be created automatically
+      database: mygrocerylist
