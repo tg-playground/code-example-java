@@ -16,27 +16,29 @@ public class MongoTemplateUtil {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public <T> T saveOrUpdate(T t, String collectionName) {
-        return mongoTemplate.save(t, collectionName);
+    public <T> T saveOrUpdate(T t) {
+        return mongoTemplate.save(t);
+        // Don't need passing collectionName argument. It declared in @Document("yourCollectionName") on entity class
+        // return mongoTemplate.save(t, collectionName);
     }
 
-    public <T> Long delete(T t, String collectionName) {
-        return mongoTemplate.remove(t, collectionName).getDeletedCount();
+    public <T> Long delete(T t) {
+        return mongoTemplate.remove(t).getDeletedCount();
     }
 
-    public <T> T findById(String id, Class<T> cls, String collectionName) {
-        return mongoTemplate.findById(id, cls, collectionName);
+    public <T> T findById(String id, Class<T> cls) {
+        return mongoTemplate.findById(id, cls);
     }
 
-    public <T> List<T> findAll(Class<T> cls, String collectionName) {
-        return mongoTemplate.findAll(cls, collectionName);
+    public <T> List<T> findAll(Class<T> cls) {
+        return mongoTemplate.findAll(cls);
     }
 
-    public <T> Long count(Class<T> cls, String collectionName) {
-        return mongoTemplate.count(new Query(), cls, collectionName);
+    public <T> Long count(Class<T> cls) {
+        return mongoTemplate.count(new Query(), cls);
     }
 
-    public <T> List<T> findByQuery(Query query, Class<T> cls, String collectionName) {
-        return mongoTemplate.find(query, cls, collectionName);
+    public <T> List<T> findByQuery(Query query, Class<T> cls) {
+        return mongoTemplate.find(query, cls);
     }
 }

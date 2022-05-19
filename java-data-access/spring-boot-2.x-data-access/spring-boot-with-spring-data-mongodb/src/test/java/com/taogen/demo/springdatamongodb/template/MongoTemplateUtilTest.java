@@ -23,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 class MongoTemplateUtilTest {
 
-    public static final String COLLECTION_NAME = "groceryitems";
-
     @Autowired
     private MongoTemplateUtil mongoTemplateUtil;
 
@@ -32,8 +30,8 @@ class MongoTemplateUtilTest {
     void saveOrUpdate() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
-        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class, COLLECTION_NAME);
+        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
+        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class);
         assertNotNull(fetchEntity);
         assertEquals(groceryItem.getId(), fetchEntity.getId());
     }
@@ -52,11 +50,11 @@ class MongoTemplateUtilTest {
     void delete() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
-        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class, COLLECTION_NAME);
+        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
+        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class);
         assertNotNull(fetchEntity);
-        mongoTemplateUtil.delete(randomGroceryItem, COLLECTION_NAME);
-        fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class, COLLECTION_NAME);
+        mongoTemplateUtil.delete(randomGroceryItem);
+        fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class);
         assertNull(fetchEntity);
     }
 
@@ -64,8 +62,8 @@ class MongoTemplateUtilTest {
     void findById() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
-        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class, COLLECTION_NAME);
+        GroceryItem groceryItem = mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
+        GroceryItem fetchEntity = mongoTemplateUtil.findById(groceryItem.getId(), GroceryItem.class);
         assertNotNull(fetchEntity);
         assertEquals(groceryItem.getId(), fetchEntity.getId());
     }
@@ -74,8 +72,8 @@ class MongoTemplateUtilTest {
     void findAll() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
-        List<GroceryItem> items = mongoTemplateUtil.findAll(GroceryItem.class, COLLECTION_NAME);
+        mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
+        List<GroceryItem> items = mongoTemplateUtil.findAll(GroceryItem.class);
         log.debug("item size: {}", items.size());
         assertNotNull(items);
         assertTrue(items.size() > 0);
@@ -85,8 +83,8 @@ class MongoTemplateUtilTest {
     void count() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
-        long count = mongoTemplateUtil.count(GroceryItem.class, COLLECTION_NAME);
+        mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
+        long count = mongoTemplateUtil.count(GroceryItem.class);
         log.debug("count: {}", count);
         assertTrue(count > 0);
     }
@@ -95,14 +93,14 @@ class MongoTemplateUtilTest {
     void findByQuery() {
         ObjectId objectId = new ObjectId();
         GroceryItem randomGroceryItem = getRandomGroceryItem(objectId);
-        mongoTemplateUtil.saveOrUpdate(randomGroceryItem, COLLECTION_NAME);
+        mongoTemplateUtil.saveOrUpdate(randomGroceryItem);
         Query query = new Query();
         query.addCriteria(MongoTemplateHelper.getAndConditions(Arrays.asList(
                 Criteria.where("name").is("Whole Wheat Biscuit 222"),
                 Criteria.where("category").is("snacks")
         )));
         log.debug("query is: {}", query);
-        List<GroceryItem> items = mongoTemplateUtil.findByQuery(query, GroceryItem.class, COLLECTION_NAME);
+        List<GroceryItem> items = mongoTemplateUtil.findByQuery(query, GroceryItem.class);
         log.debug("item size: {}", items.size());
         assertNotNull(items);
         assertTrue(items.size() > 0);
