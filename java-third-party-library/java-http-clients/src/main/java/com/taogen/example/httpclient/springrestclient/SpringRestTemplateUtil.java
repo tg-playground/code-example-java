@@ -42,7 +42,7 @@ public class SpringRestTemplateUtil {
                 .queryParams(params);
         HttpEntity<Object> requestEntity =
                 new HttpEntity<>(body, headers);
-        return restTemplate.exchange(builder.toUriString(), method, requestEntity, responseType);
+        return restTemplate.exchange(builder.build().toUriString(), method, requestEntity, responseType);
     }
 
     /**
@@ -64,6 +64,6 @@ public class SpringRestTemplateUtil {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
                 .queryParams(params);
         HttpEntity<Object> requestEntity = new HttpEntity<>(body, headers);
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, requestEntity, responseType);
+        return restTemplate.exchange(builder.build().toUriString(), HttpMethod.GET, requestEntity, responseType);
     }
 }
