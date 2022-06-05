@@ -11,13 +11,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Jackson json utility
+ * Jackson JSON utility
  * <p>
  * Convert json string to object(entity, map, jsonObject, List<entity>) and vice versa.
  * <p>
- * change field name: @JsonProperty(value = "birth_date")
- * format date time: @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
- * ignore field: @JsonIgnore
+ * Serialization:
+ * 1. change field name: @JsonProperty(value = "birth_date")
+ * 2. format date time: @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+ * 3. ignore field: @JsonIgnore
+ * Deserialization:
+ * 1. ignore field: @JsonIgnoreProperties(ignoreUnknown = true)
  *
  * @author Taogen
  */
