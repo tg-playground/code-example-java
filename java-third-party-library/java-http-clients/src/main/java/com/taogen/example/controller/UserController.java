@@ -41,11 +41,11 @@ public class UserController {
                                      @RequestParam String chineseTest,
                                      @RequestHeader HttpHeaders headers) {
         checkRequest(token, headers);
-        checkChineseTest(chineseTest);
+        checkChinese(chineseTest);
         return userMap.values();
     }
 
-    private void checkChineseTest(String chineseTest) {
+    private void checkChinese(String chineseTest) {
         if (!CHINESE_TEST.equals(chineseTest)) {
             System.out.println("chineseTest is:" + chineseTest);
             throw new IllegalArgumentException("chineseTest is not correct");
@@ -65,8 +65,10 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id,
                         @RequestParam String token,
+                        @RequestParam String chineseTest,
                         @RequestHeader HttpHeaders headers) {
         checkRequest(token, headers);
+        checkChinese(chineseTest);
         User user = userMap.get(id);
         return user;
     }
