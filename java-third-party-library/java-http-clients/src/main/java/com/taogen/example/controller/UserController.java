@@ -19,6 +19,8 @@ import java.util.Optional;
 public class UserController {
     public static final String RANDOM_TOKEN = "123456";
 
+    public static final String CHINESE_TEST = "中文测试";
+
     public static final String APP_HEADER_KEY = "my-app-id";
     public static final String APP_HEADER_VALUE = "java-http-clients";
 
@@ -36,9 +38,18 @@ public class UserController {
 
     @GetMapping
     public Collection<User> getUsers(@RequestParam String token,
+                                     @RequestParam String chineseTest,
                                      @RequestHeader HttpHeaders headers) {
         checkRequest(token, headers);
+        checkChineseTest(chineseTest);
         return userMap.values();
+    }
+
+    private void checkChineseTest(String chineseTest) {
+        if (!CHINESE_TEST.equals(chineseTest)) {
+            System.out.println("chineseTest is:" + chineseTest);
+            throw new IllegalArgumentException("chineseTest is not correct");
+        }
     }
 
     private void checkRequest(String token,

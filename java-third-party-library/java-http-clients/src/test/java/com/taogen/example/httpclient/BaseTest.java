@@ -51,6 +51,7 @@ public class BaseTest {
     protected static MultiValueMap<String, String> getBasicParam() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("token", UserController.RANDOM_TOKEN);
+        params.add("chineseTest", UserController.CHINESE_TEST);
         return params;
     }
 
