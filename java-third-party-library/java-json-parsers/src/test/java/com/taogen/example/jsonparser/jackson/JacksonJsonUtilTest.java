@@ -2,6 +2,7 @@ package com.taogen.example.jsonparser.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.taogen.example.jsonparser.BaseTest;
 import com.taogen.example.jsonparser.jackson.entity.Role;
 import com.taogen.example.jsonparser.jackson.entity.User;
@@ -38,6 +39,18 @@ class JacksonJsonUtilTest extends BaseTest {
         }
     }
 
+
+    @Test
+    void testJsonStrToJsonObj() throws JsonProcessingException {
+        String s1 = "{\"name\": \"a\"}";
+        ObjectNode json = JacksonJsonUtil.jsonStrToJsonObject(s1);
+        String name = json.get("name").asText();
+        System.out.println(name);
+        if (json.get("lastName") != null) {
+            String lastName = json.get("lastName").asText();
+            System.out.println(lastName);
+        }
+    }
 
     @Test
     void objectToMap() {
