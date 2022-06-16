@@ -75,6 +75,7 @@ public class ExcelAnnotationUtil {
     private static void writeDataToSheet(XSSFWorkbook workbook, XSSFSheet sheet, List<FieldExcel> fieldExcelList, List list) {
         int rowNum = 1;
         int columnNum = 0;
+        CellStyle contentStyle = getContentStyle(workbook);
         for (Object obj : list) {
             Row row = sheet.createRow(rowNum);
             columnNum = 0;
@@ -91,7 +92,7 @@ public class ExcelAnnotationUtil {
                 }
                 CellUtil.createCell(row, columnNum,
                         fieldValue != null ? fieldValue.toString() : "",
-                        getContentStyle(workbook));
+                        contentStyle);
                 columnNum++;
             }
             rowNum++;

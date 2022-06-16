@@ -25,6 +25,15 @@ import java.util.List;
  */
 public class ExcelBuildUtil {
 
+    /**
+     * Warning: If multiple rows have the same cellStyle, do not create a new cellStyle for each row.
+     * <p>
+     * @param sheet
+     * @param rowNum
+     * @param rowHeight
+     * @param values
+     * @param cellStyle
+     */
     public static void generateOneLineRowByValues(XSSFSheet sheet,
                                                   Integer rowNum,
                                                   Integer rowHeight,
