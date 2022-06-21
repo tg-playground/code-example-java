@@ -65,7 +65,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <!-- 注意：高版本mysql驱动中的接口com.mysql.cj.conf.PropertySet不存在getBooleanReadableProperty方法 -->
-            <version>8.0.11</version>
+            <version>8.0.28</version>
         </dependency>
 
         <!-- test -->
