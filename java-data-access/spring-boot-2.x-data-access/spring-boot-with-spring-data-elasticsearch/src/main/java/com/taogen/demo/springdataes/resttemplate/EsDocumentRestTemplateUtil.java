@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * index name:
+ * 1. specify the index name in the annotation @Document(indexName = "bank") of the entity class
+ * 2. specify the index name by the method parameter of the method
+ * If the index name is not exist, the index will be created automatically.
+ *
  * @author Taogen
  */
 @Component

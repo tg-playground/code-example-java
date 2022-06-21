@@ -1,5 +1,6 @@
 package com.taogen.demo.springdataes.resttemplate;
 
+import com.taogen.demo.springdataes.AbstractBaseTest;
 import com.taogen.demo.springdataes.entity.Bank;
 import com.taogen.demo.springdataes.util.JacksonJsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -8,24 +9,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
-class EsDocumentRestTemplateUtilTest {
+public class EsDocumentRestTemplateUtilTest extends AbstractBaseTest {
 
     public static final String INDEX_NAME = "bank1";
 
@@ -33,39 +32,22 @@ class EsDocumentRestTemplateUtilTest {
     private EsDocumentRestTemplateUtil esDocumentRestTemplateUtil;
 
     @Test
-    void insert() {
+    @Override
+    public void insert() {
         insertRandomEntity();
     }
 
     Bank insertRandomEntity() {
         Bank bank = getRandomEntityWithoutId();
         esDocumentRestTemplateUtil.insert(bank, new String[]{INDEX_NAME});
-        log.debug("bank: {}", bank);
+        log.debug("insert a bank: {}", bank);
         assertNotNull(bank);
         assertNotNull(bank.getId());
         return bank;
     }
 
-    private Bank getRandomEntityWithoutId() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        Bank bank = new Bank();
-        bank.setAccountNumber(ThreadLocalRandom.current().nextLong(10000000000L, 100000000000L));
-        bank.setAddress("address" + dateFormat.format(date));
-        bank.setAge(ThreadLocalRandom.current().nextInt(0, 100 + 1));
-        bank.setBalance(ThreadLocalRandom.current().nextLong(0, 100000000));
-        bank.setCity("city" + dateFormat.format(date));
-        bank.setEmail("email" + dateFormat.format(date));
-        bank.setEmployer("employer" + dateFormat.format(date));
-        bank.setFirstName("firstName" + dateFormat.format(date));
-        bank.setGender("male");
-        bank.setLastName("Jones");
-        bank.setState("state" + dateFormat.format(date));
-        return bank;
-    }
-
     @Test
-    void delete() {
+    public void delete() {
         Bank bank = insertRandomEntity();
         esDocumentRestTemplateUtil.delete(bank.getId(), new String[]{INDEX_NAME});
         Bank fetchEntity = esDocumentRestTemplateUtil.getById(bank.getId(), Bank.class, new String[]{INDEX_NAME});
@@ -73,7 +55,7 @@ class EsDocumentRestTemplateUtilTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         Bank bank = insertRandomEntity();
         bank.setFirstName("firstName-updated");
         Document document = Document.from(JacksonJsonUtil.objectToMap(bank));
@@ -91,7 +73,7 @@ class EsDocumentRestTemplateUtilTest {
     }
 
     @Test
-    void getById() {
+    public void getById() {
         Bank bank = insertRandomEntity();
         Bank fetchBank = esDocumentRestTemplateUtil.getById(bank.getId(), Bank.class, new String[]{INDEX_NAME});
         log.debug("fetchBank: {}", fetchBank);
@@ -100,13 +82,19 @@ class EsDocumentRestTemplateUtilTest {
     }
 
     @Test
-    void findList() throws InterruptedException {
+    public void findPage() {
         Bank bank = insertRandomEntity();
-        Query query = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.matchQuery("_id", bank.getId()))
-                .build();
         // waiting for indexing to finish
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Query query = new NativeSearchQueryBuilder()
+                .withPageable(PageRequest.of(0, 10,
+                        Sort.by(Sort.Direction.DESC, "age")))
+//                .withQuery(QueryBuilders.matchQuery("_id", bank.getId()))
+                .build();
         List<Bank> list = esDocumentRestTemplateUtil.findList(query, Bank.class, new String[]{INDEX_NAME});
         log.debug("list: {}", list);
         assertNotNull(list);
@@ -114,7 +102,22 @@ class EsDocumentRestTemplateUtilTest {
     }
 
     @Test
-    void count() {
+    void findList() throws InterruptedException {
+        Bank bank = insertRandomEntity();
+        // waiting for indexing to finish
+        Thread.sleep(1000);
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery("_id", bank.getId()))
+                .build();
+        List<Bank> list = esDocumentRestTemplateUtil.findList(query, Bank.class, new String[]{INDEX_NAME});
+        log.debug("list: {}", list);
+        assertNotNull(list);
+        assertTrue(list.size() > 0);
+    }
+
+    @Test
+    @Override
+    public void count() {
         insertRandomEntity();
         long count = esDocumentRestTemplateUtil.count(new NativeSearchQueryBuilder().build(), new String[]{INDEX_NAME});
         log.debug("count: {}", count);

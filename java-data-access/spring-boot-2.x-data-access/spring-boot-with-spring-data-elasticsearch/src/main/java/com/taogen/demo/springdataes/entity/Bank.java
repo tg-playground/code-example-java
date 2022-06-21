@@ -3,6 +3,8 @@ package com.taogen.demo.springdataes.entity;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * @author Taogen
@@ -15,6 +17,7 @@ public class Bank {
 
     private Long accountNumber;
 
+    @Field(type = FieldType.Text)
     private String address;
 
     private Integer age;
