@@ -32,7 +32,7 @@
         <!-- dependencies version -->
         <junit.version>4.12</junit.version>
         <log4j.version>2.8.2</log4j.version>
-        <mysql-connector.version>8.0.19</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <!-- end -->
     </properties>
 
