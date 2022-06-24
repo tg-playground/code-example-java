@@ -2,9 +2,11 @@ package com.taogen.example.util.excel.common;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Utility for handling POI Excel API
@@ -19,6 +22,19 @@ import java.util.List;
  * @author Taogen
  */
 public class ExcelUtil {
+
+    public static boolean predicateExcel(String excelFilePath, Predicate<XSSFWorkbook> excelPredicate) {
+        try (
+                XSSFWorkbook workbook = new XSSFWorkbook(new File(excelFilePath));
+        ) {
+            return excelPredicate.test(workbook);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public static void setCellValueByObject(XSSFCell cell, Object object) {
         if (object == null) {
