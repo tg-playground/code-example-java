@@ -1,23 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.taogen.demo</groupId>
+        <artifactId>servlet3.0</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <groupId>com.taogen.example</groupId>
-    <artifactId>servlet3-basic-03-asynchronous</artifactId>
+    <artifactId>servlet3.0-basic-03-asynchronous</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>servlet3-basic-03-asynchronous Maven Webapp</name>
+    <name>servlet3.0-basic-03-asynchronous</name>
     <url>http://maven.apache.org</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <!-- custom properties -->
-        <project.java.version>1.8</project.java.version>
-        <tomcat.plugin.version>2.2</tomcat.plugin.version>
-        <junit.version>4.12</junit.version>
-        <log4j.version>2.8.2</log4j.version>
         <!-- changeit -->
         <jetty.plugin.config.port>80</jetty.plugin.config.port>
         <jetty.plugin.config.contextPath>/servlet3-async</jetty.plugin.config.contextPath>
@@ -30,15 +26,13 @@
     <dependencies>
         <!-- ** Unit Test ** -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.23.4</version>
             <scope>test</scope>
         </dependency>
 
@@ -46,7 +40,6 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
-            <version>${log4j.version}</version>
         </dependency>
 
         <!-- servlet api -->
@@ -67,18 +60,12 @@
             <!-- maven compile -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>${project.java.version}</source>
-                    <target>${project.java.version}</target>
-                </configuration>
             </plugin>
 
             <!-- maven package war -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webResources>
@@ -93,7 +80,6 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>${tomcat.plugin.version}</version>
                 <configuration>
                     <port>${tomcat.plugin.config.port}</port>
                     <path>${tomcat.plugin.config.path}</path>
