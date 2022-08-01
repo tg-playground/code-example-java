@@ -1,10 +1,15 @@
 # data access
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/my_test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
-    username: root
-    password: root
     driverClassName: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://localhost:3306/my_test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    #    username: root
+    #    password: root
+    url: ${sytc.datasource.app-wzjc.url}
+    username: ${sytc.datasource.app-wzjc.username}
+    password: ${sytc.datasource.app-wzjc.password}
+  config:
+    import: D:\config\database-120-application.yml
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.taogen.demo.mybatisplus.entity

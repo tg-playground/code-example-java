@@ -29,7 +29,7 @@ public class EsDocumentOperationUtil {
         return documentId;
     }
 
-    public <T> void delete(String id, String[] indexNames) {
+    public void delete(String id, String[] indexNames) {
         String s = elasticsearchOperations.delete(id, IndexCoordinates.of(indexNames));
     }
 
