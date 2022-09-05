@@ -1,0 +1,8 @@
+server:
+  port: 8761
+eureka:
+  client:
+    # If we mark the above properties as true (or just don't configure them, as they're true by default), then while starting the server, the inbuilt client tries to register itself with the Eureka server and also tries to fetch the registry, which isn't available yet. As a result, we get TransportException.
+    # So we should never configure these properties as true in the Eureka server applications.
+    registerWithEureka: false
+    fetchRegistry: false

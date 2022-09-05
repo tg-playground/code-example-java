@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: D:\config\github-application.yml
+  security:
+    user:
+      name: admin
+      password: admin123
+  cloud:
+    config:
+      server:
+        git:
+          cloneOnStart: true
+          timeout: 10
+          uri: git@github.com:tagnja/spring-cloud-config.git
+          defaultLabel: main
+          ignoreLocalSshSettings: true
+          hostKey: ${hostKey}
+          hostKeyAlgorithm: ecdsa-sha2-nistp256
+          privatekey: ${githubPrivateKey}
+server:
+  port: 8888
+

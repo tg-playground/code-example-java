@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: spring-cloud-eureka-client
+server:
+  # configure the service use a random port number
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+#    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

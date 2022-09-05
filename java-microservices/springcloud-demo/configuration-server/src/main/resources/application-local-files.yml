@@ -1,0 +1,16 @@
+# local system file config need spring.profiles.active=native
+spring:
+  security:
+    user:
+      name: admin
+      password: admin123
+  cloud:
+    config:
+      server:
+        native:
+          # On Linux, file://${user.home}/config-repo
+          # On Windows, you need an extra "/" in the file URL if it is absolute with a drive prefix (for example,file:///${user.home}/config-repo).
+          searchLocations: file:///D:/config/spring-cloud-configuration
+server:
+  port: 8888
+

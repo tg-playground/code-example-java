@@ -1,0 +1,15 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: admin123
+  cloud:
+    config:
+      server:
+        git:
+          # On Linux, file://${user.home}/config-repo
+          # On Windows, you need an extra "/" in the file URL if it is absolute with a drive prefix (for example,file:///${user.home}/config-repo).
+          uri: file:///D:/config/spring-cloud-configuration
+server:
+  port: 8888
+
