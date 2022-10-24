@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.jdbc.support.rowset.SqlRowSetMetaData;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +66,27 @@ public class JdbcCrudServiceImpl implements JdbcCrudService {
         return Long.valueOf(new ArrayList<>(resultMap.values()).get(0).toString());
     }
 
+    @Override
+    public List<String> getQueryLabels(String sql, Object[] args, int[] argTypes) {
+        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, args, argTypes);
+        SqlRowSetMetaData metaData = sqlRowSet.getMetaData();
+        return getQueryLabelsByMetaData(metaData);
+    }
+
+    private List<String> getQueryLabelsByMetaData(SqlRowSetMetaData sqlRowSetMetaData) {
+        List<String> labels = new ArrayList<>();
+        int columnNum = sqlRowSetMetaData.getColumnCount();
+        for (int i = 0; i < columnNum; i++) {
+            labels.add(sqlRowSetMetaData.getColumnLabel(i + 1));
+        }
+        return labels;
+    }
+    private List<String> getQueryLabelsByMetaData(ResultSetMetaData resultSetMetaData) throws SQLException, SQLException {
+        List<String> labels = new ArrayList<>();
+        int columnNum = resultSetMetaData.getColumnCount();
+        for (int i = 0; i < columnNum; i++) {
+            labels.add(resultSetMetaData.getColumnLabel(i + 1));
+        }
+        return labels;
+    }
 }

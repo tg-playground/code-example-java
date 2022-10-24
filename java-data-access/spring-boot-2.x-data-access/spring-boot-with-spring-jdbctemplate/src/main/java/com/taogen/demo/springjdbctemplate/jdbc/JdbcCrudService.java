@@ -41,4 +41,6 @@ public interface JdbcCrudService {
     List<Map<String, Object>> selectList(String sql, Object[] args, int[] argTypes);
 
     long selectCount(String sql, Object[] args, int[] argTypes);
+
+    List<String> getQueryLabels(String sql, Object[] args, int[] argTypes);
 }

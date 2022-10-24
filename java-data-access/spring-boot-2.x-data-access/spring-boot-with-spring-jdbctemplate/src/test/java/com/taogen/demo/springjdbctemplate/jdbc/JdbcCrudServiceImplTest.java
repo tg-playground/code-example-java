@@ -80,4 +80,14 @@ class JdbcCrudServiceImplTest {
         log.info("selectCount result is: {}", count);
         assertTrue(count > 0);
     }
+
+    @Test
+    void getQueryLabels() {
+        String sql = "select * from user order by user_id desc limit 10";
+        List<String> labels = jdbcCrudService.getQueryLabels(sql, null, null);
+        log.info("labels are {}", labels);
+        assertNotNull(labels);
+        assertTrue(labels.size() > 0);
+        assertEquals("user_id", labels.get(0));
+    }
 }
