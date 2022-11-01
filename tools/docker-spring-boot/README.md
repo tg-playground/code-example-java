@@ -143,3 +143,19 @@ docker-compose up
 ```
 
 Visit http://localhost:8080
+
+8. Push an image to Docker Hub
+
+Name your local images using one of these methods:
+
+```shell
+docker build -t <hub-user>/<repo-name>[:<tag>]
+docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]
+docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]
+```
+
+push the repository to the registry
+
+```shell
+docker push <hub-user>/<repo-name>:<tag>
+```
