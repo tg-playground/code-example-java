@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  docker-spring-boot:
+    image: demo/docker-spring-boot:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+    networks:
+      backend:
+        aliases:
+          - "docker-spring-boot"
+networks:
+  backend:
+    driver: bridge
