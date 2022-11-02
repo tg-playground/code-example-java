@@ -106,9 +106,12 @@ docker images
 # list images
 docker images
 # running an image
+docker run -d -p {host_port}:{container_port} {image_name}
 docker run -d -p 8080:8080 demo/docker-spring-boot:0.0.1-SNAPSHOT
 # view running containers
 docker ps
+# view process console output
+docker logs <container_id>
 # stop running containers
 docker stop <container_id>
 ```
