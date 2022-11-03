@@ -29,6 +29,9 @@ mysql/mysql-server:8.0.31
 
 create a new MySQL user
 
+Whether your jdbcUrl is `jdbc:mysql://exposedHostname:port/xxx` or `jdbc:mysql://containerName:port/xxx`, you can't use the existing `root@localhost` user in your application to connect your MySQL. You need a user with a host '%' (all hosts) or your specific host 'xxx.xxx.xxx'.
+Suggest creating a user like your_name@'%' or root@'%'.
+
 ```shell
 $ docker exec -it mysql1 mysql -u root -p
 # or
@@ -37,6 +40,8 @@ $ winpty docker exec -it mysql1 mysql -u root -p
 
 ```mysql
 CREATE USER 'taogen'@'%' IDENTIFIED BY 'PASSWORD';
+# or
+CREATE USER 'root'@'%' IDENTIFIED BY 'PASSWORD';
 GRANT ALL PRIVILEGES ON *.* TO 'taogen'@'%' WITH GRANT OPTION;
 # for not including WITH GRANT OPTION and targeting a specified database instead of all (*).
 GRANT ALL PRIVILEGES ON *.* TO 'taogen'@'%';
