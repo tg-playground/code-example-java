@@ -1,0 +1,14 @@
+# export MySQL to outside
+$ docker run --name=mysql1 -d -p 3306:3306 \
+-e MYSQL_ROOT_HOST='%' -e MYSQL_ROOT_PASSWORD=root123 \
+--restart unless-stopped \
+-v mysql_data:/var/lib/mysql \
+mysql/mysql-server:8.0.31
+
+# connect MySQL by container network
+$ docker run --name=mysql1 -d \
+-e MYSQL_ROOT_HOST='%' -e MYSQL_ROOT_PASSWORD=root123 \
+--restart unless-stopped \
+-v mysql_data:/var/lib/mysql \
+--network example-app \
+mysql/mysql-server:8.0.31
