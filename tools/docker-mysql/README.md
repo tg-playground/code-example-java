@@ -171,3 +171,5 @@ Your API and MySQL containers now share a network. You can connect to MySQL from
 
 - [mysql/mysql-server](https://hub.docker.com/r/mysql/mysql-server)
 - [How to Use Docker for Your MySQL Database](https://earthly.dev/blog/docker-mysql/)
+- [Using Option Files - MySQL Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/option-files.html)
+- [More Topics on Deploying MySQL Server with Docker - MySQL Reference Manual](https://dev.mysql.com/doc/mysql-linuxunix-excerpt/5.7/en/docker-mysql-more-topics.html)
