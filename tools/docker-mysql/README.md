@@ -41,12 +41,18 @@ $ docker run --name=mysql1 -d \
 mysql/mysql-server:8.0.31
 ```
 
-- `--name=mysql1 -d -p 3306:3306`: container name, running in background, expose port. 
-- `-e MYSQL_ROOT_HOST='%'`: enable remote connections by adding a user `root@'%'`. The password of the user `root@'%'` is the same with `root@localhost`.
-- `-e MYSQL_ROOT_PASSWORD=root123`: set the password of user `root@localhost` to root123. 
+- `--name=mysql1 -d -p 3306:3306`: container name, running in background, expose port. `0.0.0.0:3306->3306/tcp`
+- `-e MYSQL_ROOT_HOST='%'`: enable remote connections by adding a user `root@'%'`. The password of the user `root@'%'` is the same with `root@localhost`. Note: if you use docker volume and the MySQL data is initialized in the volume, you can't create the user `root@'%'`.
+- `-e MYSQL_ROOT_PASSWORD=root123`: set the password of user `root@localhost` to root123. Note: if you use docker volume and the MySQL data is initialized in the volume, you can't set root user password by `-e MYSQL_ROOT_PASSWORD=root123`.
 - `--restart unless-stopped`: --restart means always restart the container. your MySQL database will run without intervention after host machine reboots or Docker daemon updates. The unless-stopped policy used here won’t start the container if you manually stopped it with docker stop.
-- `-v mysql_data:/var/lib/mysql`: Docker-managed volume. If the volume is not existing, it will be created automatically. Note, if you use docker volume and the root user data is initialed, you may can't set root user password by `-e MYSQL_ROOT_PASSWORD=root123`.
+- `-v mysql_data:/var/lib/mysql`: Docker-managed volume. If the volume is not existing, it will be created automatically. 
 - `--network example-app`: Container Networks. You need create network first.
+
+```sh
+$ docker logs -f mysql1
+
+2022-11-07T03:18:01.802487Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.31'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  MySQL Community Server - GPL.
+```
 
 The `--name` option, for supplying a custom name for your server container (`mysql1` in the example), is optional; if no container name is supplied, a random one is generated. If the Docker image of the specified name and tag has not been downloaded by an earlier `docker pull` or `docker run` command, the image is now downloaded. After download completes, initialization for the container begins, and the container appears in the list of running containers when you run the `docker ps` command.
 
