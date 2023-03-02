@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,11 +27,23 @@ import java.util.Map;
 public class JdbcTest {
 
     @Autowired
+    @Qualifier("db1DataSource")
+    private DataSource dataSource;
+
+    @Autowired
     @Qualifier("db1JdbcTemplate")
     private JdbcTemplate jdbcTemplate1;
     @Autowired
     @Qualifier("db2JdbcTemplate")
     private JdbcTemplate jdbcTemplate2;
+
+    @Test
+    @Disabled
+    void testDs() {
+        // com.zaxxer.hikari.HikariDataSource
+        // or org.apache.tomcat.jdbc.pool.DataSource
+        System.out.println(dataSource.getClass().getName());
+    }
 
     @Test
     @Disabled

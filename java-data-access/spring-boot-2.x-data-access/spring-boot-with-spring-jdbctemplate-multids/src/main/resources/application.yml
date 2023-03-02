@@ -10,6 +10,17 @@ spring:
       username: root
       password: root123
       driverClassName: com.mysql.cj.jdbc.Driver
+    # tomcat JDBC pool configurations
+    tomcat:
+      max-active: 70
+      max-wait: 25000
+      initial-size: 20
+      max-idle: 20
+      min-idle: 9
+      default-auto-commit: true
+    # hikari JDBC pool configurations
+    hikari:
+      connection-timeout: 30000
 logging:
   level:
     org:
