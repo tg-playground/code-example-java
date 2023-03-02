@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 /**
  * @author Taogen
  */
-public interface DataSourceConfiguration {
+public interface DataSourceConfig {
     DataSourceProperties dataSourceProperties();
 
     DataSource dataSource();

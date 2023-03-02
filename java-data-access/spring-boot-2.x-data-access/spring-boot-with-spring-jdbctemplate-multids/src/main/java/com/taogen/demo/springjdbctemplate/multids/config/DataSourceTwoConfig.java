@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-public class DataSourceTwoConfiguration implements DataSourceConfiguration{
+public class DataSourceTwoConfig implements DataSourceConfig {
     @Bean("db2DataSourceProperties")
     @ConfigurationProperties("spring.datasource.db2")
     public DataSourceProperties dataSourceProperties() {
