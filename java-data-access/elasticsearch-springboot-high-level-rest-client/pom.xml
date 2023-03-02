@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>7.12.0</version>
+			<version>7.14.0</version>
 		</dependency>
 
 		<!-- The High Level Java REST Client depends on the following artifacts and their transitive dependencies: -->
