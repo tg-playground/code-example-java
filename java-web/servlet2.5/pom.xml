@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.taogen-lib</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>servlet2.5-basic-01-helloworld</module>
+        <module>servlet2.5-basic-02-the-request</module>
+        <module>servlet2.5-basic-02-upload-by-commons-fileupload</module>
+        <module>servlet2.5-basic-03-servlet-context</module>
+        <module>servlet2.5-basic-04-the-response</module>
+        <module>servlet2.5-basic-05-filter</module>
+        <module>servlet2.5-basic-06-session</module>
+        <module>servlet2.5-basic-06-session-by-url-rewrite</module>
+        <module>servlet2.5-basic-07-dispatching-request</module>
+        <module>servlet2.5-basic-08-error-handling</module>
+        <module>servlet2.5-basic-08-web-applications</module>
+        <module>servlet2.5-basic-09-application-lifecycle-events</module>
+        <module>servlet2.5-basic-10-mapping-requests-to-servlets</module>
+        <module>servlet2.5-basic-11-security</module>
+    </modules>
+
+    <groupId>com.taogen.demo</groupId>
+    <artifactId>servlet2.5</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>servlet2.5</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+    <packaging>pom</packaging>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    <build>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <!-- plugin for mvn compile -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                </plugin>
+                <!-- plugins for mvn test -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- plugin for mvn compile -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <!-- plugins for mvn test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

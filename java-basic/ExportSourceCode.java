@@ -1,4 +1,4 @@
-package com.taogen.example;
+package com.taogen.app;
 
 import java.io.*;
 import java.util.*;
@@ -8,15 +8,18 @@ import java.util.stream.Collectors;
  * @author Taogen
  */
 public class ExportSourceCode {
-
+    private static final List<String> EXPORT_SOURCE_CODE_SUFFIXES =
+            Arrays.asList("java", "js", "vue");
+    /**
+     * 1页word=25行代码
+     */
+    private static final Integer MAX_EXPORT_LINES = 1250;
 
     public static void main(String[] args) throws IOException {
         String sourceCodeDirPath = "D:\\temp\\code\\src";
         String outputDirPath = "D:/temp/code";
         String outputFileName = String.format("code-by-stack--%s.txt", System.currentTimeMillis());
-        List<String> exportSourceCodeSuffixes = Arrays.asList("java");
-        Integer maxExportLines = 11700;
-        exportCodeDepthFirst(sourceCodeDirPath, outputDirPath, outputFileName, exportSourceCodeSuffixes, maxExportLines);
+        exportCodeDepthFirst(sourceCodeDirPath, outputDirPath, outputFileName, EXPORT_SOURCE_CODE_SUFFIXES, MAX_EXPORT_LINES);
         // exportCodeBreadthFirst(sourceCodeDirPath, outputDirPath, outputFileName, exportSourceCodeSuffixes, maxExportLines);
     }
 
@@ -64,6 +67,9 @@ public class ExportSourceCode {
                         for (File file : children) {
                             if (file.isFile()) {
                                 totalLineCount += writeFile(file, outputDirPath, outputFileName, exportSourceCodeSuffixes);
+                                if (maxExportLines != null && totalLineCount > maxExportLines) {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -106,6 +112,9 @@ public class ExportSourceCode {
                         fileDeque.add(file);
                     } else {
                         totalLineCount += writeFile(file, outputDirPath, outputFileName, exportSourceCodeSuffixes);
+                        if (maxExportLines != null && totalLineCount > maxExportLines) {
+                            break;
+                        }
                     }
                 }
             }

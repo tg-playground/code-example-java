@@ -1,5 +1,16 @@
 # spring-boot-with-spring-data-elasticsearch
 
+Elasticsearch data access
+
+- Java REST client (Deprecated in 7.15.0)
+  - Java Low Level REST client
+  - Java High Level REST Client
+- Java Transport Client (Deprecated in 7.0.0)
+- Java Client (co.elastic.clients:elasticsearch-java:7.17.4)
+- Spring data elasticsearch
+  - repository
+  - restTemplate
+
 Functions
 
 - CRUD for document

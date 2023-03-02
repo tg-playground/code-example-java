@@ -3,6 +3,7 @@ package com.taogen.demo.springdataredis.redistemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,5 +22,9 @@ public abstract class AbstractRedisOperations {
 
     protected Boolean deleteKey(String key) {
         return redisTemplate.delete(key);
+    }
+
+    protected Set<String> keys(String pattern) {
+        return redisTemplate.keys(pattern);
     }
 }

@@ -26,6 +26,7 @@
         <module>spring-boot-with-spring-data-mongodb</module>
         <!-- search engines -->
         <module>spring-boot-with-spring-data-elasticsearch</module>
+        <module>spring-boot-with-elasticsearch</module>
         <module>spring-boot-with-spring-jdbctemplate-multids</module>
     </modules>
 

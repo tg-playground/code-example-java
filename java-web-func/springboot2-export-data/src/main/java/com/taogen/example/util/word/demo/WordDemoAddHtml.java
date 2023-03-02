@@ -36,9 +36,12 @@ public class WordDemoAddHtml {
     }
 
     private static String formatHtml(String html) {
-        String htmlTemplate = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><style type=\"text/css\"></style></head><body>%s</body></html>";
         if (!html.contains("<html>") || !html.contains("</html>")) {
-            html = String.format(htmlTemplate, html);
+            return new StringBuilder()
+                    .append("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><style type=\"text/css\"></style></head><body>")
+                    .append(html)
+                    .append("</body></html>")
+                    .toString();
         }
         return html;
     }

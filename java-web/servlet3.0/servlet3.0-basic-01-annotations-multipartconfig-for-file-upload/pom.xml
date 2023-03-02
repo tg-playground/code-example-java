@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.taogen.demo</groupId>
+		<artifactId>servlet3.0</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+    <groupId>com.taogen.example</groupId>
+    <artifactId>servlet3.0-basic-01-annotations-multipartconfig-for-file-upload</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>servlet3.0-basic-01-annotations-multipartconfig-for-file-upload</name>
+    <url>http://maven.apache.org</url>
+
+	<properties>
+		<!-- changeit -->
+		<tomcat.plugin.config.port>80</tomcat.plugin.config.port>
+		<tomcat.plugin.config.path>/servlet-upload-by-multipartconfig</tomcat.plugin.config.path>
+		<servlet.version>3.0.1</servlet.version>
+		<servlet.artifactId>javax.servlet-api</servlet.artifactId>
+	</properties>
+
+    <dependencies>
+        <!-- unit test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+		</dependency>
+
+		<!-- servlet api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>${servlet.artifactId}</artifactId>
+			<version>${servlet.version}</version>
+			<!-- provided: indicates you expect the JDK or a container to provide the dependency at runtime. set the dependency on the Servlet API and related Java EE APIs to scope provided because the web container provides those classes. -->
+			<scope>provided</scope>
+		</dependency>
+    </dependencies>
+	
+    <build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<plugins>
+			<!-- maven compile -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<!-- maven package war -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>src/main/resources</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<!-- Tomcat plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>${tomcat.plugin.config.port}</port>
+					<path>${tomcat.plugin.config.path}</path>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
