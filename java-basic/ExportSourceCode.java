@@ -145,7 +145,7 @@ public class ExportSourceCode {
                 String line;
                 while ((line = fileReader.readLine()) != null) {
                     String s = line.trim();
-                    if (s.isEmpty() || s.startsWith("/") || s.startsWith("*")) {
+                    if (s.isEmpty() || s.startsWith("/") || s.startsWith("*") || s.startsWith("<!--")) {
                         continue;
                     }
                     fileWriter.write(line);
