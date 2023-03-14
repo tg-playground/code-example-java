@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    db1:
+      url: jdbc:mysql://localhost:3306/my_test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: root123
+      driverClassName: com.mysql.cj.jdbc.Driver
+    db2:
+      url: jdbc:mysql://localhost:4306/my_test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: root123
+      driverClassName: com.mysql.cj.jdbc.Driver
+    # tomcat JDBC pool configurations
+    tomcat:
+      max-active: 70
+      max-wait: 25000
+      initial-size: 20
+      max-idle: 20
+      min-idle: 9
+      default-auto-commit: true
+    # hikari JDBC pool configurations
+    hikari:
+      connection-timeout: 30000
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core:
+            JdbcTemplate: DEBUG
+            StatementCreatorUtils: TRACE
