@@ -3,11 +3,11 @@
 Elasticsearch data access
 
 - Java REST client (Deprecated in 7.15.0)
-  - Java Low Level REST client
-  - Java High Level REST Client
-- Java Transport Client (Deprecated in 7.0.0)
-- Java Client (co.elastic.clients:elasticsearch-java:7.17.4)
-- Spring data elasticsearch
+  - ✅[Java Low Level REST client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.9/java-rest-low.html) (org.elasticsearch.client:elasticsearch-rest-client) (Since 5.6.x)
+  - ❌[Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.9/java-rest-high.html)) (org.elasticsearch.client:elasticsearch-rest-high-level-client) (5.6.x~7.17.x)
+- ❌[Java Transport Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/index.html) (Deprecated in 7.0.0) (org.elasticsearch.client:transport) (5.0.x~7.17.x)
+- ✅[Java API Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/current/index.html) (co.elastic.clients:elasticsearch-java:x.x.x) (Since 7.15.x) Dependency: org.elasticsearch.client:elasticsearch-rest-client
+- ✅Spring data elasticsearch
   - repository
   - restTemplate
 
