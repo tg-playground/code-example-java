@@ -62,7 +62,7 @@
         inner join address as b on a.user_id = b.user_id
         inner join
         (
-        SELECT a.user_id
+        SELECT distinct a.user_id
         FROM user as a
         inner join address as b on a.user_id = b.user_id
         <trim prefix="where" suffixOverrides="and">
@@ -109,6 +109,16 @@
             </if>
         </if>
         ) as a2 on a.user_id = a2.user_id
+        <if test="page != null">
+            <choose>
+                <when test="page.orderBy != null and page.orderBy.trim() != ''">
+                    order by a.${page.orderBy}
+                </when>
+                <otherwise>
+                    order by a.user_id desc
+                </otherwise>
+            </choose>
+        </if>
     </select>
     <select id="getUser" parameterType="java.lang.Integer"
             resultMap="userResultMap">
