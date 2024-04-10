@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author Taogen
  */
@@ -13,12 +15,14 @@ import lombok.NoArgsConstructor;
 public class User {
     private Integer userId;
     private String userName;
-    private String userPassword;
-    private String userEmail;
+    private String password;
+    private String email;
 
-    public User(String userName, String userPassword, String userEmail) {
+    private List<Address> addressList;
+
+    public User(String userName, String password, String email) {
         this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
+        this.password = password;
+        this.email = email;
     }
 }

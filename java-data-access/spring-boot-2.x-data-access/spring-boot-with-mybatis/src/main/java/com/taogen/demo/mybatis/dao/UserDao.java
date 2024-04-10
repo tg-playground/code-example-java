@@ -1,5 +1,6 @@
 package com.taogen.demo.mybatis.dao;
 
+import com.taogen.demo.mybatis.entity.Address;
 import com.taogen.demo.mybatis.entity.User;
 import com.taogen.demo.common.vo.Page;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,6 +14,10 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     List<User> listUsers(@Param("page") Page page, @Param("user") User user);
+
+    List<User> listUsersWithAddresses(@Param("page") Page page,
+                                      @Param("user") User user,
+                                      @Param("address") Address address);
 
     User getUser(Integer id);
 

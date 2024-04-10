@@ -5,14 +5,28 @@
     <resultMap id="userResultMap" type="com.taogen.demo.mybatis.entity.User">
         <id property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
-        <result property="userPassword" column="user_password"/>
-        <result property="userEmail" column="user_email"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
     </resultMap>
+
+    <resultMap id="userWithAddressesResultMap" type="com.taogen.demo.mybatis.entity.User">
+        <id column="a.user_id" property="userId"/>
+        <result column="a.user_name" property="userName"/>
+        <result column="a.password" property="password"/>
+        <result column="a.email" property="email"/>
+        <collection property="addressList" ofType="Address">
+            <result column="b.address_id" property="addressId"/>
+            <result column="b.city" property="city"/>
+            <result column="b.street" property="street"/>
+            <result column="b.user_id" property="userId"/>
+        </collection>
+    </resultMap>
+
     <select id="listUsers" resultMap="userResultMap">
         SELECT user_id,
         user_name,
-        user_password,
-        user_email
+        password,
+        email
         FROM user
         <trim prefix="where" suffixOverrides="and">
             <if test="user != null">
@@ -22,11 +36,11 @@
                 <if test="userName != null and !userName.isEmpty()">
                     user_name = #{user.userName} and
                 </if>
-                <if test="userPassword != null and !userPassword.isEmpty()">
-                    user_password = #{user.userPassword} and
+                <if test="password != null and !password.isEmpty()">
+                    password = #{user.password} and
                 </if>
-                <if test="userEmail != null and !userEmail.isEmpty()">
-                    user_email = #{user.userEmail}
+                <if test="email != null and !email.isEmpty()">
+                    email = #{user.email}
                 </if>
             </if>
         </trim>
@@ -39,28 +53,86 @@
             </if>
         </if>
     </select>
+
+    <select id="listUsersWithAddresses" resultMap="userWithAddressesResultMap">
+        select
+        a.user_id as "a.user_id", a.user_name as "a.user_name", a.password as "a.password", a.email as "a.email"
+        , b.address_id as "b.address_id", b.city as "b.city", b.street as "b.street", b.user_id as "b.user_id"
+        from user as a
+        inner join address as b on a.user_id = b.user_id
+        inner join
+        (
+        SELECT a.user_id
+        FROM user as a
+        inner join address as b on a.user_id = b.user_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="user != null">
+                <if test="user.userId != null">
+                    a.user_id = #{user.userId} and
+                </if>
+                <if test="user.userName != null and !user.userName.isEmpty()">
+                    a.user_name like concat('%', #{user.userName}, '%') and
+                </if>
+                <if test="user.password != null and !user.password.isEmpty()">
+                    a.password = #{user.password} and
+                </if>
+                <if test="user.email != null and !user.email.isEmpty()">
+                    a.email = #{user.email}
+                </if>
+            </if>
+            <if test="address != null">
+                <if test="address.addressId != null">
+                    b.address_id = #{address.addressId} and
+                </if>
+                <if test="address.city != null and !address.city.isEmpty()">
+                    b.city like concat('%', #{address.city}, '%') and
+                </if>
+                <if test="address.street != null and !address.street.isEmpty()">
+                    b.street = #{address.street} and
+                </if>
+                <if test="address.userId != null">
+                    b.user_id = #{address.userId}
+                </if>
+            </if>
+        </trim>
+        <if test="page != null">
+            <choose>
+                <when test="page.orderBy != null and page.orderBy.trim() != ''">
+                    order by ${page.orderBy}
+                </when>
+                <otherwise>
+                    order by user_id desc
+                </otherwise>
+            </choose>
+            <if test="page.pageNo != null and page.pageSize != null ">
+                limit ${(page.pageNo - 1) * page.pageSize}, ${page.pageSize}
+            </if>
+        </if>
+        ) as a2 on a.user_id = a2.user_id
+    </select>
     <select id="getUser" parameterType="java.lang.Integer"
             resultMap="userResultMap">
-        SELECT user_id, user_name, user_password, user_email
+        SELECT user_id, user_name, password, email
         FROM user
         WHERE user_id = #{id,jdbcType=INTEGER};
     </select>
+
     <insert id="saveUser"
             parameterType="com.taogen.demo.mybatis.entity.User"
             useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
         INSERT
-        INTO user(user_name, user_password,
-                  user_email)
+        INTO user(user_name, password,
+                  email)
         VALUES (#{userName,jdbcType=VARCHAR},
-                #{userPassword,jdbcType=VARCHAR},
-                #{userEmail,jdbcType=VARCHAR});
+                #{password,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR});
     </insert>
     <update id="updateUser"
             parameterType="com.taogen.demo.mybatis.entity.User">
         UPDATE user
         SET user_name=#{userName,jdbcType=VARCHAR},
-            user_password=#{userPassword,jdbcType=VARCHAR},
-            user_email=#{userEmail,jdbcType=VARCHAR}
+            password=#{password,jdbcType=VARCHAR},
+            email=#{email,jdbcType=VARCHAR}
         WHERE user_id = #{userId,jdbcType=INTEGER};
     </update>
     <delete id="deleteUser" parameterType="java.lang.Integer">
