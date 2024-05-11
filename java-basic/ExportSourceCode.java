@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * Copy me to your project and run it.
  * @author Taogen
  */
 public class ExportSourceCode {
