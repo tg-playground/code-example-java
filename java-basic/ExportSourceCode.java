@@ -12,9 +12,10 @@ public class ExportSourceCode {
     private static final List<String> EXPORT_SOURCE_CODE_SUFFIXES =
             Arrays.asList("java", "js", "vue");
     /**
-     * 1页word=25行代码
+     * 1页word=25行代码，60页。共1500行。
+     * 软件著作权-源代码：1页word=50行代码，60页。共3000行。word 固定行距：6磅，字体大小：6.5
      */
-    private static final Integer MAX_EXPORT_LINES = 1250;
+    private static final Integer MAX_EXPORT_LINES = 1500;
 
     public static void main(String[] args) throws IOException {
         String sourceCodeDirPath = "D:\\temp\\code\\src";
