@@ -9,6 +9,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionManager;
 
 /**
+ * The ChainedTransactionManger is working as expected for:
+ * insert -> DB1 -> SUCCESSFUL insert -> DB2 -> ERROR ROLLBACK DB1
+ * but not for:
+ * insert -> DB1 -> FAIL ROLLBAK DB1 -> DB2 -> SUCCESSFUL
+ *
  * @author Taogen
  */
 @Configuration
