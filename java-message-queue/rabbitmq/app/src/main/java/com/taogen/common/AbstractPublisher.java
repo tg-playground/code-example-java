@@ -20,6 +20,8 @@ public abstract class AbstractPublisher {
     // Reuse channels: Create a channel once per thread or once per producer/consumer and reuse it for sending or receiving messages.
     protected Channel channel;
 
+    protected BuiltinExchangeType exchangeType;
+
     protected AbstractPublisher() {
         if (channel == null) {
             if (connection == null) {
@@ -38,8 +40,8 @@ public abstract class AbstractPublisher {
         }
     }
 
-    protected void declareExchange(String exchangeName, BuiltinExchangeType type) throws IOException {
-        this.channel.exchangeDeclare(exchangeName, type, true);
+    protected void declareExchange(String exchangeName) throws IOException {
+        this.channel.exchangeDeclare(exchangeName, this.exchangeType, true);
     }
 
     protected void declareQueues(List<String> queueNames) throws IOException {

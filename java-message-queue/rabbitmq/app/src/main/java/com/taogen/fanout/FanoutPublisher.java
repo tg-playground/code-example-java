@@ -12,13 +12,21 @@ import java.util.List;
  */
 public class FanoutPublisher extends AbstractPublisher {
 
-    public static void main(String[] args) throws IOException {
+    public FanoutPublisher() {
+        this.exchangeType = BuiltinExchangeType.FANOUT;
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         FanoutPublisher fanoutPublisher = new FanoutPublisher();
         String exchangeName = "taxi_fanout";
-        fanoutPublisher.declareExchange(exchangeName, BuiltinExchangeType.FANOUT);
+        fanoutPublisher.declareExchange(exchangeName);
         List<String> queueNames = List.of("taxi.1", "taxi.2", "taxi.3");
         fanoutPublisher.declareQueues(queueNames);
         fanoutPublisher.bindQueuesToExchange(exchangeName, queueNames, List.of("", "", ""));
-        fanoutPublisher.publish(exchangeName, "", "Hello, world!" + new Date());
+        while (true) {
+            // publish a message per second
+            fanoutPublisher.publish(exchangeName, "", "Hello, world!" + new Date());
+            Thread.sleep(1000);
+        }
     }
 }
