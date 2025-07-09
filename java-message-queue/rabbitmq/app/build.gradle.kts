@@ -4,6 +4,12 @@
  * This generated file contains a sample Java application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.14.2/userguide/building_java_projects.html in the Gradle documentation.
  */
+object Versions {
+    const val lombokVersion = "1.18.38"
+    const val logbackVersion = "1.5.18"
+    const val slf4jVersion = "2.0.17"
+    const val rabbitMqVersion = "5.25.0"
+}
 
 plugins {
     java
@@ -24,9 +30,17 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
-
+    // Logging
+    implementation("org.slf4j:slf4j-api:${Versions.slf4jVersion}")
+    implementation("ch.qos.logback:logback-classic:${Versions.logbackVersion}")
     // RabbitMQ Java client library for messaging.
-    implementation("com.rabbitmq:amqp-client:5.25.0")
+    implementation("com.rabbitmq:amqp-client:${Versions.rabbitMqVersion}")
+
+    // Lombok
+    compileOnly("org.projectlombok:lombok:${Versions.lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${Versions.lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${Versions.lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${Versions.lombokVersion}")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
