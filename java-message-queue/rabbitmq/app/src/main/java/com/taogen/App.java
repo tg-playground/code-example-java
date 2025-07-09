@@ -29,7 +29,7 @@ public class App {
         factory.setPort(portNumber);
 
         Connection conn = factory.newConnection();
-        log.info("Connection: " + conn);
+        log.info("Connection: {}", conn);
         // Close the connection
         conn.close();
     }

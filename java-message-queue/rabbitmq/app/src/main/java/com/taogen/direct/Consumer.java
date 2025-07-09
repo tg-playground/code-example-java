@@ -30,7 +30,7 @@ public class Consumer {
                 String contentType = properties.getContentType();
                 long deliveryTag = envelope.getDeliveryTag();
                 // process the message before acknowledge
-                log.info("Received message: " + new String(body));
+                log.info("Received message: {}", new String(body));
                 channel.basicAck(deliveryTag, false);
             }
         });

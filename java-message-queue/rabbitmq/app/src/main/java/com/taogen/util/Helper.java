@@ -29,7 +29,7 @@ public class Helper {
         factory.setPort(portNumber);
 
         Connection conn = factory.newConnection();
-        log.debug("Connection: " + conn);
+        log.debug("Connection: {}", conn);
         return conn;
     }
 }
