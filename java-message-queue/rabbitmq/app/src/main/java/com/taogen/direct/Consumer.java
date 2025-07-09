@@ -1,8 +1,8 @@
-package org.example.direct;
+package com.taogen.direct;
 
 import com.rabbitmq.client.*;
+import com.taogen.util.Helper;
 import lombok.extern.slf4j.Slf4j;
-import org.example.util.Helper;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
