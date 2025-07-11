@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * Use case: Clients send an order request to all taxis within a particular topic.
  * @author taogen
  */
 @Slf4j

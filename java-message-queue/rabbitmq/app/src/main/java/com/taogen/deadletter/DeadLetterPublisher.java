@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Use case: After one week, any message that is not delivered will be dealt with in one of email or discard.
  * @author taogen
  */
 public class DeadLetterPublisher extends AbstractPublisher {

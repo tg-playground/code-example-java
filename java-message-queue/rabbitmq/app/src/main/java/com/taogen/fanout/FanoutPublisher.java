@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * Use case: The back office wants to be able to send information messages to all taxis at once.
  * @author taogen
  */
 public class FanoutPublisher extends AbstractPublisher {

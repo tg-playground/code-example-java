@@ -45,6 +45,10 @@ public abstract class AbstractPublisher {
         this.channel.exchangeDeclare(exchangeName, this.exchangeType, true);
     }
 
+    protected void declareExchange(String exchangeName, BuiltinExchangeType exchangeType) throws IOException {
+        this.channel.exchangeDeclare(exchangeName, exchangeType, true);
+    }
+
     protected void declareQueue(String queueName, Map<String, Object> argument) throws IOException {
         this.channel.queueDeclare(queueName, true, false, false, argument).getQueue();
     }
