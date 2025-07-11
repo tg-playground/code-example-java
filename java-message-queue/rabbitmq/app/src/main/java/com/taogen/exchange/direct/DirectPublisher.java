@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
  * @author taogen
  */
 @Slf4j
-public class Publisher {
+public class DirectPublisher {
     private static Connection connection;
     // Reuse channels: Create a channel once per thread or once per producer/consumer and reuse it for sending or receiving messages.
     private static Channel channel;
