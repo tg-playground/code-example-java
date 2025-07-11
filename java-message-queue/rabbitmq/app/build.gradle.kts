@@ -9,6 +9,7 @@ object Versions {
     const val logbackVersion = "1.5.18"
     const val slf4jVersion = "2.0.17"
     const val rabbitMqVersion = "5.25.0"
+    const val dotenvVersion = "3.2.0"
 }
 
 plugins {
@@ -35,6 +36,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:${Versions.logbackVersion}")
     // RabbitMQ Java client library for messaging.
     implementation("com.rabbitmq:amqp-client:${Versions.rabbitMqVersion}")
+    implementation("io.github.cdimascio:dotenv-java:${Versions.dotenvVersion}")
 
     // Lombok
     compileOnly("org.projectlombok:lombok:${Versions.lombokVersion}")

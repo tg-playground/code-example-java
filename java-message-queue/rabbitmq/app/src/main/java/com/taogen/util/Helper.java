@@ -2,6 +2,7 @@ package com.taogen.util;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -17,11 +18,12 @@ public class Helper {
         // Example usage of RabbitMQ
         ConnectionFactory factory = new ConnectionFactory();
         // "guest"/"guest" by default, limited to localhost connections
-        String userName = "guest";
-        String password = "guest";
+        Dotenv dotenv = Dotenv.load();
+        String userName = dotenv.get("RABBITMQ_USER");
+        String password = dotenv.get("RABBITMQ_PASSWORD");
         String virtualHost = "/";
         String hostName = "localhost";
-        int portNumber = 5672;
+        int portNumber = Integer.parseInt(dotenv.get("RABBITMQ_PORT"));
         factory.setUsername(userName);
         factory.setPassword(password);
         factory.setVirtualHost(virtualHost);
