@@ -21,7 +21,7 @@ public class FanoutPublisher extends AbstractPublisher {
         String exchangeName = "taxi_fanout";
         fanoutPublisher.declareExchange(exchangeName);
         List<String> queueNames = List.of("taxi.1", "taxi.2", "taxi.3");
-        fanoutPublisher.declareQueues(queueNames);
+        fanoutPublisher.declareQueues(queueNames, null);
         fanoutPublisher.bindQueuesToExchange(exchangeName, queueNames, List.of("", "", ""));
         while (true) {
             // publish a message per second
