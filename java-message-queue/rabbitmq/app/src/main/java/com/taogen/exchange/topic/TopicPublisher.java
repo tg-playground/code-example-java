@@ -1,4 +1,4 @@
-package com.taogen.topic;
+package com.taogen.exchange.topic;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;

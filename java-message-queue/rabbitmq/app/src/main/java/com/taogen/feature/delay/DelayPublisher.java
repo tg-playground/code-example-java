@@ -1,4 +1,4 @@
-package com.taogen.delay;
+package com.taogen.feature.delay;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.taogen.common.AbstractPublisher;

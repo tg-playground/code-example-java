@@ -1,4 +1,4 @@
-package com.taogen.deadletter;
+package com.taogen.feature.deadletter;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.taogen.common.AbstractPublisher;

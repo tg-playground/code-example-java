@@ -1,4 +1,4 @@
-package com.taogen.fanout;
+package com.taogen.exchange.fanout;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.taogen.common.AbstractPublisher;

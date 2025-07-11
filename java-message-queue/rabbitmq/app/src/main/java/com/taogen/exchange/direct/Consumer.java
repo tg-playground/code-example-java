@@ -1,4 +1,4 @@
-package com.taogen.direct;
+package com.taogen.exchange.direct;
 
 import com.rabbitmq.client.*;
 import com.taogen.util.Helper;
