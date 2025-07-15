@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-boot-rabbitmq
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
+  rabbitmq:
+    password: ${RABBITMQ_PASSWORD}
+    username: ${RABBITMQ_USER}
+    port: ${RABBITMQ_PORT}

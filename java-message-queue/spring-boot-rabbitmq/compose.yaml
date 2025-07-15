@@ -1,0 +1,11 @@
+services:
+  rabbitmq:
+    image: 'rabbitmq:4-management'
+    ports:
+      - '${RABBITMQ_PORT}:5672'
+      - '${RABBITMQ_MANAGEMENT_CONSOLE_PORT}:15672'
+    # The default username and password of RabbitMQ are guest / guest
+    environment:
+      - TZ=Asia/Shanghai
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - 'RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}'
