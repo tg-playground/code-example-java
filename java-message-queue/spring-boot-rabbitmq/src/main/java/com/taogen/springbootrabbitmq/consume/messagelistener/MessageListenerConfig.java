@@ -6,12 +6,11 @@ import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author taogen
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class MessageListenerConfig {
 

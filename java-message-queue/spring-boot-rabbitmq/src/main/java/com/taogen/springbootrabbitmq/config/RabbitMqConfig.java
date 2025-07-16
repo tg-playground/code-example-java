@@ -2,7 +2,7 @@ package com.taogen.springbootrabbitmq.config;
 
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 
 /**
  * Spring Boot will automatically create a RabbitTemplate bean
@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Bean;
  */
 //@Configuration
 public class RabbitMqConfig {
-    @Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
-        connectionFactory.setUsername("guest123");
-        connectionFactory.setPassword("guest123");
+    //    @Bean
+    public ConnectionFactory connectionFactory(RabbitProperties rabbitProperties) {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.setHost(rabbitProperties.getHost());
+        connectionFactory.setUsername(rabbitProperties.getUsername());
+        connectionFactory.setPassword(rabbitProperties.getPassword());
         return connectionFactory;
     }
 

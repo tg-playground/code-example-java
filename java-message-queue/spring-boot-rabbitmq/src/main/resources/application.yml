@@ -4,6 +4,6 @@ spring:
   config:
     import: optional:file:.env[.properties],optional:file:../.env[.properties]
   rabbitmq:
-    password: ${RABBITMQ_PASSWORD}
     username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
     port: ${RABBITMQ_PORT}
