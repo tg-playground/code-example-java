@@ -42,4 +42,14 @@ public class MyRabbitMqBinding {
     Binding fanoutQueue3Binding(Queue queue3, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(queue3).to(fanoutExchange);
     }
+
+    @Bean
+    Binding fanoutQueueTtlBinding(Queue queueTtl, FanoutExchange ttlExchange) {
+        return BindingBuilder.bind(queueTtl).to(ttlExchange);
+    }
+
+    @Bean
+    Binding fanoutQueueDlxBinding(Queue queueDlx, FanoutExchange dlxExchange) {
+        return BindingBuilder.bind(queueDlx).to(dlxExchange);
+    }
 }

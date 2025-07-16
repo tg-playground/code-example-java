@@ -15,6 +15,9 @@ public class MyRabbitMqExchange {
     public static final String DIRECT_EXCHANGE_NAME = "spring-amqp-direct-exchange";
     public static final String TOPIC_EXCHANGE_NAME = "spring-amqp-topic-exchange";
     public static final String FANOUT_EXCHANGE_NAME = "spring-amqp-fanout-exchange";
+    public static final String TTL_EXCHANGE = "spring-amqp-ttl-exchange";
+    public static final String DLX_EXCHANGE = "spring-amqp-dlx-exchange";
+
 
     @Bean
     DirectExchange directExchange() {
@@ -29,5 +32,15 @@ public class MyRabbitMqExchange {
     @Bean
     FanoutExchange fanoutExchange() {
         return new FanoutExchange(FANOUT_EXCHANGE_NAME);
+    }
+
+    @Bean
+    FanoutExchange ttlExchange() {
+        return new FanoutExchange(TTL_EXCHANGE);
+    }
+
+    @Bean
+    FanoutExchange dlxExchange() {
+        return new FanoutExchange(DLX_EXCHANGE);
     }
 }
