@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author taogen
  */
 @Configuration
-public class RabbitMqExchange {
+public class MyRabbitMqExchange {
 
     public static final String DIRECT_EXCHANGE_NAME = "spring-amqp-direct-exchange";
     public static final String TOPIC_EXCHANGE_NAME = "spring-amqp-topic-exchange";

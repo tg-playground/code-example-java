@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author taogen
  */
 @Configuration
-public class RabbitMqBinding {
+public class MyRabbitMqBinding {
 
     public static final String DIRECT_ROUTING_KEY = "spring-amqp-queue.1";
     public static final String TOPIC_ROUTING_KEY = "spring-amqp-queue.*";
