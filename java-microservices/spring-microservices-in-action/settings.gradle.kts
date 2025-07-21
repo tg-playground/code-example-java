@@ -14,4 +14,4 @@ rootProject.name = "spring-microservices-in-action"
 include("config-client")
 include("config-server-filesystem")
 include("config-server-git")
-//include("config-server-vault")
+include("config-server-vault")

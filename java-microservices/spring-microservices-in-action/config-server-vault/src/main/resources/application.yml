@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: config-server-vault
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
+  profiles:
+    active: vault
+  cloud:
+    config:
+      server:
+        vault:
+          host: localhost
+          port: ${VAULT_PORT}
+          kv-version: 2
+          authentication: token
+          token: ${VAULT_DEV_ROOT_TOKEN_ID}
+          profile-separator: /
+          scheme: http
+          backend: myapp
+server:
+  port: 8888
