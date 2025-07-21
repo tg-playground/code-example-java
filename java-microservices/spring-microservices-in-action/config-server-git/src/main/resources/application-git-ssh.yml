@@ -10,9 +10,9 @@ spring:
           uri: git@github.com:tg-playground/spring-cloud-config.git
           defaultLabel: main
           ignoreLocalSshSettings: true
-          hostKey:
+          hostKey: ${hostKey}
           hostKeyAlgorithm: ssh-rsa
-          private-key:
+          private-key: ${privateKey}
 
 
 server:
