@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          cloneOnStart: true
+          timeout: 10
+          uri: git@github.com:tg-playground/spring-cloud-config.git
+          defaultLabel: main
+          ignoreLocalSshSettings: true
+          hostKey:
+          hostKeyAlgorithm: ssh-rsa
+          private-key:
+
+
+server:
+  port: 8888

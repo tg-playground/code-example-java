@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: config-server-git
+  profiles:
+    # git-https, git-local, git-ssh
+    active: git-ssh
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
+server:
+  port: 8888

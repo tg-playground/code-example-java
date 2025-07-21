@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          # On Linux, file://${user.home}/config-repo
+          # On Windows, you need an extra "/" in the file URL if it is absolute with a drive prefix (for example,file:///${user.home}/config-repo, file:///D:/config/config-repo).
+          uri: file://Users/taogen/config/spring-cloud-configuration
+          defaultLabel: main
+server:
+  port: 8888
+

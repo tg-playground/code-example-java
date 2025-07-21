@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          cloneOnStart: true
+          timeout: 10
+          # Suggest using Gitee for Chinese users. Using GitHub URL often throws connect timeout exception.
+          uri: "https://github.com/tg-playground/spring-cloud-config.git"
+          defaultLabel: main
+          username: ${username}
+          password: ${personalAccessToken}
+server:
+  port: 8888
+

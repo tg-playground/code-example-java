@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server-filesystem
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          #          search-locations: file:///Users/taogen/springcloud/configserver
+          searchLocations: "classpath:/config"
+server:
+  port: 8888
