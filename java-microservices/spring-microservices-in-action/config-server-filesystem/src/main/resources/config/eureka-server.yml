@@ -1,0 +1,17 @@
+server:
+  # Sets the listening port for the Eureka Server
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # Tells the Config Server to not register with the Eureka service
+    registerWithEureka: false
+    # Tells the Config Server to not cache registry information locally
+    fetchRegistry: false
+    # the service URL
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    # Sets the initial time to wait before the server takes requests
+    waitTimeInMsWhenSyncEmpty: 5
