@@ -27,13 +27,16 @@ public class EurekaClientApplication {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello Eureka Client" + new Date();
+        String message = "Hello Eureka Client 1 " + new Date();
+        System.out.println(message);
+        return message;
     }
 
     @RequestMapping("/client2")
     public String client2() {
         RestTemplate restTemplate = new RestTemplate();
-        String serviceId = "EUREKA-CLIENT-2";
+//        String serviceId = "EUREKA-CLIENT-2";
+        String serviceId = "eureka-client-2";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();
         String response = restTemplate.getForObject(serviceUrl + "/", String.class);
         System.out.println("Response from " + serviceId + ": " + response);
