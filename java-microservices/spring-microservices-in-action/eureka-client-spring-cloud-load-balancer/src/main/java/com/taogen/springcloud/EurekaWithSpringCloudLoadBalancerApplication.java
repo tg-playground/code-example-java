@@ -31,7 +31,7 @@ public class EurekaWithSpringCloudLoadBalancerApplication {
 
     @GetMapping("/client1")
     public String client1() {
-        String serviceUrl = "http://eureka-client/";
+        String serviceUrl = "http://eureka-client-1/";
         return restTemplate.getForObject(serviceUrl, String.class);
     }
 }

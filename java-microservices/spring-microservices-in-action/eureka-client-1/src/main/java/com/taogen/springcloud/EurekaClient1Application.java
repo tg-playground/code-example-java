@@ -16,12 +16,12 @@ import java.util.Date;
 @RestController
 @RefreshScope
 @EnableDiscoveryClient
-public class EurekaClientApplication {
+public class EurekaClient1Application {
     @Autowired
     private DiscoveryClient discoveryClient;
 
     public static void main(String[] args) {
-        SpringApplication.run(EurekaClientApplication.class, args);
+        SpringApplication.run(EurekaClient1Application.class, args);
 //        new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
     }
 
@@ -35,7 +35,6 @@ public class EurekaClientApplication {
     @RequestMapping("/client2")
     public String client2() {
         RestTemplate restTemplate = new RestTemplate();
-//        String serviceId = "EUREKA-CLIENT-2";
         String serviceId = "eureka-client-2";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();
         String response = restTemplate.getForObject(serviceUrl + "/", String.class);

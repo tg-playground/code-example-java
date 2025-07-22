@@ -35,8 +35,7 @@ public class EurekaClient2Application {
     @RequestMapping("/client1")
     public String client1() {
         RestTemplate restTemplate = new RestTemplate();
-//        String serviceId = "EUREKA-CLIENT";
-        String serviceId = "eureka-client";
+        String serviceId = "eureka-client-1";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();
         String response = restTemplate.getForObject(serviceUrl + "/", String.class);
         System.out.println("Response from " + serviceId + ": " + response);
