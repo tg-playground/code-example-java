@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: circuit-breaker-resilience4j
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  profiles:
+    active: dev
+
+resilience4j.circuitbreaker:
+  instances:
+    circuit-breaker-resilience4j-2:
+      registerHealthIndicator: true
+      sliding-window-size: 6
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 60
