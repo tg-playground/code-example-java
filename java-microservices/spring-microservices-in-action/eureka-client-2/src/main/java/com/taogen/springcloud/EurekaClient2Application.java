@@ -3,6 +3,7 @@ package com.taogen.springcloud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,6 +21,9 @@ public class EurekaClient2Application {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private ServletWebServerApplicationContext server;
+
     public static void main(String[] args) {
         SpringApplication.run(EurekaClient2Application.class, args);
 //        new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
@@ -27,7 +31,8 @@ public class EurekaClient2Application {
 
     @RequestMapping("/")
     public String home() {
-        String message = "Hello Eureka Client 2 " + new Date();
+//        String message = "Hello Eureka Client 2 " + new Date();
+        String message = String.format("Hello Eureka Client 2 (%s). %s", server.getWebServer().getPort(), new Date());
         System.out.println(message);
         return message;
     }

@@ -46,7 +46,7 @@ public class CircuitBreakerResilience4jApplication {
 
     private String callRemoteService() {
         RestTemplate restTemplate = new RestTemplate();
-        String serviceId = "circuit-breaker-resilience4j-2";
+        String serviceId = "eureka-circuit-breaker-resilience4j-2";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();
         Supplier<String> supplier = () -> restTemplate.getForObject(serviceUrl + "/testBreakerResilience", String.class);
         Function<Throwable, String> fallbackFunction = throwable -> {
