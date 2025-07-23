@@ -1,0 +1,45 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+
+server:
+  port: 8072
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans,gateway
+
+# Automated mapping of routes via service discovery
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: eureka-client-1
+#          uri: lb://EUREKA-CLIENT-1
+#          predicates:
+#            - Path=/eureka-client-1/**
+#      discover:
+#        locator:
+#          # Enables the gateway to create routes based on services registered with service discovery
+#          enable: true
+#          lowerCaseServiceId: true
