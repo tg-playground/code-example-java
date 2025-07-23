@@ -1,6 +1,6 @@
 spring:
   application:
-    name: circuit-breaker-resilience4j
+    name: eureka-circuit-breaker-resilience4j
   config:
     import: "optional:configserver:http://localhost:8888"
   profiles:
