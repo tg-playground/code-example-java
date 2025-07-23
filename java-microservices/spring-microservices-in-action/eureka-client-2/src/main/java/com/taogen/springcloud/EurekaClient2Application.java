@@ -33,7 +33,7 @@ public class EurekaClient2Application {
     }
 
     @RequestMapping("/client1")
-    public String client1() {
+    public String requestEurekaClient1() {
         RestTemplate restTemplate = new RestTemplate();
         String serviceId = "eureka-client-1";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();

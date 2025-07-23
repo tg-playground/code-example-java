@@ -29,7 +29,7 @@ public class EurekaWithOpenFeignApplication {
     }
 
     @GetMapping("/client1")
-    public String client1() {
+    public String requestEurekaClient1WithOpenFeign() {
         return "Client 1 response: " + myFeignClient.client1();
     }
 }

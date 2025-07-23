@@ -16,7 +16,7 @@ import java.util.Date;
 @RefreshScope
 public class EurekaWithSpringCloudLoadBalancerApplication {
     @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate loadBalancedRestTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaWithSpringCloudLoadBalancerApplication.class, args);
@@ -30,8 +30,8 @@ public class EurekaWithSpringCloudLoadBalancerApplication {
     }
 
     @GetMapping("/client1")
-    public String client1() {
+    public String requestEurekaClient1WithCloudLoadBalancer() {
         String serviceUrl = "http://eureka-client-1/";
-        return restTemplate.getForObject(serviceUrl, String.class);
+        return loadBalancedRestTemplate.getForObject(serviceUrl, String.class);
     }
 }
