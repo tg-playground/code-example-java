@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 @RestController
 @EnableDiscoveryClient
 @Slf4j
-public class CircuitBreakerResilience4jApplication {
+public class EurekaWithCircuitBreakerResilience4jApplication {
     @Autowired
     private CircuitBreakerFactory circuitBreakerFactory;
 
@@ -29,7 +29,7 @@ public class CircuitBreakerResilience4jApplication {
     private DiscoveryClient discoveryClient;
 
     public static void main(String[] args) {
-        SpringApplication.run(CircuitBreakerResilience4jApplication.class, args);
+        SpringApplication.run(EurekaWithCircuitBreakerResilience4jApplication.class, args);
     }
 
     @GetMapping("/")

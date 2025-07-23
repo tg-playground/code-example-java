@@ -11,11 +11,11 @@ import java.util.Date;
 @SpringBootApplication
 @RestController
 @EnableDiscoveryClient
-public class CircuitBreakerResilience4j2Application {
+public class EurekaWithCircuitBreakerResilience4j2Application {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(CircuitBreakerResilience4j2Application.class, args);
+        SpringApplication.run(EurekaWithCircuitBreakerResilience4j2Application.class, args);
     }
 
     @GetMapping("/")

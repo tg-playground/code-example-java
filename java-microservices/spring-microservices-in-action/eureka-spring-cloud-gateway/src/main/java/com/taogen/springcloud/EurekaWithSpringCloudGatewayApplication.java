@@ -14,12 +14,12 @@ import java.util.Date;
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
-public class ApiGatewayServerApplication {
+public class EurekaWithSpringCloudGatewayApplication {
     @Autowired
     private DiscoveryClient discoveryClient;
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiGatewayServerApplication.class, args);
+        SpringApplication.run(EurekaWithSpringCloudGatewayApplication.class, args);
     }
 
     @GetMapping("/")
