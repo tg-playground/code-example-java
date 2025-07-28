@@ -1,0 +1,47 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+#server:
+#  # configure the service use a random port number
+#  port: 0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8081/realms/my-realm
+        registration:
+          keycloak:
+            client-id: ${KEYCLOAK_CLIENT_ID}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            scope: openid,profile,email
+            redirect-uri: http://localhost:8082/login/oauth2/code/keycloak
+server:
+  port: 8082
+
+#keycloak:
+#  realm: my-realm
+#  auth-server-url: http://keycloak:8081/auth
+#  ssl-required: external
+#  resource: ${KEYCLOAK_CLIENT_ID}
+#  credentials:
+#    secret: ${KEYCLOAK_CLIENT_SECRET}
+#  use-resource-role-mappings: true
+#  bearer-only: true
+

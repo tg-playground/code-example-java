@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome to the Home Page</title>
+</head>
+<body>
+<h1>Welcome to the Home Page</h1>
+<a onclick="handleClick()">Logout</a>
+<script type="application/javascript">
+    function handleClick() {
+        console.log('click');
+        fetch('/logout', {
+            method: 'POST',
+            credentials: 'include',
+            // headers: {
+            //     'Content-Type': 'text/html;charset=utf-8'
+            // },
+            // body: null
+        }).then((response) => {
+            if (response.ok) {
+                console.log('Logout successful');
+                window.location.href = '/login'; // Redirect to login page after logout
+            } else {
+                console.error('Logout failed');
+            }
+        }).catch((error) => {
+            console.error('Error during logout:', error);
+        });
+    }
+</script>
+</body>
+</html>

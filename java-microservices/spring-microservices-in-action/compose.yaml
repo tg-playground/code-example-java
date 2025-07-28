@@ -7,3 +7,48 @@ services:
       - IPC_LOCK
     environment:
       - 'VAULT_DEV_ROOT_TOKEN_ID=${VAULT_DEV_ROOT_TOKEN_ID}'
+  keycloak1:
+    image: 'quay.io/keycloak/keycloak:26.3'
+    depends_on:
+      postgres1:
+        condition: service_healthy
+    ports:
+      - ${KEYCLOAK_PORT}:8080
+    environment:
+      - TZ=Asia/Shanghai
+      - 'KC_BOOTSTRAP_ADMIN_USERNAME=${KC_BOOTSTRAP_ADMIN_USERNAME}'
+      - 'KC_BOOTSTRAP_ADMIN_PASSWORD=${KC_BOOTSTRAP_ADMIN_PASSWORD}'
+      - 'KC_DB=postgres'
+      - 'KC_DB_URL=jdbc:postgresql://postgres1:${POSTGRES_PORT}/keycloak'
+      - 'KC_DB_USERNAME=postgres'
+      - 'KC_DB_PASSWORD=${POSTGRES_PASSWORD}'
+    networks:
+      - keycloak
+    command: start-dev
+  postgres1:
+    image: 'postgres:17-alpine'
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    environment:
+      - TZ=Asia/Shanghai
+      # Note: Password can only be set on first startup. You can delete the volume to set a new password.
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
+      - POSTGRES_DB=keycloak
+    volumes:
+      - 'postgres_data_for_keycloak:/var/lib/postgresql/data'
+    restart: unless-stopped
+    networks:
+      - keycloak
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data_for_keycloak:
+    driver: local
+
+networks:
+  keycloak:
+    driver: bridge
