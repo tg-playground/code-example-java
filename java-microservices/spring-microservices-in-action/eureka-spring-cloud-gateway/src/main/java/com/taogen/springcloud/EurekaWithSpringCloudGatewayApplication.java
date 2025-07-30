@@ -30,7 +30,7 @@ public class EurekaWithSpringCloudGatewayApplication {
     @GetMapping("/client1")
     public String requestEurekaClient1ByGateway() {
         RestTemplate restTemplate = new RestTemplate();
-        String serviceId = "gateway-server";
+        String serviceId = "eureka-spring-cloud-gateway";
         String serviceUrl = discoveryClient.getInstances(serviceId).get(0).getUri().toString();
         String response = restTemplate.getForObject(serviceUrl + "/eureka-client-1", String.class);
         System.out.println("Response from " + serviceId + ": " + response);
