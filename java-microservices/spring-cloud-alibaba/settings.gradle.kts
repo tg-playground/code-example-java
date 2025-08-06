@@ -15,3 +15,4 @@ rootProject.name = "spring-cloud-alibaba"
 include("nacos-config-client")
 include("nacos-service-discovery-1")
 include("nacos-service-discovery-2")
+include("nacos-spring-cloud-gateway")

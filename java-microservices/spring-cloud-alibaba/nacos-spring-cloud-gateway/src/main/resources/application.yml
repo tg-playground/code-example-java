@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: nacos-spring-cloud-gateway
+  config:
+    import: optional:nacos:my-config?group=DEFAULT_GROUP
+  cloud:
+    nacos:
+      #      config:
+      #        server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: my-service-1
+          # Forward http://localhost:8072/service-1/** to http://nacos-service-discovery-1/**
+          uri: lb://nacos-service-discovery-1
+          predicates:
+            - Path=/service-1/**
+          filters:
+            - StripPrefix=1
+        - id: my-service-2
+          uri: lb://nacos-service-discovery-2
+          predicates:
+            - Path=/service-2/**
+          filters:
+            - StripPrefix=1
+
+
+server:
+  port: 8072
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans,gateway
