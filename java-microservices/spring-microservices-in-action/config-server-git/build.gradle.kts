@@ -8,6 +8,7 @@
 plugins {
     java
     id("org.springframework.boot") version "3.5.3"
+    // Use the Spring Dependency Management plugin to manage Spring Cloud dependencies.
     id("io.spring.dependency-management") version "1.1.7"
 }
 

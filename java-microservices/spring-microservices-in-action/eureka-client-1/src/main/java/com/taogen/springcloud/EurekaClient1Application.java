@@ -36,6 +36,13 @@ public class EurekaClient1Application {
         return message;
     }
 
+    @RequestMapping("/greeting")
+    public String greeting() {
+        String message = String.format("Hello Eureka Client 1 (%s). %s", server.getWebServer().getPort(), new Date());
+        System.out.println(message);
+        return message;
+    }
+
     @RequestMapping("/client2")
     public String requestEurekaClient2() {
         RestTemplate restTemplate = new RestTemplate();
