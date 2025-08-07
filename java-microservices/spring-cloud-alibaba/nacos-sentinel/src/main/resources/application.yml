@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: nacos-sentinel-2
+  config:
+    import: optional:nacos:my-config?group=DEFAULT_GROUP
+  cloud:
+    nacos:
+      #      config:
+      #        server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8081
+        # 在应用对应的机器上启动一个 Http Server，该 Server 会与 Sentinel 控制台做交互。比如 Sentinel 控制台添加了一个限流规则，会把规则数据 push 给这个 Http Server 接收，Http Server 再将规则注册到 Sentinel 中。
+        port: 8719
+server:
+  port: 0
