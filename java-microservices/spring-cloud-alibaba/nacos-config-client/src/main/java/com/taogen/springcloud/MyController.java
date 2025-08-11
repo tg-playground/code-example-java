@@ -18,7 +18,7 @@ public class MyController {
     /**
      * @NacosConfig支持运行期动态更新
      */
-    @NacosConfig(dataId = "my-config", group = "DEFAULT_GROUP", key = "greeting2")
+    @NacosConfig(dataId = "nacos-config-client-dev.properties", group = "DEFAULT_GROUP", key = "greeting2")
     private String greeting2;
 
     @GetMapping("/greeting")

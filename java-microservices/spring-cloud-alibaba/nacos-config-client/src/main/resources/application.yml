@@ -1,8 +1,10 @@
 spring:
   application:
     name: nacos-config-client
+  profiles:
+    active: dev
   config:
-    import: nacos:my-config?group=DEFAULT_GROUP
+    import: optional:nacos:${spring.application.name}-${spring.profiles.active}.properties?group=DEFAULT_GROUP
   nacos:
     config:
       server-addr: "127.0.0.1:8848"
