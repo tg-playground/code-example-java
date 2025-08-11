@@ -1,8 +1,10 @@
 spring:
   application:
     name: nacos-sentinel-2
+  profiles:
+    active: dev
   config:
-    import: optional:nacos:my-config?group=DEFAULT_GROUP
+    import: optional:nacos:${spring.application.name}-${spring.profiles.active}.properties?group=DEFAULT_GROUP
   cloud:
     nacos:
       #      config:
