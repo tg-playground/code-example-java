@@ -5,8 +5,8 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MainGeneric {
     public static void main(String[] args) {
-        GenericApplicationContext beanFactory = new GenericXmlApplicationContext("applicationContext.xml");
-        MyBean bean = (MyBean) beanFactory.getBean("MyBean");
+        GenericApplicationContext ctx = new GenericXmlApplicationContext("applicationContext.xml");
+        MyBean bean = (MyBean) ctx.getBean("MyBean");
         bean.sayHello();
     }
 }
