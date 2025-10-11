@@ -3,7 +3,7 @@ package com.taogen.springiocbyxml;
 import org.springframework.context.support.AbstractRefreshableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Main
+public class MainRefreshable
 {
     public static void main(String[] args)
     {
