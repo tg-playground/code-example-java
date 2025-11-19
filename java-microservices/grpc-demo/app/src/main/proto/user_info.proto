@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+
+package com.taogen.grpc;
+
+service UserService {
+  rpc searchUsers(google.protobuf.StringValue) returns (stream User);
+  rpc addUsers(stream User) returns (google.protobuf.StringValue);
+  rpc updateUsers(stream User) returns (stream UpdateStatus);
+}
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  int32 age = 3;
+  string gender = 4;
+}
+
+message UpdateStatus {
+  int32 id = 1;
+  string status = 2;
+  string message = 3;
+}
