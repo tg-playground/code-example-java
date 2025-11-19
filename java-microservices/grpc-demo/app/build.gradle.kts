@@ -10,6 +10,7 @@ import com.google.protobuf.gradle.id
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    // Add protobuf plugin
     id("com.google.protobuf") version "0.9.5"
 }
 object Versions {
@@ -63,20 +64,20 @@ application {
 /**
  * Customizing proto source directories
  */
-sourceSets {
-    main {
-        proto {
-            // In addition to the default 'src/main/proto'
-            srcDir("src/main/protobuf")
-        }
-    }
-    test {
-        proto {
-            // In addition to the default 'src/test/proto'
-            srcDir("src/test/protobuf")
-        }
-    }
-}
+//sourceSets {
+//    main {
+//        proto {
+//            // In addition to the default 'src/main/proto'
+//            srcDir("src/main/protobuf")
+//        }
+//    }
+//    test {
+//        proto {
+//            // In addition to the default 'src/test/proto'
+//            srcDir("src/test/protobuf")
+//        }
+//    }
+//}
 
 /**
  * Customizing Protobuf compilation
@@ -109,7 +110,7 @@ protobuf {
                 // This yields "--grpc_out=/path/to/output" on the protoc commandline.
                 id("grpc") {
                     // Use subdirectory 'grpcjava' instead of the default 'grpc'
-                    outputSubDir = "grpcjava"
+//                    outputSubDir = "grpcjava"
                 }
             }
         }

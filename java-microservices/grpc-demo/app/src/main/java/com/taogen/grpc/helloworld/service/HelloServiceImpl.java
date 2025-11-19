@@ -1,12 +1,11 @@
-package com.taogen.service;
+package com.taogen.grpc.helloworld.service;
 
-import com.taogen.HelloRequest;
-import com.taogen.HelloResponse;
-import com.taogen.HelloServiceGrpc;
+import com.taogen.grpc.HelloRequest;
+import com.taogen.grpc.HelloResponse;
+import com.taogen.grpc.HelloServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 /**
- *
  * @author taogen
  */
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {

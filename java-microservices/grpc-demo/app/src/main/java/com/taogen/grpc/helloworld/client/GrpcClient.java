@@ -1,10 +1,12 @@
-package com.taogen;
+package com.taogen.grpc.helloworld.client;
 
+import com.taogen.grpc.HelloRequest;
+import com.taogen.grpc.HelloResponse;
+import com.taogen.grpc.HelloServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 /**
- *
  * @author taogen
  */
 public class GrpcClient {
@@ -18,7 +20,7 @@ public class GrpcClient {
 
         HelloResponse helloResponse = stub.hello(HelloRequest.newBuilder()
                 .setFirstName("Thomas")
-                .setLastName("Jia")
+                .setLastName("Jones")
                 .build());
         System.out.println("Response: " + helloResponse.getGreeting());
 
