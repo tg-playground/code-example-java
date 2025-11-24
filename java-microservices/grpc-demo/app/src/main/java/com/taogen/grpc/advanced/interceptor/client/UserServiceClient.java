@@ -1,4 +1,4 @@
-package com.taogen.grpc.interceptor.interceptor.client;
+package com.taogen.grpc.advanced.interceptor.client;
 
 import com.google.protobuf.StringValue;
 import com.taogen.grpc.UserServiceGrpc;

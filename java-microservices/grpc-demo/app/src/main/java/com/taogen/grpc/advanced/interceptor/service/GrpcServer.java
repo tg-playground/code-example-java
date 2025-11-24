@@ -1,4 +1,4 @@
-package com.taogen.grpc.interceptor.interceptor.service;
+package com.taogen.grpc.advanced.interceptor.service;
 
 import com.taogen.grpc.helloworld.service.HelloServiceImpl;
 import com.taogen.grpc.streaming.service.UserServiceImpl;
