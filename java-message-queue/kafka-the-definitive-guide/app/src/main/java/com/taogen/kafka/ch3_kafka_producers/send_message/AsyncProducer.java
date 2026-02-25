@@ -2,9 +2,11 @@ package com.taogen.kafka.ch3_kafka_producers.send_message;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  *
@@ -19,7 +21,7 @@ public class AsyncProducer {
 
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(props)) {
             ProducerRecord<String, String> record = new ProducerRecord<>("my-topic", "key1", "Hello Kafka!");
-            producer.send(record, (metadata, exception) -> {
+            Future<RecordMetadata> future = producer.send(record, (metadata, exception) -> {
                 if (exception != null) {
                     exception.printStackTrace();
                 } else {
@@ -27,6 +29,9 @@ public class AsyncProducer {
                         metadata.topic(), metadata.partition(), metadata.offset());
                 }
             });
+            System.out.println("Do other work here if needed");
+            RecordMetadata recordMetadata = future.get();
+            System.out.println("recordMetadata" + recordMetadata);
         }
         System.out.println("Done");
     }

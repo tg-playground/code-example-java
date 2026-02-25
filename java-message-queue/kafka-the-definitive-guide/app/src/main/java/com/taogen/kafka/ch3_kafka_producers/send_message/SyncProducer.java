@@ -15,6 +15,7 @@ import java.util.concurrent.Future;
 public class SyncProducer {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties props = new Properties();
+//        props.put("bootstrap.servers", "localhost:10001,localhost:10002,localhost:10003");
         props.put("bootstrap.servers", "localhost:9092");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
