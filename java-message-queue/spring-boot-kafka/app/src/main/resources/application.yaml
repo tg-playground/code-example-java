@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: spring-kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: all
+      retries: 2147483647
+      properties:
+        enable.idempotence: true
+        linger.ms: 10
+      transaction-id-prefix: tx-
+      batch-size: 32KB
+      compression-type: zstd
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    listener:
+      ack-mode: manual
