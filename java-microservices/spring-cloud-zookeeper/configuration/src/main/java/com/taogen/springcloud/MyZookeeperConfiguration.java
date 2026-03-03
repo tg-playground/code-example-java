@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author taogen
  */
 @Component
-public class ZookeeperConfiguration implements CommandLineRunner {
+public class MyZookeeperConfiguration implements CommandLineRunner {
 
     @Value("${greeting}")
     private String greeting;
