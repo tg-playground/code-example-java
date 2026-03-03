@@ -1,0 +1,37 @@
+services:
+  zookeeper1:
+    image: "zookeeper:3.9"
+    restart: unless-stopped
+    hostname: zoo1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_4LW_COMMANDS_WHITELIST: ruok,stat
+    volumes:
+      - zk_data:/data
+      - zk_log:/datalog
+    healthcheck:
+      test: [ "CMD-SHELL", "echo 'ruok' | nc -w 2 localhost 2181 | grep imok" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+  zoonavigator:
+    image: "elkozmon/zoonavigator:2.0.0"
+    depends_on:
+      zookeeper1:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      HTTP_PORT: 9000
+    healthcheck:
+      test: "curl --fail http://localhost:9000/ || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  zk_data:
+  zk_log:

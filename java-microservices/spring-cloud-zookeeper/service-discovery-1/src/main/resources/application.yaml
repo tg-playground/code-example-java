@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: spring-cloud-zookeeper-service-1
+  config:
+    import: optional:zookeeper:localhost:2181
+  cloud:
+    zookeeper:
+      config:
+        enabled: true
+        # Sets the base namespace for configuration values. Node path: /<root>/<spring.application.name>,<profile>/<key-name>. For example, /configuration/spring-cloud-zookeeper/greeting: Hello ZooKeeper!
+        root: config
+        # Sets the name used by all applications.
+        defaultContext: apps
+        profileSeparator: ','
+      connect-string: localhost:2181
+server:
+  # configure the service to use a random port number
+  port: 0
