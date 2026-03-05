@@ -1,0 +1,74 @@
+services:
+  app_provider:
+    build:
+      context: dubbo-service-provider
+      dockerfile: Dockerfile
+    depends_on:
+      zookeeper1:
+        condition: service_healthy
+    ports:
+      - "50051:50051"
+  zookeeper1:
+    image: "zookeeper:3.9"
+    restart: unless-stopped
+    hostname: zoo1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_4LW_COMMANDS_WHITELIST: ruok,stat
+    volumes:
+      - zk_data:/data
+      - zk_log:/datalog
+    healthcheck:
+      test: [ "CMD-SHELL", "echo 'ruok' | nc -w 2 localhost 2181 | grep imok" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+  zoonavigator:
+    image: "elkozmon/zoonavigator:2.0.0"
+    depends_on:
+      zookeeper1:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      HTTP_PORT: 9000
+    healthcheck:
+      test: "curl --fail http://localhost:9000/ || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  dubbo_admin:
+    image: "apache/dubbo-admin:0.6.0"
+    depends_on:
+      zookeeper1:
+        condition: service_healthy
+    ports:
+      - "38080:38080"
+    platform: "linux/amd64"
+    environment:
+      - "admin.registry.address=zookeeper://zookeeper1:2181"
+      - "admin.config-center=zookeeper://zookeeper1:2181"
+      - "admin.metadata-report.address=zookeeper://zookeeper1:2181"
+  nacos1:
+    image: "nacos/nacos-server:v3.0.2"
+    environment:
+      - "MODE=standalone"
+      - "NACOS_AUTH_TOKEN=${NACOS_AUTH_TOKEN}"
+      - "NACOS_AUTH_IDENTITY_KEY=${NACOS_AUTH_IDENTITY_KEY}"
+      - "NACOS_AUTH_IDENTITY_VALUE=${NACOS_AUTH_IDENTITY_VALUE}"
+    ports:
+      - "8080:8080"
+      - "8848:8848"
+      - "9848:9848"
+    healthcheck:
+      test: "curl http://localhost:8080"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  zk_data:
+  zk_log:

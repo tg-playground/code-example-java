@@ -1,0 +1,10 @@
+dubbo:
+  application:
+    logger: slf4j
+    name: dubbo-service-provider
+  registry:
+    address: zookeeper://zookeeper1:2181
+  protocol:
+    name: tri
+    port: 50051
+    host: app_provider

@@ -1,0 +1,15 @@
+dubbo:
+  application:
+    logger: slf4j
+    name: dubbo-with-nacos
+  registry:
+    address: nacos://127.0.0.1:8848
+  # Configure Dubbo using ZooKeeper
+  #  protocol:
+  #    name: tri
+  #    port: 50051
+  config-center:
+    address: nacos://127.0.0.1:8848
+    config-file: dubbo.properties
+    namespace: public
+    group: DEFAULT_GROUP

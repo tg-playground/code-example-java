@@ -1,0 +1,16 @@
+dubbo:
+  application:
+    logger: slf4j
+    name: dubbo-with-zookeeper
+  registry:
+    address: zookeeper://localhost:2181
+  # Configure Dubbo using ZooKeeper
+  #  protocol:
+  #    name: tri
+  #    port: 50051
+  config-center:
+    address: zookeeper://localhost:2181
+    # ZooKeeper ZNode Path: /<namespace>/config/<group>/dubbo.properties
+    config-file: dubbo.properties
+    namespace: dubbo
+    group: ${dubbo.application.name}
