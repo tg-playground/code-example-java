@@ -11,10 +11,6 @@
     <modules>
         <module>dubbo-service-provider</module>
         <module>dubbo-service-consumer</module>
-        <module>dubbo-service-discovery-nacos</module>
-        <module>dubbo-service-discovery-zookeeper</module>
-        <module>dubbo-load-balancing</module>
-        <module>dubbo-gateway</module>
         <module>dubbo-with-zookeeper</module>
         <module>dubbo-with-nacos</module>
     </modules>
