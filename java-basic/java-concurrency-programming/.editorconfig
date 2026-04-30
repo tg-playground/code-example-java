@@ -1,0 +1,18 @@
+root = true
+
+[*]
+# General files
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = lf
+# Unix-style newlines with a newline ending every file
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{html,css,js,jsx,ts,tsx,vue,scss,sass,less,ejs,mts,json,jsonc,yaml,yml}]
+# Specific settings for web-related files
+indent_size = 2
+
+[Makefile]
+indent_style = tab
