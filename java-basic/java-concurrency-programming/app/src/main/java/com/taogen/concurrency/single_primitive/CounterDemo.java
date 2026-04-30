@@ -6,7 +6,7 @@ import lombok.Data;
  *
  * @author taogen
  */
-public class Test1 {
+public class CounterDemo {
     static void main() {
         System.out.println("Test beginning...");
         Counter counter = new Counter(1);

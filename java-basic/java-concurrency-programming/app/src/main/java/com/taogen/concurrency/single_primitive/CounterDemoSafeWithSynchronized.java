@@ -6,7 +6,7 @@ import lombok.Data;
  *
  * @author taogen
  */
-public class Test1SafeWithSynchronized {
+public class CounterDemoSafeWithSynchronized {
     static void main() {
         System.out.println("Test beginning...");
         Counter counter = new Counter(1);

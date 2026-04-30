@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author taogen
  */
-public class Test1SafeWithAtomicInteger {
+public class CounterDemoSafeWithAtomicInteger {
     static void main() {
         System.out.println("Test beginning...");
         Counter counter = new Counter(new AtomicInteger(1));
